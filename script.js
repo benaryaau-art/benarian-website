@@ -1,40 +1,11 @@
-const hotels = [
-  {name:"AYANA Resort Bali",img:"assets/images/hotel-ayanna.jpg",place:"Jimbaran, Bali",price:"AUD 450",score:"9.4",rooms:"3 rooms left"},
-  {name:"The Apurva Kempinski Bali",img:"assets/images/hotel-kempinski.jpg",place:"Nusa Dua, Bali",price:"AUD 680",score:"9.3",rooms:"2 rooms left"},
-  {name:"Uluwatu Surf Villas",img:"assets/images/hotel-uluwatu.jpg",place:"Uluwatu, Bali",price:"AUD 550",score:"9.2",rooms:"4 rooms left"},
-  {name:"Alila Villas Uluwatu",img:"assets/images/hotel-alila.jpg",place:"Uluwatu, Bali",price:"AUD 690",score:"9.1",rooms:"2 rooms left"}
-];
-const restaurants = [
-  {name:"Merah Putih",img:"assets/images/restaurant-1.jpg",rating:"4.8",place:"Jimbaran"},
-  {name:"Locavore",img:"assets/images/restaurant-2.jpg",rating:"4.7",place:"Ubud"},
-  {name:"The Cave by Chef Ryan Clift",img:"assets/images/restaurant-3.jpg",rating:"4.8",place:"Uluwatu"},
-  {name:"Sundara Beach Club",img:"assets/images/restaurant-4.jpg",rating:"4.6",place:"Jimbaran"}
-];
-
-document.getElementById("hotelGrid").innerHTML = hotels.map(h => `
-  <article class="hotel-card">
-    <div class="heart">♡</div><img src="${h.img}" alt="${h.name}" loading="lazy">
-    <div class="hotel-body"><h3>${h.name} <span class="score">${h.score}</span></h3>
-    <p>★★★★★</p><p>⌖ ${h.place}</p><p>From ${h.price} / night</p><p class="rooms">${h.rooms}</p></div>
-  </article>`).join("");
-
-document.getElementById("restaurantList").innerHTML = restaurants.map(r => `
-  <article class="restaurant"><img src="${r.img}" alt="${r.name}" loading="lazy">
-  <div><h4>${r.name}</h4><div class="rating">★★★★★ &nbsp; ${r.rating}</div><div class="location">⌖ ${r.place}</div></div></article>`).join("");
-
-const now = new Date();
-const inDate = new Date(now); inDate.setDate(now.getDate()+10);
-const outDate = new Date(now); outDate.setDate(now.getDate()+14);
-const fmt = d => d.toISOString().slice(0,10);
-document.getElementById("checkin").value = fmt(inDate);
-document.getElementById("checkout").value = fmt(outDate);
-document.getElementById("year").textContent = now.getFullYear();
-
-document.querySelector(".menu-btn").addEventListener("click",()=>document.querySelector(".nav").classList.toggle("open"));
-document.querySelectorAll(".service-tabs button").forEach(btn=>btn.addEventListener("click",()=>{
-  document.querySelectorAll(".service-tabs button").forEach(x=>x.classList.remove("active"));
-  btn.classList.add("active");
-}));
-document.getElementById("searchForm").addEventListener("submit",e=>{
-  e.preventDefault(); const t=document.getElementById("toast"); t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),3500);
-});
+const AFFILIATE_CONFIG={bookingAid:"",bookingLabel:"",bookingBaseUrl:"https://www.booking.com/searchresults.html"};
+const qs=(s)=>document.querySelector(s),qsa=(s)=>[...document.querySelectorAll(s)];
+const menu=qs('.menu-toggle'),nav=qs('.main-nav');if(menu){menu.addEventListener('click',()=>{nav.classList.toggle('open');menu.setAttribute('aria-expanded',nav.classList.contains('open'))})}
+let activeTab='hotels';qsa('.search-tabs button').forEach(btn=>btn.addEventListener('click',()=>{qsa('.search-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeTab=btn.dataset.tab;qs('#searchNote').textContent=activeTab==='hotels'?'Hotel searches open with our booking partner. Affiliate tracking will be activated after partner approval.':`${btn.textContent} integration is ready for an approved partner. For now, submit an enquiry or use the curated sections below.`}));
+function bookingUrl(destination,checkin='',checkout='',guests='2'){
+ const url=new URL(AFFILIATE_CONFIG.bookingBaseUrl);url.searchParams.set('ss',destination||'Bali');if(checkin)url.searchParams.set('checkin',checkin);if(checkout)url.searchParams.set('checkout',checkout);url.searchParams.set('group_adults',guests);url.searchParams.set('no_rooms','1');url.searchParams.set('group_children','0');if(AFFILIATE_CONFIG.bookingAid)url.searchParams.set('aid',AFFILIATE_CONFIG.bookingAid);if(AFFILIATE_CONFIG.bookingLabel)url.searchParams.set('label',AFFILIATE_CONFIG.bookingLabel);return url.toString();
+}
+qs('#travelSearch')?.addEventListener('submit',e=>{e.preventDefault();const d=qs('#destination').value,ci=qs('#checkin').value,co=qs('#checkout').value,g=qs('#guests').value;if(activeTab==='hotels'){window.open(bookingUrl(d,ci,co,g),'_blank','noopener')}else{location.href='#contact'}});
+qsa('.hotel-book').forEach(b=>b.addEventListener('click',()=>window.open(bookingUrl(b.dataset.destination),'_blank','noopener')));
+qs('[data-language]')?.addEventListener('click',()=>{const fa=document.documentElement.lang==='fa';document.documentElement.lang=fa?'en':'fa';document.documentElement.dir=fa?'ltr':'rtl';localStorage.setItem('benarian-language',fa?'en':'fa');alert(fa?'English layout restored. Full Persian content will be expanded in the next content release.':'چیدمان فارسی فعال شد. ترجمه کامل محتوا در نسخه محتوایی بعدی تکمیل می‌شود.');});
+const savedLang=localStorage.getItem('benarian-language');if(savedLang==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rtl'}

@@ -1,187 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="BENARIAN — Luxury Travel & Hospitality. Hotels, restaurants, experiences, wellness, transfers, yachts, helicopter tours and luxury cars." />
-  <meta name="theme-color" content="#050505" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BENARIAN | Luxury Travel & Hospitality</title>
+  <meta name="description" content="BENARIAN curates luxury hotels, flights, restaurants, spa, villas, transfers and extraordinary travel experiences worldwide." />
+  <meta property="og:title" content="BENARIAN | Luxury Travel Worldwide" />
+  <meta property="og:description" content="From the Timeless Beauty of Persia to the World’s Finest Destinations." />
+  <meta property="og:image" content="assets/hero-luxury.png" />
+  <link rel="icon" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="topbar">
-    <div>🌐 Language: <span>فارسی</span> | EN</div>
-    <div class="toplinks">
-      <span>AUD⌄</span><span>♡ Wishlist</span><span>▣ My Bookings</span><span>👤 Login / Sign Up</span>
-    </div>
+  <div class="topline">
+    <span>Worldwide Luxury Travel</span>
+    <div><button class="text-btn" data-language>EN / فارسی</button><button class="text-btn">AUD</button><a href="#wishlist">♡ Wishlist</a><a href="#bookings">My Bookings</a></div>
   </div>
 
-  <header class="header">
-    <a class="brand" href="#top" aria-label="BENARIAN home">
-      <div class="monogram">B</div>
-      <div>
-        <h1>BENARIAN</h1>
-        <p>LUXURY TRAVEL &amp; HOSPITALITY</p>
-      </div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="BENARIAN home">
+      <img src="assets/header-logo.svg" alt="BENARIAN logo" />
+      <span><strong>BENARIAN</strong><small>Luxury Travel & Hospitality</small></span>
     </a>
-
-    <button class="menu-btn" aria-label="Open menu">☰</button>
-
-    <nav class="nav">
-      <a href="#destinations">Destinations</a>
-      <a href="#hotels">Hotels</a>
-      <a href="#restaurants">Restaurants</a>
-      <a href="#experiences">Experiences</a>
-      <a href="#wellness">Spa &amp; Wellness</a>
-      <a href="#yachts">Yacht Charter</a>
-      <a href="#helicopter">Helicopter Tours</a>
-      <a href="#cars">Luxury Cars</a>
-      <a href="#visa">Visa Guide</a>
-      <a href="#about">About Us</a>
-      <a href="#contact">Contact</a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#destinations">Destinations</a><a href="#hotels">Hotels</a><a href="#flights">Flights</a><a href="#restaurants">Restaurants</a><a href="#spa">Spa & Wellness</a><a href="#experiences">Experiences</a><a href="#services">More</a><a href="visa-guide.html">Visa Guide</a>
     </nav>
   </header>
 
-  <main id="top">
-    <section class="hero-grid">
-      <div class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="eyebrow">BESPOKE JOURNEYS • WORLDWIDE</p>
-          <h2>LUXURY TRAVEL<br><span>WORLDWIDE</span></h2>
-          <p class="hero-copy">Handpicked hotels, restaurants and experiences<br>for unforgettable journeys.</p>
-          <a class="gold-btn" href="#destinations">Explore Destinations <span>›</span></a>
-        </div>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-media" role="img" aria-label="Luxury oceanfront hotel at sunset"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">Curated by hospitality expertise</p>
+        <h1>Luxury Travel<br><span>Worldwide</span></h1>
+        <p>Handpicked hotels, fine dining, wellness and unforgettable experiences across the world’s most exclusive destinations.</p>
+        <div class="hero-actions"><a class="btn gold" href="#destinations">Explore Destinations</a><a class="btn outline" href="#bens-collection">Ben’s Collection</a></div>
       </div>
-
-      <aside class="side-panel">
-        <div class="side-brand">
-          <div class="side-mark">B</div>
-          <h3>BENARIAN</h3>
-          <p>LUXURY TRAVEL &amp; HOSPITALITY</p>
-          <div class="divider"></div>
-          <p class="heritage">From the Timeless Beauty of Persia<br>to the World’s Finest Destinations</p>
-          <div class="signature">Ben Tafreshi</div>
-        </div>
-
-        <div class="restaurants" id="restaurants">
-          <div class="section-mini-head">
-            <h3>Top Restaurants in Bali</h3><a href="#">View All</a>
-          </div>
-          <div id="restaurantList"></div>
+      <aside class="brand-panel">
+        <div class="persia-texture"></div>
+        <div class="brand-panel-content">
+          <img src="assets/logo.svg" alt="BENARIAN emblem" class="panel-logo" />
+          <h2>BENARIAN</h2>
+          <p class="tagline">From the Timeless Beauty of Persia<br>to the World’s Finest Destinations</p>
+          <img src="assets/signature.svg" alt="Ben Tafreshi signature" class="signature" />
         </div>
       </aside>
     </section>
 
-    <section class="booking-shell">
-      <div class="service-tabs" id="experiences">
-        <button class="active">▤ Hotels</button>
-        <button>🍴 Restaurants</button>
-        <button>◯ Experiences</button>
-        <button>♨ Spa &amp; Wellness</button>
-        <button>🚘 Transfers</button>
-        <button>✈ Flights</button>
-        <button>⛵ Yachts</button>
-        <button>🚁 Helicopter Tours</button>
-        <button>🏎 Luxury Cars</button>
+    <section class="search-shell" aria-label="Travel search">
+      <div class="search-tabs" role="tablist">
+        <button class="active" data-tab="hotels">Hotels</button><button data-tab="flights">Flights</button><button data-tab="restaurants">Restaurants</button><button data-tab="spa">Spa</button><button data-tab="experiences">Experiences</button><button data-tab="transfers">Transfers</button>
       </div>
+      <form class="search-form" id="travelSearch">
+        <label><span>Destination</span><input id="destination" value="Bali" aria-label="Destination"></label>
+        <label><span>Check-in / Date</span><input id="checkin" type="date"></label>
+        <label><span>Check-out / Return</span><input id="checkout" type="date"></label>
+        <label><span>Guests</span><select id="guests"><option value="2">2 Guests</option><option value="1">1 Guest</option><option value="3">3 Guests</option><option value="4">4 Guests</option></select></label>
+        <button class="btn gold search-btn" type="submit">Search</button>
+      </form>
+      <p class="search-note" id="searchNote">Hotel searches open with our booking partner. Affiliate tracking will be activated after partner approval.</p>
+    </section>
 
-      <form class="search-form" id="searchForm">
-        <label>Destination
-          <input id="destination" value="Bali, Indonesia" />
-        </label>
-        <label>Check-in
-          <input id="checkin" type="date" />
-        </label>
-        <label>Check-out
-          <input id="checkout" type="date" />
-        </label>
-        <label>Guests &amp; Rooms
-          <select id="guests">
-            <option>2 Guests, 1 Room</option>
-            <option>1 Guest, 1 Room</option>
-            <option>3 Guests, 2 Rooms</option>
-            <option>4 Guests, 2 Rooms</option>
-          </select>
-        </label>
-        <button class="search-btn" type="submit">Search</button>
+    <section class="section" id="hotels">
+      <div class="section-head"><div><p class="eyebrow">Curated stays</p><h2>Popular Hotels by Region</h2></div><a href="bali.html">Explore Bali →</a></div>
+      <div class="cards hotel-grid">
+        <article class="card hotel-card"><img src="assets/destination-bali.png" alt="Luxury cliffside resort in Uluwatu"><div class="card-body"><span class="pill">Uluwatu · Bali</span><h3>Clifftop Luxury Collection</h3><p>Private pools, dramatic ocean views and refined service for romantic escapes.</p><div class="rating"><strong>BENARIAN 9.4</strong><span>Editorial selection</span></div><button class="btn small gold hotel-book" data-destination="Uluwatu Bali">Check availability</button></div></article>
+        <article class="card hotel-card"><img src="assets/destination-maldives.png" alt="Overwater luxury resort in Maldives"><div class="card-body"><span class="pill">Maldives</span><h3>Overwater Icons</h3><p>Intimate villas, house reefs and butler-led island experiences.</p><div class="rating"><strong>BENARIAN 9.6</strong><span>Editorial selection</span></div><button class="btn small gold hotel-book" data-destination="Maldives">Check availability</button></div></article>
+        <article class="card hotel-card"><img src="assets/destination-dubai.png" alt="Luxury resort in Dubai"><div class="card-body"><span class="pill">Dubai · UAE</span><h3>Dubai Landmark Stays</h3><p>Skyline glamour, beachfront resorts and exceptional dining.</p><div class="rating"><strong>BENARIAN 9.2</strong><span>Editorial selection</span></div><button class="btn small gold hotel-book" data-destination="Dubai">Check availability</button></div></article>
+      </div>
+      <p class="legal-note">Ratings shown are BENARIAN editorial scores, not Booking.com guest ratings. Live partner reviews will only be displayed through authorised integrations.</p>
+    </section>
+
+    <section class="section destinations" id="destinations">
+      <div class="section-head"><div><p class="eyebrow">Discover the world</p><h2>Trending Destinations</h2></div></div>
+      <div class="destination-grid">
+        <a class="destination-card large" href="bali.html"><img src="assets/destination-bali.png" alt="Bali"><div><span>Indonesia</span><h3>Bali</h3><p>Where luxury meets paradise.</p></div></a>
+        <a class="destination-card" href="#"><img src="assets/destination-dubai.png" alt="Dubai"><div><span>United Arab Emirates</span><h3>Dubai</h3></div></a>
+        <a class="destination-card" href="#"><img src="assets/destination-maldives.png" alt="Maldives"><div><span>Indian Ocean</span><h3>Maldives</h3></div></a>
+        <a class="destination-card" href="#"><img src="assets/destination-iran.png" alt="Persia"><div><span>Discover Iran</span><h3>Persia</h3></div></a>
+      </div>
+    </section>
+
+    <section class="section split-section" id="restaurants">
+      <div class="split-visual restaurant-visual"></div>
+      <div class="split-content"><p class="eyebrow">Dining worth travelling for</p><h2>Restaurants & Rooftop Experiences</h2><p>Explore fine dining, sunset bars, beach clubs and locally celebrated kitchens selected for setting, service and culinary character.</p><div class="mini-list"><a href="#">Bali Fine Dining <span>Reserve or enquire →</span></a><a href="#">Dubai Rooftops <span>Explore →</span></a><a href="#">Romantic Tables <span>Discover →</span></a></div></div>
+    </section>
+
+    <section class="section" id="spa">
+      <div class="section-head"><div><p class="eyebrow">Restore & reconnect</p><h2>Spa & Wellness</h2></div></div>
+      <div class="cards service-cards">
+        <article class="service-card"><span>01</span><h3>Luxury Hotel Spas</h3><p>Signature treatments, private spa suites and destination-inspired rituals.</p><a href="#contact">Book or enquire</a></article>
+        <article class="service-card"><span>02</span><h3>Wellness Retreats</h3><p>Yoga, detox, mindfulness and personalised wellbeing programmes.</p><a href="#contact">Explore retreats</a></article>
+        <article class="service-card"><span>03</span><h3>Romantic Spa Journeys</h3><p>Couples’ treatments and private experiences for honeymoons and celebrations.</p><a href="#contact">Plan an experience</a></article>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="flights">
+      <div class="section-head"><div><p class="eyebrow">One journey, beautifully connected</p><h2>Flights, Transfers & Villas</h2></div></div>
+      <div class="icon-grid">
+        <a href="#home"><b>✈</b><span>Flights</span><small>Compare routes and cabins</small></a><a href="#home"><b>🚘</b><span>Airport Transfers</span><small>VIP chauffeur and private driver</small></a><a href="#home"><b>⌂</b><span>Luxury Villas</span><small>Private escapes and residences</small></a><a href="#experiences"><b>◈</b><span>Yacht Charters</span><small>Private days at sea</small></a><a href="#experiences"><b>✦</b><span>Helicopter Tours</span><small>Iconic aerial experiences</small></a><a href="visa-guide.html"><b>◎</b><span>Visa Guide</span><small>Plan entry requirements</small></a>
+      </div>
+    </section>
+
+    <section class="section" id="experiences">
+      <div class="section-head"><div><p class="eyebrow">Beyond the stay</p><h2>Unforgettable Experiences</h2></div></div>
+      <div class="experience-strip"><div><span>Private Yacht</span></div><div><span>Helicopter Tour</span></div><div><span>Hidden Cultural Gems</span></div><div><span>Luxury Car Rental</span></div></div>
+    </section>
+
+    <section class="section bens" id="bens-collection">
+      <div class="bens-copy"><p class="eyebrow">Hospitality insight</p><h2>Ben’s Collection</h2><p>Personally curated hotels and experiences selected through more than two decades of international hospitality knowledge.</p><div class="chips"><span>Ben Recommends</span><span>Hidden Gems</span><span>Best Value Luxury</span><span>Romantic Escapes</span></div></div>
+      <div class="bens-mark"><img src="assets/logo.svg" alt="BENARIAN emblem"><img src="assets/signature.svg" alt="Ben Tafreshi signature"></div>
+    </section>
+
+    <section class="section community" id="community">
+      <div><p class="eyebrow">Traveller Stories</p><h2>Share Your Journey</h2><p>Upload travel photos and stories for editorial review and a chance to be featured in the BENARIAN Community.</p></div>
+      <form name="traveller-stories" method="POST" data-netlify="true" enctype="multipart/form-data" class="community-form">
+        <input type="hidden" name="form-name" value="traveller-stories">
+        <input name="name" placeholder="Your name" required><input name="email" type="email" placeholder="Email" required><input name="destination" placeholder="Destination"><input name="photo" type="file" accept="image/*"><textarea name="story" placeholder="Tell us about your experience"></textarea><button class="btn gold" type="submit">Submit Story</button>
       </form>
     </section>
 
-    <section class="benefit-strip">
-      <article id="wellness"><span>♨</span><div><h4>Spa &amp; Wellness</h4><p>Rejuvenate your body and mind</p></div></article>
-      <article><span>🚘</span><div><h4>Airport Transfers</h4><p>Comfortable &amp; reliable worldwide</p></div></article>
-      <article id="yachts"><span>⛵</span><div><h4>Yacht Charters</h4><p>Sail in luxury exclusive yachts</p></div></article>
-      <article id="helicopter"><span>🚁</span><div><h4>Helicopter Tours</h4><p>See the world from above</p></div></article>
-      <article id="cars"><span>🏎</span><div><h4>Luxury Cars</h4><p>Drive the world’s best cars</p></div></article>
-      <article><span>♢</span><div><h4>Travel Insurance</h4><p>Travel with peace of mind</p></div></article>
+    <section class="section visa-preview">
+      <div><p class="eyebrow">Travel with confidence</p><h2>Visa Guide</h2><p>Entry guidance, official application links and practical information for selected destinations and nationalities.</p><a class="btn gold" href="visa-guide.html">Open Visa Guide</a></div>
+      <div class="visa-countries"><span>Indonesia</span><span>Japan</span><span>UAE</span><span>Thailand</span><span>Schengen</span><span>Australia</span></div>
     </section>
 
-    <section class="content-grid">
-      <div>
-        <div class="section-head" id="hotels">
-          <h2>Best Hotels in Bali</h2><a href="#">View All</a>
-        </div>
-        <div class="hotel-grid" id="hotelGrid"></div>
-
-        <div class="trust-grid">
-          <article><span>◇</span><div><h3>Handpicked Luxury</h3><p>Only the finest hotels and experiences, personally selected.</p></div></article>
-          <article><span>✺</span><div><h3>Best Price Guarantee</h3><p>Get the best available rates with exclusive deals.</p></div></article>
-          <article><span>◉</span><div><h3>24/7 Concierge</h3><p>Our team is here to assist you anytime, anywhere.</p></div></article>
-          <article><span>♢</span><div><h3>Secure Booking</h3><p>Your data and payments are 100% secure with us.</p></div></article>
-        </div>
-      </div>
-
-      <aside class="assistance" id="contact">
-        <div class="bell">♧</div>
-        <div>
-          <h3>Need Assistance?</h3>
-          <p>Our travel concierge team is here to help you 24/7.</p>
-          <a class="outline-btn" href="https://wa.me/" target="_blank" rel="noopener">Contact Us on WhatsApp ◉</a>
-        </div>
-      </aside>
-    </section>
-
-    <section class="destinations-section" id="destinations">
-      <p class="eyebrow">CURATED BY BENARIAN</p>
-      <h2>Signature Destinations</h2>
-      <div class="destination-grid">
-        <article><div><h3>Bali</h3><p>Villas, wellness and beach escapes</p></div></article>
-        <article><div><h3>Dubai</h3><p>Iconic hotels and private experiences</p></div></article>
-        <article><div><h3>Maldives</h3><p>Overwater luxury and island serenity</p></div></article>
-        <article><div><h3>Persia</h3><p>Culture, heritage and timeless beauty</p></div></article>
-      </div>
-    </section>
-
-    <section class="visa-section" id="visa">
-      <div>
-        <p class="eyebrow">TRAVEL WITH CONFIDENCE</p>
-        <h2>Visa Guide</h2>
-        <p>Practical destination guidance designed for international travellers, including passport requirements, visa pathways and key arrival information.</p>
-      </div>
-      <a class="gold-btn" href="#contact">Ask Our Concierge</a>
-    </section>
-
-    <section class="about-section" id="about">
-      <p class="eyebrow">FOUNDER’S VISION</p>
-      <h2>Hospitality Without Compromise</h2>
-      <p>BENARIAN brings together luxury hotels, exceptional dining and unforgettable experiences through a hospitality-first approach shaped by decades of international hotel leadership.</p>
-      <div class="signature large">Ben Tafreshi</div>
+    <section class="section contact" id="contact">
+      <div><p class="eyebrow">Personal assistance</p><h2>BENARIAN Concierge</h2><p>Tell us where you want to go and what matters most. We’ll help shape a refined itinerary around your preferences.</p></div>
+      <form name="concierge" method="POST" data-netlify="true"><input type="hidden" name="form-name" value="concierge"><input name="name" placeholder="Your name" required><input name="email" type="email" placeholder="Email" required><input name="destination" placeholder="Destination"><textarea name="message" placeholder="How can we help?"></textarea><button class="btn gold" type="submit">Send Enquiry</button></form>
     </section>
   </main>
 
   <footer>
-    <div class="brand footer-brand">
-      <div class="monogram">B</div>
-      <div><h1>BENARIAN</h1><p>LUXURY TRAVEL &amp; HOSPITALITY</p></div>
-    </div>
-    <p>© <span id="year"></span> BENARIAN. All rights reserved.</p>
+    <div class="footer-brand"><img src="assets/footer-logo.svg" alt="BENARIAN"><p>From the Timeless Beauty of Persia to the World’s Finest Destinations.</p></div>
+    <div><h4>Explore</h4><a href="#hotels">Hotels</a><a href="#flights">Flights</a><a href="#restaurants">Restaurants</a><a href="#spa">Spa</a></div>
+    <div><h4>Plan</h4><a href="visa-guide.html">Visa Guide</a><a href="#community">Community</a><a href="#contact">Concierge</a><a href="about.html">About</a></div>
+    <div><h4>Legal</h4><a href="affiliate-disclosure.html">Affiliate Disclosure</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+    <p class="copyright">© 2026 BENARIAN Pty Ltd. BENARIAN may earn a commission from selected partner bookings at no additional cost to the customer.</p>
   </footer>
-
-  <div class="toast" id="toast">Search request received. Booking integration can be connected next.</div>
   <script src="script.js"></script>
 </body>
 </html>
