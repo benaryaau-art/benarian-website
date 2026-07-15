@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 230" role="img" aria-label="Ben Tafreshi signature">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#b97820"/><stop offset=".5" stop-color="#f2c86c"/><stop offset="1" stop-color="#a86617"/></linearGradient></defs>
+<text x="25" y="150" fill="url(#g)" font-family="Brush Script MT, Segoe Script, cursive" font-size="120" font-style="italic">Ben Tafreshi</text>
+<path d="M155 185 C310 150 500 198 690 166" fill="none" stroke="url(#g)" stroke-width="5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 155" role="img" aria-label="BENARIAN by Ben Tafreshi">
+  <defs>
+    <linearGradient id="gold" x1="0" x2="1"><stop stop-color="#B97A22"/><stop offset=".5" stop-color="#F0C66C"/><stop offset="1" stop-color="#A86618"/></linearGradient>
+  </defs>
+  <g fill="url(#gold)">
+    <text x="6" y="112" font-family="Georgia,serif" font-size="120" font-weight="700">ℬ</text>
+    <text x="116" y="70" font-family="Georgia,serif" font-size="54" letter-spacing="12">BENARIAN</text>
+    <text x="120" y="122" font-family="Brush Script MT,Segoe Script,cursive" font-size="45" font-style="italic">Ben Tafreshi</text>
+  </g>
+  <path d="M125 132 C225 117 340 139 472 123" fill="none" stroke="url(#gold)" stroke-width="2.8" stroke-linecap="round"/>
+</svg>
