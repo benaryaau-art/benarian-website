@@ -1,12 +1,19 @@
-# BENARIAN Professional Booking Website
+# BENARIAN Luxury Travel Platform
 
-This static website is ready for GitHub + Netlify.
+Static website ready for GitHub Pages or Netlify.
 
-## Booking
-The search form opens live Booking.com search results using the guest's destination, dates and occupancy. Availability and payment are completed securely on Booking.com.
+## Booking.com affiliate setup
+Open `script.js` and add the approved values only after Booking.com/CJ approval:
 
-## Persian access
-Use the Iranian flag / فارسی control in the header or lower-right section to switch the homepage into Persian and RTL mode.
+```js
+const AFFILIATE_CONFIG = {
+  bookingAid: "YOUR_APPROVED_AID",
+  bookingLabel: "YOUR_APPROVED_LABEL",
+  bookingBaseUrl: "https://www.booking.com/searchresults.html"
+};
+```
 
-## Deploy
-Upload all project files to the root of the existing GitHub repository. Netlify will redeploy automatically.
+Do not invent IDs. Current buttons work as normal Booking.com searches without affiliate tracking.
+
+## Netlify
+Drag the unzipped project folder into Netlify, or connect the GitHub repository. Netlify Forms are included for Concierge and Traveller Stories.

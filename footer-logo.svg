@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 210" role="img" aria-label="BENARIAN Luxury Hotels and Exclusive Experiences">
+  <defs><linearGradient id="gold" x1="0" x2="1"><stop stop-color="#B97A22"/><stop offset=".5" stop-color="#F0C66C"/><stop offset="1" stop-color="#A86618"/></linearGradient></defs>
+  <g fill="url(#gold)">
+    <text x="245" y="90" text-anchor="middle" font-family="Georgia,serif" font-size="100" font-weight="700">ℬ</text>
+    <text x="320" y="150" text-anchor="middle" font-family="Georgia,serif" font-size="52" letter-spacing="13">BENARIAN</text>
+    <text x="320" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" letter-spacing="5">LUXURY HOTELS • EXCLUSIVE EXPERIENCES</text>
+  </g>
+</svg>

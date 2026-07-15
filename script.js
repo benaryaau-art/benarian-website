@@ -1,60 +1,11 @@
-const html = document.documentElement;
-const langToggle = document.getElementById('languageToggle');
-const persianAccess = document.getElementById('persianAccess');
-
-function setLanguage(lang){
-  const fa = lang === 'fa';
-  html.lang = fa ? 'fa' : 'en';
-  html.dir = fa ? 'rtl' : 'ltr';
-  document.querySelectorAll('[data-en][data-fa]').forEach(el=>{
-    el.innerHTML = fa ? el.dataset.fa : el.dataset.en;
-  });
-  document.querySelectorAll('[data-placeholder-en]').forEach(el=>{
-    el.placeholder = fa ? el.dataset.placeholderFa : el.dataset.placeholderEn;
-  });
-  localStorage.setItem('benarian-language', lang);
+const AFFILIATE_CONFIG={bookingAid:"",bookingLabel:"",bookingBaseUrl:"https://www.booking.com/searchresults.html"};
+const qs=(s)=>document.querySelector(s),qsa=(s)=>[...document.querySelectorAll(s)];
+const menu=qs('.menu-toggle'),nav=qs('.main-nav');if(menu){menu.addEventListener('click',()=>{nav.classList.toggle('open');menu.setAttribute('aria-expanded',nav.classList.contains('open'))})}
+let activeTab='hotels';qsa('.search-tabs button').forEach(btn=>btn.addEventListener('click',()=>{qsa('.search-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');activeTab=btn.dataset.tab;qs('#searchNote').textContent=activeTab==='hotels'?'Hotel searches open with our booking partner. Affiliate tracking will be activated after partner approval.':`${btn.textContent} integration is ready for an approved partner. For now, submit an enquiry or use the curated sections below.`}));
+function bookingUrl(destination,checkin='',checkout='',guests='2'){
+ const url=new URL(AFFILIATE_CONFIG.bookingBaseUrl);url.searchParams.set('ss',destination||'Bali');if(checkin)url.searchParams.set('checkin',checkin);if(checkout)url.searchParams.set('checkout',checkout);url.searchParams.set('group_adults',guests);url.searchParams.set('no_rooms','1');url.searchParams.set('group_children','0');if(AFFILIATE_CONFIG.bookingAid)url.searchParams.set('aid',AFFILIATE_CONFIG.bookingAid);if(AFFILIATE_CONFIG.bookingLabel)url.searchParams.set('label',AFFILIATE_CONFIG.bookingLabel);return url.toString();
 }
-setLanguage(localStorage.getItem('benarian-language') || 'en');
-langToggle?.addEventListener('click',()=>setLanguage(html.lang==='fa'?'en':'fa'));
-persianAccess?.addEventListener('click',()=>setLanguage('fa'));
-
-document.querySelectorAll('.booking-tabs button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.booking-tabs button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
-
-document.querySelectorAll('[data-search]').forEach(card=>{
-  card.addEventListener('click',e=>{
-    e.preventDefault();
-    document.getElementById('destination').value = card.dataset.search;
-    document.querySelector('.booking').scrollIntoView({behavior:'smooth',block:'center'});
-  });
-});
-
-document.getElementById('bookingForm')?.addEventListener('submit',e=>{
-  e.preventDefault();
-  const destination = document.getElementById('destination').value.trim();
-  const checkin = document.getElementById('checkin').value;
-  const checkout = document.getElementById('checkout').value;
-  const guests = document.getElementById('guests').value || '2';
-  if(!destination || !checkin || !checkout) return;
-  const url = new URL('https://www.booking.com/searchresults.html');
-  url.searchParams.set('ss', destination);
-  url.searchParams.set('checkin', checkin);
-  url.searchParams.set('checkout', checkout);
-  url.searchParams.set('group_adults', guests);
-  url.searchParams.set('no_rooms', guests === '4' ? '2' : '1');
-  url.searchParams.set('group_children', '0');
-  window.open(url.toString(), '_blank', 'noopener,noreferrer');
-});
-
-const today = new Date();
-const tomorrow = new Date(today); tomorrow.setDate(today.getDate()+1);
-const after = new Date(today); after.setDate(today.getDate()+3);
-const iso = d => d.toISOString().slice(0,10);
-const ci = document.getElementById('checkin'), co = document.getElementById('checkout');
-if(ci && !ci.value){ci.min=iso(today);ci.value=iso(tomorrow)}
-if(co && !co.value){co.min=iso(tomorrow);co.value=iso(after)}
-ci?.addEventListener('change',()=>{co.min=ci.value;if(co.value<=ci.value){const d=new Date(ci.value);d.setDate(d.getDate()+1);co.value=iso(d)}});
+qs('#travelSearch')?.addEventListener('submit',e=>{e.preventDefault();const d=qs('#destination').value,ci=qs('#checkin').value,co=qs('#checkout').value,g=qs('#guests').value;if(activeTab==='hotels'){window.open(bookingUrl(d,ci,co,g),'_blank','noopener')}else{location.href='#contact'}});
+qsa('.hotel-book').forEach(b=>b.addEventListener('click',()=>window.open(bookingUrl(b.dataset.destination),'_blank','noopener')));
+qs('[data-language]')?.addEventListener('click',()=>{const fa=document.documentElement.lang==='fa';document.documentElement.lang=fa?'en':'fa';document.documentElement.dir=fa?'ltr':'rtl';localStorage.setItem('benarian-language',fa?'en':'fa');alert(fa?'English layout restored. Full Persian content will be expanded in the next content release.':'چیدمان فارسی فعال شد. ترجمه کامل محتوا در نسخه محتوایی بعدی تکمیل می‌شود.');});
+const savedLang=localStorage.getItem('benarian-language');if(savedLang==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rtl'}
