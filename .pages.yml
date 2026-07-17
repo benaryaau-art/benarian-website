@@ -7,46 +7,155 @@ media:
 
 content:
   - name: homepage
-    label: Homepage
+    label: Homepage & Hero
     type: file
-    path: index.html
-    format: code
-    operations:
-      delete: false
+    path: content/homepage.json
+    format: json
+    fields:
+      - name: hero_title
+        label: Hero Title
+        type: string
 
-  - name: styles
-    label: Website Style & Fonts
+      - name: hero_highlight
+        label: Gold Word in Title
+        type: string
+
+      - name: hero_subtitle
+        label: Hero Subtitle
+        type: text
+
+      - name: hero_button_text
+        label: Button Text
+        type: string
+
+      - name: hero_button_link
+        label: Button Link
+        type: string
+
+      - name: hero_image
+        label: Hero Image
+        type: image
+
+      - name: brand_panel_image
+        label: Right Brand Panel Image
+        type: image
+
+      - name: logo
+        label: BENARIAN Logo
+        type: image
+
+      - name: tagline
+        label: Brand Tagline
+        type: text
+
+      - name: signature
+        label: Founder Signature
+        type: string
+
+  - name: design
+    label: Fonts & Colours
     type: file
-    path: assets/styles.css
-    format: code
-    operations:
-      delete: false
+    path: content/settings.json
+    format: json
+    fields:
+      - name: font_family
+        label: Main Font
+        type: select
+        options:
+          values:
+            - Inter
+            - Arial
+            - Georgia
+            - Garamond
+            - Helvetica
 
-  - name: logo
-    label: Logo
+      - name: heading_font
+        label: Heading Font
+        type: select
+        options:
+          values:
+            - Georgia
+            - Garamond
+            - Times New Roman
+            - Inter
+
+      - name: gold_colour
+        label: Main Gold Colour
+        type: color
+
+      - name: gold_light
+        label: Light Gold Colour
+        type: color
+
+      - name: text_colour
+        label: Text Colour
+        type: color
+
+      - name: background_colour
+        label: Background Colour
+        type: color
+
+  - name: hotels
+    label: Featured Hotels
     type: file
-    path: assets/logo.svg
-    format: code
-    operations:
-      delete: false
+    path: content/hotels.json
+    format: json
+    fields:
+      - name: hotels
+        label: Hotels
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Hotel Name
+            type: string
 
-  - name: partner
+          - name: location
+            label: Location
+            type: string
+
+          - name: price
+            label: Price Text
+            type: string
+
+          - name: rooms
+            label: Availability Text
+            type: string
+
+          - name: score
+            label: Review Score
+            type: string
+
+          - name: image
+            label: Hotel Image
+            type: image
+
+          - name: booking_url
+            label: Booking Link
+            type: string
+
+  - name: contact
+    label: Contact Details
+    type: file
+    path: content/contact.json
+    format: json
+    fields:
+      - name: email
+        label: Email
+        type: string
+
+      - name: whatsapp
+        label: WhatsApp Number
+        type: string
+
+      - name: instagram
+        label: Instagram Link
+        type: string
+
+  - name: affiliate
     label: Affiliate Settings
     type: file
     path: assets/partner-config.js
     format: code
     operations:
       delete: false
-
-  - name: pages
-    label: Website Pages
-    type: collection
-    path: .
-    filename: "{primary}.html"
-    view:
-      fields:
-        - primary
-    fields:
-      - name: body
-        label: HTML
-        type: code
