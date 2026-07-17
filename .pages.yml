@@ -1,0 +1,32 @@
+media:
+  input: assets/images
+  output: /assets/images
+  categories:
+    - image
+  rename: safe
+
+content:
+  - name: homepage
+    label: Homepage
+    type: file
+    path: index.html
+    format: code
+
+  - name: styles
+    label: Website Style & Fonts
+    type: file
+    path: assets/styles.css
+    format: code
+
+  - name: pages
+    label: Website Pages
+    type: collection
+    path: .
+    filename: "{primary}.html"
+    view:
+      fields:
+        - name
+    fields:
+      - name: body
+        label: Page Content
+        type: code
