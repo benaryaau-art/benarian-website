@@ -6,11 +6,13 @@ media:
   rename: safe
 
 content:
-  - name: homepage
-    label: Homepage
+    - name: partner
+    label: Affiliate Settings
     type: file
-    path: index.html
+    path: assets/partner-config.js
     format: code
+    operations:
+      delete: false
 
   - name: styles
     label: Website Style & Fonts
