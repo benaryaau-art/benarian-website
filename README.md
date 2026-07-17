@@ -1,6 +1,3 @@
-# BENARIAN Clean Cloudflare Edition
+# BENARIAN Final Exact Edition
 
-Static HTML/CSS/JS site. Cloudflare Pages settings:
-- Framework: None
-- Build command: exit 0
-- Output directory: .
+Static HTML/CSS/JS website prepared for GitHub and Cloudflare Pages.

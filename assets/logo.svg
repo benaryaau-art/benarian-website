@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 150" role="img" aria-labelledby="t d">
-<title id="t">BENARIAN</title><desc id="d">BENARIAN luxury hotels and exclusive experiences</desc>
-<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#b77a21"/><stop offset=".5" stop-color="#f0cb73"/><stop offset="1" stop-color="#a86716"/></linearGradient></defs>
-<g fill="url(#g)"><text x="10" y="102" font-family="Georgia,serif" font-size="116" font-weight="600">ℬ</text><text x="106" y="82" font-family="Georgia,serif" font-size="55" letter-spacing="12">BENARIAN</text><text x="110" y="118" font-family="Arial,sans-serif" font-size="14" letter-spacing="5">LUXURY HOTELS • EXCLUSIVE EXPERIENCES</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 132" role="img" aria-label="BENARIAN Luxury Travel and Hospitality">
+  <g fill="none" stroke="#b78022" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M42 18v96M74 18v96M42 18h30c24 0 37 11 37 27 0 12-8 21-22 25 18 4 28 15 28 29 0 19-16 31-44 31H42"/>
+    <path d="M58 18v96M58 66h26M58 114h23"/>
+    <path d="M92 18v96M92 18h24c23 0 36 11 36 27 0 13-9 22-24 26 19 4 29 15 29 29 0 18-15 30-42 30H92" opacity=".9"/>
+  </g>
+  <text x="185" y="63" fill="#8d5b16" font-family="Georgia, 'Times New Roman', serif" font-size="46" letter-spacing="6">BENARIAN</text>
+  <text x="189" y="93" fill="#b78022" font-family="Arial, sans-serif" font-size="15" letter-spacing="3.2">LUXURY TRAVEL &amp; HOSPITALITY</text>
 </svg>
