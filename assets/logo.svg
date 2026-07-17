@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 132" role="img" aria-label="BENARIAN Luxury Travel and Hospitality">
-  <g fill="none" stroke="#b78022" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M42 18v96M74 18v96M42 18h30c24 0 37 11 37 27 0 12-8 21-22 25 18 4 28 15 28 29 0 19-16 31-44 31H42"/>
-    <path d="M58 18v96M58 66h26M58 114h23"/>
-    <path d="M92 18v96M92 18h24c23 0 36 11 36 27 0 13-9 22-24 26 19 4 29 15 29 29 0 18-15 30-42 30H92" opacity=".9"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 150" role="img" aria-label="BENARIAN Luxury Travel and Hospitality">
+  <rect width="640" height="150" fill="none"/>
+  <g fill="#b78022">
+    <text x="22" y="104" font-family="Georgia, Times New Roman, serif" font-size="96" font-weight="700" letter-spacing="-10">B</text>
+    <text x="60" y="104" font-family="Georgia, Times New Roman, serif" font-size="96" font-weight="700" letter-spacing="-10" opacity="0.95">B</text>
   </g>
-  <text x="185" y="63" fill="#8d5b16" font-family="Georgia, 'Times New Roman', serif" font-size="46" letter-spacing="6">BENARIAN</text>
-  <text x="189" y="93" fill="#b78022" font-family="Arial, sans-serif" font-size="15" letter-spacing="3.2">LUXURY TRAVEL &amp; HOSPITALITY</text>
+  <text x="148" y="68" fill="#8d5b16" font-family="Georgia, Times New Roman, serif" font-size="52" letter-spacing="5">BENARIAN</text>
+  <text x="150" y="98" fill="#b78022" font-family="Arial, sans-serif" font-size="17" letter-spacing="3.1">LUXURY TRAVEL &amp; HOSPITALITY</text>
 </svg>
