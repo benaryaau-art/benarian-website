@@ -12,3 +12,9 @@ Static luxury travel website ready for GitHub Pages, Netlify or Cloudflare Pages
 - Connect contact forms to Netlify Forms, Formspree or a CRM.
 - Replace demonstration hotel names/prices with verified partner content.
 - Verify visa information with official embassies/immigration authorities.
+
+
+## Compliance pages
+- affiliate-disclosure.html
+- privacy-policy.html
+- Clear affiliate notice added to the home page near booking search.
