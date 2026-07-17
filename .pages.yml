@@ -6,10 +6,10 @@ media:
   rename: safe
 
 content:
-    - name: partner
-    label: Affiliate Settings
+  - name: homepage
+    label: Homepage
     type: file
-    path: assets/partner-config.js
+    path: index.html
     format: code
     operations:
       delete: false
@@ -19,16 +19,34 @@ content:
     type: file
     path: assets/styles.css
     format: code
+    operations:
+      delete: false
+
+  - name: logo
+    label: Logo
+    type: file
+    path: assets/logo.svg
+    format: code
+    operations:
+      delete: false
+
+  - name: partner
+    label: Affiliate Settings
+    type: file
+    path: assets/partner-config.js
+    format: code
+    operations:
+      delete: false
 
   - name: pages
     label: Website Pages
     type: collection
-    path:.
+    path: .
     filename: "{primary}.html"
     view:
       fields:
-        - name
+        - primary
     fields:
       - name: body
-        label: Page Content
+        label: HTML
         type: code
