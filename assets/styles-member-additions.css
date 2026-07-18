@@ -1,0 +1,36 @@
+
+/* BENARIAN About Ben + Member Area */
+.member-top-btn{border:1px solid var(--gold);background:transparent;color:var(--gold);padding:7px 11px;border-radius:4px;font-size:11px;cursor:pointer}
+.about-luxury{background:#090909;color:#f7f2e8}
+.about-hero{min-height:560px;display:grid;grid-template-columns:1.05fr .95fr;background:radial-gradient(circle at 65% 45%,rgba(183,128,34,.14),transparent 30%),linear-gradient(120deg,#050505,#111);border-bottom:1px solid rgba(183,128,34,.42)}
+.about-hero-copy{padding:100px 52px 70px;max-width:720px}
+.eyebrow{color:#c6923b;letter-spacing:1.5px;font-size:12px;font-weight:600}
+.about-hero h1,.founder-section h2,.member-heading h2{font-family:"Playfair Display",Georgia,serif;font-weight:500}
+.about-hero h1{font-size:58px;line-height:1.08;margin:16px 0 20px;color:#fff}
+.gold-rule{display:block;width:70px;height:2px;background:var(--gold);margin:26px 0}
+.about-hero-copy>p:not(.eyebrow){max-width:570px;line-height:1.75;color:#c9c4bb;font-size:17px}
+.about-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:30px}
+.btn-outline{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--gold);border-radius:4px;padding:13px 21px;background:transparent;color:#d6a452;font-weight:600;cursor:pointer}
+.about-portrait-panel{display:flex;align-items:flex-end;justify-content:center;padding:50px;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.75)),url('images/hero-hotel.jpg') center/cover}
+.portrait-placeholder{border:1px solid rgba(214,164,82,.55);padding:20px 32px;text-align:center;background:rgba(0,0,0,.65);backdrop-filter:blur(6px)}
+.portrait-placeholder span{display:block;font-family:"Playfair Display",serif;font-size:25px;color:#fff}.portrait-placeholder small{color:#c6923b;letter-spacing:2px}
+.founder-section{display:grid;grid-template-columns:1.25fr 1fr .85fr;gap:44px;padding:55px 52px;border-bottom:1px solid rgba(183,128,34,.35)}
+.founder-section h2{font-size:36px;margin:10px 0 18px;color:#fff}.founder-section p{line-height:1.7;color:#c7c1b7}
+.founder-points{border-left:1px solid rgba(183,128,34,.5);padding-left:35px}.founder-points p{margin:0 0 17px}
+.signature-card{border-left:1px solid rgba(183,128,34,.5);padding-left:35px;display:flex;flex-direction:column;justify-content:center}
+.signature-script{font-family:"Brush Script MT",cursive;font-size:45px;color:#c6923b;margin-bottom:16px}.signature-card strong{font-size:16px}.signature-card span{color:#c6923b;margin-top:8px}
+.member-exclusive{padding:70px 52px;background:#0d0d0d}.member-heading{max-width:780px;margin-bottom:35px}.member-heading h2{font-size:42px;margin:10px 0;color:#fff}.member-heading>p:last-child{color:#bbb4aa;line-height:1.7}
+.member-content-preview{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.member-content-preview article{min-height:205px;border:1px solid rgba(183,128,34,.35);padding:26px;background:linear-gradient(145deg,#171717,#0c0c0c);filter:blur(2px);opacity:.45}
+.member-content-preview article span{color:#c6923b}.member-content-preview article h3{font-family:"Playfair Display",serif;font-size:24px}.member-content-preview article p{color:#aaa49b;line-height:1.6}
+.member-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(5,5,5,.58);backdrop-filter:blur(4px);padding:25px}
+.member-lock .lock-icon{font-size:42px;color:#c6923b}.member-lock h3{font-family:"Playfair Display",serif;font-size:32px;margin:8px 0}.member-lock p{color:#c8c0b5}.member-lock>div:last-child{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.about-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(183,128,34,.35)}
+.about-stats div{text-align:center;padding:30px 15px;border-right:1px solid rgba(183,128,34,.25)}.about-stats div:last-child{border-right:0}
+.about-stats strong{display:block;font-size:31px;color:#c6923b}.about-stats span{display:block;font-size:10px;margin-top:8px;color:#d0c8bd;letter-spacing:1px}
+.member-modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.78);padding:20px}.member-modal.open{display:flex}
+.member-modal-card{position:relative;max-width:510px;background:#111;color:#eee;border:1px solid #b78022;padding:40px;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.member-modal-card h2{font-family:"Playfair Display",serif;font-size:38px;margin:10px 0}.member-modal-card>p:not(.eyebrow){line-height:1.7;color:#bbb4aa}
+.member-close{position:absolute;right:15px;top:10px;border:0;background:transparent;color:#d6a452;font-size:28px;cursor:pointer}
+@media(max-width:900px){.about-hero{grid-template-columns:1fr}.about-portrait-panel{min-height:330px}.founder-section{grid-template-columns:1fr}.founder-points,.signature-card{border-left:0;border-top:1px solid rgba(183,128,34,.4);padding:25px 0 0}.member-content-preview{grid-template-columns:1fr}.about-stats{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.about-hero-copy{padding:55px 24px}.about-hero h1{font-size:42px}.founder-section,.member-exclusive{padding:45px 24px}.member-heading h2{font-size:34px}.member-content-preview article{min-height:165px}.about-stats{grid-template-columns:1fr 1fr}.member-top-btn{display:none}}
