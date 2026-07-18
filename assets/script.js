@@ -47,3 +47,25 @@ if (form) {
     window.open(bookingSearchUrl(params), '_blank', 'noopener');
   });
 }
+
+
+// BENARIAN membership preview. Replace this local demo with Supabase/Firebase/Cloudflare auth for production.
+const MEMBER_KEY = 'benarianMember';
+function getMember(){try{return JSON.parse(localStorage.getItem(MEMBER_KEY)||'null')}catch{return null}}
+function saveMember(member){localStorage.setItem(MEMBER_KEY,JSON.stringify(member))}
+function displayMemberState(){
+  const member=getMember();
+  document.querySelectorAll('[data-member-name]').forEach(el=>el.textContent=member?.name||member?.email?.split('@')[0]||'BENARIAN Member');
+  const locked=document.querySelector('#member-locked');
+  const unlocked=document.querySelector('#member-unlocked');
+  if(locked&&unlocked){locked.hidden=!!member;unlocked.hidden=!member}
+  document.querySelectorAll('.member-top-link').forEach(link=>{if(member){link.textContent='♟ My Account';link.href='member-dashboard.html'}});
+  if(location.pathname.endsWith('member-dashboard.html')&&!member){location.replace('member-login.html?next=member-dashboard.html')}
+}
+const loginForm=document.querySelector('#member-login-form');
+if(loginForm){loginForm.addEventListener('submit',e=>{e.preventDefault();const email=document.querySelector('#member-email').value.trim();const password=document.querySelector('#member-password').value;const msg=document.querySelector('#member-form-message');if(password.length<6){msg.textContent='Please enter a password with at least 6 characters.';return}saveMember({email,name:email.split('@')[0]});msg.textContent='Sign-in successful. Opening your dashboard…';setTimeout(()=>location.href='member-dashboard.html',450)})}
+const joinForm=document.querySelector('#member-join-form');
+if(joinForm){joinForm.addEventListener('submit',e=>{e.preventDefault();const name=document.querySelector('#member-name').value.trim();const email=document.querySelector('#member-email').value.trim();const password=document.querySelector('#member-password').value;const consent=document.querySelector('#member-consent').checked;const msg=document.querySelector('#member-form-message');if(!name||password.length<6||!consent){msg.textContent='Please complete all fields and accept the privacy terms.';return}saveMember({name,email});msg.textContent='Welcome to BENARIAN. Opening your private member area…';setTimeout(()=>location.href='member-dashboard.html',500)})}
+const logout=document.querySelector('#member-logout');
+if(logout){logout.addEventListener('click',()=>{localStorage.removeItem(MEMBER_KEY);location.href='member-login.html'})}
+displayMemberState();
