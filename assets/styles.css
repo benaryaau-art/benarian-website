@@ -153,3 +153,17 @@ body{padding:18px}
 .member-kicker,.member-founder-card h3,.dashboard-icon,.promise-icon{color:var(--gold3)!important}
 @media(max-width:1100px){body{padding:0}.main-grid,.content-grid{grid-template-columns:1fr!important}.side-card{display:none!important}.curated-grid{grid-template-columns:1fr 1fr!important}.luxury-promise{grid-template-columns:1fr 1fr!important}.promise-cta{grid-column:1/-1!important}.brand{width:240px!important;min-width:240px!important}.brand img{height:44px!important}}
 @media(max-width:760px){body{padding:0}.shell{border-radius:0!important;border-left:0!important;border-right:0!important}.header{padding:10px 14px!important}.brand{width:220px!important;min-width:220px!important}.brand img{height:42px!important}.nav{background:#090909!important}.main-grid{padding:12px!important}.hero-copy{width:100%!important;padding:26px 20px!important}.hero-copy h1{font-size:42px!important}.search-box,.service-strip,.content-grid,.curated-section,.benefits{margin-left:10px!important;margin-right:10px!important;padding-left:0!important;padding-right:0!important}.content-grid{grid-template-columns:1fr!important}.hotel-row,.curated-grid,.benefits{grid-template-columns:1fr!important}.luxury-promise{grid-template-columns:1fr!important}.promise-block+.promise-block{border-left:0!important;border-top:1px solid rgba(214,160,74,.22)!important;padding-left:0!important;padding-top:16px!important}.brand-poster{height:auto!important}.side-card{display:none!important}}
+
+/* Final logo, hero and member restoration */
+.brand{width:290px!important;min-width:290px!important;height:58px!important;display:flex!important;align-items:center!important;overflow:hidden!important}
+.brand img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:left center!important;display:block!important}
+.hero-panel{background-image:url('images/hero-hotel-clean.jpg')!important;background-position:center right!important;background-size:cover!important}
+.hero-panel:before{background:linear-gradient(90deg,rgba(0,0,0,.90) 0%,rgba(0,0,0,.72) 34%,rgba(0,0,0,.22) 72%,rgba(0,0,0,.06) 100%)!important}
+.hero-copy{width:52%!important;max-width:610px!important;padding:42px 38px!important;position:relative!important;z-index:2!important}
+.hero-copy h1{margin:0 0 22px!important;font-size:50px!important;line-height:1.05!important;letter-spacing:.5px!important}
+.hero-copy p{margin:0 0 26px!important;line-height:1.6!important;max-width:500px!important}
+.member-founder-card{margin-top:24px!important;background:#0d0d0d!important;color:#fff!important;border:1px solid rgba(214,160,74,.30)!important;border-radius:14px!important;overflow:hidden!important;display:grid!important;grid-template-columns:300px 1fr!important}
+.member-founder-card img{width:100%!important;height:100%!important;min-height:360px!important;object-fit:cover!important;object-position:center top!important}
+.member-founder-card>div{padding:38px!important}
+@media(max-width:1100px){.brand{width:250px!important;min-width:250px!important;height:52px!important}.hero-copy{width:58%!important}}
+@media(max-width:760px){.brand{width:220px!important;min-width:220px!important;height:46px!important}.hero-copy{width:100%!important;padding:30px 22px!important}.hero-copy h1{font-size:38px!important}.member-founder-card{grid-template-columns:1fr!important}.member-founder-card img{height:410px!important;min-height:0!important}}
