@@ -49,3 +49,16 @@ benefits{display:block}.benefits{display:grid;grid-template-columns:repeat(4,1fr
 .member-founder-card{margin-top:24px;background:#111;color:#fff;border:1px solid #6f4c18;border-radius:14px;overflow:hidden;display:grid;grid-template-columns:260px 1fr;box-shadow:0 18px 45px rgba(0,0,0,.16)}.member-founder-card img{width:100%;height:100%;min-height:330px;object-fit:cover;object-position:center top}.member-founder-card>div{padding:34px}.member-founder-card h2{font-family:Georgia,serif;color:#d9a34a;font-size:36px;margin:8px 0 2px}.member-founder-card h3{font-size:13px;letter-spacing:1.4px;color:#f0d7ab;margin:0 0 18px}.member-founder-card p{line-height:1.75;color:#ddd;max-width:680px}.founder-highlights{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.founder-highlights span{border:1px solid rgba(211,154,49,.55);color:#efd6a8;border-radius:999px;padding:8px 12px;font-size:11px}
 @media(max-width:1100px){.curated-grid{grid-template-columns:1fr 1fr}.curated-card:last-child{grid-column:1/-1}.luxury-promise{grid-template-columns:1fr 1fr}.promise-cta{grid-column:1/-1}.member-founder-card{grid-template-columns:220px 1fr}}
 @media(max-width:760px){.hotel-card img{height:220px}.curated-heading h2{font-size:15px}.curated-grid{grid-template-columns:1fr}.curated-card:last-child{grid-column:auto}.curated-card,.curated-card img{min-height:220px;height:220px}.luxury-promise{grid-template-columns:1fr;padding:20px}.promise-block+.promise-block{border-left:0;border-top:1px solid rgba(211,154,49,.35);padding-left:0;padding-top:18px}.promise-cta{grid-column:auto}.member-founder-card{grid-template-columns:1fr}.member-founder-card img{height:360px;min-height:0}.member-founder-card>div{padding:26px}.member-founder-card h2{font-size:30px}}
+
+
+/* Final approved BENARIAN black-and-gold logo */
+.header{background:#090909;border-bottom:1px solid #8f641e}
+.brand{width:285px;min-width:285px;background:#090909;border-radius:4px;overflow:hidden}
+.brand img{display:block;width:100%;height:72px;object-fit:cover;object-position:center 28%;filter:none}
+.nav a{color:#f2eadc}
+.nav a:hover,.nav a.current{color:#d8a449}
+.menu-btn{background:#111;color:#d8a449;border-color:#8f641e}
+.brand-poster{background:#090909;padding:0}
+.brand-poster-image{width:100%;height:100%;object-fit:cover;object-position:center center}
+@media(min-width:1101px) and (max-width:1320px){.brand{width:245px;min-width:245px}.brand img{height:66px}}
+@media(max-width:760px){.header{background:#090909}.brand{width:235px;min-width:235px}.brand img{height:62px}.nav{background:#090909}.nav a{color:#f2eadc}}
