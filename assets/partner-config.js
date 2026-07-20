@@ -2,10 +2,10 @@
 // Replace only the values below after each advertiser is approved.
 window.BENARIAN_PARTNERS = {
   booking: {
-    enabled: false,
+    enabled: true,
     baseUrl: "https://www.booking.com/searchresults.html",
     // Paste the approved CJ/Booking tracking or deep-link prefix here.
-    affiliateBaseUrl: ""
+    affiliateBaseUrl: "https://www.kqzyfj.com/click-101828630-17289006"
   },
   agoda: { enabled: false, affiliateBaseUrl: "" },
   trip: { enabled: false, affiliateBaseUrl: "" },
