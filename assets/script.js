@@ -11,10 +11,68 @@ document.querySelectorAll('.nav a').forEach(link => {
   if (href === currentPage) link.classList.add('current');
 });
 
+function openPartnerLink(key, fallback) {
+  const partner = window.BENARIAN_PARTNERS?.[key];
+  const url = partner?.enabled && partner?.affiliateBaseUrl
+    ? partner.affiliateBaseUrl
+    : fallback;
+  if (!url) return;
+  if (/^https?:/i.test(url)) {
+    window.open(url, '_blank', 'noopener');
+  } else {
+    location.href = url;
+  }
+}
+
+// Activate the category tabs on the homepage.
+const tabRoutes = {
+  'HOTELS': null,
+  'RESTAURANTS': { fallback: 'restaurants.html' },
+  'EXPERIENCES': { partner: 'attractions', fallback: 'experiences.html' },
+  'SPA & WELLNESS': { fallback: 'wellness.html' },
+  'TRANSFERS': { partner: 'taxi', fallback: 'contact.html' },
+  'FLIGHTS': { partner: 'flights', fallback: 'contact.html' },
+  'YACHTS': { fallback: 'yacht-charter.html' },
+  'HELICOPTER TOURS': { fallback: 'helicopter-tours.html' },
+  'LUXURY CARS': { partner: 'cars', fallback: 'luxury-cars.html' }
+};
+
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(item => item.classList.remove('active'));
     tab.classList.add('active');
+    const label = tab.textContent.replace(/^[^A-Z]+/, '').trim();
+    const route = tabRoutes[label];
+    if (!route) return;
+    openPartnerLink(route.partner, route.fallback);
+  });
+});
+
+// Turn the homepage service tiles into real buttons.
+const serviceRoutes = {
+  'SPA & WELLNESS': { fallback: 'wellness.html' },
+  'AIRPORT TRANSFERS': { partner: 'taxi', fallback: 'contact.html' },
+  'YACHT CHARTERS': { fallback: 'yacht-charter.html' },
+  'HELICOPTER TOURS': { fallback: 'helicopter-tours.html' },
+  'LUXURY CARS': { partner: 'cars', fallback: 'luxury-cars.html' },
+  'TRAVEL INSURANCE': { fallback: 'contact.html' }
+};
+
+document.querySelectorAll('.service').forEach(service => {
+  const label = service.querySelector('h4')?.textContent.trim();
+  const route = serviceRoutes[label];
+  if (!route) return;
+  service.setAttribute('role', 'link');
+  service.setAttribute('tabindex', '0');
+  service.style.cursor = 'pointer';
+  service.setAttribute('aria-label', `Open ${label}`);
+  const activate = () => openPartnerLink(route.partner, route.fallback);
+  service.addEventListener('click', activate);
+  service.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      activate();
+    }
   });
 });
 
@@ -47,7 +105,6 @@ if (form) {
     window.open(bookingSearchUrl(params), '_blank', 'noopener');
   });
 }
-
 
 // BENARIAN membership preview. Replace this local demo with Supabase/Firebase/Cloudflare auth for production.
 const MEMBER_KEY = 'benarianMember';
