@@ -1,5 +1,6 @@
 /* BENARIAN final consistency fixes */
 .brand-lockup,.brand{display:flex!important;align-items:center!important;text-decoration:none!important;background:transparent!important}
+.home-lux .header .brand-lockup:before,.home-lux .header .brand-lockup:after{content:none!important;display:none!important}
 .brand-lockup .brand-mark,.brand .brand-mark{font-family:'Cormorant Garamond',Georgia,serif;font-size:62px;line-height:.75;color:#b9872c;font-weight:600;letter-spacing:-10px;margin-right:22px;transform:scaleX(.8)}
 .brand-lockup .brand-copy,.brand .brand-copy{display:flex;flex-direction:column}
 .brand-lockup .brand-copy strong,.brand .brand-copy strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:38px;line-height:.9;letter-spacing:6px;color:#151310;font-weight:600}
