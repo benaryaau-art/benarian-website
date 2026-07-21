@@ -20,8 +20,8 @@
 .header .brand.brand-lockup .brand-copy{display:flex!important;flex-direction:column!important;min-width:0!important}
 .header .brand.brand-lockup .brand-copy strong{display:block!important;font-family:'Cormorant Garamond',Georgia,serif!important;font-size:35px!important;line-height:.9!important;letter-spacing:4px!important;color:#151310!important;font-weight:600!important;white-space:nowrap!important}
 .header .brand.brand-lockup .brand-copy small{display:block!important;font-family:Inter,Arial,sans-serif!important;font-size:8px!important;line-height:1.2!important;letter-spacing:1.15px!important;color:#151310!important;white-space:nowrap!important;margin-top:5px!important}
-.header .brand:not(.brand-lockup){display:flex!important;align-items:center!important;width:310px!important;height:68px!important;max-width:100%!important;overflow:hidden!important}
-.header .brand:not(.brand-lockup) img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:left center!important}
+.header .brand:not(.brand-lockup){display:flex!important;align-items:center!important;width:310px!important;height:68px!important;max-width:100%!important;overflow:hidden!important;background:#fff!important}
+.header .brand:not(.brand-lockup) img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:left center!important;filter:invert(1) grayscale(1) sepia(.95) saturate(2.8) hue-rotate(345deg) contrast(1.08)!important}
 .header .brand:not(.brand-lockup):before,.header .brand:not(.brand-lockup):after{content:none!important;display:none!important}
 .header .nav{grid-column:1/-1;width:100%!important;justify-content:center!important;border-top:1px solid #eee4d2!important;padding-top:8px!important}
 .header .menu-btn{display:none!important}
