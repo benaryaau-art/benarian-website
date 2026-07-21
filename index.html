@@ -10,12 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/home-luxury.css">
+  <link rel="stylesheet" href="assets/benarian-fixes.css">
 </head>
 <body class="home-lux">
 <div class="shell">
   <div class="topline">
     <div class="left">🌐 <span>Language:</span><a href="fa.html">فارسی</a><span>|</span><b>EN</b></div>
-    <div class="right"><span class="accent">AUD⌄</span><span>♡ Wishlist</span><span>▣ My Bookings</span><a class="member-top-link" href="member-login.html">My Account</a></div>
+    <div class="right"><span class="accent">AUD⌄</span><span>♡ Wishlist</span><span>▣ My Bookings</span><a class="member-top-link" href="member-login.html">Members</a></div>
   </div>
 
   <header class="header">
@@ -23,16 +24,9 @@
       <span class="brand-mark">BB</span>
       <span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL &amp; HOSPITALITY</small></span>
     </a>
-    <button class="menu-btn" aria-label="Open menu">Menu <span>☰</span></button>
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">Menu <span>☰</span></button>
     <nav class="nav">
-      <a href="destinations.html">DESTINATIONS</a>
-      <a href="hotels.html">HOTELS</a>
-      <a href="restaurants.html">RESTAURANTS</a>
-      <a href="experiences.html">EXPERIENCES</a>
-      <a href="wellness.html">SPA &amp; WELLNESS</a>
-      <a href="visa-guide.html">VISA GUIDE</a>
-      <a href="about.html">ABOUT US</a>
-      <a href="contact.html">CONTACT</a>
+      <a href="destinations.html">DESTINATIONS</a><a href="hotels.html">HOTELS</a><a href="restaurants.html">RESTAURANTS</a><a href="experiences.html">EXPERIENCES</a><a href="wellness.html">SPA &amp; WELLNESS</a><a href="visa-guide.html">VISA GUIDE</a><a href="about.html">ABOUT US</a><a href="contact.html">CONTACT</a>
     </nav>
   </header>
 
@@ -46,75 +40,44 @@
       </div>
     </section>
 
+    <section class="booking-search" aria-label="Hotel search">
+      <form class="booking-form">
+        <label><span>DESTINATION</span><input id="destination" type="text" value="Bali" placeholder="Where would you like to stay?"></label>
+        <label><span>CHECK-IN</span><input id="checkin" type="date"></label>
+        <label><span>CHECK-OUT</span><input id="checkout" type="date"></label>
+        <label><span>GUESTS &amp; ROOMS</span><select id="guests"><option value="2-1">2 Adults, 1 Room</option><option value="1-1">1 Adult, 1 Room</option><option value="3-1">3 Adults, 1 Room</option><option value="4-2">4 Adults, 2 Rooms</option></select></label>
+        <button type="submit">Search Hotels →</button>
+      </form>
+      <p>Hotel searches open Booking.com through BENARIAN’s affiliate connection.</p>
+    </section>
+
     <section class="lux-section hotels-section">
-      <div class="lux-section-head centered-head">
-        <div class="title-wrap"><div class="section-icon">✤</div><h2 class="lux-title">Featured Hotels</h2></div>
-        <a class="lux-view" href="hotels.html">View all →</a>
-      </div>
+      <div class="lux-section-head centered-head"><div class="title-wrap"><div class="section-icon">✤</div><h2 class="lux-title">Featured Hotels</h2></div><a class="lux-view" href="hotels.html">View all →</a></div>
       <div class="lux-hotel-grid">
-        <a class="lux-card" href="https://www.booking.com/searchresults.html?ss=AYANA%20Resort%20Bali%20Jimbaran" target="_blank" rel="noopener sponsored">
-          <div class="lux-card-media"><img src="assets/images/hotel-ayana.jpg" alt="AYANA Resort Bali"></div>
-          <div class="lux-card-body"><h3>AYANA Resort Bali</h3><div class="lux-stars">★★★★★</div><div class="lux-meta"><span>⌖ Jimbaran, Bali</span><span class="lux-price">From AUD 450<br><small>/ night</small></span></div></div>
-        </a>
-        <a class="lux-card" href="https://www.booking.com/searchresults.html?ss=The%20Apurva%20Kempinski%20Bali" target="_blank" rel="noopener sponsored">
-          <div class="lux-card-media"><img src="assets/images/hotel-apurva.jpg" alt="The Apurva Kempinski Bali"></div>
-          <div class="lux-card-body"><h3>The Apurva Kempinski Bali</h3><div class="lux-stars">★★★★★</div><div class="lux-meta"><span>⌖ Nusa Dua, Bali</span><span class="lux-price">From AUD 680<br><small>/ night</small></span></div></div>
-        </a>
-        <a class="lux-card" href="https://www.booking.com/searchresults.html?ss=Alila%20Villas%20Uluwatu" target="_blank" rel="noopener sponsored">
-          <div class="lux-card-media"><img src="assets/images/hotel-alila.jpg" alt="Alila Villas Uluwatu"></div>
-          <div class="lux-card-body"><h3>Alila Villas Uluwatu</h3><div class="lux-stars">★★★★★</div><div class="lux-meta"><span>⌖ Uluwatu, Bali</span><span class="lux-price">From AUD 690<br><small>/ night</small></span></div></div>
-        </a>
+        <a class="lux-card" href="https://www.booking.com/searchresults.html?ss=AYANA%20Resort%20Bali%20Jimbaran" target="_blank" rel="noopener sponsored"><div class="lux-card-media"><img src="assets/images/hotel-ayana.jpg" alt="AYANA Resort Bali"></div><div class="lux-card-body"><h3>AYANA Resort Bali</h3><div class="lux-stars">★★★★★</div><div class="lux-meta"><span>⌖ Jimbaran, Bali</span><span class="lux-price">View rates</span></div></div></a>
+        <a class="lux-card" href="https://www.booking.com/searchresults.html?ss=The%20Apurva%20Kempinski%20Bali" target="_blank" rel="noopener sponsored"><div class="lux-card-media"><img src="assets/images/hotel-apurva.jpg" alt="The Apurva Kempinski Bali"></div><div class="lux-card-body"><h3>The Apurva Kempinski Bali</h3><div class="lux-stars">★★★★★</div><div class="lux-meta"><span>⌖ Nusa Dua, Bali</span><span class="lux-price">View rates</span></div></div></a>
+        <a class="lux-card" href="https://www.booking.com/searchresults.html?ss=Alila%20Villas%20Uluwatu" target="_blank" rel="noopener sponsored"><div class="lux-card-media"><img src="assets/images/hotel-alila.jpg" alt="Alila Villas Uluwatu"></div><div class="lux-card-body"><h3>Alila Villas Uluwatu</h3><div class="lux-stars">★★★★★</div><div class="lux-meta"><span>⌖ Uluwatu, Bali</span><span class="lux-price">View rates</span></div></div></a>
       </div>
     </section>
 
     <section class="lux-section destinations-section">
-      <div class="lux-section-head centered-head">
-        <div class="title-wrap"><div class="section-icon">✤</div><h2 class="lux-title">Destinations</h2></div>
-        <a class="lux-view" href="destinations.html">View all →</a>
-      </div>
+      <div class="lux-section-head centered-head"><div class="title-wrap"><div class="section-icon">✤</div><h2 class="lux-title">Destinations</h2></div><a class="lux-view" href="destinations.html">View all →</a></div>
       <div class="lux-destinations">
-        <a class="lux-destination" href="destinations.html"><img src="assets/images/bali.jpg" alt="Bali"><div class="lux-destination-copy"><h3>Bali</h3><p>The Island of Gods</p><span class="lux-mini-btn">Explore Bali →</span></div></a>
-        <a class="lux-destination" href="destinations.html"><img src="assets/images/kyoto.jpg" alt="Phuket luxury destination"><div class="lux-destination-copy"><h3>Phuket</h3><p>Tropical Paradise</p><span class="lux-mini-btn">Explore Phuket →</span></div></a>
+        <a class="lux-destination" href="destinations.html"><img src="assets/images/bali.jpg" alt="Bali temple and coastline"><div class="lux-destination-copy"><h3>Bali</h3><p>The Island of Gods</p><span class="lux-mini-btn">Explore Bali →</span></div></a>
+        <a class="lux-destination" href="destinations.html"><img src="assets/images/phuket.jpg" alt="Phuket tropical islands and beach"><div class="lux-destination-copy"><h3>Phuket</h3><p>Tropical Paradise</p><span class="lux-mini-btn">Explore Phuket →</span></div></a>
       </div>
     </section>
 
-    <section class="lux-section feature-section">
-      <div class="lux-feature-grid">
-        <article class="lux-feature">
-          <div class="lux-feature-copy"><div class="lux-icon">✿</div><h3>Spa &amp; Wellness</h3><p>Rejuvenate your body and mind with world-class wellness experiences.</p><a class="lux-link" href="wellness.html">Explore Wellness →</a></div>
-          <img src="assets/images/hotel-uluwatu.jpg" alt="Luxury spa and wellness retreat">
-        </article>
-        <article class="lux-feature">
-          <div class="lux-feature-copy"><div class="lux-icon">⌑</div><h3>Restaurants &amp;<br>Experiences</h3><p>Savor exceptional cuisine and unforgettable curated experiences.</p><a class="lux-link" href="restaurants.html">Explore Experiences →</a></div>
-          <img src="assets/images/rest-1.jpg" alt="Luxury restaurant experience">
-        </article>
-      </div>
-    </section>
+    <section class="lux-section feature-section"><div class="lux-feature-grid">
+      <article class="lux-feature"><div class="lux-feature-copy"><div class="lux-icon">✿</div><h3>Spa &amp; Wellness</h3><p>Rejuvenate your body and mind with world-class wellness experiences.</p><a class="lux-link" href="wellness.html">Explore Wellness →</a></div><img src="assets/images/hotel-uluwatu.jpg" alt="Luxury tropical wellness retreat"></article>
+      <article class="lux-feature"><div class="lux-feature-copy"><div class="lux-icon">⌑</div><h3>Restaurants &amp;<br>Experiences</h3><p>Savor exceptional cuisine and unforgettable curated experiences.</p><a class="lux-link" href="restaurants.html">Explore Experiences →</a></div><img src="assets/images/rest-1.jpg" alt="Luxury fine dining restaurant"></article>
+    </div></section>
 
-    <section class="lux-section info-section">
-      <div class="lux-visa">
-        <div class="lux-visa-icon">▣</div>
-        <div><h3>Visa Guide for Iranian Travelers</h3><p>Complete guide to visa requirements and travel documents.</p><p class="fa">راهنمای کامل ویزا و مدارک سفر برای مسافران ایرانی</p></div>
-        <a class="lux-btn" href="visa-guide.html">View Visa Guide →</a>
-      </div>
-    </section>
-
-    <section class="lux-concierge">
-      <div class="concierge-icon">⌘</div>
-      <div><h2>Your Personal Concierge</h2><p>We are here to craft your perfect journey.<br>24/7 Luxury Travel Assistance</p></div>
-      <div class="lux-contact-actions"><a class="lux-outline" href="contact.html">◉ WhatsApp</a><a class="lux-outline" href="contact.html">✉ Email</a><a class="lux-outline wide" href="contact.html">⌕ +44 20 3885 1234</a></div>
-    </section>
+    <section class="lux-section info-section"><div class="lux-visa"><div class="lux-visa-icon">▣</div><div><h3>Visa Guide for Iranian Travelers</h3><p>Complete guide to visa requirements and travel documents.</p><p class="fa">راهنمای کامل ویزا و مدارک سفر برای مسافران ایرانی</p></div><a class="lux-btn" href="visa-guide.html">View Visa Guide →</a></div></section>
+    <section class="lux-concierge"><div class="concierge-icon">⌘</div><div><h2>Your Personal Concierge</h2><p>We are here to craft your perfect journey.<br>24/7 Luxury Travel Assistance</p></div><div class="lux-contact-actions"><a class="lux-outline" href="contact.html">◉ WhatsApp</a><a class="lux-outline" href="contact.html">✉ Email</a><a class="lux-outline wide" href="contact.html">Contact Concierge</a></div></section>
   </main>
 
-  <footer class="footer lux-footer">
-    <div class="footer-brand"><span class="brand-mark small">BB</span><span><strong>BENARIAN</strong><small>LUXURY TRAVEL &amp; HOSPITALITY</small></span></div>
-    <div><strong>Company</strong><a href="about.html">About Us</a><a href="experiences.html">Our Services</a><a href="contact.html">Concierge</a></div>
-    <div><strong>Support</strong><a href="contact.html">FAQ</a><a href="privacy-policy.html">Privacy Policy</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a></div>
-    <div><strong>Follow Us</strong><p>◎ &nbsp; f &nbsp; ✉</p></div>
-    <p class="copyright">© 2026 BENARIAN. All rights reserved.</p>
-  </footer>
+  <footer class="footer lux-footer"><div class="footer-brand"><span class="brand-mark small">BB</span><span><strong>BENARIAN</strong><small>LUXURY TRAVEL &amp; HOSPITALITY</small></span></div><div><strong>Company</strong><a href="about.html">About Us</a><a href="experiences.html">Our Services</a><a href="contact.html">Concierge</a></div><div><strong>Support</strong><a href="contact.html">FAQ</a><a href="privacy-policy.html">Privacy Policy</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a></div><div><strong>Follow Us</strong><p>◎ &nbsp; f &nbsp; ✉</p></div><p class="copyright">© 2026 BENARIAN. All rights reserved.</p></footer>
 </div>
-<script src="assets/partner-config.js"></script>
-<script src="assets/script.js"></script>
-</body>
-</html>
+<script src="assets/partner-config.js"></script><script src="assets/script.js"></script>
+</body></html>
