@@ -1,0 +1,15 @@
+/* BENARIAN final consistency fixes */
+.brand-lockup,.brand{display:flex!important;align-items:center!important;text-decoration:none!important;background:transparent!important}
+.brand-lockup .brand-mark,.brand .brand-mark{font-family:'Cormorant Garamond',Georgia,serif;font-size:62px;line-height:.75;color:#b9872c;font-weight:600;letter-spacing:-10px;margin-right:22px;transform:scaleX(.8)}
+.brand-lockup .brand-copy,.brand .brand-copy{display:flex;flex-direction:column}
+.brand-lockup .brand-copy strong,.brand .brand-copy strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:38px;line-height:.9;letter-spacing:6px;color:#151310;font-weight:600}
+.brand-lockup .brand-copy small,.brand .brand-copy small{margin-top:9px;font-size:10px;letter-spacing:2px;color:#b9872c;font-weight:600}
+.booking-search{position:relative;z-index:5;margin:-34px 54px 20px;background:#fff;border:1px solid #dcc79f;border-radius:14px;box-shadow:0 16px 40px rgba(75,49,12,.13);padding:16px}
+.booking-form{display:grid;grid-template-columns:1.35fr 1fr 1fr 1.1fr 170px;gap:10px;align-items:stretch}
+.booking-form label{display:block;border:1px solid #e4d7c0;border-radius:9px;padding:10px 12px;background:#fff}
+.booking-form label span{display:block;font-size:10px;letter-spacing:1px;font-weight:700;color:#9b6a20;margin-bottom:6px}
+.booking-form input,.booking-form select{width:100%;border:0;outline:0;background:transparent;color:#29241e;font-size:14px}
+.booking-form button{border:0;border-radius:9px;background:linear-gradient(180deg,#d7a649,#b97818);color:#fff;font-weight:700;padding:0 18px;cursor:pointer}
+.booking-search>p{margin:9px 3px 0;font-size:10px;color:#81786d}
+@media(max-width:900px){.booking-form{grid-template-columns:1fr 1fr}.booking-form button{min-height:52px}.booking-search{margin:-24px 20px 16px}}
+@media(max-width:760px){.brand-lockup .brand-mark,.brand .brand-mark{font-size:52px;margin-right:16px}.brand-lockup .brand-copy strong,.brand .brand-copy strong{font-size:29px;letter-spacing:4px}.brand-lockup .brand-copy small,.brand .brand-copy small{font-size:7.5px;letter-spacing:1.2px}.booking-search{margin:-18px 14px 15px;padding:12px}.booking-form{grid-template-columns:1fr}.booking-form button{min-height:48px}.home-lux .nav.open{max-height:calc(100vh - 100px);overflow:auto}.lux-destination img,.lux-feature img,.lux-card img{object-position:center}}
