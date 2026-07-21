@@ -5,11 +5,10 @@
 .brand-lockup .brand-copy,.brand .brand-copy{display:flex;flex-direction:column;min-width:0}
 .brand-lockup .brand-copy strong,.brand .brand-copy strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:38px;line-height:.9;letter-spacing:6px;color:#151310;font-weight:600;white-space:nowrap}
 .brand-lockup .brand-copy small,.brand .brand-copy small{margin-top:9px;font-size:10px;letter-spacing:2px;color:#b9872c;font-weight:600;white-space:nowrap}
-
-/* Match the footer brand to the approved header logo */
-.home-lux .lux-footer .footer-brand{display:block!important;width:330px!important;height:70px!important;max-width:100%!important;flex:0 0 330px!important;background-color:transparent!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 760 120'%3E%3Cg fill='%23b9872c'%3E%3Ctext x='0' y='88' font-family='Georgia,serif' font-size='90'%3EB%3C/text%3E%3Ctext x='38' y='88' font-family='Georgia,serif' font-size='90'%3EB%3C/text%3E%3C/g%3E%3Ctext x='130' y='70' font-family='Georgia,serif' font-size='52' letter-spacing='6' fill='%23151310'%3EBENARIAN%3C/text%3E%3Ctext x='132' y='99' font-family='Arial,sans-serif' font-size='14' letter-spacing='2.2' fill='%23b9872c'%3ELUXURY TRAVEL %26 HOSPITALITY%3C/text%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-size:contain!important;background-position:left center!important;overflow:visible!important}
-.home-lux .lux-footer .footer-brand>*{display:none!important}
-
+.home-lux .lux-footer .footer-brand{display:flex!important;width:auto!important;height:auto!important;max-width:100%!important;flex:0 1 auto!important;background:none!important;overflow:visible!important}
+.home-lux .lux-footer .footer-brand>*{display:flex!important}
+.home-lux .lux-footer .footer-brand .brand-mark{display:block!important}
+.home-lux .lux-footer{grid-template-columns:minmax(300px,1.4fr) repeat(3,minmax(120px,.6fr))!important;align-items:start!important;column-gap:36px!important}
 .booking-search{position:relative;z-index:5;margin:-34px 54px 20px;background:#fff;border:1px solid #dcc79f;border-radius:14px;box-shadow:0 16px 40px rgba(75,49,12,.13);padding:16px}
 .booking-form{display:grid;grid-template-columns:1.35fr 1fr 1fr 1.1fr 170px;gap:10px;align-items:stretch}
 .booking-form label{display:block;border:1px solid #e4d7c0;border-radius:9px;padding:10px 12px;background:#fff}
@@ -25,7 +24,9 @@
 .brand-lockup .brand-copy strong,.brand .brand-copy strong{font-size:25px;letter-spacing:3px;line-height:.92}
 .brand-lockup .brand-copy small,.brand .brand-copy small{font-size:6.8px;letter-spacing:.95px;margin-top:6px}
 .home-lux .menu-btn{position:static!important;margin:0!important;white-space:nowrap!important;padding:11px 15px!important;font-size:15px!important}
-.home-lux .lux-footer .footer-brand{width:250px!important;height:62px!important;flex-basis:250px!important;background-position:center!important;margin:0 auto!important}
+.home-lux .lux-footer{display:grid!important;grid-template-columns:1fr 1fr!important;gap:28px 22px!important;padding:34px 28px!important}
+.home-lux .lux-footer .footer-brand{grid-column:1/-1!important;justify-content:flex-start!important;margin:0!important;width:100%!important}
+.home-lux .lux-footer .copyright{grid-column:1/-1!important;margin-top:8px!important}
 .booking-search{margin:-18px 14px 15px;padding:12px}.booking-form{grid-template-columns:1fr}.booking-form button{min-height:48px}.home-lux .nav.open{max-height:calc(100vh - 100px);overflow:auto}.lux-destination img,.lux-feature img,.lux-card img{object-position:center}
 }
-@media(max-width:390px){.brand-lockup .brand-mark,.brand .brand-mark{font-size:43px;margin-right:9px}.brand-lockup .brand-copy strong,.brand .brand-copy strong{font-size:22px;letter-spacing:2.3px}.brand-lockup .brand-copy small,.brand .brand-copy small{font-size:6px;letter-spacing:.7px}.home-lux .menu-btn{padding:10px 12px!important;font-size:14px!important}.home-lux .lux-footer .footer-brand{width:230px!important;height:58px!important;flex-basis:230px!important}}
+@media(max-width:390px){.brand-lockup .brand-mark,.brand .brand-mark{font-size:43px;margin-right:9px}.brand-lockup .brand-copy strong,.brand .brand-copy strong{font-size:22px;letter-spacing:2.3px}.brand-lockup .brand-copy small,.brand .brand-copy small{font-size:6px;letter-spacing:.7px}.home-lux .menu-btn{padding:10px 12px!important;font-size:14px!important}.home-lux .lux-footer{grid-template-columns:1fr!important}.home-lux .lux-footer .footer-brand,.home-lux .lux-footer .copyright{grid-column:1!important}}
