@@ -1,80 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap');
 
-body.home-lux{padding:0!important;background:#fff!important;color:#181713!important}
-.home-lux .shell{max-width:1440px;border:0!important;border-radius:0!important;background:#fff!important;box-shadow:none!important}
-.home-lux .topline{background:#faf7f0!important;color:#665f55!important;border-color:#eee3cf!important;height:36px}
-.home-lux .topline a,.home-lux .topline b{color:#6a5433!important}
-.home-lux .header{background:rgba(255,255,255,.98)!important;border-bottom:1px solid #eadcc1!important;padding:14px 28px!important;min-height:88px!important}
-.home-lux .brand{width:330px!important;min-width:330px!important;height:64px!important;background:transparent!important}
-.home-lux .brand img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:left center!important}
-.home-lux .nav{justify-content:flex-end!important;gap:16px!important}
-.home-lux .nav a{color:#29251f!important;font-size:11px!important;letter-spacing:.45px!important}
-.home-lux .nav a:hover{color:#b78022!important}
-.home-lux .menu-btn{background:#fff!important;color:#9a651c!important;border:1px solid #c99b50!important;border-radius:12px!important;padding:12px 17px!important;font-weight:600}
+:root{--gold:#b9872c;--gold2:#d0a04a;--ink:#211d18;--muted:#71695f;--line:#dcc79f;--cream:#fbf8f2}
+*{box-sizing:border-box}
+body.home-lux{padding:0!important;margin:0;background:#fff!important;color:var(--ink)!important;font-family:Inter,Arial,sans-serif}
+.home-lux .shell{max-width:1440px;margin:auto;border:0!important;border-radius:0!important;background:#fff!important;box-shadow:none!important}
+.home-lux .topline{height:38px;padding:0 34px;background:#faf8f3!important;color:#6b6257!important;border-bottom:1px solid #eee5d6!important;font-size:12px}
+.home-lux .topline a,.home-lux .topline b{color:#7b5b28!important}
+.home-lux .header{background:#fff!important;border-bottom:1px solid #eadfcb!important;padding:16px 34px!important;min-height:104px!important;display:flex;align-items:center;gap:26px}
+.brand-lockup{display:flex!important;align-items:center!important;width:auto!important;min-width:390px!important;height:auto!important;background:transparent!important;text-decoration:none!important}
+.brand-mark{font-family:'Cormorant Garamond',Georgia,serif;font-size:64px;line-height:.75;color:var(--gold);font-weight:600;letter-spacing:-10px;margin-right:24px;transform:scaleX(.8)}
+.brand-copy{display:flex;flex-direction:column}
+.brand-copy strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:39px;line-height:.9;letter-spacing:6px;color:#151310;font-weight:600}
+.brand-copy small{margin-top:10px;font-size:11px;letter-spacing:2.2px;color:var(--gold);font-weight:600}
+.home-lux .nav{justify-content:flex-end!important;gap:20px!important;flex:1}
+.home-lux .nav a{color:#494139!important;font-size:11px!important;letter-spacing:.45px!important;font-weight:500}
+.home-lux .nav a:hover{color:var(--gold)!important}
+.home-lux .menu-btn{display:none;background:#fff!important;color:#9a681d!important;border:1px solid #c99b50!important;border-radius:10px!important;padding:13px 19px!important;font-weight:600;font-size:16px}
 
-.lux-hero{position:relative;min-height:590px;background:url('images/hero-hotel-clean.jpg') center/cover no-repeat;display:flex;align-items:center;overflow:hidden}
-.lux-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,7,7,.78),rgba(7,7,7,.35) 48%,rgba(7,7,7,.08))}
-.lux-hero-copy{position:relative;z-index:1;width:min(650px,58%);padding:72px 64px;color:#fff}
-.lux-kicker{display:flex;align-items:center;gap:12px;color:#e2b866;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
-.lux-kicker:before{content:"";width:42px;height:1px;background:#d5a24b}
-.lux-hero h1,.lux-title,.lux-card h3,.lux-destination h3,.lux-feature h3,.lux-concierge h2{font-family:'Cormorant Garamond',Georgia,serif}
-.lux-hero h1{font-size:72px;line-height:.98;font-weight:500;margin:0 0 22px;letter-spacing:-1px}
-.lux-hero p{font-size:18px;line-height:1.7;max-width:560px;color:#f5efe5;margin:0 0 30px}
-.lux-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:15px 24px;border-radius:8px;background:linear-gradient(180deg,#d7a649,#b97818);color:#fff!important;font-weight:600;box-shadow:0 12px 28px rgba(91,53,8,.25)}
+.lux-hero{position:relative;min-height:600px;background:url('images/hero-hotel-clean.jpg') center/cover no-repeat;display:flex;align-items:center;overflow:hidden}
+.lux-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.28) 52%,rgba(0,0,0,.05))}
+.lux-hero-copy{position:relative;z-index:1;width:min(610px,58%);padding:70px 70px;color:#fff}
+.lux-hero h1,.lux-title,.lux-card h3,.lux-destination h3,.lux-feature h3,.lux-concierge h2,.lux-visa h3{font-family:'Cormorant Garamond',Georgia,serif}
+.lux-hero h1{font-size:72px;line-height:.96;font-weight:500;margin:0 0 20px;letter-spacing:-1px}
+.hero-ornament{display:flex;align-items:center;gap:12px;color:#d6a447;font-size:22px;margin-bottom:18px}.hero-ornament:before,.hero-ornament:after{content:"";height:1px;background:#d6a447}.hero-ornament:before{width:38px}.hero-ornament:after{width:90px}
+.lux-hero p{font-size:17px;line-height:1.55;max-width:490px;color:#fff;margin:0 0 28px}
+.lux-btn,.lux-mini-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:8px;background:linear-gradient(180deg,#d7a649,#b97818);color:#fff!important;font-weight:600;box-shadow:0 10px 24px rgba(91,53,8,.2)}
+.lux-btn{padding:15px 24px}.lux-mini-btn{padding:11px 16px;font-size:13px}
 
-.lux-section{padding:68px 54px}
-.lux-section.soft{background:#fcfaf6}
-.lux-section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}
-.lux-eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#a46d20;font-weight:600;margin-bottom:8px}
-.lux-title{font-size:46px;line-height:1;margin:0;font-weight:600;color:#181713}
-.lux-view{font-size:13px;color:#a46d20!important;font-weight:600}
-.lux-hotel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.lux-card{background:#fff;border:1px solid #e6d4b4;border-radius:18px;overflow:hidden;box-shadow:0 12px 32px rgba(85,57,16,.08);transition:.25s ease}
-.lux-card:hover{transform:translateY(-5px);box-shadow:0 18px 42px rgba(85,57,16,.13)}
-.lux-card-media{position:relative;height:260px;overflow:hidden}
-.lux-card-media img{width:100%;height:100%;object-fit:cover;display:block;transition:.35s ease}
-.lux-card:hover img{transform:scale(1.025)}
-.lux-heart{position:absolute;right:15px;top:13px;width:39px;height:39px;border-radius:50%;background:rgba(0,0,0,.36);display:grid;place-items:center;color:#fff;font-size:23px}
-.lux-score{position:absolute;left:14px;bottom:14px;background:#fff8ea;color:#77501b;border:1px solid rgba(201,155,80,.7);padding:7px 10px;border-radius:8px;font-size:12px;font-weight:700}
-.lux-card-body{padding:20px}
-.lux-card h3{font-size:27px;margin:0 0 8px;font-weight:600}
-.lux-stars{color:#c78a28;font-size:13px;letter-spacing:2px}
-.lux-meta{display:flex;justify-content:space-between;gap:12px;margin-top:15px;color:#6e665c;font-size:13px}
-.lux-price{color:#9f681d;font-weight:600;white-space:nowrap}
+.lux-section{padding:52px 54px 30px}
+.destinations-section,.feature-section,.info-section{padding-top:25px}
+.lux-section-head{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px}
+.centered-head{position:relative}.centered-head .title-wrap{margin:auto;display:flex;align-items:center;gap:14px}.centered-head .title-wrap:before,.centered-head .title-wrap:after{content:"";height:1px;width:84px;background:var(--line)}
+.section-icon{color:var(--gold);font-size:23px}.lux-title{font-size:39px;line-height:1;margin:0;font-weight:600;color:#1f1b16;white-space:nowrap}.lux-view{position:absolute;right:0;font-size:13px;color:#a46d20!important;font-weight:600}
 
-.lux-destinations{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.lux-destination{position:relative;min-height:390px;border-radius:20px;overflow:hidden;color:#fff}
-.lux-destination img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.lux-destination:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,.05) 65%)}
-.lux-destination-copy{position:absolute;z-index:1;left:28px;right:28px;bottom:27px}
-.lux-destination h3{font-size:48px;margin:0 0 3px;font-weight:600}
-.lux-destination p{margin:0 0 16px;color:#f6f0e6}
-.lux-link{color:#e9b95d!important;font-weight:600;font-size:13px}
+.lux-hotel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.lux-card{background:#fff;border:1px solid #e1cfaa;border-radius:15px;overflow:hidden;box-shadow:0 8px 24px rgba(84,57,18,.07);transition:.25s ease}
+.lux-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(84,57,18,.12)}
+.lux-card-media{position:relative;height:245px;overflow:hidden}.lux-card-media img{width:100%;height:100%;object-fit:cover;display:block;transition:.35s ease}.lux-card:hover img{transform:scale(1.025)}
+.lux-heart,.lux-score{display:none!important}
+.lux-card-body{padding:18px 17px 16px}.lux-card h3{font-size:26px;margin:0 0 6px;font-weight:600}.lux-stars{color:#c58d2f;font-size:13px;letter-spacing:2px}.lux-meta{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-top:13px;color:#6e665c;font-size:12px}.lux-price{color:#342e26;font-weight:500;text-align:right;white-space:nowrap}.lux-price small{font-size:10px;color:#6e665c}
 
-.lux-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.lux-feature{display:grid;grid-template-columns:1fr 1.15fr;min-height:315px;border:1px solid #e6d4b4;border-radius:20px;overflow:hidden;background:#fff}
-.lux-feature-copy{padding:34px;display:flex;flex-direction:column;justify-content:center}
-.lux-icon{font-size:30px;color:#b78022;margin-bottom:15px}
-.lux-feature h3{font-size:35px;line-height:1;margin:0 0 13px}
-.lux-feature p{color:#6b645b;line-height:1.65;margin:0 0 18px}
-.lux-feature img{width:100%;height:100%;object-fit:cover;min-height:315px}
+.lux-destinations{display:grid;grid-template-columns:1fr 1fr;gap:20px}.lux-destination{position:relative;min-height:300px;border-radius:14px;overflow:hidden;color:#fff}.lux-destination img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.lux-destination:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.58),rgba(0,0,0,.06) 72%)}.lux-destination-copy{position:absolute;z-index:1;left:24px;bottom:24px}.lux-destination h3{font-size:45px;margin:0 0 2px}.lux-destination p{margin:0 0 14px;color:#fff}
 
-.lux-visa{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;border:1px solid #d4a85f;border-radius:18px;padding:27px 30px;background:linear-gradient(135deg,#fff,#fffaf0)}
-.lux-visa-icon{width:64px;height:64px;border:1px solid #c9943c;border-radius:14px;display:grid;place-items:center;font-size:31px;color:#ae741e}
-.lux-visa h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;margin:0 0 5px}
-.lux-visa p{margin:3px 0;color:#655e54;line-height:1.5}
-.lux-visa .fa{font-family:Tahoma,Arial,sans-serif;direction:rtl;text-align:left;color:#7b6c58}
+.lux-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.lux-feature{display:grid;grid-template-columns:1fr 1.1fr;min-height:280px;border:1px solid #e2d2b4;border-radius:14px;overflow:hidden;background:#fff}.lux-feature-copy{padding:28px;display:flex;flex-direction:column;justify-content:center}.lux-icon{font-size:27px;color:var(--gold);margin-bottom:12px}.lux-feature h3{font-size:32px;line-height:1.02;margin:0 0 12px}.lux-feature p{color:#6b645b;line-height:1.55;margin:0 0 16px;font-size:14px}.lux-feature img{width:100%;height:100%;object-fit:cover;min-height:280px}.lux-link{color:#ad761f!important;font-weight:600;font-size:13px}
 
-.lux-concierge{margin:0 54px 54px;border-radius:22px;background:#11100e;color:#fff;padding:42px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px;border:1px solid #8f641e}
-.lux-concierge h2{font-size:42px;color:#f4dfb8;margin:0 0 8px}
-.lux-concierge p{color:#d5c9b7;margin:0;line-height:1.6}
-.lux-contact-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
-.lux-outline{border:1px solid #c3913f;border-radius:10px;padding:13px 18px;color:#e5bc72!important;background:#191713;font-weight:600}
+.lux-visa{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;border:1px solid #d4a85f;border-radius:15px;padding:24px 27px;background:#fff}.lux-visa-icon{width:58px;height:58px;border:1px solid #c9943c;border-radius:8px;display:grid;place-items:center;font-size:27px;color:#ae741e}.lux-visa h3{font-size:28px;margin:0 0 4px}.lux-visa p{margin:2px 0;color:#655e54;line-height:1.45;font-size:13px}.lux-visa .fa{font-family:Tahoma,Arial,sans-serif;direction:rtl;text-align:left;color:#7b6c58}
 
-.lux-footer{background:#faf7f0!important;color:#655e54!important;border-top:1px solid #eadcc1!important;padding:28px 54px!important}
+.lux-concierge{margin:0 54px 34px;border-radius:15px;background:#fffaf1;color:#2b251e;padding:24px 28px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;border:1px solid #dcc79f}.concierge-icon{font-size:42px;color:var(--gold)}.lux-concierge h2{font-size:29px;color:#2a241e;margin:0 0 4px}.lux-concierge p{color:#6d6458;margin:0;line-height:1.45;font-size:13px}.lux-contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.lux-outline{border:1px solid #c89a4a;border-radius:8px;padding:11px 15px;color:#9d6c23!important;background:#fff;font-weight:600;text-align:center}.lux-outline.wide{grid-column:1/-1}
 
-@media(max-width:1100px){
-.home-lux .header{padding:12px 20px!important}.home-lux .brand{width:285px!important;min-width:285px!important}.lux-hero{min-height:520px}.lux-hero-copy{width:68%;padding:58px 42px}.lux-hero h1{font-size:61px}.lux-section{padding:54px 28px}.lux-card-media{height:220px}.lux-concierge{margin:0 28px 40px}.lux-feature{grid-template-columns:1fr}.lux-feature img{height:230px;min-height:230px}}
+.lux-footer{background:#fff!important;color:#655e54!important;border-top:1px solid #eadcc1!important;padding:30px 54px!important;display:grid!important;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:26px;align-items:start!important}.lux-footer>div{display:flex;flex-direction:column;gap:7px}.lux-footer strong{color:#332d25}.lux-footer a{color:#6b6257!important;font-size:12px}.footer-brand{display:flex!important;flex-direction:row!important;align-items:center}.brand-mark.small{font-size:48px;margin-right:17px}.footer-brand>span:last-child{display:flex;flex-direction:column}.footer-brand strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;letter-spacing:4px}.footer-brand small{color:var(--gold);font-size:7px;letter-spacing:1px;margin-top:4px}.copyright{grid-column:1/-1;margin:10px 0 0;font-size:12px;color:#92887d}
+
+@media(max-width:1100px){.home-lux .header{padding:14px 22px!important}.brand-lockup{min-width:320px!important}.brand-copy strong{font-size:32px}.brand-copy small{font-size:9px}.home-lux .nav{gap:13px!important}.lux-hero{min-height:530px}.lux-hero-copy{padding:55px 45px}.lux-hero h1{font-size:61px}.lux-section{padding-left:28px;padding-right:28px}.lux-card-media{height:220px}.lux-concierge{margin-left:28px;margin-right:28px}.lux-footer{padding-left:28px!important;padding-right:28px!important}}
 
 @media(max-width:760px){
-.home-lux .topline{display:none}.home-lux .header{min-height:86px!important;padding:12px 16px!important}.home-lux .brand{width:235px!important;min-width:235px!important;height:54px!important}.home-lux .nav{background:#fff!important;padding:18px!important}.home-lux .nav a{color:#29251f!important}.lux-hero{min-height:500px;background-position:63% center}.lux-hero:before{background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.3))}.lux-hero-copy{width:100%;padding:55px 24px}.lux-hero h1{font-size:49px}.lux-hero p{font-size:15px;line-height:1.65}.lux-section{padding:48px 17px}.lux-section-head{align-items:center}.lux-title{font-size:37px}.lux-hotel-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px}.lux-card{min-width:86%;scroll-snap-align:start}.lux-card-media{height:225px}.lux-destinations,.lux-feature-grid{grid-template-columns:1fr}.lux-destination{min-height:330px}.lux-feature{grid-template-columns:1fr}.lux-feature-copy{padding:27px}.lux-feature img{height:230px;min-height:230px}.lux-visa{grid-template-columns:auto 1fr;padding:22px 18px}.lux-visa .lux-btn{grid-column:1/-1}.lux-visa h3{font-size:26px}.lux-concierge{margin:0 17px 35px;padding:30px 23px;grid-template-columns:1fr}.lux-concierge h2{font-size:35px}.lux-contact-actions{justify-content:flex-start}.lux-footer{padding:25px 20px!important;flex-direction:column!important}}
+.home-lux .topline{display:none}.home-lux .header{min-height:100px!important;padding:14px 17px!important;justify-content:space-between}.brand-lockup{min-width:0!important;flex:1!important}.brand-mark{font-size:55px;margin-right:18px}.brand-copy strong{font-size:31px;letter-spacing:4px}.brand-copy small{font-size:8px;letter-spacing:1.15px;margin-top:7px}.home-lux .menu-btn{display:block}.home-lux .nav{background:#fff!important;padding:18px!important}.home-lux .nav a{color:#29251f!important}
+.lux-hero{min-height:445px;background-position:62% center}.lux-hero:before{background:linear-gradient(90deg,rgba(0,0,0,.7),rgba(0,0,0,.18))}.lux-hero-copy{width:100%;padding:42px 25px}.lux-hero h1{font-size:49px}.lux-hero p{font-size:14px;max-width:320px}.hero-ornament:after{width:65px}
+.lux-section{padding:34px 17px 16px}.centered-head{margin-bottom:15px}.centered-head .title-wrap{gap:8px}.centered-head .title-wrap:before,.centered-head .title-wrap:after{width:48px}.section-icon{font-size:18px}.lux-title{font-size:30px}.lux-view{right:0;font-size:11px;transform:translateY(26px)}
+.lux-hotel-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;overflow:visible}.lux-card{min-width:0;border-radius:10px}.lux-card-media{height:116px}.lux-card-body{padding:10px 9px}.lux-card h3{font-family:Inter,Arial,sans-serif;font-size:12px;line-height:1.25;min-height:31px}.lux-stars{font-size:9px;letter-spacing:1px}.lux-meta{font-size:8px;gap:5px}.lux-price{font-size:8px}.lux-price small{font-size:7px}
+.lux-destinations{grid-template-columns:1fr 1fr;gap:10px}.lux-destination{min-height:180px;border-radius:10px}.lux-destination-copy{left:14px;bottom:14px}.lux-destination h3{font-size:31px}.lux-destination p{font-size:11px;margin-bottom:10px}.lux-mini-btn{padding:8px 10px;font-size:10px}
+.lux-feature-grid{grid-template-columns:1fr 1fr;gap:10px}.lux-feature{grid-template-columns:1fr 1fr;min-height:175px;border-radius:10px}.lux-feature-copy{padding:14px}.lux-icon{font-size:18px;margin-bottom:7px}.lux-feature h3{font-size:20px}.lux-feature p{font-size:9px;line-height:1.45;margin-bottom:8px}.lux-feature img{min-height:175px}.lux-link{font-size:9px}
+.lux-visa{grid-template-columns:auto 1fr;padding:17px 14px;gap:12px}.lux-visa-icon{width:48px;height:48px}.lux-visa .lux-btn{grid-column:1/-1;justify-self:end;padding:11px 16px}.lux-visa h3{font-size:20px}.lux-visa p{font-size:10px}
+.lux-concierge{margin:0 17px 22px;padding:18px 16px;grid-template-columns:auto 1fr}.concierge-icon{font-size:30px}.lux-concierge h2{font-size:21px}.lux-concierge p{font-size:10px}.lux-contact-actions{grid-column:1/-1;width:100%}.lux-outline{padding:9px;font-size:11px}
+.lux-footer{padding:24px 17px!important;grid-template-columns:1.5fr 1fr 1fr;gap:18px}.lux-footer>div:last-of-type{grid-column:2/-1}.footer-brand{grid-row:span 2}.brand-mark.small{font-size:40px}.footer-brand strong{font-size:21px}.lux-footer a,.lux-footer p{font-size:9px}.copyright{font-size:9px}
+}
+
+@media(max-width:460px){.brand-copy strong{font-size:27px;letter-spacing:3px}.brand-copy small{font-size:7px}.home-lux .menu-btn{padding:11px 14px;font-size:14px}.lux-hero{min-height:410px}.lux-hero h1{font-size:44px}.lux-card-media{height:105px}.lux-destination{min-height:165px}.lux-feature{min-height:165px}.lux-feature img{min-height:165px}}
