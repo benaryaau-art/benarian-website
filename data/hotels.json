@@ -1,0 +1,28 @@
+{
+  "featuredHotels": [
+    {
+      "name": "AYANA Resort Bali",
+      "location": "Jimbaran, Bali",
+      "price": "From AUD 450",
+      "score": "9.4 Exceptional",
+      "image": "assets/images/hotel-ayana.jpg",
+      "bookingUrl": "https://www.booking.com/searchresults.html?ss=AYANA%20Resort%20Bali%20Jimbaran"
+    },
+    {
+      "name": "The Apurva Kempinski Bali",
+      "location": "Nusa Dua, Bali",
+      "price": "From AUD 680",
+      "score": "9.3 Superb",
+      "image": "assets/images/hotel-apurva.jpg",
+      "bookingUrl": "https://www.booking.com/searchresults.html?ss=The%20Apurva%20Kempinski%20Bali"
+    },
+    {
+      "name": "Alila Villas Uluwatu",
+      "location": "Uluwatu, Bali",
+      "price": "From AUD 690",
+      "score": "9.1 Wonderful",
+      "image": "assets/images/hotel-alila.jpg",
+      "bookingUrl": "https://www.booking.com/searchresults.html?ss=Alila%20Villas%20Uluwatu"
+    }
+  ]
+}
