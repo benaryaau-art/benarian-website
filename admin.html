@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BENARIAN Content Editor</title>
+  <style>
+    :root{--gold:#b89654;--ink:#1d2119;--soft:#f6f3eb;--line:#ded8ca}*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--soft);color:var(--ink)}main{width:min(1050px,92%);margin:42px auto}.head{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:24px}.head h1{font-family:Georgia,serif;font-size:38px;margin:0}.head a{color:var(--ink)}.notice{background:#fff8e7;border:1px solid #ead5a6;padding:15px 18px;border-radius:12px;margin-bottom:20px;line-height:1.55}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 14px 40px rgba(40,38,30,.07)}.hotel{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}.hotel:last-child{border-bottom:0}label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}input{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;margin-top:6px;font:inherit}.wide{grid-column:1/-1}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}button{border:0;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer;background:var(--ink);color:#fff}.gold{background:var(--gold)}.ghost{background:#ebe7dc;color:var(--ink)}#status{margin-top:14px;font-weight:600;color:#57604d}@media(max-width:700px){.hotel{grid-template-columns:1fr}.wide{grid-column:auto}.head{align-items:flex-start;flex-direction:column}.head h1{font-size:30px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="head"><div><div>BENARIAN</div><h1>Hotel Content Editor</h1></div><a href="index.html">View website →</a></div>
+  <div class="notice"><strong>Free editor:</strong> change the hotel information below, then download the updated <code>hotels.json</code>. Replace the existing file inside <code>data/hotels.json</code> in GitHub. Cloudflare will publish the changes automatically.</div>
+  <section class="panel">
+    <div id="hotels"></div>
+    <div class="actions">
+      <button id="add" class="ghost">+ Add hotel</button>
+      <button id="save" class="gold">Download updated hotels.json</button>
+      <button id="reset">Reload website data</button>
+    </div>
+    <div id="status" aria-live="polite"></div>
+  </section>
+</main>
+<script src="assets/admin.js"></script>
+</body>
+</html>
