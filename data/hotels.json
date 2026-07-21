@@ -3,25 +3,25 @@
     {
       "name": "AYANA Resort Bali",
       "location": "Jimbaran, Bali",
-      "price": "From AUD 450",
+      "price": "View live rates",
       "score": "9.4 Exceptional",
-      "image": "assets/images/hotel-ayana.jpg",
+      "image": "https://images.unsplash.com/photo-1782413263988-11f7178cf385?auto=format&fit=crop&q=88&w=1600",
       "bookingUrl": "https://www.booking.com/searchresults.html?ss=AYANA%20Resort%20Bali%20Jimbaran"
     },
     {
       "name": "The Apurva Kempinski Bali",
       "location": "Nusa Dua, Bali",
-      "price": "From AUD 680",
+      "price": "View live rates",
       "score": "9.3 Superb",
-      "image": "assets/images/hotel-apurva.jpg",
+      "image": "https://images.unsplash.com/photo-1769149255642-c9741ad91b05?auto=format&fit=crop&q=88&w=1600",
       "bookingUrl": "https://www.booking.com/searchresults.html?ss=The%20Apurva%20Kempinski%20Bali"
     },
     {
       "name": "Alila Villas Uluwatu",
       "location": "Uluwatu, Bali",
-      "price": "From AUD 690",
+      "price": "View live rates",
       "score": "9.1 Wonderful",
-      "image": "assets/images/hotel-alila.jpg",
+      "image": "https://images.unsplash.com/photo-1758448756167-88dc934c58e4?auto=format&fit=crop&q=88&w=1600",
       "bookingUrl": "https://www.booking.com/searchresults.html?ss=Alila%20Villas%20Uluwatu"
     }
   ]
