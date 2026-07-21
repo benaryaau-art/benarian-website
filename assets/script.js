@@ -139,6 +139,66 @@ if (hotelRow && hotelRow.children.length > 1) {
   startHotelRotation();
 }
 
+function safeText(value, fallback = '') {
+  return typeof value === 'string' && value.trim() ? value.trim() : fallback;
+}
+
+async function loadFeaturedHotels() {
+  const grid = document.querySelector('.lux-hotel-grid');
+  if (!grid) return;
+  try {
+    const response = await fetch('data/hotels.json', { cache: 'no-store' });
+    if (!response.ok) return;
+    const data = await response.json();
+    if (!Array.isArray(data.featuredHotels) || !data.featuredHotels.length) return;
+    grid.innerHTML = '';
+    data.featuredHotels.forEach(hotel => {
+      const card = document.createElement('a');
+      card.className = 'lux-card';
+      card.href = safeText(hotel.bookingUrl, 'hotels.html');
+      if (/^https?:/i.test(card.href)) {
+        card.target = '_blank';
+        card.rel = 'noopener sponsored';
+      }
+
+      const media = document.createElement('div');
+      media.className = 'lux-card-media';
+      const image = document.createElement('img');
+      image.src = safeText(hotel.image, 'assets/images/hotel-ayana.jpg');
+      image.alt = safeText(hotel.name, 'Luxury hotel');
+      image.loading = 'lazy';
+      const heart = document.createElement('span');
+      heart.className = 'lux-heart';
+      heart.textContent = '♡';
+      const score = document.createElement('span');
+      score.className = 'lux-score';
+      score.textContent = safeText(hotel.score, 'Exceptional');
+      media.append(image, heart, score);
+
+      const body = document.createElement('div');
+      body.className = 'lux-card-body';
+      const title = document.createElement('h3');
+      title.textContent = safeText(hotel.name, 'Luxury Hotel');
+      const stars = document.createElement('div');
+      stars.className = 'lux-stars';
+      stars.textContent = '★★★★★';
+      const meta = document.createElement('div');
+      meta.className = 'lux-meta';
+      const location = document.createElement('span');
+      location.textContent = safeText(hotel.location, 'Bali');
+      const price = document.createElement('span');
+      price.className = 'lux-price';
+      price.textContent = safeText(hotel.price, 'View rates');
+      meta.append(location, price);
+      body.append(title, stars, meta);
+      card.append(media, body);
+      grid.appendChild(card);
+    });
+  } catch (error) {
+    console.warn('BENARIAN hotel data could not be loaded; using built-in cards.', error);
+  }
+}
+
 const MEMBER_KEY = 'benarianMember';
 function getMember(){try{return JSON.parse(localStorage.getItem(MEMBER_KEY)||'null')}catch{return null}}
 function saveMember(member){localStorage.setItem(MEMBER_KEY,JSON.stringify(member))}
@@ -157,4 +217,6 @@ const joinForm=document.querySelector('#member-join-form');
 if(joinForm){joinForm.addEventListener('submit',e=>{e.preventDefault();const name=document.querySelector('#member-name').value.trim();const email=document.querySelector('#member-email').value.trim();const password=document.querySelector('#member-password').value;const consent=document.querySelector('#member-consent').checked;const msg=document.querySelector('#member-form-message');if(!name||password.length<6||!consent){msg.textContent='Please complete all fields and accept the privacy terms.';return}saveMember({name,email});msg.textContent='Welcome to BENARIAN. Opening your private member area…';setTimeout(()=>location.href='member-dashboard.html',500)})}
 const logout=document.querySelector('#member-logout');
 if(logout){logout.addEventListener('click',()=>{localStorage.removeItem(MEMBER_KEY);location.href='member-login.html'})}
+
+loadFeaturedHotels();
 displayMemberState();
