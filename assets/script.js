@@ -65,10 +65,39 @@ document.querySelectorAll('.service').forEach(service => {
   service.setAttribute('role', 'link');
   service.setAttribute('tabindex', '0');
   service.style.cursor = 'pointer';
+  service.style.transition = 'background-color .2s ease, transform .2s ease';
   service.setAttribute('aria-label', `Open ${label}`);
   const activate = () => openPartnerLink(route.partner, route.fallback);
   service.addEventListener('click', activate);
+  service.addEventListener('mouseenter', () => {
+    service.style.backgroundColor = 'rgba(214,160,74,.08)';
+    service.style.transform = 'translateY(-2px)';
+  });
+  service.addEventListener('mouseleave', () => {
+    service.style.backgroundColor = '';
+    service.style.transform = '';
+  });
   service.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      activate();
+    }
+  });
+});
+
+// Activate Wishlist and My Bookings in the utility bar.
+document.querySelectorAll('.topline .right span').forEach(item => {
+  const label = item.textContent.trim().toUpperCase();
+  const destination = label.includes('WISHLIST') || label.includes('MY BOOKINGS')
+    ? 'member-dashboard.html'
+    : null;
+  if (!destination) return;
+  item.setAttribute('role', 'link');
+  item.setAttribute('tabindex', '0');
+  item.style.cursor = 'pointer';
+  const activate = () => { location.href = destination; };
+  item.addEventListener('click', activate);
+  item.addEventListener('keydown', event => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       activate();
@@ -83,6 +112,28 @@ function bookingSearchUrl(params) {
     : (config.baseUrl || 'https://www.booking.com/searchresults.html');
   const separator = base.includes('?') ? '&' : '?';
   return base + separator + params.toString();
+}
+
+// Keep default booking dates current instead of showing expired dates.
+const checkinInput = document.querySelector('#checkin');
+const checkoutInput = document.querySelector('#checkout');
+if (checkinInput && checkoutInput) {
+  const formatDate = date => date.toISOString().slice(0, 10);
+  const today = new Date();
+  const suggestedCheckin = new Date(today);
+  suggestedCheckin.setDate(today.getDate() + 7);
+  const suggestedCheckout = new Date(today);
+  suggestedCheckout.setDate(today.getDate() + 11);
+  if (!checkinInput.value || checkinInput.value < formatDate(today)) checkinInput.value = formatDate(suggestedCheckin);
+  if (!checkoutInput.value || checkoutInput.value <= checkinInput.value) checkoutInput.value = formatDate(suggestedCheckout);
+  checkinInput.min = formatDate(today);
+  checkoutInput.min = formatDate(suggestedCheckin);
+  checkinInput.addEventListener('change', () => {
+    const nextDay = new Date(`${checkinInput.value}T12:00:00`);
+    nextDay.setDate(nextDay.getDate() + 1);
+    checkoutInput.min = formatDate(nextDay);
+    if (checkoutInput.value <= checkinInput.value) checkoutInput.value = formatDate(nextDay);
+  });
 }
 
 const form = document.querySelector('.booking-form');
@@ -104,6 +155,31 @@ if (form) {
     if (checkout) params.set('checkout', checkout);
     window.open(bookingSearchUrl(params), '_blank', 'noopener');
   });
+}
+
+// Rotate featured hotel cards every five seconds while keeping every card linked to its own hotel.
+const hotelRow = document.querySelector('.hotel-row');
+if (hotelRow && hotelRow.children.length > 1) {
+  hotelRow.style.transition = 'opacity .35s ease, transform .35s ease';
+  let hotelRotation;
+  const rotateHotels = () => {
+    hotelRow.style.opacity = '0';
+    hotelRow.style.transform = 'translateY(6px)';
+    window.setTimeout(() => {
+      hotelRow.appendChild(hotelRow.firstElementChild);
+      hotelRow.style.opacity = '1';
+      hotelRow.style.transform = 'translateY(0)';
+    }, 360);
+  };
+  const startHotelRotation = () => {
+    window.clearInterval(hotelRotation);
+    hotelRotation = window.setInterval(rotateHotels, 5000);
+  };
+  hotelRow.addEventListener('mouseenter', () => window.clearInterval(hotelRotation));
+  hotelRow.addEventListener('mouseleave', startHotelRotation);
+  hotelRow.addEventListener('focusin', () => window.clearInterval(hotelRotation));
+  hotelRow.addEventListener('focusout', startHotelRotation);
+  startHotelRotation();
 }
 
 // BENARIAN membership preview. Replace this local demo with Supabase/Firebase/Cloudflare auth for production.
