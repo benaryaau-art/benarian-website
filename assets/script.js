@@ -1,30 +1,28 @@
-const menu = document.querySelector('.menu-btn');
-const nav = document.querySelector('.nav');
-if (menu && nav) {
-  menu.addEventListener('click', () => nav.classList.toggle('open'));
+// BENARIAN global white-and-gold theme.
+if (!document.querySelector('link[href="assets/white-theme.css"]')) {
+  const whiteTheme = document.createElement('link');
+  whiteTheme.rel = 'stylesheet';
+  whiteTheme.href = 'assets/white-theme.css?v=20260721';
+  document.head.appendChild(whiteTheme);
 }
 
-// Mark the current navigation item.
+const menu = document.querySelector('.menu-btn');
+const nav = document.querySelector('.nav');
+if (menu && nav) menu.addEventListener('click', () => nav.classList.toggle('open'));
+
 const currentPage = location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav a').forEach(link => {
-  const href = link.getAttribute('href');
-  if (href === currentPage) link.classList.add('current');
+  if (link.getAttribute('href') === currentPage) link.classList.add('current');
 });
 
 function openPartnerLink(key, fallback) {
   const partner = window.BENARIAN_PARTNERS?.[key];
-  const url = partner?.enabled && partner?.affiliateBaseUrl
-    ? partner.affiliateBaseUrl
-    : fallback;
+  const url = partner?.enabled && partner?.affiliateBaseUrl ? partner.affiliateBaseUrl : fallback;
   if (!url) return;
-  if (/^https?:/i.test(url)) {
-    window.open(url, '_blank', 'noopener');
-  } else {
-    location.href = url;
-  }
+  if (/^https?:/i.test(url)) window.open(url, '_blank', 'noopener');
+  else location.href = url;
 }
 
-// Activate the category tabs on the homepage.
 const tabRoutes = {
   'HOTELS': null,
   'RESTAURANTS': { fallback: 'restaurants.html' },
@@ -43,12 +41,10 @@ document.querySelectorAll('.tab').forEach(tab => {
     tab.classList.add('active');
     const label = tab.textContent.replace(/^[^A-Z]+/, '').trim();
     const route = tabRoutes[label];
-    if (!route) return;
-    openPartnerLink(route.partner, route.fallback);
+    if (route) openPartnerLink(route.partner, route.fallback);
   });
 });
 
-// Turn the homepage service tiles into real buttons.
 const serviceRoutes = {
   'SPA & WELLNESS': { fallback: 'wellness.html' },
   'AIRPORT TRANSFERS': { partner: 'taxi', fallback: 'contact.html' },
@@ -64,40 +60,10 @@ document.querySelectorAll('.service').forEach(service => {
   if (!route) return;
   service.setAttribute('role', 'link');
   service.setAttribute('tabindex', '0');
-  service.style.cursor = 'pointer';
-  service.style.transition = 'background-color .2s ease, transform .2s ease';
   service.setAttribute('aria-label', `Open ${label}`);
   const activate = () => openPartnerLink(route.partner, route.fallback);
   service.addEventListener('click', activate);
-  service.addEventListener('mouseenter', () => {
-    service.style.backgroundColor = 'rgba(214,160,74,.08)';
-    service.style.transform = 'translateY(-2px)';
-  });
-  service.addEventListener('mouseleave', () => {
-    service.style.backgroundColor = '';
-    service.style.transform = '';
-  });
   service.addEventListener('keydown', event => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      activate();
-    }
-  });
-});
-
-// Activate Wishlist and My Bookings in the utility bar.
-document.querySelectorAll('.topline .right span').forEach(item => {
-  const label = item.textContent.trim().toUpperCase();
-  const destination = label.includes('WISHLIST') || label.includes('MY BOOKINGS')
-    ? 'member-dashboard.html'
-    : null;
-  if (!destination) return;
-  item.setAttribute('role', 'link');
-  item.setAttribute('tabindex', '0');
-  item.style.cursor = 'pointer';
-  const activate = () => { location.href = destination; };
-  item.addEventListener('click', activate);
-  item.addEventListener('keydown', event => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       activate();
@@ -110,11 +76,9 @@ function bookingSearchUrl(params) {
   const base = config.enabled && config.affiliateBaseUrl
     ? config.affiliateBaseUrl
     : (config.baseUrl || 'https://www.booking.com/searchresults.html');
-  const separator = base.includes('?') ? '&' : '?';
-  return base + separator + params.toString();
+  return base + (base.includes('?') ? '&' : '?') + params.toString();
 }
 
-// Keep default booking dates current instead of showing expired dates.
 const checkinInput = document.querySelector('#checkin');
 const checkoutInput = document.querySelector('#checkout');
 if (checkinInput && checkoutInput) {
@@ -141,23 +105,16 @@ if (form) {
   form.addEventListener('submit', event => {
     event.preventDefault();
     const destination = (document.querySelector('#destination')?.value || 'Bali').trim();
-    const checkin = document.querySelector('#checkin')?.value || '';
-    const checkout = document.querySelector('#checkout')?.value || '';
-    const guestValue = document.querySelector('#guests')?.value || '2-1';
-    const [adults, rooms] = guestValue.split('-');
-    const params = new URLSearchParams({
-      ss: destination,
-      group_adults: adults,
-      no_rooms: rooms,
-      group_children: '0'
-    });
+    const checkin = checkinInput?.value || '';
+    const checkout = checkoutInput?.value || '';
+    const [adults, rooms] = (document.querySelector('#guests')?.value || '2-1').split('-');
+    const params = new URLSearchParams({ ss: destination, group_adults: adults, no_rooms: rooms, group_children: '0' });
     if (checkin) params.set('checkin', checkin);
     if (checkout) params.set('checkout', checkout);
     window.open(bookingSearchUrl(params), '_blank', 'noopener');
   });
 }
 
-// Rotate featured hotel cards every five seconds while keeping every card linked to its own hotel.
 const hotelRow = document.querySelector('.hotel-row');
 if (hotelRow && hotelRow.children.length > 1) {
   hotelRow.style.transition = 'opacity .35s ease, transform .35s ease';
@@ -165,24 +122,23 @@ if (hotelRow && hotelRow.children.length > 1) {
   const rotateHotels = () => {
     hotelRow.style.opacity = '0';
     hotelRow.style.transform = 'translateY(6px)';
-    window.setTimeout(() => {
+    setTimeout(() => {
       hotelRow.appendChild(hotelRow.firstElementChild);
       hotelRow.style.opacity = '1';
       hotelRow.style.transform = 'translateY(0)';
     }, 360);
   };
   const startHotelRotation = () => {
-    window.clearInterval(hotelRotation);
-    hotelRotation = window.setInterval(rotateHotels, 5000);
+    clearInterval(hotelRotation);
+    hotelRotation = setInterval(rotateHotels, 5000);
   };
-  hotelRow.addEventListener('mouseenter', () => window.clearInterval(hotelRotation));
+  hotelRow.addEventListener('mouseenter', () => clearInterval(hotelRotation));
   hotelRow.addEventListener('mouseleave', startHotelRotation);
-  hotelRow.addEventListener('focusin', () => window.clearInterval(hotelRotation));
+  hotelRow.addEventListener('focusin', () => clearInterval(hotelRotation));
   hotelRow.addEventListener('focusout', startHotelRotation);
   startHotelRotation();
 }
 
-// BENARIAN membership preview. Replace this local demo with Supabase/Firebase/Cloudflare auth for production.
 const MEMBER_KEY = 'benarianMember';
 function getMember(){try{return JSON.parse(localStorage.getItem(MEMBER_KEY)||'null')}catch{return null}}
 function saveMember(member){localStorage.setItem(MEMBER_KEY,JSON.stringify(member))}
@@ -193,7 +149,7 @@ function displayMemberState(){
   const unlocked=document.querySelector('#member-unlocked');
   if(locked&&unlocked){locked.hidden=!!member;unlocked.hidden=!member}
   document.querySelectorAll('.member-top-link').forEach(link=>{if(member){link.textContent='♟ My Account';link.href='member-dashboard.html'}});
-  if(location.pathname.endsWith('member-dashboard.html')&&!member){location.replace('member-login.html?next=member-dashboard.html')}
+  if(location.pathname.endsWith('member-dashboard.html')&&!member) location.replace('member-login.html?next=member-dashboard.html');
 }
 const loginForm=document.querySelector('#member-login-form');
 if(loginForm){loginForm.addEventListener('submit',e=>{e.preventDefault();const email=document.querySelector('#member-email').value.trim();const password=document.querySelector('#member-password').value;const msg=document.querySelector('#member-form-message');if(password.length<6){msg.textContent='Please enter a password with at least 6 characters.';return}saveMember({email,name:email.split('@')[0]});msg.textContent='Sign-in successful. Opening your dashboard…';setTimeout(()=>location.href='member-dashboard.html',450)})}
