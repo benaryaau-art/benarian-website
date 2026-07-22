@@ -32,7 +32,6 @@ window.BENARIAN_PARTNERS = {
   getYourGuide: { enabled: false, affiliateBaseUrl: "" }
 };
 
-// Use one clean transparent BENARIAN logo across every page.
 document.addEventListener('DOMContentLoaded', () => {
   const logoMarkup = `
     <svg class="benarian-global-logo" viewBox="0 0 760 120" role="img" aria-label="BENARIAN Luxury Travel and Hospitality" xmlns="http://www.w3.org/2000/svg">
@@ -86,32 +85,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }`;
   document.head.appendChild(style);
 
-  // Refined founder signature inspired by classic Didot/Bodoni editorial typography.
-  if (!document.querySelector('link[data-benarian-signature-font]')) {
-    const signatureFont = document.createElement('link');
-    signatureFont.rel = 'stylesheet';
-    signatureFont.href = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,500;1,600&display=swap';
-    signatureFont.setAttribute('data-benarian-signature-font', 'true');
-    document.head.appendChild(signatureFont);
-  }
-
   const signatureStyle = document.createElement('style');
-  signatureStyle.id = 'benarian-signature-style';
+  signatureStyle.id = 'benarian-signature-style-v2';
   signatureStyle.textContent = `
-    .about-signature,
-    .founder-signature{
-      font-family:'Bodoni Moda','Didot','Bodoni 72','Times New Roman',serif!important;
+    .about-page .about-signature,
+    .about-page .founder-signature{
+      font-family:'Didot','Bodoni 72','Bodoni MT','Times New Roman',serif!important;
       font-style:italic!important;
-      font-weight:500!important;
-      letter-spacing:.6px!important;
+      font-weight:400!important;
+      letter-spacing:-2.2px!important;
+      line-height:.96!important;
       color:#b9872c!important;
       text-rendering:geometricPrecision!important;
+      -webkit-font-smoothing:antialiased!important;
     }
-    .about-signature{font-size:52px!important;line-height:1.08!important}
-    .founder-signature{font-size:48px!important;line-height:1.08!important}
+    .about-page .about-signature{
+      font-size:64px!important;
+      margin-top:32px!important;
+    }
+    .about-page .founder-signature{
+      font-size:58px!important;
+      margin-top:20px!important;
+    }
     @media(max-width:760px){
-      .about-signature{font-size:43px!important}
-      .founder-signature{font-size:40px!important}
+      .about-page .about-signature{font-size:48px!important;letter-spacing:-1.5px!important}
+      .about-page .founder-signature{font-size:45px!important;letter-spacing:-1.5px!important}
     }`;
   document.head.appendChild(signatureStyle);
 });
