@@ -85,39 +85,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }`;
   document.head.appendChild(style);
 
-  if (!document.querySelector('link[data-benarian-script-font]')) {
+  if (!document.querySelector('link[data-benarian-signature-font]')) {
     const scriptFont = document.createElement('link');
     scriptFont.rel = 'stylesheet';
-    scriptFont.href = 'https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap';
-    scriptFont.setAttribute('data-benarian-script-font', 'true');
+    scriptFont.href = 'https://fonts.googleapis.com/css2?family=Allura&display=swap';
+    scriptFont.setAttribute('data-benarian-signature-font', 'true');
     document.head.appendChild(scriptFont);
   }
 
   const signatureStyle = document.createElement('style');
-  signatureStyle.id = 'benarian-signature-style-v3';
+  signatureStyle.id = 'benarian-signature-style-final';
   signatureStyle.textContent = `
     .about-page .about-signature,
     .about-page .founder-signature{
-      font-family:'Great Vibes','Snell Roundhand','Apple Chancery',cursive!important;
+      font-family:'Allura','Snell Roundhand','Apple Chancery',cursive!important;
       font-style:normal!important;
       font-weight:400!important;
-      letter-spacing:.2px!important;
-      line-height:1.05!important;
+      letter-spacing:.1px!important;
+      line-height:1!important;
       color:#b9872c!important;
       text-rendering:geometricPrecision!important;
       -webkit-font-smoothing:antialiased!important;
     }
     .about-page .about-signature{
-      font-size:68px!important;
+      font-size:72px!important;
       margin-top:30px!important;
     }
     .about-page .founder-signature{
-      font-size:62px!important;
+      font-size:66px!important;
       margin-top:18px!important;
     }
     @media(max-width:760px){
-      .about-page .about-signature{font-size:52px!important}
-      .about-page .founder-signature{font-size:49px!important}
+      .about-page .about-signature{font-size:54px!important}
+      .about-page .founder-signature{font-size:50px!important}
     }`;
   document.head.appendChild(signatureStyle);
 });
