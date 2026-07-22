@@ -121,6 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }`;
   document.head.appendChild(signatureStyle);
 
+  // Use the uploaded high-resolution founder portrait without stretching it.
+  const founderImage = document.querySelector('.about-page .founder-photo img');
+  if (founderImage) {
+    founderImage.src = 'assets/images/ben-tafreshi-founder.jpg?v=20260723a';
+    founderImage.alt = 'Ben Tafreshi, Founder and CEO of BENARIAN';
+    founderImage.loading = 'eager';
+    founderImage.decoding = 'async';
+    founderImage.style.width = '100%';
+    founderImage.style.height = '100%';
+    founderImage.style.objectFit = 'cover';
+    founderImage.style.objectPosition = 'center 18%';
+  }
+
   // Keep the legal terms visible in the main navigation, including mobile menus.
   document.querySelectorAll('.header .nav').forEach(nav => {
     if (nav.querySelector('a[href="terms-and-conditions.html"]')) return;
