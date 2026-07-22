@@ -121,17 +121,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }`;
   document.head.appendChild(signatureStyle);
 
-  // Use the uploaded high-resolution founder portrait without stretching it.
+  // Use the uploaded high-resolution portrait and preserve its natural 2:3 framing.
+  const portraitStyle = document.createElement('style');
+  portraitStyle.id = 'benarian-founder-photo-fix';
+  portraitStyle.textContent = `
+    .about-page .founder-photo{
+      min-height:0!important;
+      aspect-ratio:2/3!important;
+      background:#111!important;
+    }
+    .about-page .founder-photo img{
+      width:100%!important;
+      height:100%!important;
+      object-fit:contain!important;
+      object-position:center center!important;
+      display:block!important;
+      image-rendering:auto!important;
+    }
+    @media(max-width:1000px){
+      .about-page .founder-photo{aspect-ratio:2/3!important;max-width:620px;margin:0 auto!important;width:100%!important}
+    }`;
+  document.head.appendChild(portraitStyle);
+
   const founderImage = document.querySelector('.about-page .founder-photo img');
   if (founderImage) {
-    founderImage.src = 'assets/images/ben-tafreshi-founder.jpg?v=20260723a';
+    founderImage.src = 'assets/images/ben-tafreshi-founder.jpg?v=20260723b';
     founderImage.alt = 'Ben Tafreshi, Founder and CEO of BENARIAN';
     founderImage.loading = 'eager';
     founderImage.decoding = 'async';
-    founderImage.style.width = '100%';
-    founderImage.style.height = '100%';
-    founderImage.style.objectFit = 'cover';
-    founderImage.style.objectPosition = 'center 18%';
   }
 
   // Keep the legal terms visible in the main navigation, including mobile menus.
