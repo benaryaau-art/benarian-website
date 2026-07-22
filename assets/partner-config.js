@@ -85,4 +85,33 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }`;
   document.head.appendChild(style);
+
+  // Refined founder signature inspired by classic Didot/Bodoni editorial typography.
+  if (!document.querySelector('link[data-benarian-signature-font]')) {
+    const signatureFont = document.createElement('link');
+    signatureFont.rel = 'stylesheet';
+    signatureFont.href = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,500;1,600&display=swap';
+    signatureFont.setAttribute('data-benarian-signature-font', 'true');
+    document.head.appendChild(signatureFont);
+  }
+
+  const signatureStyle = document.createElement('style');
+  signatureStyle.id = 'benarian-signature-style';
+  signatureStyle.textContent = `
+    .about-signature,
+    .founder-signature{
+      font-family:'Bodoni Moda','Didot','Bodoni 72','Times New Roman',serif!important;
+      font-style:italic!important;
+      font-weight:500!important;
+      letter-spacing:.6px!important;
+      color:#b9872c!important;
+      text-rendering:geometricPrecision!important;
+    }
+    .about-signature{font-size:52px!important;line-height:1.08!important}
+    .founder-signature{font-size:48px!important;line-height:1.08!important}
+    @media(max-width:760px){
+      .about-signature{font-size:43px!important}
+      .founder-signature{font-size:40px!important}
+    }`;
+  document.head.appendChild(signatureStyle);
 });
