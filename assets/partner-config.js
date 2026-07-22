@@ -121,6 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }`;
   document.head.appendChild(signatureStyle);
 
+  // Keep the legal terms visible in the main navigation, including mobile menus.
+  document.querySelectorAll('.header .nav').forEach(nav => {
+    if (nav.querySelector('a[href="terms-and-conditions.html"]')) return;
+    const termsLink = document.createElement('a');
+    termsLink.href = 'terms-and-conditions.html';
+    termsLink.textContent = 'TERMS & CONDITIONS';
+    nav.appendChild(termsLink);
+  });
+
   // Keep the legal terms accessible from every site footer.
   document.querySelectorAll('.footer').forEach(footer => {
     if (footer.querySelector('a[href="terms-and-conditions.html"]')) return;
