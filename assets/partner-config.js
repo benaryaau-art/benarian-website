@@ -120,4 +120,29 @@ document.addEventListener('DOMContentLoaded', () => {
       .about-page .founder-signature{font-size:50px!important}
     }`;
   document.head.appendChild(signatureStyle);
+
+  // Keep the legal terms accessible from every site footer.
+  document.querySelectorAll('.footer').forEach(footer => {
+    if (footer.querySelector('a[href="terms-and-conditions.html"]')) return;
+
+    const privacyLink = footer.querySelector('a[href="privacy-policy.html"]');
+    if (privacyLink) {
+      const termsLink = document.createElement('a');
+      termsLink.href = 'terms-and-conditions.html';
+      termsLink.textContent = 'Terms & Conditions';
+      privacyLink.parentNode.insertBefore(termsLink, privacyLink);
+      privacyLink.parentNode.insertBefore(document.createTextNode(' · '), privacyLink);
+      return;
+    }
+
+    const supportColumn = Array.from(footer.querySelectorAll('div')).find(div =>
+      /support/i.test(div.querySelector('strong')?.textContent || '')
+    );
+    if (supportColumn) {
+      const termsLink = document.createElement('a');
+      termsLink.href = 'terms-and-conditions.html';
+      termsLink.textContent = 'Terms & Conditions';
+      supportColumn.appendChild(termsLink);
+    }
+  });
 });
