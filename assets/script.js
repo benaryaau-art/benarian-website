@@ -1,14 +1,29 @@
 // BENARIAN global white-and-gold theme.
-if (!document.querySelector('link[href="assets/white-theme.css"]')) {
+if (!document.querySelector('link[href^="assets/white-theme.css"]')) {
   const whiteTheme = document.createElement('link');
   whiteTheme.rel = 'stylesheet';
-  whiteTheme.href = 'assets/white-theme.css?v=20260721';
+  whiteTheme.href = 'assets/white-theme.css?v=20260722';
   document.head.appendChild(whiteTheme);
 }
 
 const menu = document.querySelector('.menu-btn');
 const nav = document.querySelector('.nav');
 if (menu && nav) menu.addEventListener('click', () => nav.classList.toggle('open'));
+
+// Keep the Iran flight and tour services visible in the navigation on every page.
+if (nav) {
+  const ensureNavLink = (href, label, beforeHref = 'restaurants.html') => {
+    if (nav.querySelector(`a[href="${href}"]`)) return;
+    const link = document.createElement('a');
+    link.href = href;
+    link.textContent = label;
+    const before = nav.querySelector(`a[href="${beforeHref}"]`);
+    if (before) nav.insertBefore(link, before);
+    else nav.appendChild(link);
+  };
+  ensureNavLink('iran-flights.html', 'IRAN FLIGHTS');
+  ensureNavLink('iran-tours.html', 'IRAN TOURS');
+}
 
 const currentPage = location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav a').forEach(link => {
@@ -29,7 +44,7 @@ const tabRoutes = {
   'EXPERIENCES': { partner: 'attractions', fallback: 'experiences.html' },
   'SPA & WELLNESS': { fallback: 'wellness.html' },
   'TRANSFERS': { partner: 'taxi', fallback: 'contact.html' },
-  'FLIGHTS': { partner: 'flights', fallback: 'contact.html' },
+  'FLIGHTS': { partner: 'flights', fallback: 'iran-flights.html' },
   'YACHTS': { fallback: 'yacht-charter.html' },
   'HELICOPTER TOURS': { fallback: 'helicopter-tours.html' },
   'LUXURY CARS': { partner: 'cars', fallback: 'luxury-cars.html' }
@@ -60,7 +75,6 @@ document.querySelectorAll('.service').forEach(service => {
   if (!route) return;
   service.setAttribute('role', 'link');
   service.setAttribute('tabindex', '0');
-  service.setAttribute('aria-label', `Open ${label}`);
   const activate = () => openPartnerLink(route.partner, route.fallback);
   service.addEventListener('click', activate);
   service.addEventListener('keydown', event => {
@@ -160,7 +174,6 @@ async function loadFeaturedHotels() {
         card.target = '_blank';
         card.rel = 'noopener sponsored';
       }
-
       const media = document.createElement('div');
       media.className = 'lux-card-media';
       const image = document.createElement('img');
@@ -174,7 +187,6 @@ async function loadFeaturedHotels() {
       score.className = 'lux-score';
       score.textContent = safeText(hotel.score, 'Exceptional');
       media.append(image, heart, score);
-
       const body = document.createElement('div');
       body.className = 'lux-card-body';
       const title = document.createElement('h3');
