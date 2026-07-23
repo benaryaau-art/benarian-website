@@ -1,0 +1,23 @@
+/* BENARIAN Weekend Luxury Deals refinement */
+#weekend-deals-title{white-space:nowrap!important;font-size:clamp(36px,4vw,52px)!important;letter-spacing:-1px!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-heading{align-items:end!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card{border-radius:24px!important;overflow:hidden!important;background:#fff!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card-media{height:330px!important;background:#ddd center/cover no-repeat!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card-media img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;opacity:1!important;filter:saturate(.94) contrast(1.03)!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card-body{padding:24px 22px 22px!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card h3{font-size:32px!important;line-height:1.05!important;margin-bottom:14px!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-rating{display:flex!important;align-items:center!important;gap:8px!important;padding-bottom:15px!important;border-bottom:1px solid #eadfc9!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card-foot{display:flex!important;justify-content:space-between!important;align-items:end!important;gap:18px!important;padding-top:17px!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card-foot small,.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card-foot strong{display:block!important}
+.benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card-foot a{white-space:nowrap!important;text-decoration:none!important;color:#17130f!important;font-weight:600!important}
+@media(max-width:760px){
+  .benarian-market-section[aria-labelledby="weekend-deals-title"] .market-heading{display:block!important}
+  #weekend-deals-title{font-size:30px!important;line-height:1.05!important;letter-spacing:-.7px!important;white-space:nowrap!important;margin-bottom:14px!important}
+  .benarian-market-section[aria-labelledby="weekend-deals-title"] .market-heading p{max-width:92%!important}
+  .benarian-market-section[aria-labelledby="weekend-deals-title"] .market-view-all{display:inline-block!important;margin-top:16px!important}
+  .benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card{flex:0 0 88vw!important}
+  .benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card-media{height:390px!important}
+  .benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card h3{font-size:29px!important}
+  .benarian-market-section[aria-labelledby="weekend-deals-title"] .market-card-foot{align-items:center!important}
+}
+@media(max-width:390px){#weekend-deals-title{font-size:27px!important}}
