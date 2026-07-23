@@ -1,0 +1,58 @@
+/* BENARIAN hotels page: clean responsive hero and destination tabs */
+@media (max-width: 760px){
+  body:has(.hotels-hero) .hotels-hero{
+    min-height:520px!important;
+    padding:64px 24px 48px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-end!important;
+    align-items:flex-start!important;
+    background-position:center center!important;
+    overflow:hidden!important;
+  }
+  body:has(.hotels-hero) .hotels-hero .eyebrow{
+    width:100%!important;
+    margin:0 0 14px!important;
+    font-size:10px!important;
+    line-height:1.4!important;
+    letter-spacing:2px!important;
+    color:#efc979!important;
+  }
+  body:has(.hotels-hero) .hotels-hero h1{
+    width:100%!important;
+    max-width:520px!important;
+    margin:0 0 16px!important;
+    font-size:clamp(43px,12vw,58px)!important;
+    line-height:.95!important;
+    letter-spacing:-.6px!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+  body:has(.hotels-hero) .hotels-hero>p:last-child{
+    width:100%!important;
+    max-width:520px!important;
+    margin:0!important;
+    font-size:14px!important;
+    line-height:1.65!important;
+    color:#fff!important;
+  }
+  body:has(.hotels-hero) .jump-nav{
+    position:relative!important;
+    top:auto!important;
+    z-index:3!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    padding:16px!important;
+  }
+  body:has(.hotels-hero) .jump-nav a{
+    min-width:0!important;
+    padding:13px 8px!important;
+    text-align:center!important;
+    font-size:10px!important;
+  }
+}
+@media (max-width: 390px){
+  body:has(.hotels-hero) .hotels-hero{min-height:490px!important;padding:56px 20px 42px!important}
+  body:has(.hotels-hero) .hotels-hero h1{font-size:42px!important}
+}
