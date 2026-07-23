@@ -18,7 +18,6 @@ function initialiseBenarianRuntime() {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const saveData = Boolean(navigator.connection && navigator.connection.saveData);
 
-  // Keep the hero image visible immediately, then load video after critical content.
   if (hero && !hero.querySelector('.benarian-hero-video') && !reducedMotion && !saveData) {
     const loadHeroVideo = () => {
       if (hero.querySelector('.benarian-hero-video')) return;
@@ -32,14 +31,12 @@ function initialiseBenarianRuntime() {
       video.setAttribute('aria-hidden', 'true');
       video.innerHTML = '<source src="assets/videos/Video.mp4" type="video/mp4">';
       hero.prepend(video);
-
       const overlay = document.createElement('span');
       overlay.className = 'benarian-hero-overlay';
       overlay.setAttribute('aria-hidden', 'true');
       hero.insertBefore(overlay, video.nextSibling);
       video.play().catch(() => {});
     };
-
     const scheduleVideo = () => {
       if ('requestIdleCallback' in window) window.requestIdleCallback(loadHeroVideo, { timeout: 1800 });
       else window.setTimeout(loadHeroVideo, 500);
@@ -78,7 +75,6 @@ function initialiseBenarianRuntime() {
     document.head.appendChild(style);
   }
 
-  // Load the signature font only on the About page.
   if (document.body.classList.contains('about-page') && !document.querySelector('link[data-benarian-signature-font]')) {
     const font = document.createElement('link');
     font.rel = 'stylesheet';
@@ -124,6 +120,14 @@ function initialiseBenarianRuntime() {
       support.appendChild(link);
     }
   });
+
+  if (!document.querySelector('script[data-benarian-live-concierge]')) {
+    const chatScript = document.createElement('script');
+    chatScript.src = 'assets/live-concierge.js?v=20260723';
+    chatScript.defer = true;
+    chatScript.setAttribute('data-benarian-live-concierge', 'true');
+    document.body.appendChild(chatScript);
+  }
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialiseBenarianRuntime, { once: true });
