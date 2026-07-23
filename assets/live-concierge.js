@@ -1,4 +1,42 @@
 (() => {
+  if (!document.querySelector('link[rel="manifest"]')) {
+    const manifest = document.createElement('link');
+    manifest.rel = 'manifest';
+    manifest.href = '/manifest.webmanifest?v=20260723';
+    document.head.appendChild(manifest);
+  }
+
+  const theme = document.querySelector('meta[name="theme-color"]') || document.createElement('meta');
+  theme.name = 'theme-color';
+  theme.content = '#17140f';
+  if (!theme.parentNode) document.head.appendChild(theme);
+
+  const capable = document.querySelector('meta[name="apple-mobile-web-app-capable"]') || document.createElement('meta');
+  capable.name = 'apple-mobile-web-app-capable';
+  capable.content = 'yes';
+  if (!capable.parentNode) document.head.appendChild(capable);
+
+  const statusBar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]') || document.createElement('meta');
+  statusBar.name = 'apple-mobile-web-app-status-bar-style';
+  statusBar.content = 'black-translucent';
+  if (!statusBar.parentNode) document.head.appendChild(statusBar);
+
+  const appTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]') || document.createElement('meta');
+  appTitle.name = 'apple-mobile-web-app-title';
+  appTitle.content = 'BENARIAN';
+  if (!appTitle.parentNode) document.head.appendChild(appTitle);
+
+  if (!document.querySelector('link[rel="apple-touch-icon"]')) {
+    const icon = document.createElement('link');
+    icon.rel = 'apple-touch-icon';
+    icon.href = '/assets/app-icon.svg?v=20260723';
+    document.head.appendChild(icon);
+  }
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js?v=20260723').catch(() => {}), { once: true });
+  }
+
   if (document.querySelector('#benarian-live-concierge')) return;
 
   const whatsappNumber = '61420788006';
