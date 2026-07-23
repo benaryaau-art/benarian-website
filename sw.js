@@ -1,4 +1,4 @@
-const CACHE_NAME = 'benarian-pwa-v2';
+const CACHE_NAME = 'benarian-pwa-v3-20260724';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -6,6 +6,7 @@ const CORE_ASSETS = [
   '/destinations.html',
   '/visa-guide.html',
   '/contact.html',
+  '/terms-and-conditions.html',
   '/assets/styles.css',
   '/assets/white-theme.css',
   '/assets/app-icon.svg',
