@@ -56,14 +56,14 @@
   const wrapper = document.createElement('div');
   wrapper.id = 'benarian-live-concierge';
   wrapper.innerHTML = `
-    <button class="benarian-chat-launcher" type="button" aria-expanded="false" aria-controls="benarian-chat-panel"><span class="dot" aria-hidden="true"></span>WhatsApp Concierge</button>
-    <section class="benarian-chat-panel" id="benarian-chat-panel" aria-label="BENARIAN WhatsApp Concierge" aria-hidden="true">
-      <div class="benarian-chat-head"><div><strong>BENARIAN Concierge</strong><span>Luxury travel assistance via WhatsApp</span></div><button class="benarian-chat-close" type="button" aria-label="Close WhatsApp chat">×</button></div>
+    <button class="benarian-chat-launcher" type="button" aria-expanded="false" aria-controls="benarian-chat-panel"><span class="dot" aria-hidden="true"></span>BENARIAN Travel Assistant</button>
+    <section class="benarian-chat-panel" id="benarian-chat-panel" aria-label="BENARIAN Travel Assistant" aria-hidden="true">
+      <div class="benarian-chat-head"><div><strong>BENARIAN Travel Assistant</strong><span>Luxury travel assistance via WhatsApp</span></div><button class="benarian-chat-close" type="button" aria-label="Close travel assistant">×</button></div>
       <div class="benarian-chat-body">
         <div class="benarian-chat-message">Welcome to BENARIAN. Tap below to start a WhatsApp conversation about hotels, destinations or luxury travel.</div>
         <div class="benarian-chat-actions">
-          <a class="benarian-chat-primary" href="${whatsappUrl}" target="_blank" rel="noopener">Open WhatsApp Chat</a>
-          <a class="benarian-chat-secondary" href="mailto:concierge@benarian.com?subject=BENARIAN%20Concierge%20Enquiry">Email Concierge</a>
+          <a class="benarian-chat-primary" href="${whatsappUrl}" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          <a class="benarian-chat-secondary" href="mailto:concierge@benarian.com?subject=BENARIAN%20Travel%20Enquiry">Email BENARIAN</a>
         </div>
         <p class="benarian-chat-note">Your message will open in WhatsApp with a ready-made greeting.</p>
       </div>
