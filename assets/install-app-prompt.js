@@ -54,3 +54,20 @@
 
   window.addEventListener('appinstalled', () => card.remove());
 })();
+
+// Expedia Travel Shop pages can be unavailable to some visitors or regions.
+// Replace those links with Expedia's public hotel search, which is broadly accessible.
+(() => {
+  const publicHotelsUrl = 'https://www.expedia.com.au/Hotels';
+  const rewriteLinks = root => {
+    root.querySelectorAll?.('a[href*="expedia.com.au/shop/benariantravel"]').forEach(link => {
+      link.href = publicHotelsUrl;
+      link.target = '_blank';
+      link.rel = 'noopener sponsored';
+      if (/shop|collection|explore all/i.test(link.textContent || '')) link.textContent = 'SEARCH HOTELS ON EXPEDIA →';
+    });
+  };
+  rewriteLinks(document);
+  const observer = new MutationObserver(() => rewriteLinks(document));
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+})();
