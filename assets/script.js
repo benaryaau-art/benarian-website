@@ -1,245 +1,41 @@
-// BENARIAN global white-and-gold theme.
-if (!document.querySelector('link[href^="assets/white-theme.css"]')) {
-  const whiteTheme = document.createElement('link');
-  whiteTheme.rel = 'stylesheet';
-  whiteTheme.href = 'assets/white-theme.css?v=20260722';
-  document.head.appendChild(whiteTheme);
+// BENARIAN global runtime
+function loadCssOnce(href, key){if(document.querySelector(`link[data-${key}]`))return;const l=document.createElement('link');l.rel='stylesheet';l.href=href;l.setAttribute(`data-${key}`,'true');document.head.appendChild(l)}
+loadCssOnce('assets/white-theme.css?v=20260722','benarian-white-theme');
+if(document.querySelector('.hotels-hero'))loadCssOnce('assets/hotels-mobile-fix.css?v=20260724a','benarian-hotels-mobile');
+
+const menu=document.querySelector('.menu-btn');
+const nav=document.querySelector('.nav');
+if(menu&&nav)menu.addEventListener('click',()=>nav.classList.toggle('open'));
+if(nav){
+  const ensureNavLink=(href,label,beforeHref='restaurants.html')=>{if(nav.querySelector(`a[href="${href}"]`))return;const link=document.createElement('a');link.href=href;link.textContent=label;const before=nav.querySelector(`a[href="${beforeHref}"]`);before?nav.insertBefore(link,before):nav.appendChild(link)};
+  ensureNavLink('iran-flights.html','IRAN FLIGHTS');ensureNavLink('iran-tours.html','IRAN TOURS');
 }
+const currentPage=location.pathname.split('/').pop()||'index.html';
+document.querySelectorAll('.nav a').forEach(link=>{if(link.getAttribute('href')===currentPage)link.classList.add('current')});
 
-const menu = document.querySelector('.menu-btn');
-const nav = document.querySelector('.nav');
-if (menu && nav) menu.addEventListener('click', () => nav.classList.toggle('open'));
+function openPartnerLink(key,fallback){const p=window.BENARIAN_PARTNERS?.[key];const url=p?.enabled&&p?.affiliateBaseUrl?p.affiliateBaseUrl:fallback;if(!url)return;/^https?:/i.test(url)?window.open(url,'_blank','noopener'):location.href=url}
+const tabRoutes={'HOTELS':null,'RESTAURANTS':{fallback:'restaurants.html'},'EXPERIENCES':{partner:'attractions',fallback:'experiences.html'},'SPA & WELLNESS':{fallback:'wellness.html'},'TRANSFERS':{partner:'taxi',fallback:'contact.html'},'FLIGHTS':{partner:'flights',fallback:'iran-flights.html'},'YACHTS':{fallback:'yacht-charter.html'},'HELICOPTER TOURS':{fallback:'helicopter-tours.html'},'LUXURY CARS':{partner:'cars',fallback:'luxury-cars.html'}};
+document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));tab.classList.add('active');const label=tab.textContent.replace(/^[^A-Z]+/,'').trim();const route=tabRoutes[label];if(route)openPartnerLink(route.partner,route.fallback)}));
+const serviceRoutes={'SPA & WELLNESS':{fallback:'wellness.html'},'AIRPORT TRANSFERS':{partner:'taxi',fallback:'contact.html'},'YACHT CHARTERS':{fallback:'yacht-charter.html'},'HELICOPTER TOURS':{fallback:'helicopter-tours.html'},'LUXURY CARS':{partner:'cars',fallback:'luxury-cars.html'},'TRAVEL INSURANCE':{fallback:'contact.html'}};
+document.querySelectorAll('.service').forEach(service=>{const route=serviceRoutes[service.querySelector('h4')?.textContent.trim()];if(!route)return;service.setAttribute('role','link');service.setAttribute('tabindex','0');const go=()=>openPartnerLink(route.partner,route.fallback);service.addEventListener('click',go);service.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
 
-// Keep the Iran flight and tour services visible in the navigation on every page.
-if (nav) {
-  const ensureNavLink = (href, label, beforeHref = 'restaurants.html') => {
-    if (nav.querySelector(`a[href="${href}"]`)) return;
-    const link = document.createElement('a');
-    link.href = href;
-    link.textContent = label;
-    const before = nav.querySelector(`a[href="${beforeHref}"]`);
-    if (before) nav.insertBefore(link, before);
-    else nav.appendChild(link);
-  };
-  ensureNavLink('iran-flights.html', 'IRAN FLIGHTS');
-  ensureNavLink('iran-tours.html', 'IRAN TOURS');
-}
+const checkinInput=document.querySelector('#checkin'),checkoutInput=document.querySelector('#checkout');
+if(checkinInput&&checkoutInput){const iso=d=>d.toISOString().slice(0,10),today=new Date(),ci=new Date(today),co=new Date(today);ci.setDate(today.getDate()+7);co.setDate(today.getDate()+11);if(!checkinInput.value||checkinInput.value<iso(today))checkinInput.value=iso(ci);if(!checkoutInput.value||checkoutInput.value<=checkinInput.value)checkoutInput.value=iso(co);checkinInput.min=iso(today);checkoutInput.min=iso(ci);checkinInput.addEventListener('change',()=>{const n=new Date(`${checkinInput.value}T12:00:00`);n.setDate(n.getDate()+1);checkoutInput.min=iso(n);if(checkoutInput.value<=checkinInput.value)checkoutInput.value=iso(n)})}
+const form=document.querySelector('.booking-form');
+if(form)form.addEventListener('submit',e=>{e.preventDefault();const destination=(document.querySelector('#destination')?.value||'Bali').trim(),params=new URLSearchParams({destination});if(checkinInput?.value)params.set('startDate',checkinInput.value);if(checkoutInput?.value)params.set('endDate',checkoutInput.value);location.href=`https://www.expedia.com.au/Hotel-Search?${params}`});
 
-const currentPage = location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.nav a').forEach(link => {
-  if (link.getAttribute('href') === currentPage) link.classList.add('current');
-});
+const hotelRow=document.querySelector('.hotel-row');
+if(hotelRow&&hotelRow.children.length>1){hotelRow.style.transition='opacity .35s ease, transform .35s ease';let timer;const rotate=()=>{hotelRow.style.opacity='0';hotelRow.style.transform='translateY(6px)';setTimeout(()=>{hotelRow.appendChild(hotelRow.firstElementChild);hotelRow.style.opacity='1';hotelRow.style.transform='translateY(0)'},360)},start=()=>{clearInterval(timer);timer=setInterval(rotate,5000)};hotelRow.addEventListener('mouseenter',()=>clearInterval(timer));hotelRow.addEventListener('mouseleave',start);hotelRow.addEventListener('focusin',()=>clearInterval(timer));hotelRow.addEventListener('focusout',start);start()}
 
-function openPartnerLink(key, fallback) {
-  const partner = window.BENARIAN_PARTNERS?.[key];
-  const url = partner?.enabled && partner?.affiliateBaseUrl ? partner.affiliateBaseUrl : fallback;
-  if (!url) return;
-  if (/^https?:/i.test(url)) window.open(url, '_blank', 'noopener');
-  else location.href = url;
-}
+function safeText(v,f=''){return typeof v==='string'&&v.trim()?v.trim():f}
+async function loadFeaturedHotels(){const grid=document.querySelector('.lux-hotel-grid');if(!grid)return;try{const r=await fetch('data/hotels.json',{cache:'no-store'});if(!r.ok)return;const data=await r.json();if(!Array.isArray(data.featuredHotels)||!data.featuredHotels.length)return;grid.innerHTML='';data.featuredHotels.forEach(h=>{const card=document.createElement('a');card.className='lux-card';card.href=safeText(h.bookingUrl,'hotels.html');if(/^https?:/i.test(card.href)){card.target='_blank';card.rel='noopener sponsored'};card.innerHTML=`<div class="lux-card-media"><img src="${safeText(h.image,'assets/images/hotel-ayana.jpg')}" alt="${safeText(h.name,'Luxury hotel')}" loading="lazy"><span class="lux-heart">♡</span><span class="lux-score">${safeText(h.score,'Exceptional')}</span></div><div class="lux-card-body"><h3>${safeText(h.name,'Luxury Hotel')}</h3><div class="lux-stars">★★★★★</div><div class="lux-meta"><span>${safeText(h.location,'Bali')}</span><span class="lux-price">${safeText(h.price,'View rates')}</span></div></div>`;grid.appendChild(card)})}catch(err){console.warn('BENARIAN hotel data could not be loaded.',err)}}
 
-const tabRoutes = {
-  'HOTELS': null,
-  'RESTAURANTS': { fallback: 'restaurants.html' },
-  'EXPERIENCES': { partner: 'attractions', fallback: 'experiences.html' },
-  'SPA & WELLNESS': { fallback: 'wellness.html' },
-  'TRANSFERS': { partner: 'taxi', fallback: 'contact.html' },
-  'FLIGHTS': { partner: 'flights', fallback: 'iran-flights.html' },
-  'YACHTS': { fallback: 'yacht-charter.html' },
-  'HELICOPTER TOURS': { fallback: 'helicopter-tours.html' },
-  'LUXURY CARS': { partner: 'cars', fallback: 'luxury-cars.html' }
-};
-
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(item => item.classList.remove('active'));
-    tab.classList.add('active');
-    const label = tab.textContent.replace(/^[^A-Z]+/, '').trim();
-    const route = tabRoutes[label];
-    if (route) openPartnerLink(route.partner, route.fallback);
-  });
-});
-
-const serviceRoutes = {
-  'SPA & WELLNESS': { fallback: 'wellness.html' },
-  'AIRPORT TRANSFERS': { partner: 'taxi', fallback: 'contact.html' },
-  'YACHT CHARTERS': { fallback: 'yacht-charter.html' },
-  'HELICOPTER TOURS': { fallback: 'helicopter-tours.html' },
-  'LUXURY CARS': { partner: 'cars', fallback: 'luxury-cars.html' },
-  'TRAVEL INSURANCE': { fallback: 'contact.html' }
-};
-
-document.querySelectorAll('.service').forEach(service => {
-  const label = service.querySelector('h4')?.textContent.trim();
-  const route = serviceRoutes[label];
-  if (!route) return;
-  service.setAttribute('role', 'link');
-  service.setAttribute('tabindex', '0');
-  const activate = () => openPartnerLink(route.partner, route.fallback);
-  service.addEventListener('click', activate);
-  service.addEventListener('keydown', event => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      activate();
-    }
-  });
-});
-
-const checkinInput = document.querySelector('#checkin');
-const checkoutInput = document.querySelector('#checkout');
-if (checkinInput && checkoutInput) {
-  const formatDate = date => date.toISOString().slice(0, 10);
-  const today = new Date();
-  const suggestedCheckin = new Date(today);
-  suggestedCheckin.setDate(today.getDate() + 7);
-  const suggestedCheckout = new Date(today);
-  suggestedCheckout.setDate(today.getDate() + 11);
-  if (!checkinInput.value || checkinInput.value < formatDate(today)) checkinInput.value = formatDate(suggestedCheckin);
-  if (!checkoutInput.value || checkoutInput.value <= checkinInput.value) checkoutInput.value = formatDate(suggestedCheckout);
-  checkinInput.min = formatDate(today);
-  checkoutInput.min = formatDate(suggestedCheckin);
-  checkinInput.addEventListener('change', () => {
-    const nextDay = new Date(`${checkinInput.value}T12:00:00`);
-    nextDay.setDate(nextDay.getDate() + 1);
-    checkoutInput.min = formatDate(nextDay);
-    if (checkoutInput.value <= checkinInput.value) checkoutInput.value = formatDate(nextDay);
-  });
-}
-
-const form = document.querySelector('.booking-form');
-if (form) {
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const destination = (document.querySelector('#destination')?.value || 'Bali').trim();
-    const checkin = checkinInput?.value || '';
-    const checkout = checkoutInput?.value || '';
-    const params = new URLSearchParams({ destination });
-    if (checkin) params.set('startDate', checkin);
-    if (checkout) params.set('endDate', checkout);
-    location.href = `https://www.expedia.com.au/Hotel-Search?${params.toString()}`;
-  });
-}
-
-const hotelRow = document.querySelector('.hotel-row');
-if (hotelRow && hotelRow.children.length > 1) {
-  hotelRow.style.transition = 'opacity .35s ease, transform .35s ease';
-  let hotelRotation;
-  const rotateHotels = () => {
-    hotelRow.style.opacity = '0';
-    hotelRow.style.transform = 'translateY(6px)';
-    setTimeout(() => {
-      hotelRow.appendChild(hotelRow.firstElementChild);
-      hotelRow.style.opacity = '1';
-      hotelRow.style.transform = 'translateY(0)';
-    }, 360);
-  };
-  const startHotelRotation = () => {
-    clearInterval(hotelRotation);
-    hotelRotation = setInterval(rotateHotels, 5000);
-  };
-  hotelRow.addEventListener('mouseenter', () => clearInterval(hotelRotation));
-  hotelRow.addEventListener('mouseleave', startHotelRotation);
-  hotelRow.addEventListener('focusin', () => clearInterval(hotelRotation));
-  hotelRow.addEventListener('focusout', startHotelRotation);
-  startHotelRotation();
-}
-
-function safeText(value, fallback = '') {
-  return typeof value === 'string' && value.trim() ? value.trim() : fallback;
-}
-
-async function loadFeaturedHotels() {
-  const grid = document.querySelector('.lux-hotel-grid');
-  if (!grid) return;
-  try {
-    const response = await fetch('data/hotels.json', { cache: 'no-store' });
-    if (!response.ok) return;
-    const data = await response.json();
-    if (!Array.isArray(data.featuredHotels) || !data.featuredHotels.length) return;
-    grid.innerHTML = '';
-    data.featuredHotels.forEach(hotel => {
-      const card = document.createElement('a');
-      card.className = 'lux-card';
-      card.href = safeText(hotel.bookingUrl, 'hotels.html');
-      if (/^https?:/i.test(card.href)) {
-        card.target = '_blank';
-        card.rel = 'noopener sponsored';
-      }
-      const media = document.createElement('div');
-      media.className = 'lux-card-media';
-      const image = document.createElement('img');
-      image.src = safeText(hotel.image, 'assets/images/hotel-ayana.jpg');
-      image.alt = safeText(hotel.name, 'Luxury hotel');
-      image.loading = 'lazy';
-      const heart = document.createElement('span');
-      heart.className = 'lux-heart';
-      heart.textContent = '♡';
-      const score = document.createElement('span');
-      score.className = 'lux-score';
-      score.textContent = safeText(hotel.score, 'Exceptional');
-      media.append(image, heart, score);
-      const body = document.createElement('div');
-      body.className = 'lux-card-body';
-      const title = document.createElement('h3');
-      title.textContent = safeText(hotel.name, 'Luxury Hotel');
-      const stars = document.createElement('div');
-      stars.className = 'lux-stars';
-      stars.textContent = '★★★★★';
-      const meta = document.createElement('div');
-      meta.className = 'lux-meta';
-      const location = document.createElement('span');
-      location.textContent = safeText(hotel.location, 'Bali');
-      const price = document.createElement('span');
-      price.className = 'lux-price';
-      price.textContent = safeText(hotel.price, 'View rates');
-      meta.append(location, price);
-      body.append(title, stars, meta);
-      card.append(media, body);
-      grid.appendChild(card);
-    });
-  } catch (error) {
-    console.warn('BENARIAN hotel data could not be loaded; using built-in cards.', error);
-  }
-}
-
-const MEMBER_KEY = 'benarianMember';
+const MEMBER_KEY='benarianMember';
 function getMember(){try{return JSON.parse(localStorage.getItem(MEMBER_KEY)||'null')}catch{return null}}
-function saveMember(member){localStorage.setItem(MEMBER_KEY,JSON.stringify(member))}
-function displayMemberState(){
-  const member=getMember();
-  document.querySelectorAll('[data-member-name]').forEach(el=>el.textContent=member?.name||member?.email?.split('@')[0]||'BENARIAN Member');
-  const locked=document.querySelector('#member-locked');
-  const unlocked=document.querySelector('#member-unlocked');
-  if(locked&&unlocked){locked.hidden=!!member;unlocked.hidden=!member}
-  document.querySelectorAll('.member-top-link').forEach(link=>{if(member){link.textContent='♟ My Account';link.href='member-dashboard.html'}});
-  if(location.pathname.endsWith('member-dashboard.html')&&!member) location.replace('member-login.html?next=member-dashboard.html');
-}
-const loginForm=document.querySelector('#member-login-form');
-if(loginForm){loginForm.addEventListener('submit',e=>{e.preventDefault();const email=document.querySelector('#member-email').value.trim();const password=document.querySelector('#member-password').value;const msg=document.querySelector('#member-form-message');if(password.length<6){msg.textContent='Please enter a password with at least 6 characters.';return}saveMember({email,name:email.split('@')[0]});msg.textContent='Sign-in successful. Opening your dashboard…';setTimeout(()=>location.href='member-dashboard.html',450)})}
-const joinForm=document.querySelector('#member-join-form');
-if(joinForm){joinForm.addEventListener('submit',e=>{e.preventDefault();const name=document.querySelector('#member-name').value.trim();const email=document.querySelector('#member-email').value.trim();const password=document.querySelector('#member-password').value;const consent=document.querySelector('#member-consent').checked;const msg=document.querySelector('#member-form-message');if(!name||password.length<6||!consent){msg.textContent='Please complete all fields and accept the privacy terms.';return}saveMember({name,email});msg.textContent='Welcome to BENARIAN. Opening your private member area…';setTimeout(()=>location.href='member-dashboard.html',500)})}
-const logout=document.querySelector('#member-logout');
-if(logout){logout.addEventListener('click',()=>{localStorage.removeItem(MEMBER_KEY);location.href='member-login.html'})}
-
-function ensureMainLegalLinks() {
-  document.querySelectorAll('.footer').forEach(footer => {
-    let support = Array.from(footer.querySelectorAll('div')).find(group => /Support/i.test(group.querySelector('strong')?.textContent || ''));
-    if (!support) {
-      support = document.createElement('div');
-      support.innerHTML = '<strong>Support</strong>';
-      footer.appendChild(support);
-    }
-    if (!support.querySelector('a[href="terms-and-conditions.html"]')) {
-      const terms = document.createElement('a');
-      terms.href = 'terms-and-conditions.html';
-      terms.textContent = 'Terms & Conditions';
-      const privacy = support.querySelector('a[href="privacy-policy.html"]');
-      if (privacy) support.insertBefore(terms, privacy); else support.appendChild(terms);
-    }
-  });
-}
-
-loadFeaturedHotels();
-displayMemberState();
-ensureMainLegalLinks();
-setTimeout(ensureMainLegalLinks, 700);
+function saveMember(m){localStorage.setItem(MEMBER_KEY,JSON.stringify(m))}
+function displayMemberState(){const m=getMember();document.querySelectorAll('[data-member-name]').forEach(el=>el.textContent=m?.name||m?.email?.split('@')[0]||'BENARIAN Member');const locked=document.querySelector('#member-locked'),unlocked=document.querySelector('#member-unlocked');if(locked&&unlocked){locked.hidden=!!m;unlocked.hidden=!m}document.querySelectorAll('.member-top-link').forEach(link=>{if(m){link.textContent='♟ My Account';link.href='member-dashboard.html'}});if(location.pathname.endsWith('member-dashboard.html')&&!m)location.replace('member-login.html?next=member-dashboard.html')}
+const loginForm=document.querySelector('#member-login-form');if(loginForm)loginForm.addEventListener('submit',e=>{e.preventDefault();const email=document.querySelector('#member-email').value.trim(),password=document.querySelector('#member-password').value,msg=document.querySelector('#member-form-message');if(password.length<6){msg.textContent='Please enter a password with at least 6 characters.';return}saveMember({email,name:email.split('@')[0]});msg.textContent='Sign-in successful. Opening your dashboard…';setTimeout(()=>location.href='member-dashboard.html',450)});
+const joinForm=document.querySelector('#member-join-form');if(joinForm)joinForm.addEventListener('submit',e=>{e.preventDefault();const name=document.querySelector('#member-name').value.trim(),email=document.querySelector('#member-email').value.trim(),password=document.querySelector('#member-password').value,consent=document.querySelector('#member-consent').checked,msg=document.querySelector('#member-form-message');if(!name||password.length<6||!consent){msg.textContent='Please complete all fields and accept the privacy terms.';return}saveMember({name,email});msg.textContent='Welcome to BENARIAN. Opening your private member area…';setTimeout(()=>location.href='member-dashboard.html',500)});
+const logout=document.querySelector('#member-logout');if(logout)logout.addEventListener('click',()=>{localStorage.removeItem(MEMBER_KEY);location.href='member-login.html'});
+function ensureMainLegalLinks(){document.querySelectorAll('.footer').forEach(footer=>{let support=Array.from(footer.querySelectorAll('div')).find(g=>/Support/i.test(g.querySelector('strong')?.textContent||''));if(!support){support=document.createElement('div');support.innerHTML='<strong>Support</strong>';footer.appendChild(support)}if(!support.querySelector('a[href="terms-and-conditions.html"]')){const terms=document.createElement('a');terms.href='terms-and-conditions.html';terms.textContent='Terms & Conditions';const privacy=support.querySelector('a[href="privacy-policy.html"]');privacy?support.insertBefore(terms,privacy):support.appendChild(terms)}})}
+loadFeaturedHotels();displayMemberState();ensureMainLegalLinks();setTimeout(ensureMainLegalLinks,700);
