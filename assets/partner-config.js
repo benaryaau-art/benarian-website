@@ -9,6 +9,16 @@ window.BENARIAN_PARTNERS = {
   expedia: { enabled: true, travelShopUrl: "https://www.expedia.com.au/shop/benariantravel" }
 };
 
+const BENARIAN_FEATURED_HOTELS = [
+  { name: 'Bvlgari Resort Bali', location: 'Pecatu, Bali', description: 'An extraordinary clifftop retreat combining refined Italian design with Balinese character and exceptional privacy.' },
+  { name: 'Mandapa, a Ritz-Carlton Reserve', location: 'Ubud, Bali', description: 'A serene luxury retreat beside the Ayung River, surrounded by rice terraces and tropical forest.' },
+  { name: 'The Apurva Kempinski Bali', location: 'Nusa Dua, Bali', description: 'A grand beachfront resort known for dramatic architecture, refined rooms and an impressive oceanfront setting.' }
+];
+
+function expediaHotelSearchUrl(hotelName, location) {
+  return `https://www.expedia.com.au/Hotel-Search?destination=${encodeURIComponent(`${hotelName}, ${location}`)}`;
+}
+
 function initialiseBenarianRuntime() {
   const hero = document.querySelector('.home-lux .lux-hero');
 
@@ -22,11 +32,76 @@ function initialiseBenarianRuntime() {
     const heroCopy = hero.querySelector('.lux-hero-copy');
     if (heroCopy) heroCopy.querySelectorAll('.benarian-expedia-cta').forEach(link => link.remove());
 
-    document.querySelectorAll('.benarian-expedia-widget-section').forEach(section => section.remove());
+    document.querySelectorAll('.benarian-expedia-widget-section,.benarian-featured-stays').forEach(section => section.remove());
+
     const section = document.createElement('section');
     section.className = 'benarian-expedia-widget-section';
-    section.innerHTML = `<div class="benarian-expedia-widget-inner"><p class="benarian-expedia-eyebrow">HOTEL RESERVATIONS</p><h2>Book your hotel</h2><p class="benarian-expedia-intro">Choose your destination and travel dates below. Live hotel availability and final booking are provided securely through Expedia.</p><div class="benarian-expedia-widget-shell"><div class="eg-widget" data-widget="search" data-program="au-expedia" data-lobs="stays" data-network="pz" data-camref="1101l5PIxe" data-pubref="benarian-home-hotels"></div></div><p class="benarian-expedia-disclosure">You will continue to Expedia to view live prices, choose your room and complete your reservation. BENARIAN may earn a commission from eligible bookings.</p></div>`;
+    section.innerHTML = `
+      <div class="benarian-expedia-widget-inner">
+        <p class="benarian-expedia-eyebrow">HOTEL RESERVATIONS</p>
+        <h2>Book your hotel</h2>
+        <p class="benarian-expedia-intro">Enter your destination and travel dates. You will continue securely to Expedia to view live prices, choose your room and complete your reservation.</p>
+        <form class="benarian-expedia-direct-form" novalidate>
+          <label><span>Destination</span><input type="text" name="destination" placeholder="Bali, Phuket, Dubai..." required></label>
+          <label><span>Check-in</span><input type="date" name="checkin" required></label>
+          <label><span>Check-out</span><input type="date" name="checkout" required></label>
+          <button type="submit">SEARCH HOTELS</button>
+        </form>
+        <div class="benarian-expedia-widget-shell">
+          <div class="eg-widget" data-widget="search" data-program="au-expedia" data-lobs="stays" data-network="pz" data-camref="1101l5PIxe" data-pubref="benarian-home-hotels"></div>
+        </div>
+        <p class="benarian-expedia-disclosure">Search and booking are completed securely on Expedia. BENARIAN may earn a commission from eligible bookings.</p>
+      </div>`;
     hero.insertAdjacentElement('afterend', section);
+
+    const featured = document.createElement('section');
+    featured.className = 'benarian-featured-stays';
+    featured.innerHTML = `
+      <div class="benarian-featured-inner">
+        <p class="benarian-featured-eyebrow">FROM OUR EXPEDIA COLLECTION</p>
+        <h2>Featured Bali stays</h2>
+        <div class="benarian-featured-grid">
+          ${BENARIAN_FEATURED_HOTELS.map((hotel, index) => `
+            <article class="benarian-featured-card">
+              <span class="benarian-featured-number">0${index + 1}</span>
+              <small>${hotel.location.toUpperCase()}</small>
+              <h3>${hotel.name}</h3>
+              <p>${hotel.description}</p>
+              <a href="${expediaHotelSearchUrl(hotel.name, hotel.location)}" target="_blank" rel="noopener">VIEW HOTEL ON EXPEDIA →</a>
+            </article>`).join('')}
+        </div>
+        <a class="benarian-featured-shop" href="${window.BENARIAN_PARTNERS.expedia.travelShopUrl}" target="_blank" rel="noopener sponsored">EXPLORE THE FULL BENARIAN COLLECTION</a>
+      </div>`;
+    section.insertAdjacentElement('afterend', featured);
+
+    const form = section.querySelector('.benarian-expedia-direct-form');
+    if (form) {
+      const checkin = form.elements.checkin;
+      const checkout = form.elements.checkout;
+      const today = new Date();
+      const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
+      const nextDay = new Date(today); nextDay.setDate(today.getDate() + 2);
+      const toISO = date => date.toISOString().slice(0, 10);
+      checkin.min = toISO(today); checkout.min = toISO(tomorrow);
+      if (!checkin.value) checkin.value = toISO(tomorrow);
+      if (!checkout.value) checkout.value = toISO(nextDay);
+      checkin.addEventListener('change', () => {
+        if (!checkin.value) return;
+        const minCheckout = new Date(`${checkin.value}T00:00:00`);
+        minCheckout.setDate(minCheckout.getDate() + 1);
+        checkout.min = toISO(minCheckout);
+        if (!checkout.value || checkout.value <= checkin.value) checkout.value = toISO(minCheckout);
+      });
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        const destination = form.elements.destination.value.trim();
+        if (!destination) { form.elements.destination.focus(); return; }
+        const params = new URLSearchParams({ destination });
+        if (checkin.value) params.set('startDate', checkin.value);
+        if (checkout.value) params.set('endDate', checkout.value);
+        window.open(`https://www.expedia.com.au/Hotel-Search?${params.toString()}`, '_blank', 'noopener');
+      });
+    }
 
     if (!document.querySelector('script[data-benarian-expedia-widget]')) {
       const script = document.createElement('script');
@@ -75,9 +150,10 @@ function initialiseBenarianRuntime() {
       .header .brand,.header .brand:not(.brand-lockup){display:flex!important;align-items:center!important;width:330px!important;height:70px!important;max-width:100%!important;background:none!important}
       .header .brand:before,.header .brand:after{content:none!important;display:none!important}.header .brand img{display:none!important}.benarian-global-logo{display:block!important;width:100%!important;height:100%!important}
       .lux-hero{position:relative!important;overflow:hidden!important;background-color:#182015!important}.benarian-hero-video,.benarian-hero-overlay{display:none!important}.lux-hero-copy{position:relative!important;z-index:2!important}
-      .benarian-expedia-widget-section{background:#fff!important;padding:72px 20px 78px!important;border-bottom:1px solid #eee7dc!important}.benarian-expedia-widget-inner{max-width:1180px!important;margin:0 auto!important;text-align:center!important}.benarian-expedia-eyebrow{margin:0 0 12px!important;color:#b9872c!important;font:700 12px Arial,Helvetica,sans-serif!important;letter-spacing:2.4px!important}.benarian-expedia-widget-inner h2{margin:0!important;color:#17140f!important;font:400 clamp(40px,6vw,66px)/1.04 Georgia,'Times New Roman',serif!important}.benarian-expedia-intro{margin:16px auto 30px!important;max-width:690px!important;color:#5f5a52!important;font:400 16px/1.75 Arial,Helvetica,sans-serif!important}.benarian-expedia-widget-shell{max-width:1080px!important;margin:0 auto!important;padding:24px!important;background:#faf8f4!important;border:1px solid #dfcba6!important;box-shadow:0 20px 55px rgba(32,25,14,.09)!important}.benarian-expedia-widget-shell .eg-widget{min-height:90px!important}.benarian-expedia-disclosure{margin:17px auto 0!important;max-width:760px!important;color:#7b746a!important;font:400 12px/1.65 Arial,Helvetica,sans-serif!important}
+      .benarian-expedia-widget-section{background:#fff!important;padding:72px 20px 78px!important;border-bottom:1px solid #eee7dc!important}.benarian-expedia-widget-inner{max-width:1180px!important;margin:0 auto!important;text-align:center!important}.benarian-expedia-eyebrow,.benarian-featured-eyebrow{margin:0 0 12px!important;color:#b9872c!important;font:700 12px Arial,Helvetica,sans-serif!important;letter-spacing:2.4px!important}.benarian-expedia-widget-inner h2,.benarian-featured-inner h2{margin:0!important;color:#17140f!important;font:400 clamp(40px,6vw,66px)/1.04 Georgia,'Times New Roman',serif!important}.benarian-expedia-intro{margin:16px auto 30px!important;max-width:690px!important;color:#5f5a52!important;font:400 16px/1.75 Arial,Helvetica,sans-serif!important}.benarian-expedia-direct-form{display:grid!important;grid-template-columns:2fr 1fr 1fr auto!important;gap:12px!important;max-width:1080px!important;margin:0 auto 22px!important;padding:18px!important;background:#17140f!important;box-shadow:0 20px 55px rgba(32,25,14,.14)!important}.benarian-expedia-direct-form label{text-align:left!important}.benarian-expedia-direct-form label span{display:block!important;margin:0 0 7px!important;color:#d8b66e!important;font:700 10px Arial,sans-serif!important;letter-spacing:1.2px!important}.benarian-expedia-direct-form input{width:100%!important;box-sizing:border-box!important;border:1px solid #4a4137!important;background:#fff!important;color:#17140f!important;padding:14px 12px!important;font:400 14px Arial,sans-serif!important}.benarian-expedia-direct-form button{align-self:end!important;border:0!important;background:#bd8626!important;color:#fff!important;padding:15px 24px!important;font:700 12px Arial,sans-serif!important;letter-spacing:1.1px!important;cursor:pointer!important}.benarian-expedia-widget-shell{max-width:1080px!important;margin:0 auto!important;padding:24px!important;background:#faf8f4!important;border:1px solid #dfcba6!important;box-shadow:0 20px 55px rgba(32,25,14,.09)!important}.benarian-expedia-widget-shell .eg-widget{min-height:90px!important}.benarian-expedia-disclosure{margin:17px auto 0!important;max-width:760px!important;color:#7b746a!important;font:400 12px/1.65 Arial,Helvetica,sans-serif!important}
+      .benarian-featured-stays{background:#f7f2e9!important;padding:86px 20px 96px!important}.benarian-featured-inner{max-width:1180px!important;margin:0 auto!important;text-align:center!important}.benarian-featured-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important;margin:42px 0 34px!important;text-align:left!important}.benarian-featured-card{background:#fff!important;border:1px solid #dfcba6!important;padding:30px!important;box-shadow:0 12px 34px rgba(61,43,16,.07)!important}.benarian-featured-number{display:block!important;color:#b9872c!important;font:400 18px Georgia,serif!important;margin-bottom:24px!important}.benarian-featured-card small{display:block!important;color:#8b7659!important;font:700 10px Arial,sans-serif!important;letter-spacing:1.5px!important;margin-bottom:12px!important}.benarian-featured-card h3{margin:0 0 16px!important;color:#17140f!important;font:400 31px/1.08 Georgia,serif!important}.benarian-featured-card p{margin:0 0 24px!important;color:#625a50!important;font:400 14px/1.75 Arial,sans-serif!important}.benarian-featured-card a,.benarian-featured-shop{color:#a56c18!important;text-decoration:none!important;border-bottom:1px solid #b9872c!important;padding-bottom:5px!important;font:700 11px Arial,sans-serif!important;letter-spacing:.8px!important}.benarian-featured-shop{display:inline-block!important}
       .about-page .about-signature,.about-page .founder-signature{font-family:'Allura','Snell Roundhand','Apple Chancery',cursive!important;color:#b9872c!important}.about-page .founder-photo img{width:100%!important;height:100%!important;object-fit:contain!important}
-      @media(max-width:760px){.header .brand,.header .brand:not(.brand-lockup){width:250px!important;height:62px!important;max-width:calc(100vw - 132px)!important}.lux-hero{background-position:58% center!important}.benarian-expedia-widget-section{padding:48px 14px 56px!important}.benarian-expedia-widget-shell{padding:12px!important}}
+      @media(max-width:760px){.header .brand,.header .brand:not(.brand-lockup){width:250px!important;height:62px!important;max-width:calc(100vw - 132px)!important}.lux-hero{background-position:58% center!important}.benarian-expedia-widget-section{padding:48px 14px 56px!important}.benarian-expedia-direct-form{grid-template-columns:1fr!important;padding:14px!important}.benarian-expedia-direct-form button{width:100%!important}.benarian-expedia-widget-shell{padding:12px!important}.benarian-featured-stays{padding:62px 14px 78px!important}.benarian-featured-grid{grid-template-columns:1fr!important}.benarian-featured-card h3{font-size:29px!important}}
     `;
     document.head.appendChild(style);
   }
