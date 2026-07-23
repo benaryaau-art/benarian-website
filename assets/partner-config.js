@@ -40,6 +40,7 @@ function initialiseBenarianRuntime() {
   const founderImage = document.querySelector('.about-page .founder-photo img'); if (founderImage) { founderImage.src = 'assets/images/ben-tafreshi-founder.jpg?v=20260723b'; founderImage.alt = 'Ben Tafreshi, Founder and CEO of BENARIAN'; founderImage.loading = 'eager'; founderImage.decoding = 'async'; founderImage.fetchPriority = 'high'; }
 
   document.querySelectorAll('.header .nav').forEach(nav => { if (!nav.querySelector('a[href="terms-and-conditions.html"]')) { const link = document.createElement('a'); link.href = 'terms-and-conditions.html'; link.textContent = 'TERMS & CONDITIONS'; nav.appendChild(link); } });
+  document.querySelectorAll('a[href="iran-flights.html"]').forEach(link => { link.textContent = 'FLIGHTS'; link.setAttribute('aria-label', 'Flights'); });
   document.querySelectorAll('.footer').forEach(footer => { if (footer.querySelector('a[href="terms-and-conditions.html"]')) return; const privacy = footer.querySelector('a[href="privacy-policy.html"]'); if (privacy) { const link = document.createElement('a'); link.href = 'terms-and-conditions.html'; link.textContent = 'Terms & Conditions'; privacy.parentNode.insertBefore(link, privacy); privacy.parentNode.insertBefore(document.createTextNode(' · '), privacy); } });
 
   const loadScriptOnce = (src, marker) => { if (document.querySelector(`script[${marker}]`)) return; const script = document.createElement('script'); script.src = src; script.defer = true; script.setAttribute(marker, 'true'); document.body.appendChild(script); };
