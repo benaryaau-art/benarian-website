@@ -3,15 +3,17 @@
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   if (isStandalone) return;
 
-  const dismissedAt = Number(localStorage.getItem('benarianInstallDismissedAt') || 0);
-  if (Date.now() - dismissedAt < 7 * 24 * 60 * 60 * 1000) return;
+  // Show the install invitation once per browser session. This avoids the old
+  // seven-day suppression that made the prompt appear to be permanently gone.
+  if (sessionStorage.getItem('benarianInstallPromptShown') === 'true') return;
+  sessionStorage.setItem('benarianInstallPromptShown', 'true');
 
   let deferredPrompt = null;
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
   const style = document.createElement('style');
   style.textContent = `
-    .benarian-install-card{position:fixed;left:18px;right:18px;bottom:18px;z-index:9997;max-width:760px;margin:auto;background:#fff;border:1px solid #dfc48d;border-radius:18px;box-shadow:0 18px 55px rgba(0,0,0,.22);padding:15px 16px;display:flex;align-items:center;gap:14px;font-family:Inter,Arial,sans-serif}.benarian-install-icon{width:52px;height:52px;border-radius:14px;background:#17140f;color:#c99a43;display:grid;place-items:center;font:600 25px Georgia,serif;flex:0 0 auto}.benarian-install-copy{min-width:0;flex:1}.benarian-install-copy strong{display:block;color:#17140f;font-size:14px;margin-bottom:4px}.benarian-install-copy span{display:block;color:#6c6257;font-size:11px;line-height:1.45}.benarian-install-actions{display:flex;align-items:center;gap:8px}.benarian-install-button{border:0;background:#b9872c;color:#fff;border-radius:10px;padding:11px 15px;font:700 11px Inter,Arial,sans-serif;cursor:pointer;white-space:nowrap}.benarian-install-close{border:0;background:transparent;color:#756a5e;font-size:22px;cursor:pointer;padding:5px}.benarian-ios-guide{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.55);display:grid;place-items:end center;padding:18px}.benarian-ios-guide>div{width:min(520px,100%);background:#fff;border-radius:22px;padding:22px;font-family:Inter,Arial,sans-serif}.benarian-ios-guide h3{font-family:Georgia,serif;font-size:25px;margin:0 0 12px}.benarian-ios-guide p{color:#5e554a;font-size:13px;line-height:1.7}.benarian-ios-guide button{width:100%;border:0;border-radius:10px;padding:12px;background:#17140f;color:#fff;font-weight:700;cursor:pointer}@media(max-width:620px){.benarian-install-card{left:10px;right:10px;bottom:78px;align-items:flex-start}.benarian-install-icon{width:46px;height:46px}.benarian-install-actions{align-self:center}.benarian-install-button{padding:10px 12px}.benarian-install-copy span{font-size:10px}}
+    .benarian-install-card{position:fixed;left:18px;right:18px;bottom:18px;z-index:10020;max-width:760px;margin:auto;background:#fff;border:1px solid #dfc48d;border-radius:18px;box-shadow:0 18px 55px rgba(0,0,0,.22);padding:15px 16px;display:flex;align-items:center;gap:14px;font-family:Inter,Arial,sans-serif}.benarian-install-icon{width:52px;height:52px;border-radius:14px;background:#17140f;color:#c99a43;display:grid;place-items:center;font:600 25px Georgia,serif;flex:0 0 auto}.benarian-install-copy{min-width:0;flex:1}.benarian-install-copy strong{display:block;color:#17140f;font-size:14px;margin-bottom:4px}.benarian-install-copy span{display:block;color:#6c6257;font-size:11px;line-height:1.45}.benarian-install-actions{display:flex;align-items:center;gap:8px}.benarian-install-button{border:0;background:#b9872c;color:#fff;border-radius:10px;padding:11px 15px;font:700 11px Inter,Arial,sans-serif;cursor:pointer;white-space:nowrap}.benarian-install-close{border:0;background:transparent;color:#756a5e;font-size:22px;cursor:pointer;padding:5px}.benarian-ios-guide{position:fixed;inset:0;z-index:10030;background:rgba(0,0,0,.55);display:grid;place-items:end center;padding:18px}.benarian-ios-guide>div{width:min(520px,100%);background:#fff;border-radius:22px;padding:22px;font-family:Inter,Arial,sans-serif}.benarian-ios-guide h3{font-family:Georgia,serif;font-size:25px;margin:0 0 12px}.benarian-ios-guide p{color:#5e554a;font-size:13px;line-height:1.7}.benarian-ios-guide button{width:100%;border:0;border-radius:10px;padding:12px;background:#17140f;color:#fff;font-weight:700;cursor:pointer}@media(max-width:620px){.benarian-install-card{left:10px;right:10px;bottom:96px;align-items:flex-start}.benarian-install-icon{width:46px;height:46px}.benarian-install-actions{align-self:center}.benarian-install-button{padding:10px 12px}.benarian-install-copy span{font-size:10px}}
   `;
   document.head.appendChild(style);
 
@@ -23,8 +25,7 @@
   document.body.appendChild(card);
 
   const installButton = card.querySelector('.benarian-install-button');
-  const dismiss = () => { localStorage.setItem('benarianInstallDismissedAt', String(Date.now())); card.remove(); };
-  card.querySelector('.benarian-install-close').addEventListener('click', dismiss);
+  card.querySelector('.benarian-install-close').addEventListener('click', () => card.remove());
 
   window.addEventListener('beforeinstallprompt', event => {
     event.preventDefault();
