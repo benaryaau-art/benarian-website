@@ -1,0 +1,27 @@
+{
+  "name": "BENARIAN Luxury Travel",
+  "short_name": "BENARIAN",
+  "description": "Luxury hotels, destinations, experiences and concierge travel services.",
+  "start_url": "/index.html?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#17140f",
+  "lang": "en",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    {
+      "src": "/assets/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {"name":"Hotels","url":"/hotels.html","description":"Explore luxury hotels"},
+    {"name":"Flights","url":"/iran-flights.html","description":"Search flights"},
+    {"name":"Visa Guide","url":"/visa-guide.html","description":"Travel visa guidance"},
+    {"name":"Concierge","url":"https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking."}
+  ]
+}
