@@ -74,16 +74,45 @@
   document.querySelectorAll('.lux-concierge a').forEach(link => { if (/whatsapp/i.test(link.textContent || '')) { link.href = 'https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking.'; link.target = '_blank'; link.rel = 'noopener'; link.textContent = '◉ Travel Assistant'; } });
   document.querySelectorAll('.copyright').forEach(el => { el.textContent = el.textContent.replace(/©\s*\d{4}/, `© ${new Date().getFullYear()}`); });
 
+  // Restore Terms & Conditions visibly in every footer.
   document.querySelectorAll('.footer').forEach(footer => {
     const support = Array.from(footer.querySelectorAll('div')).find(group => /Support/i.test(group.querySelector('strong')?.textContent || ''));
     if (support && !support.querySelector('a[href="terms-and-conditions.html"]')) {
       const terms = document.createElement('a');
       terms.href = 'terms-and-conditions.html';
       terms.textContent = 'Terms & Conditions';
+      terms.style.display = 'block';
+      terms.style.marginTop = '8px';
       const privacy = support.querySelector('a[href="privacy-policy.html"]');
       if (privacy) support.insertBefore(terms, privacy); else support.appendChild(terms);
     }
   });
+
+  // Make the main hotel search reliable on iPhone/Safari and avoid popup blocking.
+  const hotelSearchForm = document.querySelector('.benarian-expedia-direct-form');
+  if (hotelSearchForm && !hotelSearchForm.dataset.benarianSearchFixed) {
+    hotelSearchForm.dataset.benarianSearchFixed = 'true';
+    hotelSearchForm.setAttribute('action', 'https://www.expedia.com.au/Hotel-Search');
+    hotelSearchForm.setAttribute('method', 'get');
+    const submitButton = hotelSearchForm.querySelector('button');
+    if (submitButton) submitButton.type = 'submit';
+    hotelSearchForm.addEventListener('submit', event => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      const destination = (hotelSearchForm.elements.destination?.value || '').trim();
+      const checkin = hotelSearchForm.elements.checkin?.value || '';
+      const checkout = hotelSearchForm.elements.checkout?.value || '';
+      if (!destination) {
+        hotelSearchForm.elements.destination?.focus();
+        return;
+      }
+      const params = new URLSearchParams({ destination });
+      if (checkin) params.set('startDate', checkin);
+      if (checkout) params.set('endDate', checkout);
+      const targetUrl = `https://www.expedia.com.au/Hotel-Search?${params.toString()}`;
+      window.location.href = targetUrl;
+    }, true);
+  }
 
   const menu = document.querySelector('.menu-btn'); const desktopNav = document.querySelector('.header .nav');
   if (menu && desktopNav && !menu.dataset.premiumBound) { menu.dataset.premiumBound = 'true'; menu.addEventListener('click', () => { const expanded = desktopNav.classList.contains('open'); menu.setAttribute('aria-expanded', String(expanded)); }); }
