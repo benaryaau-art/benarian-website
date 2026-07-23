@@ -23,7 +23,7 @@
 
   if (!document.querySelector('.benarian-trust-strip')) {
     const trust = document.createElement('section'); trust.className = 'benarian-trust-strip'; trust.setAttribute('aria-label', 'Why travel with BENARIAN');
-    trust.innerHTML = '<div class="benarian-trust-item"><strong>Curated Stays</strong><span>Selected luxury hotels and resorts</span></div><div class="benarian-trust-item"><strong>Personal Support</strong><span>Travel assistance through BENARIAN</span></div><div class="benarian-trust-item"><strong>Persian Friendly</strong><span>English and Persian travel guidance</span></div><div class="benarian-trust-item"><strong>Expedia Partner</strong><span>Live rates and secure booking on Expedia</span></div>';
+    trust.innerHTML = '<div class="benarian-trust-item"><strong>Curated Stays</strong><span>Selected luxury hotels and resorts</span></div><div class="benarian-trust-item"><strong>Personal Support</strong><span>Travel assistance through BENARIAN</span></div><div class="benarian-trust-item"><strong>Persian Friendly</strong><span>English and Persian travel guidance</span></div><div class="benarian-trust-item"><strong>Secure Partner Booking</strong><span>Live rates and booking on approved partner platforms</span></div>';
     const widget = document.querySelector('.benarian-expedia-widget-section'); const hero = document.querySelector('.lux-hero');
     if (widget?.parentNode) widget.parentNode.insertBefore(trust, widget.nextSibling); else if (hero?.parentNode) hero.parentNode.insertBefore(trust, hero.nextSibling);
   }
@@ -73,6 +73,17 @@
   document.querySelectorAll('a[target="_blank"]').forEach(link => { const rel = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean)); rel.add('noopener'); link.setAttribute('rel', Array.from(rel).join(' ')); });
   document.querySelectorAll('.lux-concierge a').forEach(link => { if (/whatsapp/i.test(link.textContent || '')) { link.href = 'https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking.'; link.target = '_blank'; link.rel = 'noopener'; link.textContent = '◉ Travel Assistant'; } });
   document.querySelectorAll('.copyright').forEach(el => { el.textContent = el.textContent.replace(/©\s*\d{4}/, `© ${new Date().getFullYear()}`); });
+
+  document.querySelectorAll('.footer').forEach(footer => {
+    const support = Array.from(footer.querySelectorAll('div')).find(group => /Support/i.test(group.querySelector('strong')?.textContent || ''));
+    if (support && !support.querySelector('a[href="terms-and-conditions.html"]')) {
+      const terms = document.createElement('a');
+      terms.href = 'terms-and-conditions.html';
+      terms.textContent = 'Terms & Conditions';
+      const privacy = support.querySelector('a[href="privacy-policy.html"]');
+      if (privacy) support.insertBefore(terms, privacy); else support.appendChild(terms);
+    }
+  });
 
   const menu = document.querySelector('.menu-btn'); const desktopNav = document.querySelector('.header .nav');
   if (menu && desktopNav && !menu.dataset.premiumBound) { menu.dataset.premiumBound = 'true'; menu.addEventListener('click', () => { const expanded = desktopNav.classList.contains('open'); menu.setAttribute('aria-expanded', String(expanded)); }); }
