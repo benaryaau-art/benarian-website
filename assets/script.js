@@ -85,14 +85,6 @@ document.querySelectorAll('.service').forEach(service => {
   });
 });
 
-function bookingSearchUrl(params) {
-  const config = window.BENARIAN_PARTNERS?.booking || {};
-  const base = config.enabled && config.affiliateBaseUrl
-    ? config.affiliateBaseUrl
-    : (config.baseUrl || 'https://www.booking.com/searchresults.html');
-  return base + (base.includes('?') ? '&' : '?') + params.toString();
-}
-
 const checkinInput = document.querySelector('#checkin');
 const checkoutInput = document.querySelector('#checkout');
 if (checkinInput && checkoutInput) {
@@ -121,11 +113,10 @@ if (form) {
     const destination = (document.querySelector('#destination')?.value || 'Bali').trim();
     const checkin = checkinInput?.value || '';
     const checkout = checkoutInput?.value || '';
-    const [adults, rooms] = (document.querySelector('#guests')?.value || '2-1').split('-');
-    const params = new URLSearchParams({ ss: destination, group_adults: adults, no_rooms: rooms, group_children: '0' });
-    if (checkin) params.set('checkin', checkin);
-    if (checkout) params.set('checkout', checkout);
-    window.open(bookingSearchUrl(params), '_blank', 'noopener');
+    const params = new URLSearchParams({ destination });
+    if (checkin) params.set('startDate', checkin);
+    if (checkout) params.set('endDate', checkout);
+    location.href = `https://www.expedia.com.au/Hotel-Search?${params.toString()}`;
   });
 }
 
@@ -230,5 +221,25 @@ if(joinForm){joinForm.addEventListener('submit',e=>{e.preventDefault();const nam
 const logout=document.querySelector('#member-logout');
 if(logout){logout.addEventListener('click',()=>{localStorage.removeItem(MEMBER_KEY);location.href='member-login.html'})}
 
+function ensureMainLegalLinks() {
+  document.querySelectorAll('.footer').forEach(footer => {
+    let support = Array.from(footer.querySelectorAll('div')).find(group => /Support/i.test(group.querySelector('strong')?.textContent || ''));
+    if (!support) {
+      support = document.createElement('div');
+      support.innerHTML = '<strong>Support</strong>';
+      footer.appendChild(support);
+    }
+    if (!support.querySelector('a[href="terms-and-conditions.html"]')) {
+      const terms = document.createElement('a');
+      terms.href = 'terms-and-conditions.html';
+      terms.textContent = 'Terms & Conditions';
+      const privacy = support.querySelector('a[href="privacy-policy.html"]');
+      if (privacy) support.insertBefore(terms, privacy); else support.appendChild(terms);
+    }
+  });
+}
+
 loadFeaturedHotels();
 displayMemberState();
+ensureMainLegalLinks();
+setTimeout(ensureMainLegalLinks, 700);
