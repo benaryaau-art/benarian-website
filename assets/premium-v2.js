@@ -31,6 +31,27 @@
   const oldBooking = document.querySelector('.booking-search');
   if (oldBooking) oldBooking.style.display = 'none';
 
+  const bindExpediaSearch = () => {
+    document.querySelectorAll('.benarian-expedia-direct-form').forEach(form => {
+      if (form.dataset.expediaBound === 'true') return;
+      form.dataset.expediaBound = 'true';
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        const destination = (form.elements.destination?.value || 'Bali').trim();
+        const checkin = form.elements.checkin?.value || '';
+        const checkout = form.elements.checkout?.value || '';
+        const params = new URLSearchParams({ destination });
+        if (checkin) params.set('startDate', checkin);
+        if (checkout) params.set('endDate', checkout);
+        location.href = `https://www.expedia.com.au/Hotel-Search?${params.toString()}`;
+      }, true);
+    });
+  };
+  bindExpediaSearch();
+  setTimeout(bindExpediaSearch, 500);
+  setTimeout(bindExpediaSearch, 1500);
+
   const featured = document.querySelector('.lux-hotel-grid');
   if (featured) {
     featured.innerHTML = hotels.slice(0,6).map(h => `<article class="lux-hotel"><a href="${expediaShop}" target="_blank" rel="noopener sponsored"><div class="lux-hotel-image"><img src="${h.image}" alt="Editorial luxury travel image for ${h.name}" loading="lazy"><span class="lux-hotel-badge">${h.location.toUpperCase()}</span></div><div class="lux-hotel-copy"><span>${h.type}</span><h3>${h.name}</h3><p>${h.location}, Bali</p><strong>View live price on Expedia →</strong></div></a></article>`).join('');
@@ -83,16 +104,20 @@
   document.querySelectorAll('.lux-concierge a').forEach(link => { if (/whatsapp/i.test(link.textContent || '')) { link.href = 'https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking.'; link.target = '_blank'; link.rel = 'noopener'; link.textContent = '◉ Travel Assistant'; } });
   document.querySelectorAll('.copyright').forEach(el => { el.textContent = el.textContent.replace(/©\s*\d{4}/, `© ${new Date().getFullYear()}`); });
 
-  document.querySelectorAll('.footer').forEach(footer => {
-    const support = Array.from(footer.querySelectorAll('div')).find(group => /Support/i.test(group.querySelector('strong')?.textContent || ''));
-    if (support && !support.querySelector('a[href="terms-and-conditions.html"]')) {
-      const terms = document.createElement('a');
-      terms.href = 'terms-and-conditions.html';
-      terms.textContent = 'Terms & Conditions';
-      const privacy = support.querySelector('a[href="privacy-policy.html"]');
-      if (privacy) support.insertBefore(terms, privacy); else support.appendChild(terms);
-    }
-  });
+  const ensureTermsLink = () => {
+    document.querySelectorAll('.footer').forEach(footer => {
+      if (footer.querySelector('a[href="terms-and-conditions.html"]')) return;
+      const link = document.createElement('a');
+      link.href = 'terms-and-conditions.html';
+      link.textContent = 'Terms & Conditions';
+      link.style.cssText = 'display:inline-block!important;color:#8d5f1b!important;text-decoration:none!important;margin:8px 18px 8px 0!important;font-weight:600!important;visibility:visible!important;opacity:1!important;';
+      const copyright = footer.querySelector('.copyright');
+      if (copyright) footer.insertBefore(link, copyright); else footer.appendChild(link);
+    });
+  };
+  ensureTermsLink();
+  setTimeout(ensureTermsLink, 500);
+  setTimeout(ensureTermsLink, 1500);
 
   const menu = document.querySelector('.menu-btn'); const desktopNav = document.querySelector('.header .nav');
   if (menu && desktopNav && !menu.dataset.premiumBound) { menu.dataset.premiumBound = 'true'; menu.addEventListener('click', () => { const expanded = desktopNav.classList.contains('open'); menu.setAttribute('aria-expanded', String(expanded)); }); }
