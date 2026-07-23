@@ -34,7 +34,7 @@ function initialiseBenarianRuntime() {
     if (!document.querySelector('.benarian-expedia-widget-section')) {
       const section = document.createElement('section');
       section.className = 'benarian-expedia-widget-section';
-      section.innerHTML = `<div class="benarian-expedia-widget-inner"><p class="benarian-expedia-eyebrow">LIVE HOTEL SEARCH</p><h2>Find your perfect stay</h2><p class="benarian-expedia-intro">Search live Expedia hotel availability from BENARIAN.</p><div class="benarian-expedia-widget-shell"><div class="eg-widget" data-widget="search" data-program="au-expedia" data-lobs="stays" data-network="pz" data-camref="1101l5PIxe" data-pubref="benarian-home"></div></div><p class="benarian-expedia-disclosure">Search and booking are powered by Expedia. BENARIAN may earn a commission from eligible bookings.</p></div>`;
+      section.innerHTML = `<div class="benarian-expedia-widget-inner"><p class="benarian-expedia-eyebrow">LIVE TRAVEL SEARCH</p><h2>Find your stay or flight</h2><p class="benarian-expedia-intro">Search live Expedia hotel availability and flights from BENARIAN.</p><div class="benarian-expedia-widget-shell"><div class="eg-widget" data-widget="search" data-program="au-expedia" data-lobs="stays,flights" data-network="pz" data-camref="1101l5PIxe" data-pubref="benarian-home"></div></div><p class="benarian-expedia-disclosure">Search and booking are powered by Expedia. BENARIAN may earn a commission from eligible bookings.</p></div>`;
       hero.insertAdjacentElement('afterend', section);
     }
 
