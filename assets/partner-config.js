@@ -10,7 +10,6 @@ window.BENARIAN_PARTNERS = {
 };
 
 function initialiseBenarianRuntime() {
-  const expediaShop = window.BENARIAN_PARTNERS.expedia.travelShopUrl;
   const hero = document.querySelector('.home-lux .lux-hero');
 
   if (hero) {
@@ -21,24 +20,13 @@ function initialiseBenarianRuntime() {
     hero.style.backgroundRepeat = 'no-repeat';
 
     const heroCopy = hero.querySelector('.lux-hero-copy');
-    if (heroCopy) {
-      heroCopy.querySelectorAll('.benarian-expedia-cta').forEach(link => link.remove());
-      const cta = document.createElement('a');
-      cta.className = 'benarian-expedia-cta';
-      cta.href = expediaShop;
-      cta.target = '_blank';
-      cta.rel = 'noopener sponsored';
-      cta.textContent = 'SEARCH HOTELS & FLIGHTS';
-      cta.setAttribute('aria-label', 'Search hotels and flights with Expedia');
-      heroCopy.appendChild(cta);
-    }
+    if (heroCopy) heroCopy.querySelectorAll('.benarian-expedia-cta').forEach(link => link.remove());
 
-    if (!document.querySelector('.benarian-expedia-widget-section')) {
-      const section = document.createElement('section');
-      section.className = 'benarian-expedia-widget-section';
-      section.innerHTML = `<div class="benarian-expedia-widget-inner"><p class="benarian-expedia-eyebrow">LIVE TRAVEL SEARCH</p><h2>Plan your next journey</h2><p class="benarian-expedia-intro">Search live hotel availability and flights securely through Expedia.</p><div class="benarian-expedia-widget-shell"><div class="eg-widget" data-widget="search" data-program="au-expedia" data-lobs="stays,flights" data-network="pz" data-camref="1101l5PIxe" data-pubref="benarian-home"></div></div><p class="benarian-expedia-disclosure">Search and booking are powered by Expedia. BENARIAN may earn a commission from eligible bookings.</p></div>`;
-      hero.insertAdjacentElement('afterend', section);
-    }
+    document.querySelectorAll('.benarian-expedia-widget-section').forEach(section => section.remove());
+    const section = document.createElement('section');
+    section.className = 'benarian-expedia-widget-section';
+    section.innerHTML = `<div class="benarian-expedia-widget-inner"><p class="benarian-expedia-eyebrow">HOTEL RESERVATIONS</p><h2>Book your hotel</h2><p class="benarian-expedia-intro">Choose your destination and travel dates below. Live hotel availability and final booking are provided securely through Expedia.</p><div class="benarian-expedia-widget-shell"><div class="eg-widget" data-widget="search" data-program="au-expedia" data-lobs="stays" data-network="pz" data-camref="1101l5PIxe" data-pubref="benarian-home-hotels"></div></div><p class="benarian-expedia-disclosure">You will continue to Expedia to view live prices, choose your room and complete your reservation. BENARIAN may earn a commission from eligible bookings.</p></div>`;
+    hero.insertAdjacentElement('afterend', section);
 
     if (!document.querySelector('script[data-benarian-expedia-widget]')) {
       const script = document.createElement('script');
@@ -50,8 +38,6 @@ function initialiseBenarianRuntime() {
     }
   }
 
-  // Hide incomplete or potentially misleading booking sections until official
-  // hotel images and tracked direct links are ready.
   const hiddenSelectors = [
     '.booking-search',
     '.home-lux .hotels-section',
@@ -69,14 +55,10 @@ function initialiseBenarianRuntime() {
     });
   });
 
-  // Temporarily remove Hotels and Expedia Shop from navigation while the
-  // hotel collection is being rebuilt with official images and direct links.
   document.querySelectorAll('.header .nav a, .benarian-mobile-nav a').forEach(link => {
     const text = (link.textContent || '').trim().toUpperCase();
     const href = (link.getAttribute('href') || '').toLowerCase();
-    if (text === 'EXPEDIA SHOP' || text === 'HOTELS' || href.endsWith('hotels.html')) {
-      link.remove();
-    }
+    if (text === 'EXPEDIA SHOP' || text === 'HOTELS' || href.endsWith('hotels.html')) link.remove();
   });
 
   const logoMarkup = `<svg class="benarian-global-logo" viewBox="0 0 760 120" role="img" aria-label="BENARIAN Luxury Travel and Hospitality" xmlns="http://www.w3.org/2000/svg"><g fill="#b9872c"><text x="0" y="88" font-family="Georgia, 'Times New Roman', serif" font-size="90">B</text><text x="38" y="88" font-family="Georgia, 'Times New Roman', serif" font-size="90">B</text></g><text x="130" y="69" font-family="Georgia, 'Times New Roman', serif" font-size="51" letter-spacing="6" fill="#17140f">BENARIAN</text><text x="132" y="99" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="2.1" fill="#b9872c">LUXURY TRAVEL &amp; HOSPITALITY</text></svg>`;
@@ -93,11 +75,9 @@ function initialiseBenarianRuntime() {
       .header .brand,.header .brand:not(.brand-lockup){display:flex!important;align-items:center!important;width:330px!important;height:70px!important;max-width:100%!important;background:none!important}
       .header .brand:before,.header .brand:after{content:none!important;display:none!important}.header .brand img{display:none!important}.benarian-global-logo{display:block!important;width:100%!important;height:100%!important}
       .lux-hero{position:relative!important;overflow:hidden!important;background-color:#182015!important}.benarian-hero-video,.benarian-hero-overlay{display:none!important}.lux-hero-copy{position:relative!important;z-index:2!important}
-      .benarian-expedia-cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;margin-top:22px!important;padding:14px 24px!important;border:1px solid #c79a43!important;background:#b9872c!important;color:#fff!important;font:700 13px Arial,Helvetica,sans-serif!important;letter-spacing:1.5px!important;text-decoration:none!important;box-shadow:0 10px 26px rgba(0,0,0,.24)!important}
-      .benarian-expedia-cta:hover{background:#9e7224!important;transform:translateY(-2px)!important}
-      .benarian-expedia-widget-section{background:#fff!important;padding:54px 20px 62px!important;border-bottom:1px solid #eee7dc!important}.benarian-expedia-widget-inner{max-width:1180px!important;margin:0 auto!important;text-align:center!important}.benarian-expedia-eyebrow{margin:0 0 10px!important;color:#b9872c!important;font:700 12px Arial,Helvetica,sans-serif!important;letter-spacing:2px!important}.benarian-expedia-widget-inner h2{margin:0!important;color:#17140f!important;font:400 clamp(34px,5vw,58px)/1.05 Georgia,'Times New Roman',serif!important}.benarian-expedia-intro{margin:14px auto 26px!important;max-width:620px!important;color:#5f5a52!important;font:400 16px/1.7 Arial,Helvetica,sans-serif!important}.benarian-expedia-widget-shell{max-width:1080px!important;margin:0 auto!important;padding:22px!important;background:#faf8f4!important;border:1px solid #e8dfd0!important;box-shadow:0 18px 50px rgba(32,25,14,.08)!important}.benarian-expedia-widget-shell .eg-widget{min-height:90px!important}.benarian-expedia-disclosure{margin:15px auto 0!important;color:#7b746a!important;font:400 12px/1.6 Arial,Helvetica,sans-serif!important}
+      .benarian-expedia-widget-section{background:#fff!important;padding:72px 20px 78px!important;border-bottom:1px solid #eee7dc!important}.benarian-expedia-widget-inner{max-width:1180px!important;margin:0 auto!important;text-align:center!important}.benarian-expedia-eyebrow{margin:0 0 12px!important;color:#b9872c!important;font:700 12px Arial,Helvetica,sans-serif!important;letter-spacing:2.4px!important}.benarian-expedia-widget-inner h2{margin:0!important;color:#17140f!important;font:400 clamp(40px,6vw,66px)/1.04 Georgia,'Times New Roman',serif!important}.benarian-expedia-intro{margin:16px auto 30px!important;max-width:690px!important;color:#5f5a52!important;font:400 16px/1.75 Arial,Helvetica,sans-serif!important}.benarian-expedia-widget-shell{max-width:1080px!important;margin:0 auto!important;padding:24px!important;background:#faf8f4!important;border:1px solid #dfcba6!important;box-shadow:0 20px 55px rgba(32,25,14,.09)!important}.benarian-expedia-widget-shell .eg-widget{min-height:90px!important}.benarian-expedia-disclosure{margin:17px auto 0!important;max-width:760px!important;color:#7b746a!important;font:400 12px/1.65 Arial,Helvetica,sans-serif!important}
       .about-page .about-signature,.about-page .founder-signature{font-family:'Allura','Snell Roundhand','Apple Chancery',cursive!important;color:#b9872c!important}.about-page .founder-photo img{width:100%!important;height:100%!important;object-fit:contain!important}
-      @media(max-width:760px){.header .brand,.header .brand:not(.brand-lockup){width:250px!important;height:62px!important;max-width:calc(100vw - 132px)!important}.lux-hero{background-position:58% center!important}.benarian-expedia-cta{width:100%!important;max-width:320px!important}.benarian-expedia-widget-section{padding:38px 14px 46px!important}.benarian-expedia-widget-shell{padding:12px!important}}
+      @media(max-width:760px){.header .brand,.header .brand:not(.brand-lockup){width:250px!important;height:62px!important;max-width:calc(100vw - 132px)!important}.lux-hero{background-position:58% center!important}.benarian-expedia-widget-section{padding:48px 14px 56px!important}.benarian-expedia-widget-shell{padding:12px!important}}
     `;
     document.head.appendChild(style);
   }
