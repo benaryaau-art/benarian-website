@@ -3,7 +3,7 @@
   document.documentElement.dataset.benarianPremiumV2 = 'true';
 
   const current = location.pathname.split('/').pop() || 'index.html';
-  const expediaShop = 'https://www.expedia.com.au/shop/benariantravel';
+  const expediaShop = 'https://www.expedia.com.au/Hotels';
   const hotels = [
     {name:'Adiwana Resort Jembawan',location:'Ubud',image:'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&q=92&w=1800',type:'Wellness Retreat',description:'A peaceful luxury retreat in the heart of Ubud, surrounded by tropical greenery and a calm wellness atmosphere.'},
     {name:'Mandapa, a Ritz-Carlton Reserve',location:'Ubud',image:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=92&w=1800',type:'Riverfront Reserve',description:'A serene luxury retreat beside the Ayung River, surrounded by rice terraces and tropical forest.'},
@@ -33,24 +33,33 @@
 
   const bindExpediaSearch = () => {
     document.querySelectorAll('.benarian-expedia-direct-form').forEach(form => {
+      form.action = 'https://www.expedia.com.au/Hotel-Search';
+      form.method = 'get';
+      form.target = '_self';
+      form.noValidate = false;
+      const destination = form.elements.destination;
+      const checkin = form.elements.checkin;
+      const checkout = form.elements.checkout;
+      if (destination) destination.name = 'destination';
+      if (checkin) checkin.name = 'startDate';
+      if (checkout) checkout.name = 'endDate';
       if (form.dataset.expediaBound === 'true') return;
       form.dataset.expediaBound = 'true';
       form.addEventListener('submit', event => {
-        event.preventDefault();
+        const destinationValue = (destination?.value || '').trim();
+        if (!destinationValue) {
+          event.preventDefault();
+          destination?.focus();
+          return;
+        }
         event.stopImmediatePropagation();
-        const destination = (form.elements.destination?.value || 'Bali').trim();
-        const checkin = form.elements.checkin?.value || '';
-        const checkout = form.elements.checkout?.value || '';
-        const params = new URLSearchParams({ destination });
-        if (checkin) params.set('startDate', checkin);
-        if (checkout) params.set('endDate', checkout);
-        location.href = `https://www.expedia.com.au/Hotel-Search?${params.toString()}`;
       }, true);
     });
   };
   bindExpediaSearch();
-  setTimeout(bindExpediaSearch, 500);
-  setTimeout(bindExpediaSearch, 1500);
+  setTimeout(bindExpediaSearch, 300);
+  setTimeout(bindExpediaSearch, 1000);
+  setTimeout(bindExpediaSearch, 2500);
 
   const featured = document.querySelector('.lux-hotel-grid');
   if (featured) {
@@ -62,7 +71,7 @@
   const weekendSection = document.querySelector('.benarian-market-section[aria-labelledby="weekend-deals-title"]');
   if (weekendSection) {
     const heading = weekendSection.querySelector('.market-heading p'); if (heading) heading.textContent = 'Real Bali hotels from the BENARIAN Expedia collection. Live prices, availability, verified ratings and cancellation terms are shown securely on Expedia.';
-    const headingLink = weekendSection.querySelector('.market-view-all'); if (headingLink) { headingLink.href = expediaShop; headingLink.target = '_blank'; headingLink.rel = 'noopener sponsored'; headingLink.textContent = 'Explore BENARIAN on Expedia →'; }
+    const headingLink = weekendSection.querySelector('.market-view-all'); if (headingLink) { headingLink.href = expediaShop; headingLink.target = '_blank'; headingLink.rel = 'noopener sponsored'; headingLink.textContent = 'Explore hotels on Expedia →'; }
     weekendSection.querySelectorAll('.market-card').forEach((card,index) => {
       const h = hotels[index + 2] || hotels[index];
       const img = card.querySelector('img'); if (img) { img.src = h.image; img.alt = `Editorial luxury travel image for ${h.name}`; }
@@ -80,7 +89,7 @@
   if (hotelGrid) {
     hotelGrid.innerHTML = hotels.map(h => `<article class="hotel-pro-card"><div class="hotel-pro-image"><img src="${h.image}" alt="Editorial luxury travel image for ${h.name}" loading="lazy"><span class="hotel-badge">${h.location.toUpperCase()}</span><span class="hotel-score">LIVE</span></div><div class="hotel-pro-body"><h3>${h.name}</h3><div class="hotel-location">${h.location}, Bali</div><p class="hotel-description">${h.description}</p><div class="hotel-book"><small>Live price, rooms, availability, verified guest ratings and cancellation terms are shown on Expedia.</small><a class="btn" href="${expediaShop}" target="_blank" rel="noopener sponsored">VIEW LIVE PRICE</a></div></div></article>`).join('');
     const searchAll = document.querySelector('.hotel-intro .btn'); if (searchAll) { searchAll.href = expediaShop; searchAll.target = '_blank'; searchAll.rel = 'noopener sponsored'; searchAll.textContent = 'SEARCH ALL HOTELS ON EXPEDIA'; }
-    const intro = document.querySelector('.hotel-intro p'); if (intro) intro.textContent = 'Explore the real hotels currently curated in the BENARIAN Expedia Travel Shop. Live prices and availability are confirmed securely on Expedia.';
+    const intro = document.querySelector('.hotel-intro p'); if (intro) intro.textContent = 'Explore selected hotels and continue to Expedia for live prices and availability.';
     const disclosure = document.querySelector('.booking-disclosure'); if (disclosure) disclosure.textContent = 'Live prices, room availability, verified guest ratings, taxes and cancellation terms are provided by Expedia. Display photography is editorial and may not be an official property image. BENARIAN may earn a commission from eligible bookings.';
   }
 
