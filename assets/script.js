@@ -38,4 +38,29 @@ const loginForm=document.querySelector('#member-login-form');if(loginForm)loginF
 const joinForm=document.querySelector('#member-join-form');if(joinForm)joinForm.addEventListener('submit',e=>{e.preventDefault();const name=document.querySelector('#member-name').value.trim(),email=document.querySelector('#member-email').value.trim(),password=document.querySelector('#member-password').value,consent=document.querySelector('#member-consent').checked,msg=document.querySelector('#member-form-message');if(!name||password.length<6||!consent){msg.textContent='Please complete all fields and accept the privacy terms.';return}saveMember({name,email});msg.textContent='Welcome to BENARIAN. Opening your private member area…';setTimeout(()=>location.href='member-dashboard.html',500)});
 const logout=document.querySelector('#member-logout');if(logout)logout.addEventListener('click',()=>{localStorage.removeItem(MEMBER_KEY);location.href='member-login.html'});
 function ensureMainLegalLinks(){document.querySelectorAll('.footer').forEach(footer=>{let support=Array.from(footer.querySelectorAll('div')).find(g=>/Support/i.test(g.querySelector('strong')?.textContent||''));if(!support){support=document.createElement('div');support.innerHTML='<strong>Support</strong>';footer.appendChild(support)}if(!support.querySelector('a[href="terms-and-conditions.html"]')){const terms=document.createElement('a');terms.href='terms-and-conditions.html';terms.textContent='Terms & Conditions';const privacy=support.querySelector('a[href="privacy-policy.html"]');privacy?support.insertBefore(terms,privacy):support.appendChild(terms)}})}
-loadFeaturedHotels();displayMemberState();ensureMainLegalLinks();setTimeout(ensureMainLegalLinks,700);
+
+function fixPersianHotelCards(){
+  document.querySelectorAll('.iran-hotel').forEach(card=>{
+    const title=card.querySelector('h3')?.textContent.trim();
+    const img=card.querySelector('.hotel-media img');
+    if(title==='Shiraz Grand Hotel'&&img){
+      img.src='https://commons.wikimedia.org/wiki/Special:Redirect/file/%D9%88%D8%B1%D9%88%D8%AF%D9%8A_%D8%B4%D9%85%D8%A7%D9%84%D9%8A_%D8%B4%D9%87%D8%B1_%D8%B4%D9%8A%D8%B1%D8%A7%D8%B2.jpg?width=1800';
+      img.alt='Shiraz Grand Hotel near Quran Gate';
+      img.onerror=null;
+    }
+    if(title==='Darvishi Royal Hotel'){
+      if(img){
+        img.src='https://commons.wikimedia.org/wiki/Special:Redirect/file/%D9%87%D9%85%D8%A7%D9%87%D8%AA%D9%84_%D9%87%D9%85%D8%A7_1_(%D8%A7%D8%AD%D9%85%D8%AF%D8%A2%D8%A8%D8%A7%D8%AF)-%D9%87%D8%AA%D9%84_%D9%87%D8%A7%DB%8C%D8%AA.jpg?width=1800';
+        img.alt='Homa Hotel 1 Mashhad';
+        img.onerror=null;
+      }
+      const badge=card.querySelector('.hotel-badge');if(badge)badge.textContent='MASHHAD LANDMARK';
+      const location=card.querySelector('.hotel-location');if(location)location.textContent='MASHHAD · AHMADABAD';
+      const heading=card.querySelector('h3');if(heading)heading.textContent='Homa Hotel 1 Mashhad';
+      const desc=card.querySelector('.hotel-body p');if(desc)desc.textContent='A recognised five-star hotel in central Mashhad, offering established hospitality, landscaped grounds and convenient access to the city’s main attractions.';
+      const foot=card.querySelector('.hotel-foot strong');if(foot)foot.textContent='Classic city stay';
+    }
+  });
+}
+
+loadFeaturedHotels();displayMemberState();ensureMainLegalLinks();fixPersianHotelCards();setTimeout(ensureMainLegalLinks,700);setTimeout(fixPersianHotelCards,700);
