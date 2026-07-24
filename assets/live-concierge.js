@@ -133,23 +133,21 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    .benarian-footer-live{display:inline-flex;align-items:center;gap:9px;margin-top:14px;padding:10px 14px;border:1px solid rgba(185,135,44,.65);border-radius:999px;background:rgba(23,20,15,.04);color:#9b681b;text-decoration:none!important;font:700 10px Inter,Arial,sans-serif;letter-spacing:1px;white-space:nowrap;transition:.2s ease}
+    .benarian-footer-concierge{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin-top:18px;max-width:290px}
+    .benarian-footer-live{display:inline-flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid rgba(185,135,44,.72);border-radius:999px;background:rgba(23,20,15,.04);color:#9b681b;text-decoration:none!important;font:700 10px Inter,Arial,sans-serif;letter-spacing:1px;white-space:nowrap;transition:.2s ease}
     .benarian-footer-live:hover{background:#17140f;color:#f3d18a;border-color:#b9872c}
     .benarian-footer-live .live-dot{width:8px;height:8px;border-radius:50%;background:#25d366;box-shadow:0 0 0 4px rgba(37,211,102,.14)}
-    @media(max-width:650px){.benarian-footer-live{margin:14px auto 0;justify-content:center}}
+    .benarian-footer-concierge p{margin:0!important;color:#746a5d!important;font:500 11px/1.55 Inter,Arial,sans-serif!important;letter-spacing:.1px}
+    @media(max-width:650px){.benarian-footer-concierge{align-items:flex-start;margin-top:16px}.benarian-footer-live{justify-content:center}}
   `;
   document.head.appendChild(style);
 
-  const link = document.createElement('a');
-  link.id = 'benarian-footer-live';
-  link.className = 'benarian-footer-live';
-  link.href = whatsappUrl;
-  link.target = '_blank';
-  link.rel = 'noopener';
-  link.setAttribute('aria-label', 'Open BENARIAN Live Concierge on WhatsApp');
-  link.innerHTML = '<span class="live-dot" aria-hidden="true"></span>LIVE CONCIERGE · WHATSAPP';
+  const block = document.createElement('div');
+  block.id = 'benarian-footer-live';
+  block.className = 'benarian-footer-concierge';
+  block.innerHTML = `<a class="benarian-footer-live" href="${whatsappUrl}" target="_blank" rel="noopener" aria-label="Open BENARIAN Live Concierge on WhatsApp"><span class="live-dot" aria-hidden="true"></span>LIVE CONCIERGE · WHATSAPP</a><p>Talk to our team or Ben Tafreshi</p>`;
 
-  const follow = [...footer.querySelectorAll('div')].find(div => /Follow Us/i.test(div.querySelector('strong')?.textContent || ''));
-  if (follow) follow.appendChild(link);
-  else footer.appendChild(link);
+  const brand = footer.querySelector('a[aria-label="BENARIAN home"], a[href="index.html"], .brand');
+  if (brand) brand.insertAdjacentElement('afterend', block);
+  else footer.insertAdjacentElement('afterbegin', block);
 })();
