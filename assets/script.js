@@ -1,27 +1,20 @@
-// BENARIAN global runtime — site-wide polish and homepage offers
+// BENARIAN global runtime — official Booking.com widget and site polish
 function loadCssOnce(href,key){
   if(document.querySelector(`link[data-${key}]`))return;
   const link=document.createElement('link');
   link.rel='stylesheet';link.href=href;link.setAttribute(`data-${key}`,'true');
   document.head.appendChild(link);
 }
-loadCssOnce('assets/white-theme.css?v=20260724h','benarian-white-theme');
+loadCssOnce('assets/white-theme.css?v=20260724i','benarian-white-theme');
 if(document.querySelector('.hotels-hero'))loadCssOnce('assets/hotels-mobile-fix.css?v=20260724c','benarian-hotels-mobile');
 
 const menu=document.querySelector('.menu-btn');
 const nav=document.querySelector('.nav');
-if(menu&&nav){
-  menu.addEventListener('click',()=>{
-    const open=nav.classList.toggle('open');
-    menu.setAttribute('aria-expanded',String(open));
-  });
-}
+if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))})}
 
 function normalPage(value){return (value||'index').replace(/^.*\//,'').replace(/\.html$/,'')||'index'}
 const currentPage=normalPage(location.pathname);
-document.querySelectorAll('.nav a').forEach(link=>{
-  if(normalPage(link.getAttribute('href'))===currentPage)link.classList.add('current');
-});
+document.querySelectorAll('.nav a').forEach(link=>{if(normalPage(link.getAttribute('href'))===currentPage)link.classList.add('current')});
 
 function ensureNavigation(){
   document.querySelectorAll('.nav').forEach(menuNav=>{
@@ -32,41 +25,40 @@ function ensureNavigation(){
     }
   });
 }
+function normaliseBrand(){document.querySelectorAll('.brand-lockup .brand-mark').forEach(mark=>{mark.textContent='BB'})}
 
-function normaliseBrand(){
-  document.querySelectorAll('.brand-lockup .brand-mark').forEach(mark=>{mark.textContent='BB'});
-}
-
-const checkin=document.querySelector('#checkin');
-const checkout=document.querySelector('#checkout');
-if(checkin&&checkout){
-  const iso=date=>date.toISOString().slice(0,10);
-  const today=new Date();
-  const first=new Date(today);first.setDate(first.getDate()+7);
-  const last=new Date(today);last.setDate(last.getDate()+11);
-  checkin.min=iso(today);
-  if(!checkin.value||checkin.value<iso(today))checkin.value=iso(first);
-  checkout.min=iso(first);
-  if(!checkout.value||checkout.value<=checkin.value)checkout.value=iso(last);
-  checkin.addEventListener('change',()=>{
-    const next=new Date(`${checkin.value}T12:00:00`);next.setDate(next.getDate()+1);
-    checkout.min=iso(next);
-    if(!checkout.value||checkout.value<=checkin.value)checkout.value=iso(next);
-  });
-}
-
-const bookingForm=document.querySelector('.booking-form');
-if(bookingForm){
-  const note=bookingForm.parentElement?.querySelector('p');
-  if(note)note.textContent='Search results open securely through our Expedia partner connection. Live rates and availability are confirmed on Expedia.';
-  bookingForm.addEventListener('submit',event=>{
-    event.preventDefault();
-    const destination=(document.querySelector('#destination')?.value||'Bali').trim();
-    const params=new URLSearchParams({destination});
-    if(checkin?.value)params.set('startDate',checkin.value);
-    if(checkout?.value)params.set('endDate',checkout.value);
-    location.href=`https://www.expedia.com.au/Hotel-Search?${params}`;
-  });
+function mountBookingWidget(){
+  const section=document.querySelector('.booking-search');
+  if(!section||section.dataset.bookingWidgetMounted)return;
+  section.dataset.bookingWidgetMounted='true';
+  section.classList.add('booking-widget-section');
+  section.innerHTML=`
+    <div class="booking-widget-heading">
+      <span>BOOKING.COM OFFICIAL SEARCH</span>
+      <h2>Search Hotels & Resorts</h2>
+      <p>Search live accommodation availability through BENARIAN’s official Booking.com affiliate connection.</p>
+    </div>
+    <div class="booking-widget-shell">
+      <div id="bookingAffiliateWidget_386d39d7-2d08-41b5-af0f-0fc2c536b862">&nbsp;</div>
+    </div>
+    <p class="booking-widget-disclosure">Prices, availability and booking confirmation are provided securely by Booking.com. BENARIAN may earn a commission from eligible reservations at no additional cost to you.</p>
+    <img src="https://www.lduhtrp.net/image-101828630-17323528" width="1" height="1" alt="" style="position:absolute;opacity:0;pointer-events:none" />`;
+  if(!document.querySelector('#booking-widget-styles')){
+    const style=document.createElement('style');style.id='booking-widget-styles';style.textContent=`
+      .booking-widget-section{position:relative;padding:48px 7%!important;background:linear-gradient(180deg,#fff,#fbf7ef)!important;border-top:1px solid #eadabf;border-bottom:1px solid #eadabf}
+      .booking-widget-heading{text-align:center;max-width:850px;margin:0 auto 24px}.booking-widget-heading span{display:block;color:#a46c18;font-size:10px;font-weight:800;letter-spacing:2.4px;margin-bottom:9px}.booking-widget-heading h2{font:600 clamp(32px,4vw,48px)/1 'Cormorant Garamond',Georgia,serif;color:#211b14;margin:0 0 10px}.booking-widget-heading p{color:#655d52;line-height:1.65;margin:0}
+      .booking-widget-shell{max-width:1180px;margin:0 auto;background:#fff;border:1px solid #dfc89f;border-radius:16px;padding:20px;box-shadow:0 15px 38px rgba(73,48,10,.1);overflow:hidden;min-height:110px}
+      .booking-widget-shell iframe{width:100%!important;max-width:100%!important;border:0!important}.booking-widget-disclosure{max-width:980px;margin:16px auto 0!important;text-align:center;color:#786e61!important;font-size:11px!important;line-height:1.55!important}
+      @media(max-width:760px){.booking-widget-section{padding:34px 16px!important}.booking-widget-shell{padding:12px;border-radius:12px}.booking-widget-heading h2{font-size:36px}}
+    `;document.head.appendChild(style);
+  }
+  const initialise=()=>{
+    if(!window.Booking?.AffiliateWidget)return;
+    try{new Booking.AffiliateWidget({iframeSettings:{selector:'bookingAffiliateWidget_386d39d7-2d08-41b5-af0f-0fc2c536b862',responsive:true},widgetSettings:{destinationurloverride:'https://www.jdoqocy.com/click-101828630-17323528?sid='}})}catch(error){console.error('Booking.com widget failed to initialise',error)}
+  };
+  if(window.Booking?.AffiliateWidget){initialise()}else{
+    const script=document.createElement('script');script.src='https://www.booking.com/affiliate/prelanding_sdk';script.async=true;script.onload=initialise;document.head.appendChild(script);
+  }
 }
 
 function addFeaturedStyles(){
@@ -77,17 +69,10 @@ html{scroll-behavior:smooth}.home-lux .hotels-section{padding-top:78px;padding-b
 @media(max-width:760px){.weekly-offers-heading{margin-bottom:24px}.weekly-offers-heading h2{font-size:clamp(23px,7vw,34px);letter-spacing:-.4px}.weekly-offers-heading .places{font-size:12px}.featured-hotel-media{min-height:300px}.featured-hotel-actions{grid-template-columns:1fr}.featured-direct-contact{align-items:flex-start;flex-direction:column;padding:24px 20px}.featured-direct-contact>a{width:100%;text-align:center}.hero-offer-btn{margin-top:10px!important}}
 `;document.head.appendChild(style);
 }
-
 function hotelCard(hotel){return `<article class="featured-hotel-card"><div class="featured-hotel-media"><img src="${hotel.image}" alt="${hotel.name}" loading="lazy"><span class="featured-hotel-badge">${hotel.badge}</span></div><div class="featured-hotel-body"><p class="featured-hotel-location">${hotel.location}</p><h3>${hotel.name}</h3><p class="featured-hotel-tagline">${hotel.tagline}</p><p class="featured-hotel-description">${hotel.description}</p><ul class="featured-hotel-highlights">${hotel.highlights.map(item=>`<li>${item}</li>`).join('')}</ul><p class="featured-hotel-price">Contact BENARIAN directly for our best available price</p><div class="featured-hotel-actions"><a class="view-hotel" href="${hotel.url}" target="_blank" rel="noopener sponsored">VIEW HOTEL →</a><a class="contact-hotel" href="contact.html">GET BEST PRICE →</a></div></div></article>`}
-
 function renderFeaturedHotels(){
-  const grid=document.querySelector('.lux-hotel-grid');if(!grid)return;
-  addFeaturedStyles();
-  const section=grid.closest('.hotels-section');
-  if(section){
-    section.id='weekly-offers';
-    if(!section.querySelector('.weekly-offers-heading'))section.insertAdjacentHTML('afterbegin','<div class="weekly-offers-heading"><span class="weekly-offers-kicker">THIS WEEK’S BEST OFFERS</span><h2>Best Offers of This Week</h2><p class="fa-title" lang="fa" dir="rtl">بهترین آفرهای این هفته</p><p class="places">BALI &nbsp;|&nbsp; UBUD &amp; JIMBARAN</p><p class="contact-copy">For the best price at these two hotels, please contact me directly.</p><p class="contact-copy" lang="fa" dir="rtl">لطفاً برای دریافت بهترین قیمت در این دو هتل، مستقیماً با من تماس بگیرید.</p></div>');
-  }
+  const grid=document.querySelector('.lux-hotel-grid');if(!grid)return;addFeaturedStyles();
+  const section=grid.closest('.hotels-section');if(section){section.id='weekly-offers';if(!section.querySelector('.weekly-offers-heading'))section.insertAdjacentHTML('afterbegin','<div class="weekly-offers-heading"><span class="weekly-offers-kicker">THIS WEEK’S BEST OFFERS</span><h2>Best Offers of This Week</h2><p class="fa-title" lang="fa" dir="rtl">بهترین آفرهای این هفته</p><p class="places">BALI &nbsp;|&nbsp; UBUD &amp; JIMBARAN</p><p class="contact-copy">For the best price at these two hotels, please contact me directly.</p><p class="contact-copy" lang="fa" dir="rtl">لطفاً برای دریافت بهترین قیمت در این دو هتل، مستقیماً با من تماس بگیرید.</p></div>')}
   const hotels=[
     {name:'Inara Alas Harum',location:'UBUD, BALI',badge:'BENARIAN UBUD SELECTION',tagline:'A serene boutique retreat surrounded by the natural beauty of Ubud',description:'Set among tropical greenery and peaceful rice-field scenery, Inara Alas Harum offers elegant accommodation, a beautiful swimming pool and easy access to Ubud’s cultural attractions.',highlights:['Peaceful Ubud setting','Tropical swimming pool','Boutique luxury atmosphere'],image:'https://inarahotels.com/alas-harum-resort-bali/wp-content/uploads/2023/11/Pool-View-Inara-Alas-Harum.webp',url:'https://www.booking.com/Share-K1krxrH'},
     {name:'Royal Tulip Springhill Resort Jimbaran',location:'JIMBARAN, BALI',badge:'BENARIAN JIMBARAN SELECTION',tagline:'A spacious tropical resort close to the beaches of southern Bali',description:'Royal Tulip Springhill Resort Jimbaran combines spacious rooms and suites, landscaped gardens and excellent resort facilities—ideal for couples, families and relaxed Bali holidays.',highlights:['Spacious rooms and suites','Large tropical resort pool','Excellent Jimbaran location'],image:'https://media.iceportal.com/95130/photos/83138249_XXL.jpg',url:'https://www.booking.com/Share-dOZxu7I'}
@@ -96,41 +81,10 @@ function renderFeaturedHotels(){
   if(!document.querySelector('.featured-direct-contact'))grid.insertAdjacentHTML('afterend','<div class="featured-direct-contact"><div><span>BENARIAN PRIVATE RATES</span><h3>Looking for the best available price in Ubud or Jimbaran?</h3><p>Contact BENARIAN directly for personalised assistance and preferred-rate enquiries.</p><p lang="fa" dir="rtl">برای دریافت بهترین قیمت در مناطق اوبود و جیمباران، مستقیماً با من تماس بگیرید.</p></div><a href="contact.html">Contact Ben Directly →</a></div>');
   document.querySelector('[aria-labelledby="weekend-deals-title"]')?.remove();
 }
+function addHeroOfferButton(){const heroCopy=document.querySelector('.lux-hero-copy');if(!heroCopy||heroCopy.querySelector('.hero-offer-btn'))return;const primary=heroCopy.querySelector('.lux-btn');if(primary)primary.insertAdjacentHTML('afterend','<a class="lux-btn hero-offer-btn" href="#weekly-offers">Best Offers of the Week <span>↓</span></a>')}
+function ensureLegalLinks(){document.querySelectorAll('.footer').forEach(footer=>{const support=[...footer.querySelectorAll('div')].find(group=>/Support/i.test(group.querySelector('strong')?.textContent||''));if(support&&!support.querySelector('a[href="terms-and-conditions.html"]')){const terms=document.createElement('a');terms.href='terms-and-conditions.html';terms.textContent='Terms & Conditions';support.appendChild(terms)}})}
+function improveExternalLinks(){document.querySelectorAll('a[href^="http"]').forEach(link=>{if(link.hostname&&link.hostname!==location.hostname){link.target='_blank';link.rel='noopener sponsored'}})}
+const MEMBER_KEY='benarianMember';function member(){try{return JSON.parse(localStorage.getItem(MEMBER_KEY)||'null')}catch{return null}}function memberState(){const saved=member();document.querySelectorAll('[data-member-name]').forEach(element=>element.textContent=saved?.name||saved?.email?.split('@')[0]||'BENARIAN Member');document.querySelectorAll('.member-top-link').forEach(link=>{if(saved){link.textContent='My Account';link.href='member-dashboard.html'}})}
 
-function addHeroOfferButton(){
-  const heroCopy=document.querySelector('.lux-hero-copy');
-  if(!heroCopy||heroCopy.querySelector('.hero-offer-btn'))return;
-  const primary=heroCopy.querySelector('.lux-btn');if(!primary)return;
-  primary.insertAdjacentHTML('afterend','<a class="lux-btn hero-offer-btn" href="#weekly-offers">Best Offers of the Week <span>↓</span></a>');
-}
-
-function ensureLegalLinks(){
-  document.querySelectorAll('.footer').forEach(footer=>{
-    const support=[...footer.querySelectorAll('div')].find(group=>/Support/i.test(group.querySelector('strong')?.textContent||''));
-    if(support&&!support.querySelector('a[href="terms-and-conditions.html"]')){
-      const terms=document.createElement('a');terms.href='terms-and-conditions.html';terms.textContent='Terms & Conditions';support.appendChild(terms);
-    }
-    if(!support&&!footer.querySelector('a[href="terms-and-conditions.html"]')){
-      const terms=document.createElement('a');terms.href='terms-and-conditions.html';terms.textContent='Terms & Conditions';
-      const copyright=footer.querySelector('.copyright')||footer.lastElementChild;
-      copyright?.insertAdjacentElement('beforebegin',terms);
-    }
-  });
-}
-
-function improveExternalLinks(){
-  document.querySelectorAll('a[href^="http"]').forEach(link=>{
-    if(link.hostname&&link.hostname!==location.hostname){link.target='_blank';link.rel='noopener sponsored'}
-  });
-}
-
-const MEMBER_KEY='benarianMember';
-function member(){try{return JSON.parse(localStorage.getItem(MEMBER_KEY)||'null')}catch{return null}}
-function memberState(){
-  const saved=member();
-  document.querySelectorAll('[data-member-name]').forEach(element=>element.textContent=saved?.name||saved?.email?.split('@')[0]||'BENARIAN Member');
-  document.querySelectorAll('.member-top-link').forEach(link=>{if(saved){link.textContent='My Account';link.href='member-dashboard.html'}});
-}
-
-ensureNavigation();normaliseBrand();renderFeaturedHotels();addHeroOfferButton();ensureLegalLinks();improveExternalLinks();memberState();
-setTimeout(()=>{ensureNavigation();normaliseBrand();ensureLegalLinks();},500);
+ensureNavigation();normaliseBrand();mountBookingWidget();renderFeaturedHotels();addHeroOfferButton();ensureLegalLinks();improveExternalLinks();memberState();
+setTimeout(()=>{ensureNavigation();normaliseBrand();ensureLegalLinks()},500);
