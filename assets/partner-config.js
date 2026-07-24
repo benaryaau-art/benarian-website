@@ -1,36 +1,33 @@
 // BENARIAN partner-link configuration — Booking.com is the primary booking partner.
 window.BENARIAN_PARTNERS = {
-  booking: {
-    enabled: true,
-    baseUrl: 'https://www.booking.com/searchresults.html',
-    affiliateBaseUrl: 'https://www.kqzyfj.com/click-101828630-17289006'
-  },
-  flights: {
-    enabled: true,
-    affiliateBaseUrl: 'https://www.anrdoezrs.net/click-101828630-17289007'
-  },
-  taxi: {
-    enabled: true,
-    affiliateBaseUrl: 'https://www.anrdoezrs.net/click-101828630-17322570'
-  },
-  attractions: {
-    enabled: true,
-    affiliateBaseUrl: 'https://www.kqzyfj.com/click-101828630-17289009'
-  },
-  cars: {
-    enabled: true,
-    affiliateBaseUrl: 'https://www.anrdoezrs.net/click-101828630-17289008'
-  }
+  booking: { enabled: true, baseUrl: 'https://www.booking.com/searchresults.html', affiliateBaseUrl: 'https://www.kqzyfj.com/click-101828630-17289006' },
+  flights: { enabled: true, affiliateBaseUrl: 'https://www.anrdoezrs.net/click-101828630-17289007' },
+  taxi: { enabled: true, affiliateBaseUrl: 'https://www.anrdoezrs.net/click-101828630-17322570' },
+  attractions: { enabled: true, affiliateBaseUrl: 'https://www.kqzyfj.com/click-101828630-17289009' },
+  cars: { enabled: true, affiliateBaseUrl: 'https://www.anrdoezrs.net/click-101828630-17289008' }
 };
 
 (function initialiseBenarianPartners(){
   function loadScriptOnce(src, marker) {
     if (document.querySelector(`script[${marker}]`)) return;
     const script = document.createElement('script');
-    script.src = src;
-    script.defer = true;
-    script.setAttribute(marker, 'true');
+    script.src = src; script.defer = true; script.setAttribute(marker, 'true');
     document.body.appendChild(script);
+  }
+
+  function ensureGlobalLogo() {
+    document.querySelectorAll('.header').forEach(header => {
+      let brand = header.querySelector('.brand, .brand-lockup, a[aria-label*="BENARIAN" i]');
+      if (!brand) {
+        brand = document.createElement('a');
+        brand.href = 'index.html';
+        header.prepend(brand);
+      }
+      brand.className = 'brand brand-lockup';
+      brand.href = 'index.html';
+      brand.setAttribute('aria-label', 'BENARIAN home');
+      brand.innerHTML = '<span class="brand-mark" aria-hidden="true">BB</span><span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL &amp; HOSPITALITY</small></span>';
+    });
   }
 
   function correctFlightLinks() {
@@ -52,18 +49,13 @@ window.BENARIAN_PARTNERS = {
           link.setAttribute('aria-label', 'Terms and Conditions');
         }
       });
-
-      if (!nav.querySelector('a[href="terms-and-conditions.html"]')) {
+      if (!nav.querySelector('a[href="terms-and-conditions.html"]') && !nav.classList.contains('benarian-mobile-nav')) {
         const terms = document.createElement('a');
-        terms.href = 'terms-and-conditions.html';
-        terms.textContent = 'TERMS & CONDITIONS';
-        terms.setAttribute('aria-label', 'Terms and Conditions');
+        terms.href = 'terms-and-conditions.html'; terms.textContent = 'TERMS & CONDITIONS';
         const contact = nav.querySelector('a[href="contact.html"]');
         contact ? nav.insertBefore(terms, contact) : nav.appendChild(terms);
       }
-
-      const termsLinks = [...nav.querySelectorAll('a[href="terms-and-conditions.html"]')];
-      termsLinks.slice(1).forEach(link => link.remove());
+      [...nav.querySelectorAll('a[href="terms-and-conditions.html"]')].slice(1).forEach(link => link.remove());
     });
   }
 
@@ -71,18 +63,16 @@ window.BENARIAN_PARTNERS = {
     document.querySelectorAll('.benarian-expedia-widget-section,.benarian-featured-stays').forEach(section => section.remove());
   }
 
-  function applyNavigationRules() {
-    correctFlightLinks();
-    replaceRestaurantsWithTerms();
+  function applyGlobalRules() {
+    ensureGlobalLogo(); correctFlightLinks(); replaceRestaurantsWithTerms();
   }
 
   function start() {
-    applyNavigationRules();
-    removeLegacyExpediaSections();
-    loadScriptOnce('assets/live-concierge.js?v=20260725d', 'data-benarian-live-concierge');
-    loadScriptOnce('assets/install-app-prompt.js?v=20260725d', 'data-benarian-install-prompt');
-    loadScriptOnce('assets/premium-v2.js?v=20260725d', 'data-benarian-premium-v2-script');
-    [300,700,1200,2000].forEach(delay => setTimeout(applyNavigationRules, delay));
+    applyGlobalRules(); removeLegacyExpediaSections();
+    loadScriptOnce('assets/live-concierge.js?v=20260725e', 'data-benarian-live-concierge');
+    loadScriptOnce('assets/install-app-prompt.js?v=20260725e', 'data-benarian-install-prompt');
+    loadScriptOnce('assets/premium-v2.js?v=20260725e', 'data-benarian-premium-v2-script');
+    [300,700,1200,2000].forEach(delay => setTimeout(applyGlobalRules, delay));
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
