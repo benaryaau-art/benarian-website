@@ -1,0 +1,45 @@
+name: Apply canonical Home footer
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-canonical-footer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add canonical footer runtime to all HTML files
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          tag = '<script src="assets/canonical-footer.js?v=20260725a"></script>'
+          changed = 0
+          for path in Path('.').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              if 'assets/canonical-footer.js' in text:
+                  continue
+              if '</body>' in text:
+                  text = text.replace('</body>', tag + '</body>')
+                  path.write_text(text, encoding='utf-8')
+                  changed += 1
+          print(f'Updated {changed} HTML files')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html'
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+          else
+            git commit -m "Use Home footer on every page [skip ci]"
+            git push
+          fi
