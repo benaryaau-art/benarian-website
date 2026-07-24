@@ -133,12 +133,13 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    .benarian-footer-concierge{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin-top:18px;max-width:290px}
-    .benarian-footer-live{display:inline-flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid rgba(185,135,44,.72);border-radius:999px;background:rgba(23,20,15,.04);color:#9b681b;text-decoration:none!important;font:700 10px Inter,Arial,sans-serif;letter-spacing:1px;white-space:nowrap;transition:.2s ease}
+    .benarian-footer-brand-column{display:flex!important;flex-direction:column!important;align-items:flex-start!important;min-width:0!important;max-width:100%!important}
+    .benarian-footer-concierge{grid-column:1!important;display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin-top:18px;max-width:290px;width:100%;box-sizing:border-box}
+    .benarian-footer-live{display:inline-flex;align-items:center;gap:9px;max-width:100%;box-sizing:border-box;padding:10px 14px;border:1px solid rgba(185,135,44,.72);border-radius:999px;background:rgba(23,20,15,.04);color:#9b681b;text-decoration:none!important;font:700 10px Inter,Arial,sans-serif;letter-spacing:.8px;white-space:normal;transition:.2s ease}
     .benarian-footer-live:hover{background:#17140f;color:#f3d18a;border-color:#b9872c}
-    .benarian-footer-live .live-dot{width:8px;height:8px;border-radius:50%;background:#25d366;box-shadow:0 0 0 4px rgba(37,211,102,.14)}
-    .benarian-footer-concierge p{margin:0!important;color:#746a5d!important;font:500 11px/1.55 Inter,Arial,sans-serif!important;letter-spacing:.1px}
-    @media(max-width:650px){.benarian-footer-concierge{align-items:flex-start;margin-top:16px}.benarian-footer-live{justify-content:center}}
+    .benarian-footer-live .live-dot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:#25d366;box-shadow:0 0 0 4px rgba(37,211,102,.14)}
+    .benarian-footer-concierge p{margin:0!important;color:#746a5d!important;font:500 11px/1.55 Inter,Arial,sans-serif!important;letter-spacing:.1px;max-width:100%}
+    @media(max-width:650px){.benarian-footer-brand-column{grid-column:1/-1!important;width:100%!important}.benarian-footer-concierge{width:100%;max-width:100%;align-items:flex-start;margin-top:14px}.benarian-footer-live{width:auto;max-width:100%;justify-content:flex-start;padding:10px 13px}.benarian-footer-concierge p{font-size:10px!important}}
   `;
   document.head.appendChild(style);
 
@@ -148,6 +149,13 @@
   block.innerHTML = `<a class="benarian-footer-live" href="${whatsappUrl}" target="_blank" rel="noopener" aria-label="Open BENARIAN Live Concierge on WhatsApp"><span class="live-dot" aria-hidden="true"></span>LIVE CONCIERGE · WHATSAPP</a><p>Talk to our team or Ben Tafreshi</p>`;
 
   const brand = footer.querySelector('a[aria-label="BENARIAN home"], a[href="index.html"], .brand');
-  if (brand) brand.insertAdjacentElement('afterend', block);
-  else footer.insertAdjacentElement('afterbegin', block);
+  if (brand) {
+    const column = document.createElement('div');
+    column.className = 'benarian-footer-brand-column';
+    brand.replaceWith(column);
+    column.appendChild(brand);
+    column.appendChild(block);
+  } else {
+    footer.insertAdjacentElement('afterbegin', block);
+  }
 })();
