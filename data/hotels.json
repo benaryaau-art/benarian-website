@@ -1,28 +1,28 @@
 {
   "featuredHotels": [
     {
-      "name": "AYANA Resort Bali",
+      "name": "Inara Alas Harum",
+      "location": "Ubud, Bali",
+      "price": "Exclusive stay · View live rates",
+      "score": "5-star jungle retreat",
+      "image": "https://inarahotels.com/alas-harum-resort-bali/wp-content/uploads/2023/11/Pool-View-Inara-Alas-Harum.webp",
+      "bookingUrl": "https://www.booking.com/hotel/id/inara-alas-harum.html"
+    },
+    {
+      "name": "Royal Tulip Springhill Resort Jimbaran",
       "location": "Jimbaran, Bali",
-      "price": "View live rates",
-      "score": "9.4 Exceptional",
-      "image": "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&q=82&w=1200",
-      "bookingUrl": "https://www.kqzyfj.com/click-101828630-11327743?sid=AYANA-BALI&url=https%3A%2F%2Fau.hotels.com%2Fho142033%2Fayana-resort-bali-jimbaran-indonesia%2F"
+      "price": "Featured escape · View live rates",
+      "score": "5-star tropical resort",
+      "image": "https://media.iceportal.com/95130/photos/83138249_XXL.jpg",
+      "bookingUrl": "https://www.booking.com/Share-dOZxu7I"
     },
     {
       "name": "The Apurva Kempinski Bali",
       "location": "Nusa Dua, Bali",
       "price": "View live rates",
-      "score": "9.3 Superb",
-      "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=82&w=1200",
+      "score": "Luxury icon",
+      "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=88&w=1400",
       "bookingUrl": "https://www.booking.com/searchresults.html?ss=The%20Apurva%20Kempinski%20Bali"
-    },
-    {
-      "name": "Alila Villas Uluwatu",
-      "location": "Uluwatu, Bali",
-      "price": "View live rates",
-      "score": "9.1 Wonderful",
-      "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=82&w=1200",
-      "bookingUrl": "https://www.booking.com/searchresults.html?ss=Alila%20Villas%20Uluwatu"
     }
   ]
 }
