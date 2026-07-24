@@ -1,7 +1,8 @@
 // BENARIAN runtime — official Booking.com widgets and quick travel access
 function loadCssOnce(href,key){if(document.querySelector(`link[data-${key}]`))return;const l=document.createElement('link');l.rel='stylesheet';l.href=href;l.setAttribute(`data-${key}`,'true');document.head.appendChild(l)}
+function loadScriptOnce(src,key){if(document.querySelector(`script[data-${key}]`))return;const s=document.createElement('script');s.src=src;s.defer=true;s.setAttribute(`data-${key}`,'true');document.body.appendChild(s)}
 loadCssOnce('assets/white-theme.css?v=20260724p','benarian-white-theme');
-if(document.querySelector('.hotels-hero'))loadCssOnce('assets/hotels-mobile-fix.css?v=20260724c','benarian-hotels-mobile');
+if(document.querySelector('.hotels-hero')){loadCssOnce('assets/hotels-mobile-fix.css?v=20260724c','benarian-hotels-mobile');loadScriptOnce('assets/hotels-booking.js?v=20260725b','benarian-hotels-booking')}
 
 const menu=document.querySelector('.menu-btn'),nav=document.querySelector('.nav');
 if(menu&&nav)menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});
