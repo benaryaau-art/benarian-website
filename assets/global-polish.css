@@ -1,42 +1,73 @@
 /* BENARIAN global visual consistency */
 :root{--ben-gold:#b9872c;--ben-ink:#1b1712;--ben-muted:#6f665b;--ben-cream:#fbf7ef;--ben-line:#e2cfaa}
+*{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:Inter,Arial,sans-serif!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{font-family:Inter,Arial,sans-serif!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
 h1,h2,h3,.section-title,.page-title,.hero-title{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;letter-spacing:-.02em}
 p,li,a,button,input,select,textarea{font-family:Inter,Arial,sans-serif}
 p{line-height:1.7}
+img{max-width:100%}
 
-/* Unified footer shell */
-.footer,.lux-footer{position:relative!important;display:grid!important;grid-template-columns:minmax(280px,1.4fr) minmax(150px,.7fr) minmax(150px,.7fr)!important;gap:38px!important;align-items:start!important;background:var(--ben-cream)!important;color:var(--ben-muted)!important;border-top:1px solid var(--ben-line)!important;padding:48px 6% 210px!important;box-sizing:border-box!important;overflow:hidden!important}
-.footer>* ,.lux-footer>*{min-width:0!important;max-width:100%!important}
-.footer strong,.lux-footer strong{display:block!important;margin:0 0 14px!important;color:var(--ben-ink)!important;font-size:15px!important;font-weight:700!important;line-height:1.25!important}
-.footer a,.lux-footer a{display:block!important;width:max-content!important;max-width:100%!important;margin:8px 0!important;color:#746b60!important;text-decoration:none!important;font-size:13px!important;line-height:1.45!important;overflow-wrap:anywhere}
+/* One premium brand lockup across every page */
+.header{display:flex!important;align-items:center!important;gap:26px!important;padding-left:5%!important;padding-right:5%!important}
+.brand-lockup{display:flex!important;align-items:center!important;flex:0 0 auto!important;text-decoration:none!important;min-width:245px!important}
+.brand-lockup .brand-mark{display:block!important;font:600 48px/.76 'Cormorant Garamond',Georgia,serif!important;color:var(--ben-gold)!important;letter-spacing:-8px!important;margin-right:18px!important;transform:scaleX(.84)!important}
+.brand-lockup .brand-copy{display:flex!important;flex-direction:column!important;min-width:0!important}
+.brand-lockup .brand-copy strong{font:600 28px/.9 'Cormorant Garamond',Georgia,serif!important;letter-spacing:4.4px!important;color:#17130f!important;white-space:nowrap!important}
+.brand-lockup .brand-copy small{margin-top:7px!important;font:700 7px/1.2 Inter,Arial,sans-serif!important;letter-spacing:1.25px!important;color:var(--ben-gold)!important;white-space:nowrap!important}
+.nav{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:17px!important;flex:1 1 auto!important;min-width:0!important}
+.nav a{font-size:9px!important;font-weight:700!important;letter-spacing:.55px!important;white-space:nowrap!important}
+.nav a.current{color:var(--ben-gold)!important}
+.menu-btn{flex:0 0 auto!important}
+
+/* Clear cards, buttons and form controls */
+button,.btn,.lux-btn,.book-btn,.contact-btn{transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease}
+button:hover,.btn:hover,.lux-btn:hover,.book-btn:hover,.contact-btn:hover{transform:translateY(-1px)}
+input,select,textarea{max-width:100%;border-radius:0}
+.hotel-card,.market-card,.featured-hotel-card,.service-card{overflow:hidden}
+
+/* Footer fallback before canonical JS loads */
+.footer,.lux-footer{position:relative!important;background:var(--ben-cream)!important;color:var(--ben-muted)!important;border-top:1px solid var(--ben-line)!important;box-sizing:border-box!important;overflow:hidden!important}
+.footer a,.lux-footer a{color:#746b60;text-decoration:none}
 .footer a:hover,.lux-footer a:hover{color:var(--ben-gold)!important}
-.footer p,.lux-footer p,.footer span,.lux-footer span{color:#766d61!important;font-size:12px!important;line-height:1.55!important}
-.footer .brand,.lux-footer .footer-brand,.benarian-footer-brand-column{grid-column:1!important;grid-row:1 / span 2!important;align-self:start!important}
-.benarian-footer-brand-column{display:flex!important;flex-direction:column!important;align-items:flex-start!important;max-width:390px!important}
-.benarian-footer-concierge{width:100%!important;max-width:390px!important;margin-top:18px!important}
-.benarian-footer-live{display:inline-flex!important;align-items:center!important;gap:9px!important;width:auto!important;max-width:100%!important;padding:10px 15px!important;border:1px solid rgba(185,135,44,.7)!important;border-radius:999px!important;background:rgba(185,135,44,.04)!important;color:#8d611c!important;font-size:10px!important;font-weight:800!important;letter-spacing:.7px!important;white-space:normal!important}
-.benarian-support-social{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:34px!important;grid-column:2 / 4!important;width:100%!important}
-.benarian-support-social>div{min-width:0!important}
-.footer .copyright,.lux-footer .copyright{grid-column:1/-1!important;margin-top:12px!important;padding-top:20px!important;border-top:1px solid #eadfc9!important}
-
-/* Keep floating travel access clear of footer content */
 .benarian-quick-access{z-index:9000!important}
+
+@media(max-width:1180px){
+  .header{gap:18px!important}
+  .brand-lockup{min-width:220px!important}
+  .brand-lockup .brand-mark{font-size:43px!important;margin-right:15px!important}
+  .brand-lockup .brand-copy strong{font-size:25px!important;letter-spacing:3.7px!important}
+  .nav{gap:12px!important}
+  .nav a{font-size:8px!important;letter-spacing:.25px!important}
+}
+
+@media(max-width:900px){
+  .header{position:relative!important;justify-content:space-between!important;padding:18px 22px!important}
+  .brand-lockup{min-width:0!important}
+  .menu-btn{display:flex!important;align-items:center!important;gap:8px!important}
+  .nav{display:none!important;position:absolute!important;left:0!important;right:0!important;top:100%!important;z-index:9999!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:12px 22px 22px!important;background:#fff!important;border-top:1px solid #eadfc9!important;box-shadow:0 18px 30px rgba(30,22,12,.12)!important}
+  .nav.open{display:flex!important}
+  .nav a{display:block!important;padding:13px 4px!important;border-bottom:1px solid #f0e8da!important;font-size:10px!important;letter-spacing:.8px!important}
+}
 
 @media(max-width:760px){
   body{font-size:15px!important}
   h1{font-size:clamp(40px,12vw,58px)!important;line-height:1!important}
   h2{font-size:clamp(32px,9vw,44px)!important;line-height:1.05!important}
-  .footer,.lux-footer{grid-template-columns:1fr!important;gap:26px!important;padding:40px 22px 220px!important}
-  .footer .brand,.lux-footer .footer-brand,.benarian-footer-brand-column{grid-column:1!important;grid-row:auto!important;width:100%!important;max-width:100%!important}
-  .benarian-support-social{grid-column:1!important;grid-template-columns:1fr 1fr!important;gap:28px!important;width:100%!important}
-  .footer strong,.lux-footer strong{font-size:14px!important;margin-bottom:12px!important}
-  .footer a,.lux-footer a{font-size:12px!important;margin:9px 0!important}
-  .benarian-footer-live{font-size:9px!important;padding:10px 13px!important}
+  .topline{padding-left:16px!important;padding-right:16px!important}
+  .topline .right span:not(.accent){display:none!important}
+  .brand-lockup .brand-mark{font-size:40px!important;margin-right:14px!important}
+  .brand-lockup .brand-copy strong{font-size:23px!important;letter-spacing:3.2px!important}
+  .brand-lockup .brand-copy small{font-size:6px!important;letter-spacing:.95px!important}
+  .booking-form{grid-template-columns:1fr!important}
+  .booking-form button{width:100%!important}
+  .hotel-card{box-shadow:none!important}
 }
 
 @media(max-width:420px){
-  .benarian-support-social{gap:18px!important}
-  .footer,.lux-footer{padding-left:18px!important;padding-right:18px!important}
+  .header{padding-left:16px!important;padding-right:16px!important}
+  .brand-lockup .brand-mark{font-size:36px!important;margin-right:12px!important}
+  .brand-lockup .brand-copy strong{font-size:20px!important;letter-spacing:2.7px!important}
+  .brand-lockup .brand-copy small{font-size:5.5px!important;letter-spacing:.8px!important}
+  .menu-btn{font-size:11px!important}
 }
