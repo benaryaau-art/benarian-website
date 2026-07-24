@@ -37,6 +37,47 @@
     window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js?v=20260723').catch(() => {}), { once: true });
   }
 
+  const addBookingButtonsToHotels = () => {
+    const cards = document.querySelectorAll('.hotel-card');
+    if (!cards.length) return;
+
+    if (!document.querySelector('#benarian-hotel-booking-buttons-style')) {
+      const hotelStyle = document.createElement('style');
+      hotelStyle.id = 'benarian-hotel-booking-buttons-style';
+      hotelStyle.textContent = `
+        .hotel-booking-actions{display:flex;flex-direction:column;gap:8px;flex:0 0 auto;min-width:154px}
+        .hotel-booking-actions .book-btn{display:block;box-sizing:border-box;width:100%;text-align:center}
+        .hotel-booking-actions .booking-com-btn{background:#17140f!important;color:#f2cc7c!important;border:1px solid #b9872c!important}
+        @media(max-width:600px){.hotel-booking-actions{width:100%;min-width:0}.hotel-booking-actions .book-btn{width:100%}}
+      `;
+      document.head.appendChild(hotelStyle);
+    }
+
+    cards.forEach(card => {
+      if (card.querySelector('.booking-com-btn')) return;
+      const currentButton = card.querySelector(':scope > .book-btn');
+      const hotelName = card.querySelector('h3')?.textContent?.trim() || 'hotel';
+      if (!currentButton) return;
+
+      const actions = document.createElement('div');
+      actions.className = 'hotel-booking-actions';
+      currentButton.replaceWith(actions);
+      actions.appendChild(currentButton);
+
+      const bookingButton = document.createElement('a');
+      bookingButton.className = 'book-btn booking-com-btn';
+      bookingButton.href = `https://www.jdoqocy.com/click-101828630-17323528?sid=${encodeURIComponent(`hotel-${hotelName}`)}`;
+      bookingButton.target = '_blank';
+      bookingButton.rel = 'noopener sponsored';
+      bookingButton.textContent = 'BOOK ON BOOKING.COM';
+      bookingButton.setAttribute('aria-label', `Book ${hotelName} on Booking.com`);
+      actions.appendChild(bookingButton);
+    });
+  };
+
+  addBookingButtonsToHotels();
+  new MutationObserver(addBookingButtonsToHotels).observe(document.documentElement, { childList: true, subtree: true });
+
   if (document.querySelector('#benarian-live-concierge')) return;
 
   const whatsappNumber = '61420788006';
