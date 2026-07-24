@@ -10,44 +10,37 @@
   const bookingTarget = (destination = '', checkin = '', checkout = '') => {
     const params = new URLSearchParams();
     if (destination) params.set('ss', destination);
-    if (checkin) {
-      const [year, month, day] = checkin.split('-');
-      params.set('checkin', checkin);
-      params.set('checkin_year', year); params.set('checkin_month', month); params.set('checkin_monthday', day);
-    }
-    if (checkout) {
-      const [year, month, day] = checkout.split('-');
-      params.set('checkout', checkout);
-      params.set('checkout_year', year); params.set('checkout_month', month); params.set('checkout_monthday', day);
-    }
+    if (checkin) params.set('checkin', checkin);
+    if (checkout) params.set('checkout', checkout);
     params.set('group_adults', '2'); params.set('no_rooms', '1'); params.set('group_children', '0');
     return `${bookingSearchBase}?${params.toString()}`;
   };
-
   const affiliateUrl = target => `${affiliateBase}${affiliateBase.includes('?') ? '&' : '?'}url=${encodeURIComponent(target)}`;
   const hotelUrl = name => affiliateUrl(bookingTarget(name));
 
   const showHotelSections = () => {
     ['.booking-search','.home-lux .hotels-section','.home-lux .benarian-home-collection','.home-lux .benarian-market-section[aria-labelledby="weekend-deals-title"]','.home-lux .weekend-deals','.home-lux .featured-hotels','.home-lux .hotel-grid','.home-lux .hotel-grid-pro'].forEach(selector => {
-      document.querySelectorAll(selector).forEach(section => {
-        section.style.removeProperty('display');
-        section.removeAttribute('aria-hidden');
-      });
+      document.querySelectorAll(selector).forEach(section => { section.style.removeProperty('display'); section.removeAttribute('aria-hidden'); });
     });
   };
 
-  const restoreDesktopHotelsNav = () => {
+  const restoreDesktopNav = () => {
     document.querySelectorAll('.header .nav').forEach(nav => {
-      if (nav.querySelector('a[href="hotels.html"]')) return;
-      const link = document.createElement('a');
-      link.href = 'hotels.html'; link.textContent = 'HOTELS';
-      const destinations = nav.querySelector('a[href="destinations.html"]');
-      destinations ? destinations.insertAdjacentElement('afterend', link) : nav.prepend(link);
+      if (!nav.querySelector('a[href="hotels.html"]')) {
+        const link = document.createElement('a'); link.href='hotels.html'; link.textContent='HOTELS';
+        const destinations = nav.querySelector('a[href="destinations.html"]');
+        destinations ? destinations.insertAdjacentElement('afterend', link) : nav.prepend(link);
+      }
+      if (!nav.querySelector('a[href="flights.html"]')) {
+        const link = document.createElement('a'); link.href='flights.html'; link.textContent='FLIGHTS';
+        const hotels = nav.querySelector('a[href="hotels.html"]');
+        hotels ? hotels.insertAdjacentElement('afterend', link) : nav.appendChild(link);
+      }
     });
   };
 
   const bindHomeSearch = () => {
-    document.querySelectorAll('.booking-form,.benarian-expedia-direct-form').forEach(form => {
+    document.querySelectorAll('.booking-form').forEach(form => {
       if (form.dataset.bookingBound === 'true') return;
       form.dataset.bookingBound = 'true';
       form.addEventListener('submit', event => {
@@ -84,15 +77,12 @@
 
   const ensureMobileNav = () => {
     let nav = document.querySelector('.benarian-mobile-nav');
-    if (!nav) { nav = document.createElement('nav'); nav.className = 'benarian-mobile-nav'; nav.setAttribute('aria-label','BENARIAN mobile navigation'); document.body.appendChild(nav); }
-    const items = [['index.html','⌂','Home'],['hotels.html','▦','Hotels'],['iran-flights.html','✈','Flights'],['visa-guide.html','◇','Visa'],['member-login.html','♙','Account']];
-    nav.innerHTML = items.map(([href,icon,label]) => `<a href="${href}"${current === href ? ' class="current" aria-current="page"' : ''}><span aria-hidden="true">${icon}</span>${label}</a>`).join('');
+    if (!nav) { nav = document.createElement('nav'); nav.className='benarian-mobile-nav'; nav.setAttribute('aria-label','BENARIAN mobile navigation'); document.body.appendChild(nav); }
+    const items = [['index.html','⌂','Home'],['hotels.html','▦','Hotels'],['flights.html','✈','Flights'],['visa-guide.html','◇','Visa'],['member-login.html','♙','Account']];
+    nav.innerHTML = items.map(([href,icon,label]) => `<a href="${href}"${current===href?' class="current" aria-current="page"':''}><span aria-hidden="true">${icon}</span>${label}</a>`).join('');
   };
 
-  const apply = () => {
-    showHotelSections(); restoreDesktopHotelsNav(); bindHomeSearch(); convertExpediaContent(); improveFeaturedLinks(); ensureMobileNav();
-  };
-
+  const apply = () => { showHotelSections(); restoreDesktopNav(); bindHomeSearch(); convertExpediaContent(); improveFeaturedLinks(); ensureMobileNav(); };
   apply();
-  [300,700,1200,1800,2600].forEach(delay => setTimeout(apply, delay));
+  [300,700,1200,1800].forEach(delay => setTimeout(apply, delay));
 })();
