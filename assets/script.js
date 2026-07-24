@@ -1,6 +1,6 @@
-// BENARIAN global runtime — official Booking.com search, premium layout and site polish
+// BENARIAN global runtime — official Booking.com search below hero
 function loadCssOnce(href,key){if(document.querySelector(`link[data-${key}]`))return;const link=document.createElement('link');link.rel='stylesheet';link.href=href;link.setAttribute(`data-${key}`,'true');document.head.appendChild(link)}
-loadCssOnce('assets/white-theme.css?v=20260724k','benarian-white-theme');
+loadCssOnce('assets/white-theme.css?v=20260724l','benarian-white-theme');
 if(document.querySelector('.hotels-hero'))loadCssOnce('assets/hotels-mobile-fix.css?v=20260724c','benarian-hotels-mobile');
 
 const menu=document.querySelector('.menu-btn'),nav=document.querySelector('.nav');
@@ -13,7 +13,7 @@ function normaliseBrand(){document.querySelectorAll('.brand-lockup .brand-mark')
 function mountBookingWidget(){
   const section=document.querySelector('.booking-search');if(!section||section.dataset.bookingWidgetMounted)return;
   section.dataset.bookingWidgetMounted='true';section.id='official-booking-search';section.classList.add('booking-widget-section');
-  const hero=document.querySelector('.lux-hero');if(hero&&hero.parentNode)hero.parentNode.insertBefore(section,hero);
+  const hero=document.querySelector('.lux-hero');if(hero&&hero.parentNode)hero.parentNode.insertBefore(section,hero.nextSibling);
   section.innerHTML=`<div class="booking-widget-heading"><span>BOOKING.COM OFFICIAL SEARCH</span><h2>Search Hotels &amp; Resorts</h2><p>Live hotel availability through BENARIAN’s official Booking.com affiliate connection.</p></div><div class="booking-widget-shell"><div id="bookingAffiliateWidget_386d39d7-2d08-41b5-af0f-0fc2c536b862">&nbsp;</div></div><p class="booking-widget-disclosure">Prices, availability and booking confirmation are provided securely by Booking.com. BENARIAN may earn a commission from eligible reservations at no additional cost to you.</p><img src="https://www.lduhtrp.net/image-101828630-17323528" width="1" height="1" alt="" style="position:absolute;opacity:0;pointer-events:none">`;
   if(!document.querySelector('#booking-widget-styles')){const style=document.createElement('style');style.id='booking-widget-styles';style.textContent=`
   .booking-widget-section{position:relative;padding:52px 7%!important;background:radial-gradient(circle at top,#282119 0,#15120e 48%,#0e0c09 100%)!important;border-top:1px solid #c59642;border-bottom:1px solid #c59642;scroll-margin-top:110px;overflow:hidden}
