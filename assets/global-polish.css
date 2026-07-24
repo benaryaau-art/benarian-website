@@ -1,8 +1,10 @@
 /* BENARIAN global visual consistency */
 :root{--ben-gold:#b9872c;--ben-ink:#1b1712;--ben-muted:#6f665b;--ben-cream:#fbf7ef;--ben-line:#e2cfaa}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:Inter,Arial,sans-serif!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+html{scroll-behavior:smooth;background:#fff!important}
+body{font-family:Inter,Arial,sans-serif!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;background:#fff!important;visibility:visible!important;opacity:1!important}
+body>.shell,.shell,main,.home-lux{visibility:visible!important;opacity:1!important}
+.page-loader,.preloader,.loading-screen,.site-loader,[data-loader]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
 h1,h2,h3,.section-title,.page-title,.hero-title{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;letter-spacing:-.02em}
 p,li,a,button,input,select,textarea{font-family:Inter,Arial,sans-serif}
 p{line-height:1.7}
