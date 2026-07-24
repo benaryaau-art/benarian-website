@@ -1,0 +1,47 @@
+name: Apply BENARIAN Global Polish
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-global-polish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Add shared polish stylesheet to every page
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          tag = '<link rel="stylesheet" href="assets/global-polish.css?v=20260725a">'
+          changed = 0
+          for path in Path('.').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              if 'assets/global-polish.css' in text:
+                  continue
+              if '</head>' in text:
+                  text = text.replace('</head>', tag + '</head>', 1)
+                  path.write_text(text, encoding='utf-8')
+                  changed += 1
+          print(f'Updated {changed} HTML files')
+          PY
+      - name: Commit global styling rollout
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html'
+          git commit -m "Apply unified footer and typography across all pages [skip ci]"
+          git push
