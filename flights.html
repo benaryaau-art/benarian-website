@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Flights | BENARIAN</title>
+  <meta name="description" content="Search and compare flights through BENARIAN's official Booking.com affiliate connection.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/global-polish.css?v=20260725c">
+  <style>
+    .flight-page{background:#fff;color:#1b1712}.flight-hero{min-height:520px;display:flex;align-items:center;padding:84px 7%;background:linear-gradient(90deg,rgba(10,12,14,.82),rgba(10,12,14,.3)),url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=92&w=2200') center/cover;color:#fff}.flight-hero-copy{max-width:760px}.flight-kicker{display:block;color:#e2b65c;font-size:11px;font-weight:800;letter-spacing:2.8px;margin-bottom:16px}.flight-hero h1{font:600 clamp(52px,7vw,84px)/.95 'Cormorant Garamond',Georgia,serif;margin:0 0 20px}.flight-hero p{font-size:17px;line-height:1.75;max-width:680px;color:#f3eee7}.flight-search{padding:64px 7%;background:radial-gradient(circle at top,#282119 0,#15120e 48%,#0e0c09 100%);border-top:1px solid #c59642;border-bottom:1px solid #c59642}.flight-search-head{text-align:center;max-width:900px;margin:0 auto 28px}.flight-search-head span{display:block;color:#d5a344;font-size:10px;font-weight:800;letter-spacing:3px;margin-bottom:12px}.flight-search-head h2{font:600 clamp(38px,5vw,58px)/1 'Cormorant Garamond',Georgia,serif;color:#f5dfb2;margin:0 0 12px}.flight-search-head p{color:#d6cab8;margin:0}.flight-widget-shell{max-width:1080px;margin:0 auto;background:#fff;border:1px solid #c9953f;border-radius:18px;padding:20px;box-shadow:0 22px 58px rgba(0,0,0,.42);min-height:150px;overflow:hidden}.flight-note{max-width:900px;margin:16px auto 0;text-align:center;color:#aa9e8d;font-size:10px;line-height:1.6}.flight-support{padding:62px 7%;text-align:center;background:#fbf7ef}.flight-support h2{font:600 clamp(34px,4vw,50px)/1 'Cormorant Garamond',Georgia,serif;margin:0 0 14px}.flight-support p{max-width:720px;margin:0 auto 24px;color:#6f665b}.flight-support a{display:inline-flex;padding:14px 22px;background:#b9872c;color:#fff;text-decoration:none;font-weight:700}.flight-fallback{padding:30px;text-align:center;color:#6f665b}.flight-fallback a{color:#8c5d15;font-weight:700}
+    @media(max-width:760px){.flight-hero{min-height:430px;padding:62px 22px}.flight-hero p{font-size:15px}.flight-search{padding:44px 14px 100px}.flight-widget-shell{padding:10px;border-radius:14px}.flight-support{padding:48px 22px}}
+  </style>
+</head>
+<body class="flight-page"><div class="shell">
+  <div class="topline"><div class="left">🌐 <a href="fa.html">فارسی</a><span>|</span><a href="index.html">EN</a></div><div class="right"><span class="accent">AUD⌄</span><a class="member-top-link" href="member-login.html">Members</a></div></div>
+  <header class="header"><a class="brand brand-lockup" href="index.html" aria-label="BENARIAN home"><span class="brand-mark" aria-hidden="true">BB</span><span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL &amp; HOSPITALITY</small></span></a><button class="menu-btn" aria-label="Open menu" aria-expanded="false">Menu <span>☰</span></button><nav class="nav"><a href="destinations.html">DESTINATIONS</a><a href="hotels.html">HOTELS</a><a href="flights.html">FLIGHTS</a><a href="persian-experiences.html">PERSIAN EXPERIENCES</a><a href="restaurants.html">RESTAURANTS</a><a href="experiences.html">EXPERIENCES</a><a href="wellness.html">SPA &amp; WELLNESS</a><a href="visa-guide.html">VISA GUIDE</a><a href="about.html">ABOUT US</a><a href="contact.html">CONTACT</a></nav></header>
+  <main>
+    <section class="flight-hero"><div class="flight-hero-copy"><span class="flight-kicker">BENARIAN FLIGHTS</span><h1>Find your next flight.</h1><p>Compare available flight options through BENARIAN’s official Booking.com affiliate connection, then complete your booking securely with the travel provider.</p></div></section>
+    <section class="flight-search"><div class="flight-search-head"><span>OFFICIAL FLIGHT SEARCH</span><h2>Search Flights</h2><p>Enter your route and travel dates to compare available options.</p></div><div class="flight-widget-shell"><div id="bookingAffiliateWidget_39c24ef3-3091-43e9-a903-e1857048b61e"><div class="flight-fallback">Loading flight search…<br><a href="https://www.jdoqocy.com/click-101828630-17323529" target="_blank" rel="noopener sponsored">Open flight search directly →</a></div></div></div><p class="flight-note">Prices, availability, payment and booking confirmation are provided by Booking.com or the relevant travel provider. BENARIAN may earn a commission from eligible bookings at no additional cost to you.</p></section>
+    <section class="flight-support"><h2>Need help planning your journey?</h2><p>Contact BENARIAN Concierge for help coordinating flights, hotels, airport transfers and special travel arrangements.</p><a href="contact.html">Contact Concierge →</a></section>
+  </main>
+  <footer class="footer"><span>© 2026 BENARIAN</span></footer>
+</div>
+<script src="https://www.booking.com/affiliate/prelanding_sdk" async></script>
+<script>
+(function initFlightWidget(){
+  const id='bookingAffiliateWidget_39c24ef3-3091-43e9-a903-e1857048b61e';
+  let tries=0;
+  const start=()=>{
+    if(window.Booking&&Booking.AffiliateWidget){
+      try{document.getElementById(id).innerHTML='';new Booking.AffiliateWidget({iframeSettings:{selector:id,responsive:true},widgetSettings:{destinationurloverride:'https://www.jdoqocy.com/click-101828630-17323529?sid=flights-page'}});return}catch(e){}
+    }
+    if(tries++<30)setTimeout(start,250);
+  };
+  start();
+})();
+</script>
+<script src="assets/script.js?v=20260725c"></script>
+<script src="assets/canonical-footer.js?v=20260725c"></script>
+</body></html>
