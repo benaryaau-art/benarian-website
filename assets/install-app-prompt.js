@@ -71,3 +71,13 @@
   const observer = new MutationObserver(() => rewriteLinks(document));
   observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
+
+// Load the dedicated Hotels hero reservation integration on the Hotels page.
+(() => {
+  if (!/hotels\.html$/i.test(location.pathname) || document.querySelector('script[data-hotels-reservation-cta]')) return;
+  const script = document.createElement('script');
+  script.src = 'assets/hotels-reservation-cta.js?v=20260725a';
+  script.defer = true;
+  script.dataset.hotelsReservationCta = 'true';
+  document.body.appendChild(script);
+})();
