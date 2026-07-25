@@ -61,16 +61,19 @@ window.BENARIAN_PARTNERS = {
 
   function ensureTravelGuideLink() {
     document.querySelectorAll('.header .nav, .benarian-mobile-nav').forEach(nav => {
-      if (nav.querySelector('a[href="bali-travel-guide.html"]')) return;
-      const guide = document.createElement('a');
-      guide.href = 'bali-travel-guide.html';
+      let guide = nav.querySelector('a[href="travel-guides.html"],a[href="bali-travel-guide.html"]');
+      if (!guide) {
+        guide = document.createElement('a');
+        const visa = nav.querySelector('a[href="visa-guide.html"]');
+        const about = nav.querySelector('a[href="about.html"]');
+        if (visa && visa.nextSibling) nav.insertBefore(guide, visa.nextSibling);
+        else if (about) nav.insertBefore(guide, about);
+        else nav.appendChild(guide);
+      }
+      guide.href = 'travel-guides.html';
       guide.textContent = 'TRAVEL GUIDE';
-      guide.setAttribute('aria-label', 'Bali Travel Guide');
-      const visa = nav.querySelector('a[href="visa-guide.html"]');
-      const about = nav.querySelector('a[href="about.html"]');
-      if (visa && visa.nextSibling) nav.insertBefore(guide, visa.nextSibling);
-      else if (about) nav.insertBefore(guide, about);
-      else nav.appendChild(guide);
+      guide.setAttribute('aria-label', 'Destination Travel Guides');
+      [...nav.querySelectorAll('a[href="travel-guides.html"]')].slice(1).forEach(link => link.remove());
     });
   }
 
