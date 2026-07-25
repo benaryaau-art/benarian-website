@@ -1,4 +1,4 @@
-const CACHE_NAME = 'benarian-pwa-v3-20260724';
+const CACHE_NAME = 'benarian-pwa-v4-20260725';
 const CORE_ASSETS = [
   '/',
   '/index.html',
