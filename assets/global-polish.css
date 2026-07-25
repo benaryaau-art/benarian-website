@@ -23,8 +23,8 @@ button,.btn,.lux-btn,.book-btn,.contact-btn{transition:transform .18s ease,box-s
 .about-page .founder-photo img{display:block!important;width:100%!important;height:auto!important;max-width:none!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center top!important;border:0!important;border-radius:0!important;box-shadow:none!important}
 @media(max-width:760px){.about-page .founder-grid{grid-template-columns:1fr!important}.about-page .founder-photo img{width:100%!important;height:auto!important}}
 
-/* Travel Guides readability hotfix: remove light/white overlay */
-.guidehub-hero:before{background:rgba(10,8,6,.48)!important}
-.guidehub-hero .hero-panel{background:rgba(12,10,8,.72)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-color:rgba(223,180,95,.72)!important}
+/* Travel Guides hotfix: remove panel fill and keep text readable */
+.guidehub-hero:before{background:rgba(10,8,6,.52)!important}
+.guidehub-hero .hero-panel{background:transparent!important;background-image:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;border-color:rgba(223,180,95,.8)!important}
 .guidehub-hero .hero-panel,.guidehub-hero .hero-panel *{opacity:1!important}
-@media(max-width:620px){.guidehub-hero:before{background:rgba(10,8,6,.55)!important}.guidehub-hero .hero-panel{background:rgba(12,10,8,.76)!important}}
+@media(max-width:620px){.guidehub-hero:before{background:rgba(10,8,6,.58)!important}.guidehub-hero .hero-panel{background:transparent!important;background-image:none!important}}
