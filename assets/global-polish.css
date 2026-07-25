@@ -28,7 +28,3 @@ button,.btn,.lux-btn,.book-btn,.contact-btn{transition:transform .18s ease,box-s
 .guidehub-hero .hero-panel{background:transparent!important;background-image:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;border-color:rgba(223,180,95,.8)!important}
 .guidehub-hero .hero-panel,.guidehub-hero .hero-panel *{opacity:1!important}
 @media(max-width:620px){.guidehub-hero:before{background:rgba(10,8,6,.58)!important}.guidehub-hero .hero-panel{background:transparent!important;background-image:none!important}}
-
-/* Home hero: tropical luxury resort sunset */
-.home-lux .lux-hero{background-image:linear-gradient(90deg,rgba(10,8,6,.58),rgba(10,8,6,.12)),url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=96&w=2400')!important;background-position:center 58%!important;background-size:cover!important;background-repeat:no-repeat!important}
-@media(max-width:760px){.home-lux .lux-hero{background-position:62% center!important}}
