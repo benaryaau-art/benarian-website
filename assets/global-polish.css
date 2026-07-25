@@ -28,3 +28,7 @@ button,.btn,.lux-btn,.book-btn,.contact-btn{transition:transform .18s ease,box-s
 .guidehub-hero .hero-panel{background:transparent!important;background-image:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;border-color:rgba(223,180,95,.8)!important}
 .guidehub-hero .hero-panel,.guidehub-hero .hero-panel *{opacity:1!important}
 @media(max-width:620px){.guidehub-hero:before{background:rgba(10,8,6,.58)!important}.guidehub-hero .hero-panel{background:transparent!important;background-image:none!important}}
+
+/* Home hero: uploaded Bali resort image */
+.home-lux .lux-hero{background-image:linear-gradient(90deg,rgba(10,8,6,.44),rgba(10,8,6,.10)),url('home-hero-bali.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+@media(max-width:760px){.home-lux .lux-hero{background-position:center center!important}}
