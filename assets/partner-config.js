@@ -72,6 +72,7 @@ window.BENARIAN_PARTNERS = {
     loadScriptOnce('assets/live-concierge.js?v=20260725e', 'data-benarian-live-concierge');
     loadScriptOnce('assets/install-app-prompt.js?v=20260725e', 'data-benarian-install-prompt');
     loadScriptOnce('assets/premium-v2.js?v=20260725e', 'data-benarian-premium-v2-script');
+    loadScriptOnce('assets/bali-culture-guide.js?v=20260725a', 'data-benarian-bali-culture');
     [300,700,1200,2000].forEach(delay => setTimeout(applyGlobalRules, delay));
   }
 
