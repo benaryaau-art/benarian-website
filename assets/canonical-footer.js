@@ -65,7 +65,7 @@
         brand.classList.add('brand-lockup');
         brand.href='index.html';
         brand.setAttribute('aria-label','BENARIAN home');
-        brand.innerHTML='<span class="brand-mark" aria-hidden="true">BB</span><span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL &amp; HOSPITALITY</small></span>';
+        brand.innerHTML='<span class="brand-mark" aria-hidden="true">BB</span><span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL & HOSPITALITY</small></span>';
       }
       const nav=header.querySelector('.nav');
       if(nav){
@@ -73,19 +73,22 @@
         const current=normalPage(location.pathname);
         nav.querySelectorAll('a').forEach(a=>{if(normalPage(a.getAttribute('href'))===current)a.classList.add('current')});
       }
-      const button=header.querySelector('.menu-btn');
-      if(button){
+      const oldButton=header.querySelector('.menu-btn');
+      if(oldButton){
+        const button=oldButton.cloneNode(true);
+        button.removeAttribute('data-final-menu-bound');
         button.setAttribute('aria-label','Open menu');
         button.setAttribute('aria-expanded','false');
-        if(!button.dataset.finalMenuBound){
-          button.dataset.finalMenuBound='true';
-          button.addEventListener('click',()=>{
-            const n=header.querySelector('.nav');
-            if(!n)return;
-            const open=n.classList.toggle('open');
-            button.setAttribute('aria-expanded',String(open));
-          });
-        }
+        oldButton.replaceWith(button);
+        button.addEventListener('click',event=>{
+          event.preventDefault();
+          event.stopPropagation();
+          const n=header.querySelector('.nav');
+          if(!n)return;
+          const open=n.classList.toggle('open');
+          button.setAttribute('aria-expanded',String(open));
+          button.setAttribute('aria-label',open?'Close menu':'Open menu');
+        });
       }
     });
   }
