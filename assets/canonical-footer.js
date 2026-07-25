@@ -9,7 +9,8 @@
     ['visa-guide.html','VISA GUIDE'],
     ['travel-guides.html','TRAVEL GUIDES'],
     ['about.html','ABOUT US'],
-    ['contact.html','CONTACT']
+    ['contact.html','CONTACT'],
+    ['terms-and-conditions.html','TERMS & CONDITIONS']
   ];
 
   const FOOTER_HTML = `
