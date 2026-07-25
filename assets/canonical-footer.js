@@ -53,6 +53,23 @@
 
   function normalPage(v){return(v||'index').replace(/^.*\//,'').replace(/\.html$/,'')||'index'}
 
+  function installAppMeta(){
+    const links=[
+      ['manifest','/manifest.json'],
+      ['icon','/benarian-app-icon.svg'],
+      ['apple-touch-icon','/benarian-app-icon.svg']
+    ];
+    links.forEach(([rel,href])=>{
+      let link=document.head.querySelector(`link[rel="${rel}"]`);
+      if(!link){link=document.createElement('link');link.rel=rel;document.head.appendChild(link)}
+      link.href=href;
+      if(rel==='icon')link.type='image/svg+xml';
+    });
+    let theme=document.head.querySelector('meta[name="theme-color"]');
+    if(!theme){theme=document.createElement('meta');theme.name='theme-color';document.head.appendChild(theme)}
+    theme.content='#080808';
+  }
+
   function installStyle(){
     let style=document.getElementById('benarian-final-global-style');
     if(!style){style=document.createElement('style');style.id='benarian-final-global-style';document.head.appendChild(style)}
@@ -100,7 +117,7 @@
     shell.insertAdjacentHTML('beforeend',FOOTER_HTML);
   }
 
-  function apply(){installStyle();installHeader();installFooter()}
+  function apply(){installAppMeta();installStyle();installHeader();installFooter()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
-  [350,1000,2200].forEach(ms=>setTimeout(()=>{installHeader();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter()},ms));
+  [350,1000,2200].forEach(ms=>setTimeout(()=>{installAppMeta();installHeader();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter()},ms));
 })();
