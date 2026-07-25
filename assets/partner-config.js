@@ -59,12 +59,27 @@ window.BENARIAN_PARTNERS = {
     });
   }
 
+  function ensureTravelGuideLink() {
+    document.querySelectorAll('.header .nav, .benarian-mobile-nav').forEach(nav => {
+      if (nav.querySelector('a[href="bali-travel-guide.html"]')) return;
+      const guide = document.createElement('a');
+      guide.href = 'bali-travel-guide.html';
+      guide.textContent = 'TRAVEL GUIDE';
+      guide.setAttribute('aria-label', 'Bali Travel Guide');
+      const visa = nav.querySelector('a[href="visa-guide.html"]');
+      const about = nav.querySelector('a[href="about.html"]');
+      if (visa && visa.nextSibling) nav.insertBefore(guide, visa.nextSibling);
+      else if (about) nav.insertBefore(guide, about);
+      else nav.appendChild(guide);
+    });
+  }
+
   function removeLegacyExpediaSections() {
     document.querySelectorAll('.benarian-expedia-widget-section,.benarian-featured-stays').forEach(section => section.remove());
   }
 
   function applyGlobalRules() {
-    ensureGlobalLogo(); correctFlightLinks(); replaceRestaurantsWithTerms();
+    ensureGlobalLogo(); correctFlightLinks(); replaceRestaurantsWithTerms(); ensureTravelGuideLink();
   }
 
   function start() {
