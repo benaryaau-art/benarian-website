@@ -2,6 +2,7 @@
   const NAV_ITEMS = [
     ['destinations.html','DESTINATIONS'],
     ['hotels.html','HOTELS'],
+    ['flights.html','FLIGHTS'],
     ['persian-experiences.html','PERSIAN EXPERIENCES'],
     ['restaurants.html','RESTAURANTS'],
     ['experiences.html','EXPERIENCES'],
@@ -18,7 +19,7 @@
       <div class="bf3-brand-block">
         <a href="index.html" class="bf3-brand" aria-label="BENARIAN home">
           <span class="bf3-mark" aria-hidden="true">BB</span>
-          <span class="bf3-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL &amp; HOSPITALITY</small></span>
+          <span class="bf3-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL & HOSPITALITY</small></span>
         </a>
         <a class="bf3-whatsapp" href="https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking." target="_blank" rel="noopener">
           <span class="bf3-dot" aria-hidden="true"></span><span>LIVE CONCIERGE · WHATSAPP</span>
@@ -26,7 +27,7 @@
         <p class="bf3-talk">Talk to our team or Ben Tafreshi</p>
       </div>
       <div class="bf3-column"><strong>Company</strong><a href="about.html">About Us</a><a href="experiences.html">Our Services</a><a href="contact.html">Concierge</a></div>
-      <div class="bf3-column"><strong>Support</strong><a href="contact.html">FAQ</a><a href="privacy-policy.html">Privacy Policy</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a><a href="terms-and-conditions.html">Terms &amp; Conditions</a></div>
+      <div class="bf3-column"><strong>Support</strong><a href="contact.html">FAQ</a><a href="privacy-policy.html">Privacy Policy</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a><a href="terms-and-conditions.html">Terms & Conditions</a></div>
       <div class="bf3-column"><strong>Follow Us</strong><a href="https://www.instagram.com/benarianhotels" target="_blank" rel="noopener">Instagram</a><a href="mailto:info@benarian.com">Email</a></div>
       <p class="bf3-copyright">© 2026 BENARIAN Pty Ltd. All rights reserved.</p>
     </footer>`;
