@@ -12,7 +12,9 @@ window.BENARIAN_PARTNERS = {
     const base = src.split('?')[0];
     if (document.querySelector(`script[${marker}]`) || document.querySelector(`script[src^="${base}"]`)) return;
     const script = document.createElement('script');
-    script.src = src; script.defer = true; script.setAttribute(marker, 'true');
+    script.src = src;
+    script.defer = true;
+    script.setAttribute(marker, 'true');
     document.body.appendChild(script);
   }
 
@@ -45,42 +47,19 @@ window.BENARIAN_PARTNERS = {
     });
   }
 
-  function replaceRestaurantsWithTerms() {
-    document.querySelectorAll('.header .nav, .benarian-mobile-nav').forEach(nav => {
-      nav.querySelectorAll('a').forEach(link => {
-        const href = (link.getAttribute('href') || '').toLowerCase();
-        const label = (link.textContent || '').trim().toUpperCase();
-        if (href.endsWith('restaurants.html') || label === 'RESTAURANTS' || label === 'RESTAURANT') {
-          link.href = 'terms-and-conditions.html';
-          link.textContent = 'TERMS & CONDITIONS';
-          link.setAttribute('aria-label', 'Terms and Conditions');
-        }
+  function bindStableMenu() {
+    document.querySelectorAll('.header').forEach(header => {
+      const button = header.querySelector('.menu-btn');
+      const nav = header.querySelector('.nav');
+      if (!button || !nav || button.dataset.benarianStableMenu === 'true') return;
+      button.dataset.benarianStableMenu = 'true';
+      button.setAttribute('aria-expanded', 'false');
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const open = nav.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(open));
       });
-      if (!nav.querySelector('a[href="terms-and-conditions.html"]') && !nav.classList.contains('benarian-mobile-nav')) {
-        const terms = document.createElement('a');
-        terms.href = 'terms-and-conditions.html'; terms.textContent = 'TERMS & CONDITIONS';
-        const contact = nav.querySelector('a[href="contact.html"]');
-        contact ? nav.insertBefore(terms, contact) : nav.appendChild(terms);
-      }
-      [...nav.querySelectorAll('a[href="terms-and-conditions.html"]')].slice(1).forEach(link => link.remove());
-    });
-  }
-
-  function ensureTravelGuideLink() {
-    document.querySelectorAll('.header .nav, .benarian-mobile-nav').forEach(nav => {
-      let guide = nav.querySelector('a[href="travel-guides.html"],a[href="bali-travel-guide.html"]');
-      if (!guide) {
-        guide = document.createElement('a');
-        const visa = nav.querySelector('a[href="visa-guide.html"]');
-        const about = nav.querySelector('a[href="about.html"]');
-        if (visa && visa.nextSibling) nav.insertBefore(guide, visa.nextSibling);
-        else if (about) nav.insertBefore(guide, about);
-        else nav.appendChild(guide);
-      }
-      guide.href = 'travel-guides.html';
-      guide.textContent = 'TRAVEL GUIDE';
-      guide.setAttribute('aria-label', 'Destination Travel Guides');
-      [...nav.querySelectorAll('a[href="travel-guides.html"]')].slice(1).forEach(link => link.remove());
     });
   }
 
@@ -118,7 +97,7 @@ window.BENARIAN_PARTNERS = {
       style.textContent = `
         html,body,body.inner-page,.shell,main,.guidehub-wrap{background:#fff!important;color:#211b15!important}
         body{font-family:'Vazirmatn','Inter',Arial,sans-serif!important;font-weight:400!important}
-        .guide-hero{min-height:0!important;aspect-ratio:16/9!important;padding:0!important;background-image:url('assets/travel-guides-hero-clean.jpg?v=20260726c')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+        .guide-hero{min-height:0!important;aspect-ratio:16/9!important;padding:0!important;background-image:url('assets/travel-guides-hero-clean.jpg?v=20260726d')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
         .guide-hero:before{display:none!important;content:none!important;background:none!important}
         .guide-hero-copy{display:none!important}
         .guidehub-hero{background:linear-gradient(90deg,rgba(255,255,255,.97),rgba(255,255,255,.74)),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=92&w=2200') center/cover!important}
@@ -146,7 +125,7 @@ window.BENARIAN_PARTNERS = {
       `;
       document.head.appendChild(style);
     }
-    loadScriptOnce('assets/canonical-footer.js?v=20260725guidefinal', 'data-benarian-canonical-footer');
+    loadScriptOnce('assets/canonical-footer.js?v=20260726navfinal', 'data-benarian-canonical-footer');
   }
 
   function removeLegacyExpediaSections() {
@@ -154,16 +133,20 @@ window.BENARIAN_PARTNERS = {
   }
 
   function applyGlobalRules() {
-    applyDistinctPageHeroes(); ensureGlobalLogo(); correctFlightLinks(); replaceRestaurantsWithTerms(); ensureTravelGuideLink(); forceTravelGuideLightTheme();
+    applyDistinctPageHeroes();
+    ensureGlobalLogo();
+    correctFlightLinks();
+    bindStableMenu();
+    forceTravelGuideLightTheme();
   }
 
   function start() {
-    applyGlobalRules(); removeLegacyExpediaSections();
+    applyGlobalRules();
+    removeLegacyExpediaSections();
     loadScriptOnce('assets/live-concierge.js?v=20260725e', 'data-benarian-live-concierge');
     loadScriptOnce('assets/install-app-prompt.js?v=20260725e', 'data-benarian-install-prompt');
     loadScriptOnce('assets/premium-v2.js?v=20260725e', 'data-benarian-premium-v2-script');
     loadScriptOnce('assets/bali-culture-guide.js?v=20260725a', 'data-benarian-bali-culture');
-    [300,700,1200,2000].forEach(delay => setTimeout(applyGlobalRules, delay));
   }
 
   window.addEventListener('resize', applyDistinctPageHeroes, {passive:true});
