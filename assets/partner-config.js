@@ -118,7 +118,7 @@ window.BENARIAN_PARTNERS = {
       style.textContent = `
         html,body,body.inner-page,.shell,main,.guidehub-wrap{background:#fff!important;color:#211b15!important}
         body{font-family:'Vazirmatn','Inter',Arial,sans-serif!important;font-weight:400!important}
-        .guide-hero{min-height:0!important;aspect-ratio:16/9!important;padding:0!important;background-image:url('assets/%20%20%20%20travel-guide-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+        .guide-hero{min-height:0!important;aspect-ratio:16/9!important;padding:0!important;background-image:url('assets/travel-guides-hero-clean.jpg?v=20260726c')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
         .guide-hero:before{display:none!important;content:none!important;background:none!important}
         .guide-hero-copy{display:none!important}
         .guidehub-hero{background:linear-gradient(90deg,rgba(255,255,255,.97),rgba(255,255,255,.74)),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=92&w=2200') center/cover!important}
