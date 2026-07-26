@@ -24,6 +24,70 @@ window.BENARIAN_PARTNERS = {
       .replace(/\.html$/, '');
   }
 
+  function ensureMeta(selector, attributes) {
+    let element = document.head.querySelector(selector);
+    if (!element) {
+      element = document.createElement(attributes.tag || 'meta');
+      document.head.appendChild(element);
+    }
+    Object.entries(attributes).forEach(([key, value]) => {
+      if (key !== 'tag') element.setAttribute(key, value);
+    });
+    return element;
+  }
+
+  function installSeoMetadata() {
+    const page = currentPageSlug();
+    const isHome = page === 'index';
+    const canonicalUrl = isHome ? 'https://benarian.com/' : `https://benarian.com/${page}.html`;
+    const title = isHome
+      ? 'BENARIAN | Luxury Hotels, Resorts & Curated Travel'
+      : `${document.title.replace(/\s*\|\s*BENARIAN.*$/i, '').trim()} | BENARIAN`;
+    const description = isHome
+      ? 'Discover curated luxury hotels, resorts, destinations, wellness retreats and exceptional travel experiences with BENARIAN.'
+      : (document.querySelector('meta[name="description"]')?.content || 'Explore curated luxury travel experiences, hotels and destination guides with BENARIAN.');
+
+    document.title = title;
+    ensureMeta('meta[name="description"]', { name: 'description', content: description });
+    ensureMeta('link[rel="canonical"]', { tag: 'link', rel: 'canonical', href: canonicalUrl });
+    ensureMeta('link[rel="icon"]', { tag: 'link', rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' });
+    ensureMeta('link[rel="manifest"]', { tag: 'link', rel: 'manifest', href: '/site.webmanifest' });
+    ensureMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' });
+    ensureMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: 'BENARIAN' });
+    ensureMeta('meta[property="og:title"]', { property: 'og:title', content: title });
+    ensureMeta('meta[property="og:description"]', { property: 'og:description', content: description });
+    ensureMeta('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl });
+    ensureMeta('meta[property="og:image"]', { property: 'og:image', content: 'https://benarian.com/assets/benarian-social-card.svg' });
+    ensureMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
+    ensureMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: title });
+    ensureMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description });
+    ensureMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: 'https://benarian.com/assets/benarian-social-card.svg' });
+
+    if (isHome) {
+      let schema = document.getElementById('benarian-organization-schema');
+      if (!schema) {
+        schema = document.createElement('script');
+        schema.type = 'application/ld+json';
+        schema.id = 'benarian-organization-schema';
+        document.head.appendChild(schema);
+      }
+      schema.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'TravelAgency',
+        '@id': 'https://benarian.com/#organization',
+        name: 'BENARIAN',
+        legalName: 'BENARIAN Pty Ltd',
+        url: 'https://benarian.com/',
+        logo: 'https://benarian.com/favicon.svg',
+        image: 'https://benarian.com/assets/benarian-social-card.svg',
+        description,
+        email: 'info@benarian.com',
+        founder: { '@type': 'Person', name: 'Ben Tafreshi' },
+        sameAs: ['https://www.instagram.com/benarianhotels']
+      });
+    }
+  }
+
   function ensureGlobalLogo() {
     document.querySelectorAll('.header').forEach(header => {
       let brand = header.querySelector('.brand, .brand-lockup, a[aria-label*="BENARIAN" i]');
@@ -133,6 +197,7 @@ window.BENARIAN_PARTNERS = {
   }
 
   function applyGlobalRules() {
+    installSeoMetadata();
     applyDistinctPageHeroes();
     ensureGlobalLogo();
     correctFlightLinks();
