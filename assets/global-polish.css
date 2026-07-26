@@ -43,3 +43,9 @@ button,.btn,.lux-btn,.book-btn,.contact-btn{transition:transform .18s ease,box-s
 .page-hero[style*="1539367628448"]{background-image:url('%20%20%20%20Destinations-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
 .hotels-hero{background-image:linear-gradient(90deg,rgba(10,8,6,.70),rgba(10,8,6,.24)),url('%20%20%20%20hotels-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
 @media(max-width:760px){.guide-hero{background-position:center center!important}.page-hero[style*="1539367628448"]{background-position:center center!important}.hotels-hero{background-position:62% center!important}}
+
+/* Final Travel Guides cleanup: show the artwork only, with no duplicated overlay copy */
+.guide-hero{min-height:0!important;aspect-ratio:16/9!important;padding:0!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+.guide-hero:before{display:none!important;content:none!important;background:none!important}
+.guide-hero-copy{display:none!important;visibility:hidden!important;opacity:0!important}
+@media(max-width:760px){.guide-hero{min-height:0!important;aspect-ratio:16/9!important;background-position:center center!important}}
