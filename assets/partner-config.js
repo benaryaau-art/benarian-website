@@ -16,6 +16,12 @@ window.BENARIAN_PARTNERS = {
     document.body.appendChild(script);
   }
 
+  function currentPageSlug() {
+    return (location.pathname.split('/').filter(Boolean).pop() || 'index')
+      .toLowerCase()
+      .replace(/\.html$/, '');
+  }
+
   function ensureGlobalLogo() {
     document.querySelectorAll('.header').forEach(header => {
       let brand = header.querySelector('.brand, .brand-lockup, a[aria-label*="BENARIAN" i]');
@@ -79,7 +85,7 @@ window.BENARIAN_PARTNERS = {
   }
 
   function applyDistinctPageHeroes() {
-    const page = (location.pathname.split('/').pop() || '').toLowerCase();
+    const page = currentPageSlug();
     const setHero = (selector, image, overlay, position = 'center center') => {
       const hero = document.querySelector(selector);
       if (!hero) return;
@@ -89,20 +95,20 @@ window.BENARIAN_PARTNERS = {
       hero.style.setProperty('background-repeat', 'no-repeat', 'important');
     };
 
-    if (page === 'affiliate-disclosure.html') {
-      setHero('.page-hero', 'assets/affiliate-hero-new.jpg?v=20260726', 'linear-gradient(90deg,rgba(18,14,10,.76),rgba(18,14,10,.18))', innerWidth <= 760 ? '62% center' : 'center center');
-    } else if (page === 'visa-guide.html') {
-      setHero('.visa-hero', 'assets/visa-hero-new.jpg?v=20260726', 'linear-gradient(90deg,rgba(10,12,18,.80),rgba(10,12,18,.34),rgba(10,12,18,.06))', innerWidth <= 760 ? '68% center' : 'center center');
-    } else if (page === 'destinations.html') {
-      setHero('.page-hero', 'assets/destinations-hero-new.jpg?v=20260726', 'linear-gradient(90deg,rgba(10,13,12,.72),rgba(10,13,12,.18))', innerWidth <= 760 ? '62% center' : 'center center');
-    } else if (page === 'hotels.html') {
-      setHero('.hotels-hero', 'assets/hotels-hero-new.jpg?v=20260726', 'linear-gradient(90deg,rgba(10,8,6,.76),rgba(10,8,6,.20),rgba(10,8,6,.04))', innerWidth <= 760 ? '66% center' : 'center center');
+    if (page === 'affiliate-disclosure') {
+      setHero('.page-hero', 'assets/affiliate-hero-new.jpg?v=20260726b', 'linear-gradient(90deg,rgba(18,14,10,.76),rgba(18,14,10,.18))', innerWidth <= 760 ? '62% center' : 'center center');
+    } else if (page === 'visa-guide') {
+      setHero('.visa-hero', 'assets/visa-hero-new.jpg?v=20260726b', 'linear-gradient(90deg,rgba(10,12,18,.80),rgba(10,12,18,.34),rgba(10,12,18,.06))', innerWidth <= 760 ? '68% center' : 'center center');
+    } else if (page === 'destinations') {
+      setHero('.page-hero', 'assets/destinations-hero-new.jpg?v=20260726b', 'linear-gradient(90deg,rgba(10,13,12,.72),rgba(10,13,12,.18))', innerWidth <= 760 ? '62% center' : 'center center');
+    } else if (page === 'hotels') {
+      setHero('.hotels-hero', 'assets/hotels-hero-new.jpg?v=20260726b', 'linear-gradient(90deg,rgba(10,8,6,.76),rgba(10,8,6,.20),rgba(10,8,6,.04))', innerWidth <= 760 ? '66% center' : 'center center');
     }
   }
 
   function forceTravelGuideLightTheme() {
-    const page = (location.pathname.split('/').pop() || '').toLowerCase();
-    if (page !== 'travel-guides.html') return;
+    const page = currentPageSlug();
+    if (page !== 'travel-guides') return;
     document.documentElement.style.background = '#ffffff';
     document.body.style.background = '#ffffff';
     document.body.style.color = '#211b15';
