@@ -32,3 +32,8 @@ button,.btn,.lux-btn,.book-btn,.contact-btn{transition:transform .18s ease,box-s
 /* Home hero: uploaded Bali resort image */
 .home-lux .lux-hero{background-image:linear-gradient(90deg,rgba(10,8,6,.44),rgba(10,8,6,.10)),url('home-hero-bali.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
 @media(max-width:760px){.home-lux .lux-hero{background-position:center center!important}}
+
+/* New BENARIAN hero photography */
+.hotels-hero{background-image:linear-gradient(90deg,rgba(10,8,6,.78),rgba(10,8,6,.34),rgba(10,8,6,.08)),url('benarian-hotels-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+.visa-hero{background-image:linear-gradient(90deg,rgba(8,10,14,.84),rgba(8,10,14,.46),rgba(8,10,14,.08)),url('benarian-visa-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+@media(max-width:760px){.hotels-hero{background-position:64% center!important}.visa-hero{background-position:62% center!important}}
