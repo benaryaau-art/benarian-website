@@ -90,6 +90,9 @@ window.BENARIAN_PARTNERS = {
       style.textContent = `
         html,body,body.inner-page,.shell,main,.guidehub-wrap{background:#fff!important;color:#211b15!important}
         body{font-family:'Vazirmatn','Inter',Arial,sans-serif!important;font-weight:400!important}
+        .guide-hero{min-height:0!important;aspect-ratio:16/9!important;padding:0!important;background-image:url('assets/%20%20%20%20travel-guide-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+        .guide-hero:before{display:none!important;content:none!important;background:none!important}
+        .guide-hero-copy{display:none!important}
         .guidehub-hero{background:linear-gradient(90deg,rgba(255,255,255,.97),rgba(255,255,255,.74)),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=92&w=2200') center/cover!important}
         .guidehub-hero h1,.guidehub-hero h2,.guidehub-hero p,.guidehub-hero span{color:#211b15!important;text-shadow:none!important}
         .guidehub-hero h1,.guidehub-intro h2,.destination-section h2{font-family:'Vazirmatn','Inter',sans-serif!important;font-weight:700!important;letter-spacing:-.02em!important}
@@ -105,6 +108,7 @@ window.BENARIAN_PARTNERS = {
         .footer a,.lux-footer a{color:#51483f!important}
         .footer strong,.lux-footer strong{color:#211b15!important}
         @media(max-width:700px){
+          .guide-hero{aspect-ratio:16/9!important;min-height:0!important;background-position:center center!important}
           .guidehub-wrap{padding-left:18px!important;padding-right:18px!important}
           .guidehub-hero h1{font-size:39px!important;line-height:1.35!important}
           .guidehub-hero p{font-size:16px!important;line-height:1.95!important}
