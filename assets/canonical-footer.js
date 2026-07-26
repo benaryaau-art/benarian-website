@@ -40,6 +40,8 @@
     .header .brand-lockup .brand-copy small{margin-top:7px!important;color:#b9872c!important;font:700 7px/1.2 Inter,Arial,sans-serif!important;letter-spacing:1.25px!important;white-space:nowrap!important}
     .header .nav{min-height:42px!important}
     .header .nav a{flex:0 0 auto!important}
+    .topline .right .benarian-utility{display:inline-flex!important;align-items:center!important;gap:5px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;color:inherit!important;text-decoration:none!important;font:inherit!important;line-height:inherit!important;white-space:nowrap!important;cursor:pointer!important}
+    .topline .right .benarian-utility:hover{color:#b9872c!important}
     .benarian-footer-v3{position:relative!important;inset:auto!important;float:none!important;clear:both!important;display:grid!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;grid-template-columns:minmax(280px,1.3fr) repeat(3,minmax(120px,.55fr))!important;gap:32px!important;align-items:start!important;margin:0!important;padding:48px 6% 36px!important;background:#fbf7ef!important;border:0!important;border-top:1px solid #e3d3b7!important;border-radius:0!important;box-shadow:none!important;color:#6d6254!important;font-family:Inter,Arial,sans-serif!important;font-size:16px!important;line-height:1.5!important;box-sizing:border-box!important;overflow:visible!important;transform:none!important;z-index:1!important}
     .benarian-footer-v3 *{box-sizing:border-box!important;min-width:0!important;max-width:100%!important}
     .bf3-brand-block{display:flex!important;flex-direction:column!important;align-items:flex-start!important;margin:0!important;padding:0!important}
@@ -66,6 +68,31 @@
 
   function installStyle(){let style=document.getElementById('benarian-final-global-style');if(!style){style=document.createElement('style');style.id='benarian-final-global-style';document.head.appendChild(style)}style.textContent=CSS}
 
+  function installUtilities(){
+    document.querySelectorAll('.topline .right').forEach(right=>{
+      [...right.children].forEach(node=>{
+        const text=(node.textContent||'').replace(/\s+/g,' ').trim();
+        if(/Wishlist/i.test(text) && node.tagName!=='A'){
+          const link=document.createElement('a');link.className='benarian-utility benarian-wishlist';link.href='member-login.html?section=wishlist';link.setAttribute('aria-label','Open Wishlist');link.innerHTML='♡ <span>Wishlist</span>';node.replaceWith(link);
+        }else if(/My Bookings/i.test(text) && node.tagName!=='A' && node.tagName!=='BUTTON'){
+          const link=document.createElement('a');link.className='benarian-utility benarian-bookings';link.href='member-login.html?section=bookings';link.setAttribute('aria-label','Open My Bookings');link.innerHTML='▣ <span>My Bookings</span>';node.replaceWith(link);
+        }else if(/^AUD\s*⌄?$/i.test(text) && node.tagName!=='BUTTON'){
+          const button=document.createElement('button');button.type='button';button.className='benarian-utility benarian-currency';button.setAttribute('aria-label','Change currency');button.dataset.currencyControl='true';node.replaceWith(button);
+        }
+      });
+      let currency=right.querySelector('[data-currency-control="true"],#currencyButton');
+      if(currency && currency.dataset.benarianCurrencyBound!=='true'){
+        currency.dataset.benarianCurrencyBound='true';
+        const currencies=['AUD','USD','EUR'];
+        let current=localStorage.getItem('benarianCurrency')||'AUD';
+        const render=()=>{const label=currency.querySelector('#currencyLabel');if(label)label.textContent=current;else currency.textContent=current+'⌄'};
+        render();
+        currency.addEventListener('click',event=>{event.preventDefault();current=currencies[(currencies.indexOf(current)+1)%currencies.length];localStorage.setItem('benarianCurrency',current);render()});
+      }
+      right.querySelectorAll('a[href="member-login.html"],a.member-top-link').forEach(a=>{a.setAttribute('aria-label','BENARIAN Members');});
+    });
+  }
+
   function installHeader(){
     document.querySelectorAll('.header').forEach(header=>{
       const brand=header.querySelector('.brand-lockup,.brand');
@@ -76,19 +103,24 @@
       if(nav){
         if(navSignature(nav)!==DESIRED_SIGNATURE) nav.innerHTML=desiredNavHtml();
         const current=normalPage(location.pathname);
-        nav.querySelectorAll('a').forEach(a=>a.classList.toggle('current',normalPage(a.getAttribute('href'))===current));
+        nav.querySelectorAll('a').forEach(a=>{a.classList.toggle('current',normalPage(a.getAttribute('href'))===current);a.addEventListener('click',()=>nav.classList.remove('open'),{once:true})});
         nav.dataset.benarianNavReady='true';
       }
-      const button=header.querySelector('.menu-btn');
-      if(button && button.dataset.finalMenuBound!=='true'){
-        button.dataset.finalMenuBound='true';button.setAttribute('aria-label','Open menu');button.setAttribute('aria-expanded','false');
-        button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();const n=header.querySelector('.nav');if(!n)return;const open=n.classList.toggle('open');button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close menu':'Open menu')});
+      const existing=header.querySelector('.menu-btn');
+      if(existing && existing.dataset.canonicalMenuReady!=='true'){
+        const button=existing.cloneNode(true);existing.replaceWith(button);button.dataset.canonicalMenuReady='true';button.dataset.finalMenuBound='true';button.setAttribute('aria-label','Open menu');button.setAttribute('aria-expanded','false');
+        button.addEventListener('click',event=>{event.preventDefault();event.stopImmediatePropagation();const n=header.querySelector('.nav');if(!n)return;const open=n.classList.toggle('open');button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close menu':'Open menu')});
       }
     });
+    if(document.documentElement.dataset.benarianMenuOutsideBound!=='true'){
+      document.documentElement.dataset.benarianMenuOutsideBound='true';
+      document.addEventListener('click',event=>{document.querySelectorAll('.header').forEach(header=>{if(header.contains(event.target))return;const nav=header.querySelector('.nav');const button=header.querySelector('.menu-btn');nav?.classList.remove('open');button?.setAttribute('aria-expanded','false');button?.setAttribute('aria-label','Open menu')})});
+      document.addEventListener('keydown',event=>{if(event.key!=='Escape')return;document.querySelectorAll('.header').forEach(header=>{header.querySelector('.nav')?.classList.remove('open');header.querySelector('.menu-btn')?.setAttribute('aria-expanded','false')})});
+    }
   }
 
   function installFooter(){document.querySelectorAll('footer').forEach(f=>f.remove());const shell=document.querySelector('.shell')||document.body;shell.insertAdjacentHTML('beforeend',FOOTER_HTML)}
-  function apply(){installAppMeta();installStyle();installHeader();installFooter()}
+  function apply(){installAppMeta();installStyle();installUtilities();installHeader();installFooter()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
-  [350,1000,2200].forEach(ms=>setTimeout(()=>{installAppMeta();installStyle();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter()},ms));
+  [350,1000,2200].forEach(ms=>setTimeout(()=>{installAppMeta();installStyle();installUtilities();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter()},ms));
 })();
