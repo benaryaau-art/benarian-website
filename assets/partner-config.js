@@ -78,6 +78,28 @@ window.BENARIAN_PARTNERS = {
     });
   }
 
+  function applyDistinctPageHeroes() {
+    const page = (location.pathname.split('/').pop() || '').toLowerCase();
+    const setHero = (selector, image, overlay, position = 'center center') => {
+      const hero = document.querySelector(selector);
+      if (!hero) return;
+      hero.style.setProperty('background-image', `${overlay},url("${image}")`, 'important');
+      hero.style.setProperty('background-position', position, 'important');
+      hero.style.setProperty('background-size', 'cover', 'important');
+      hero.style.setProperty('background-repeat', 'no-repeat', 'important');
+    };
+
+    if (page === 'affiliate-disclosure.html') {
+      setHero('.page-hero', 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=92&w=2400', 'linear-gradient(90deg,rgba(18,14,10,.78),rgba(18,14,10,.24))', 'center 48%');
+    } else if (page === 'visa-guide.html') {
+      setHero('.visa-hero', 'https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&q=92&w=2400', 'linear-gradient(90deg,rgba(10,12,18,.84),rgba(10,12,18,.42),rgba(10,12,18,.08))', innerWidth <= 760 ? '62% center' : 'center center');
+    } else if (page === 'destinations.html') {
+      setHero('.page-hero', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=92&w=2400', 'linear-gradient(90deg,rgba(10,13,12,.78),rgba(10,13,12,.26))', innerWidth <= 760 ? '58% center' : 'center center');
+    } else if (page === 'hotels.html') {
+      setHero('.hotels-hero', 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=94&w=2400', 'linear-gradient(90deg,rgba(10,8,6,.80),rgba(10,8,6,.26),rgba(10,8,6,.06))', innerWidth <= 760 ? '64% center' : 'center center');
+    }
+  }
+
   function forceTravelGuideLightTheme() {
     const page = (location.pathname.split('/').pop() || '').toLowerCase();
     if (page !== 'travel-guides.html') return;
@@ -126,7 +148,7 @@ window.BENARIAN_PARTNERS = {
   }
 
   function applyGlobalRules() {
-    ensureGlobalLogo(); correctFlightLinks(); replaceRestaurantsWithTerms(); ensureTravelGuideLink(); forceTravelGuideLightTheme();
+    applyDistinctPageHeroes(); ensureGlobalLogo(); correctFlightLinks(); replaceRestaurantsWithTerms(); ensureTravelGuideLink(); forceTravelGuideLightTheme();
   }
 
   function start() {
@@ -138,6 +160,7 @@ window.BENARIAN_PARTNERS = {
     [300,700,1200,2000].forEach(delay => setTimeout(applyGlobalRules, delay));
   }
 
+  window.addEventListener('resize', applyDistinctPageHeroes, {passive:true});
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
   else start();
 })();
