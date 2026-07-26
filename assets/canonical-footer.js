@@ -4,11 +4,10 @@
     ['hotels.html','HOTELS'],
     ['flights.html','FLIGHTS'],
     ['persian-experiences.html','PERSIAN EXPERIENCES'],
-    ['restaurants.html','RESTAURANTS'],
     ['experiences.html','EXPERIENCES'],
     ['wellness.html','SPA & WELLNESS'],
     ['visa-guide.html','VISA GUIDE'],
-    ['travel-guides.html','TRAVEL GUIDES'],
+    ['travel-guides.html','TRAVEL GUIDE'],
     ['about.html','ABOUT US'],
     ['contact.html','CONTACT'],
     ['terms-and-conditions.html','TERMS & CONDITIONS']
@@ -39,6 +38,8 @@
     .header .brand-lockup .brand-copy{display:flex!important;flex-direction:column!important}
     .header .brand-lockup .brand-copy strong{color:#17130f!important;font:600 28px/.9 'Cormorant Garamond',Georgia,serif!important;letter-spacing:4.4px!important;white-space:nowrap!important}
     .header .brand-lockup .brand-copy small{margin-top:7px!important;color:#b9872c!important;font:700 7px/1.2 Inter,Arial,sans-serif!important;letter-spacing:1.25px!important;white-space:nowrap!important}
+    .header .nav{min-height:42px!important}
+    .header .nav a{flex:0 0 auto!important}
     .benarian-footer-v3{position:relative!important;inset:auto!important;float:none!important;clear:both!important;display:grid!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;grid-template-columns:minmax(280px,1.3fr) repeat(3,minmax(120px,.55fr))!important;gap:32px!important;align-items:start!important;margin:0!important;padding:48px 6% 36px!important;background:#fbf7ef!important;border:0!important;border-top:1px solid #e3d3b7!important;border-radius:0!important;box-shadow:none!important;color:#6d6254!important;font-family:Inter,Arial,sans-serif!important;font-size:16px!important;line-height:1.5!important;box-sizing:border-box!important;overflow:visible!important;transform:none!important;z-index:1!important}
     .benarian-footer-v3 *{box-sizing:border-box!important;min-width:0!important;max-width:100%!important}
     .bf3-brand-block{display:flex!important;flex-direction:column!important;align-items:flex-start!important;margin:0!important;padding:0!important}
@@ -53,72 +54,41 @@
   `;
 
   function normalPage(v){return(v||'index').replace(/^.*\//,'').replace(/\.html$/,'')||'index'}
+  function desiredNavHtml(){return NAV_ITEMS.map(([href,label])=>`<a href="${href}">${label}</a>`).join('')}
+  function navSignature(nav){return [...nav.querySelectorAll('a')].map(a=>`${normalPage(a.getAttribute('href'))}:${(a.textContent||'').trim()}`).join('|')}
+  const DESIRED_SIGNATURE=NAV_ITEMS.map(([href,label])=>`${normalPage(href)}:${label}`).join('|');
 
   function installAppMeta(){
-    const links=[
-      ['manifest','/manifest.json'],
-      ['icon','/benarian-app-icon.svg'],
-      ['apple-touch-icon','/benarian-app-icon.svg']
-    ];
-    links.forEach(([rel,href])=>{
-      let link=document.head.querySelector(`link[rel="${rel}"]`);
-      if(!link){link=document.createElement('link');link.rel=rel;document.head.appendChild(link)}
-      link.href=href;
-      if(rel==='icon')link.type='image/svg+xml';
-    });
-    let theme=document.head.querySelector('meta[name="theme-color"]');
-    if(!theme){theme=document.createElement('meta');theme.name='theme-color';document.head.appendChild(theme)}
-    theme.content='#080808';
+    const links=[['manifest','/manifest.json'],['icon','/benarian-app-icon.svg'],['apple-touch-icon','/benarian-app-icon.svg']];
+    links.forEach(([rel,href])=>{let link=document.head.querySelector(`link[rel="${rel}"]`);if(!link){link=document.createElement('link');link.rel=rel;document.head.appendChild(link)}link.href=href;if(rel==='icon')link.type='image/svg+xml'});
+    let theme=document.head.querySelector('meta[name="theme-color"]');if(!theme){theme=document.createElement('meta');theme.name='theme-color';document.head.appendChild(theme)}theme.content='#080808';
   }
 
-  function installStyle(){
-    let style=document.getElementById('benarian-final-global-style');
-    if(!style){style=document.createElement('style');style.id='benarian-final-global-style';document.head.appendChild(style)}
-    style.textContent=CSS;
-  }
+  function installStyle(){let style=document.getElementById('benarian-final-global-style');if(!style){style=document.createElement('style');style.id='benarian-final-global-style';document.head.appendChild(style)}style.textContent=CSS}
 
   function installHeader(){
     document.querySelectorAll('.header').forEach(header=>{
-      let brand=header.querySelector('.brand-lockup,.brand');
-      if(brand){
-        brand.classList.add('brand-lockup');
-        brand.href='index.html';
-        brand.setAttribute('aria-label','BENARIAN home');
-        brand.innerHTML='<span class="brand-mark" aria-hidden="true">BB</span><span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL & HOSPITALITY</small></span>';
+      const brand=header.querySelector('.brand-lockup,.brand');
+      if(brand && brand.dataset.benarianBrandReady!=='true'){
+        brand.classList.add('brand-lockup');brand.href='index.html';brand.setAttribute('aria-label','BENARIAN home');brand.innerHTML='<span class="brand-mark" aria-hidden="true">BB</span><span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL & HOSPITALITY</small></span>';brand.dataset.benarianBrandReady='true';
       }
       const nav=header.querySelector('.nav');
       if(nav){
-        nav.innerHTML=NAV_ITEMS.map(([href,label])=>`<a href="${href}">${label}</a>`).join('');
+        if(navSignature(nav)!==DESIRED_SIGNATURE) nav.innerHTML=desiredNavHtml();
         const current=normalPage(location.pathname);
-        nav.querySelectorAll('a').forEach(a=>{if(normalPage(a.getAttribute('href'))===current)a.classList.add('current')});
+        nav.querySelectorAll('a').forEach(a=>a.classList.toggle('current',normalPage(a.getAttribute('href'))===current));
+        nav.dataset.benarianNavReady='true';
       }
-      const oldButton=header.querySelector('.menu-btn');
-      if(oldButton){
-        const button=oldButton.cloneNode(true);
-        button.removeAttribute('data-final-menu-bound');
-        button.setAttribute('aria-label','Open menu');
-        button.setAttribute('aria-expanded','false');
-        oldButton.replaceWith(button);
-        button.addEventListener('click',event=>{
-          event.preventDefault();
-          event.stopPropagation();
-          const n=header.querySelector('.nav');
-          if(!n)return;
-          const open=n.classList.toggle('open');
-          button.setAttribute('aria-expanded',String(open));
-          button.setAttribute('aria-label',open?'Close menu':'Open menu');
-        });
+      const button=header.querySelector('.menu-btn');
+      if(button && button.dataset.finalMenuBound!=='true'){
+        button.dataset.finalMenuBound='true';button.setAttribute('aria-label','Open menu');button.setAttribute('aria-expanded','false');
+        button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();const n=header.querySelector('.nav');if(!n)return;const open=n.classList.toggle('open');button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close menu':'Open menu')});
       }
     });
   }
 
-  function installFooter(){
-    document.querySelectorAll('footer').forEach(f=>f.remove());
-    const shell=document.querySelector('.shell')||document.body;
-    shell.insertAdjacentHTML('beforeend',FOOTER_HTML);
-  }
-
+  function installFooter(){document.querySelectorAll('footer').forEach(f=>f.remove());const shell=document.querySelector('.shell')||document.body;shell.insertAdjacentHTML('beforeend',FOOTER_HTML)}
   function apply(){installAppMeta();installStyle();installHeader();installFooter()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
-  [350,1000,2200].forEach(ms=>setTimeout(()=>{installAppMeta();installHeader();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter()},ms));
+  [350,1000,2200].forEach(ms=>setTimeout(()=>{installAppMeta();installStyle();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter()},ms));
 })();
