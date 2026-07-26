@@ -37,3 +37,9 @@ button,.btn,.lux-btn,.book-btn,.contact-btn{transition:transform .18s ease,box-s
 .hotels-hero{background-image:linear-gradient(90deg,rgba(10,8,6,.78),rgba(10,8,6,.34),rgba(10,8,6,.08)),url('benarian-hotels-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
 .visa-hero{background-image:linear-gradient(90deg,rgba(8,10,14,.84),rgba(8,10,14,.46),rgba(8,10,14,.08)),url('benarian-visa-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
 @media(max-width:760px){.hotels-hero{background-position:64% center!important}.visa-hero{background-position:62% center!important}}
+
+/* 2026-07-26: uploaded hero images — scoped to three requested pages only */
+.guide-hero{background-image:url('%20%20%20%20travel-guide-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+.page-hero[style*="1539367628448"]{background-image:url('%20%20%20%20Destinations-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+.hotels-hero{background-image:linear-gradient(90deg,rgba(10,8,6,.70),rgba(10,8,6,.24)),url('%20%20%20%20hotels-hero.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+@media(max-width:760px){.guide-hero{background-position:center center!important}.page-hero[style*="1539367628448"]{background-position:center center!important}.hotels-hero{background-position:62% center!important}}
