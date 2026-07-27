@@ -61,9 +61,36 @@
   const DESIRED_SIGNATURE=NAV_ITEMS.map(([href,label])=>`${normalPage(href)}:${label}`).join('|');
 
   function installAppMeta(){
-    const links=[['manifest','/manifest.json'],['icon','/benarian-app-icon.svg'],['apple-touch-icon','/benarian-app-icon.svg']];
-    links.forEach(([rel,href])=>{let link=document.head.querySelector(`link[rel="${rel}"]`);if(!link){link=document.createElement('link');link.rel=rel;document.head.appendChild(link)}link.href=href;if(rel==='icon')link.type='image/svg+xml'});
-    let theme=document.head.querySelector('meta[name="theme-color"]');if(!theme){theme=document.createElement('meta');theme.name='theme-color';document.head.appendChild(theme)}theme.content='#080808';
+    const links=[['manifest','/site.webmanifest'],['icon','/favicon.svg'],['shortcut icon','/favicon.svg'],['apple-touch-icon','/favicon.svg']];
+    links.forEach(([rel,href])=>{let link=document.head.querySelector(`link[rel="${rel}"]`);if(!link){link=document.createElement('link');link.rel=rel;document.head.appendChild(link)}link.href=href;if(rel.includes('icon'))link.type='image/svg+xml'});
+    let theme=document.head.querySelector('meta[name="theme-color"]');if(!theme){theme=document.createElement('meta');theme.name='theme-color';document.head.appendChild(theme)}theme.content='#ffffff';
+  }
+
+  function installSeoMeta(){
+    const page=normalPage(location.pathname);
+    if(page!=='index')return;
+    const description='Discover curated luxury hotels, resorts, destinations, flights, wellness retreats and exceptional travel experiences with BENARIAN.';
+    document.title='BENARIAN | Luxury Travel & Hospitality';
+    const setMeta=(selector,attrs)=>{let node=document.head.querySelector(selector);if(!node){node=document.createElement('meta');document.head.appendChild(node)}Object.entries(attrs).forEach(([key,value])=>node.setAttribute(key,value));};
+    setMeta('meta[name="description"]',{name:'description',content:description});
+    setMeta('meta[property="og:title"]',{property:'og:title',content:'BENARIAN | Luxury Travel & Hospitality'});
+    setMeta('meta[property="og:description"]',{property:'og:description',content:description});
+    setMeta('meta[property="og:type"]',{property:'og:type',content:'website'});
+    setMeta('meta[property="og:url"]',{property:'og:url',content:'https://benarian.com/'});
+    setMeta('meta[property="og:image"]',{property:'og:image',content:'https://benarian.com/favicon.svg'});
+    setMeta('meta[name="twitter:card"]',{name:'twitter:card',content:'summary'});
+    setMeta('meta[name="twitter:title"]',{name:'twitter:title',content:'BENARIAN | Luxury Travel & Hospitality'});
+    setMeta('meta[name="twitter:description"]',{name:'twitter:description',content:description});
+    let canonical=document.head.querySelector('link[rel="canonical"]');if(!canonical){canonical=document.createElement('link');canonical.rel='canonical';document.head.appendChild(canonical)}canonical.href='https://benarian.com/';
+    let schema=document.getElementById('benarian-structured-data');if(!schema){schema=document.createElement('script');schema.type='application/ld+json';schema.id='benarian-structured-data';document.head.appendChild(schema)}
+    schema.textContent=JSON.stringify({
+      '@context':'https://schema.org',
+      '@graph':[
+        {'@type':'Organization','@id':'https://benarian.com/#organization','name':'BENARIAN','alternateName':'Benarian Hotels','url':'https://benarian.com/','logo':{'@type':'ImageObject','url':'https://benarian.com/favicon.svg','width':512,'height':512},'sameAs':['https://www.instagram.com/benarianhotels']},
+        {'@type':'WebSite','@id':'https://benarian.com/#website','url':'https://benarian.com/','name':'BENARIAN','alternateName':'BENARIAN Luxury Travel & Hospitality','publisher':{'@id':'https://benarian.com/#organization'},'inLanguage':'en'},
+        {'@type':'WebPage','@id':'https://benarian.com/#webpage','url':'https://benarian.com/','name':'BENARIAN | Luxury Travel & Hospitality','isPartOf':{'@id':'https://benarian.com/#website'},'about':{'@id':'https://benarian.com/#organization'},'description':description,'inLanguage':'en'}
+      ]
+    });
   }
 
   function installStyle(){let style=document.getElementById('benarian-final-global-style');if(!style){style=document.createElement('style');style.id='benarian-final-global-style';document.head.appendChild(style)}style.textContent=CSS}
@@ -120,7 +147,7 @@
   }
 
   function installFooter(){document.querySelectorAll('footer').forEach(f=>f.remove());const shell=document.querySelector('.shell')||document.body;shell.insertAdjacentHTML('beforeend',FOOTER_HTML)}
-  function apply(){installAppMeta();installStyle();installUtilities();installHeader();installFooter()}
+  function apply(){installAppMeta();installSeoMeta();installStyle();installUtilities();installHeader();installFooter()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
-  [350,1000,2200].forEach(ms=>setTimeout(()=>{installAppMeta();installStyle();installUtilities();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter()},ms));
+  [350,1000,2200].forEach(ms=>setTimeout(()=>{installAppMeta();installSeoMeta();installStyle();installUtilities();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter()},ms));
 })();
