@@ -1,17 +1,27 @@
 /*
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
+  Pragma: no-cache
+  Expires: 0
 
 /assets/partner-config.js
-  Cache-Control: no-cache, no-store, must-revalidate
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
 
 /assets/premium-v2.js
-  Cache-Control: no-cache, no-store, must-revalidate
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
 
 /assets/script.js
-  Cache-Control: no-cache, no-store, must-revalidate
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
 
 /assets/*.js
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
 
 /assets/*.css
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
