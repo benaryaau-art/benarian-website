@@ -210,7 +210,8 @@ window.BENARIAN_PARTNERS = {
     removeLegacyExpediaSections();
     loadScriptOnce('assets/live-concierge.js?v=20260725e', 'data-benarian-live-concierge');
     loadScriptOnce('assets/install-app-prompt.js?v=20260725e', 'data-benarian-install-prompt');
-    loadScriptOnce('assets/premium-v2.js?v=20260725e', 'data-benarian-premium-v2-script');
+    loadScriptOnce('assets/premium-v2.js?v=20260727flight', 'data-benarian-premium-v2-script');
+    loadScriptOnce('assets/custom-flight-luxury.js?v=20260727a', 'data-benarian-custom-flight');
     loadScriptOnce('assets/bali-culture-guide.js?v=20260725a', 'data-benarian-bali-culture');
   }
 
