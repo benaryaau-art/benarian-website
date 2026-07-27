@@ -2,6 +2,14 @@
   if (document.documentElement.dataset.benarianLuxuryFlight === 'true') return;
   document.documentElement.dataset.benarianLuxuryFlight = 'true';
 
+  if (!document.querySelector('script[data-benarian-hotel-image]')) {
+    const hotelImageScript = document.createElement('script');
+    hotelImageScript.src = 'assets/hotel-image-enhancement.js?v=20260727b';
+    hotelImageScript.defer = true;
+    hotelImageScript.dataset.benarianHotelImage = 'true';
+    document.head.appendChild(hotelImageScript);
+  }
+
   const flightPartner = window.BENARIAN_PARTNERS?.flights || {};
   const affiliateBase = flightPartner.affiliateBaseUrl || 'https://www.anrdoezrs.net/click-101828630-17289007';
   const IMG = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=92&w=1800';
