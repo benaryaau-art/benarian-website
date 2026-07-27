@@ -12,11 +12,11 @@
       style.id = 'benarian-hotel-image-style';
       style.textContent = `
         .benarian-hotel-card-wrap{position:relative;max-width:600px;margin:0 auto;background:#fff;border:1px solid #cfa14d;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.28)}
-        .benarian-hotel-image{height:190px;background-image:linear-gradient(180deg,rgba(20,14,9,.03),rgba(20,14,9,.20)),url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=92&w=1800');background-position:center 56%;background-size:cover;background-repeat:no-repeat;position:relative;background-color:#2a2118}
+        .benarian-hotel-image{height:190px;background-image:linear-gradient(180deg,rgba(20,14,9,.02),rgba(20,14,9,.23)),url('assets/hotels-hero-new.jpg?v=20260727hotel');background-position:center 58%;background-size:cover;background-repeat:no-repeat;position:relative;background-color:#2a2118}
         .benarian-hotel-card-wrap .benarian-luxury-form{max-width:none!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
         @media(max-width:760px){
           .benarian-hotel-card-wrap{margin:0 34px;border-radius:17px}
-          .benarian-hotel-image{height:142px;background-position:center 58%}
+          .benarian-hotel-image{height:142px;background-position:center 60%}
           .benarian-hotel-card-wrap .benarian-luxury-form{margin:0!important;border-radius:0!important}
         }
         @media(max-width:390px){.benarian-hotel-card-wrap{margin-left:22px;margin-right:22px}.benarian-hotel-image{height:132px}}
@@ -29,7 +29,7 @@
     const image = document.createElement('div');
     image.className = 'benarian-hotel-image';
     image.setAttribute('role', 'img');
-    image.setAttribute('aria-label', 'Luxury tropical resort at golden sunset');
+    image.setAttribute('aria-label', 'Luxury hotel and resort exterior');
     form.parentNode.insertBefore(wrap, form);
     wrap.appendChild(image);
     wrap.appendChild(form);
