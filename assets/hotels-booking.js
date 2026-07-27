@@ -2,7 +2,6 @@
   const hero = document.querySelector('.hotels-hero');
   if (!hero || document.querySelector('#benarian-hotels-reservation')) return;
 
-  const WIDGET_TRACKING_URL = 'https://www.jdoqocy.com/click-101828630-17323528?sid=';
   const HOTEL_TRACKING_URL = 'https://www.kqzyfj.com/click-101828630-17289006';
 
   const bookingSearch = query => {
@@ -21,10 +20,10 @@
     .hotels-hero{position:relative}
     .hotels-best-price{margin-top:26px;max-width:660px;padding:18px 20px;border:1px solid rgba(230,181,84,.82);border-radius:14px;background:rgba(15,12,8,.78);backdrop-filter:blur(8px);box-shadow:0 14px 40px rgba(0,0,0,.24);box-sizing:border-box}
     .hotels-best-price strong{display:block;color:#f4d38b;font:600 22px/1.2 'Cormorant Garamond',Georgia,serif;margin-bottom:5px}.hotels-best-price span{display:block;color:#fff;font:500 13px/1.6 Inter,Arial,sans-serif}.hotels-best-price .fa{margin-top:3px;color:#f2d7a0;direction:rtl;text-align:left}.hotels-best-price a{display:inline-flex;margin-top:14px;padding:12px 18px;border-radius:9px;background:#c58c28;color:#fff;text-decoration:none;font:700 11px Inter,Arial,sans-serif;letter-spacing:.7px}
-    #benarian-hotels-reservation{position:relative;padding:54px 6% 64px;background:radial-gradient(circle at top,#2a2118 0,#17130e 55%,#0e0b08 100%);border-top:1px solid #c8953d;border-bottom:1px solid #c8953d;color:#fff;scroll-margin-top:90px;overflow:hidden}.hotels-reservation-inner{max-width:1080px;width:100%;margin:auto;text-align:center;box-sizing:border-box}.hotels-reservation-kicker{display:block;color:#d7a544;font:800 10px Inter,Arial,sans-serif;letter-spacing:3px;margin-bottom:10px}.hotels-reservation-inner h2{margin:0;color:#f4dfb6;font:600 clamp(34px,5vw,58px)/1 'Cormorant Garamond',Georgia,serif}.hotels-reservation-intro{max-width:760px;margin:14px auto 26px;color:#d6cab8;font:400 14px/1.7 Inter,Arial,sans-serif}
-    .hotels-booking-form{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end;width:100%;background:#fff;border:1px solid #c9953f;border-radius:18px;padding:20px;box-shadow:0 22px 60px rgba(0,0,0,.4);text-align:left;box-sizing:border-box}.hotels-booking-form>*{min-width:0;box-sizing:border-box}.hotels-booking-form label{display:block;color:#8d6424;font:800 9px/1 Inter,Arial,sans-serif;letter-spacing:1.2px}.hotels-booking-form input{display:block;width:100%;margin-top:8px;padding:14px 12px;border:1px solid #cfc7bb;border-radius:8px;background:#fff;color:#17130e;font:500 14px Inter,Arial,sans-serif;box-sizing:border-box}.hotels-booking-form button{min-height:48px;padding:13px 22px;border:0;border-radius:8px;background:#c58c28;color:#fff;font:800 11px Inter,Arial,sans-serif;letter-spacing:.8px;cursor:pointer;white-space:nowrap}.hotels-reservation-note{margin:15px auto 0!important;color:#a99c89!important;font:400 10px/1.7 Inter,Arial,sans-serif!important;max-width:820px}.hotels-widget-shell{margin-top:20px;background:#fff;border:1px solid #c9953f;border-radius:14px;padding:10px;overflow:hidden}.hotels-widget-shell iframe{display:block;width:100%!important;max-width:100%!important;border:0!important}
+    #benarian-hotels-reservation{position:relative;padding:54px 6% 44px;background:radial-gradient(circle at top,#2a2118 0,#17130e 55%,#0e0b08 100%);border-top:1px solid #c8953d;border-bottom:1px solid #c8953d;color:#fff;scroll-margin-top:90px;overflow:hidden}.hotels-reservation-inner{max-width:1080px;width:100%;margin:auto;text-align:center;box-sizing:border-box}.hotels-reservation-kicker{display:block;color:#d7a544;font:800 10px Inter,Arial,sans-serif;letter-spacing:3px;margin-bottom:10px}.hotels-reservation-inner h2{margin:0;color:#f4dfb6;font:600 clamp(34px,5vw,58px)/1 'Cormorant Garamond',Georgia,serif}.hotels-reservation-intro{max-width:760px;margin:14px auto 26px;color:#d6cab8;font:400 14px/1.7 Inter,Arial,sans-serif}
+    .hotels-booking-form{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end;width:100%;background:#fff;border:1px solid #c9953f;border-radius:18px;padding:20px;box-shadow:0 22px 60px rgba(0,0,0,.4);text-align:left;box-sizing:border-box}.hotels-booking-form>*{min-width:0;box-sizing:border-box}.hotels-booking-form label{display:block;color:#8d6424;font:800 9px/1 Inter,Arial,sans-serif;letter-spacing:1.2px}.hotels-booking-form input{display:block;width:100%;margin-top:8px;padding:14px 12px;border:1px solid #cfc7bb;border-radius:8px;background:#fff;color:#17130e;font:500 14px Inter,Arial,sans-serif;box-sizing:border-box}.hotels-booking-form button{min-height:48px;padding:13px 22px;border:0;border-radius:8px;background:#17130e;color:#fff;font:800 11px Inter,Arial,sans-serif;letter-spacing:.8px;cursor:pointer;white-space:nowrap}.hotels-reservation-note{margin:15px auto 0!important;color:#b7aa98!important;font:400 10px/1.7 Inter,Arial,sans-serif!important;max-width:820px}
     .booking-partner-strip{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:17px 6%;background:#fff8eb;border-bottom:1px solid #e5d1aa;text-align:center}.booking-partner-strip span{font-size:9px;font-weight:800;letter-spacing:1.7px;color:#96651b}.booking-partner-strip strong{font:600 23px 'Cormorant Garamond',Georgia,serif;color:#211b15}.booking-partner-strip small{font-size:11px;color:#6d6255}
-    @media(max-width:760px){.hotels-best-price{width:100%;padding:16px}.hotels-best-price strong{font-size:20px}#benarian-hotels-reservation{padding:40px 12px 56px}.hotels-reservation-inner h2{font-size:34px}.hotels-booking-form{display:block;padding:14px}.hotels-booking-form label{margin:0 0 16px}.hotels-booking-form input{height:52px;font-size:16px}.hotels-booking-form button{display:block;width:100%;white-space:normal}.booking-partner-strip{align-items:flex-start;flex-direction:column;text-align:left;padding:17px 20px;gap:5px}}
+    @media(max-width:760px){.hotels-best-price{width:100%;padding:16px}.hotels-best-price strong{font-size:20px}#benarian-hotels-reservation{padding:40px 12px 34px}.hotels-reservation-inner h2{font-size:34px}.hotels-booking-form{display:block;padding:14px}.hotels-booking-form label{margin:0 0 16px}.hotels-booking-form input{height:52px;font-size:16px}.hotels-booking-form button{display:block;width:100%;white-space:normal}.booking-partner-strip{align-items:flex-start;flex-direction:column;text-align:left;padding:17px 20px;gap:5px}}
   `;
   document.head.appendChild(style);
 
@@ -42,7 +41,7 @@
 
   const section = document.createElement('section');
   section.id = 'benarian-hotels-reservation';
-  section.innerHTML = `<div class="hotels-reservation-inner"><span class="hotels-reservation-kicker">BOOKING.COM OFFICIAL AFFILIATE SEARCH</span><h2>Search &amp; Book Your Stay</h2><p class="hotels-reservation-intro">Choose your destination and dates. Live rates, room availability, payment and booking confirmation are provided securely by Booking.com.</p><form class="hotels-booking-form"><label>DESTINATION<input name="destination" type="text" placeholder="Hotel or destination" required></label><label>CHECK-IN<input name="checkin" type="date" min="${iso(new Date())}" value="${iso(tomorrow)}" required></label><label>CHECK-OUT<input name="checkout" type="date" min="${iso(tomorrow)}" value="${iso(dayAfter)}" required></label><button type="submit">SEARCH BOOKING.COM →</button></form><p class="hotels-reservation-note">You will continue to Booking.com in a new tab. BENARIAN may earn an affiliate commission from eligible bookings at no additional cost to you.</p><div class="hotels-widget-shell"><div id="bookingAffiliateWidget_hotelsPage_386d39d7">&nbsp;</div></div><img src="https://www.lduhtrp.net/image-101828630-17323528" width="1" height="1" alt="" style="position:absolute;opacity:0;pointer-events:none"></div>`;
+  section.innerHTML = `<div class="hotels-reservation-inner"><span class="hotels-reservation-kicker">BOOKING.COM AFFILIATE SEARCH</span><h2>Search &amp; Book Your Stay</h2><p class="hotels-reservation-intro">Choose your destination and dates. Live rates, room availability, payment and booking confirmation are provided securely by Booking.com.</p><form class="hotels-booking-form"><label>DESTINATION<input name="destination" type="text" placeholder="Hotel or destination" required></label><label>CHECK-IN<input name="checkin" type="date" min="${iso(new Date())}" value="${iso(tomorrow)}" required></label><label>CHECK-OUT<input name="checkout" type="date" min="${iso(tomorrow)}" value="${iso(dayAfter)}" required></label><button type="submit">SEARCH BOOKING.COM →</button></form><p class="hotels-reservation-note">You will continue to Booking.com in a new tab. BENARIAN may earn an affiliate commission from eligible bookings at no additional cost to you.</p></div>`;
   hero.insertAdjacentElement('afterend', section);
 
   const strip = document.createElement('div');
@@ -91,21 +90,4 @@
     if (!destination) return form.elements.destination.focus();
     window.open(deepLink(bookingSearch(destination)), '_blank', 'noopener');
   });
-
-  const initWidget = () => {
-    if (!window.Booking?.AffiliateWidget || section.dataset.widgetInitialised) return;
-    section.dataset.widgetInitialised = 'true';
-    try {
-      new Booking.AffiliateWidget({iframeSettings:{selector:'bookingAffiliateWidget_hotelsPage_386d39d7',responsive:true},widgetSettings:{destinationurloverride:`${WIDGET_TRACKING_URL}hotels-page`}});
-    } catch (error) { section.dataset.widgetInitialised = ''; }
-  };
-  if (window.Booking?.AffiliateWidget) initWidget();
-  else {
-    const sdk = document.createElement('script');
-    sdk.src = 'https://www.booking.com/affiliate/prelanding_sdk';
-    sdk.async = true;
-    sdk.dataset.benarianHotelsSdk = 'true';
-    sdk.addEventListener('load', initWidget, {once:true});
-    document.head.appendChild(sdk);
-  }
 })();
