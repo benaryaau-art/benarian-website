@@ -1,4 +1,17 @@
+/*
+  Cache-Control: no-cache, must-revalidate
+
 /assets/partner-config.js
   Cache-Control: no-cache, no-store, must-revalidate
-/assets/live-concierge.js
+
+/assets/premium-v2.js
   Cache-Control: no-cache, no-store, must-revalidate
+
+/assets/script.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/assets/*.js
+  Cache-Control: no-cache, must-revalidate
+
+/assets/*.css
+  Cache-Control: no-cache, must-revalidate
