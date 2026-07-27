@@ -73,25 +73,26 @@
         .benarian-custom-heading .eyebrow{display:block;color:#d3a24d!important;font-size:10px!important;font-weight:800!important;letter-spacing:4px!important;margin-bottom:22px!important}
         .benarian-custom-heading h2{font:600 clamp(42px,6vw,70px)/.96 'Cormorant Garamond',Georgia,serif!important;color:#17110c!important;margin:0 0 26px!important;letter-spacing:-1px!important}
         .benarian-custom-heading p{max-width:650px;margin:0 auto 42px!important;color:#eee5da!important;font-size:16px!important;line-height:1.75!important}
-        .benarian-luxury-form{position:relative;max-width:640px;margin:0 auto;padding:24px 25px 25px;background:#fff;border:1.5px solid #d3a34b;border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.38)}
-        .benarian-luxury-field{display:block;text-align:left;margin-bottom:18px}
+        .benarian-luxury-form{position:relative;max-width:640px;margin:0 auto;padding:24px 25px 25px;background:#fff;border:1.5px solid #d3a34b;border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.38);overflow:hidden}
+        .benarian-luxury-field{display:block;text-align:left;margin-bottom:18px;min-width:0;overflow:hidden}
         .benarian-luxury-field span{display:block;margin:0 0 9px;color:#81591e;font-size:10px;font-weight:800;letter-spacing:2px}
-        .benarian-luxury-field input{width:100%;height:72px;padding:0 20px;border:1px solid #d8c7ab!important;border-radius:12px!important;background:#fff!important;color:#17130f!important;font-size:20px!important;box-shadow:inset 0 0 0 1px rgba(190,153,93,.08)}
+        .benarian-luxury-field input{display:block;box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important;height:72px;padding:0 20px;border:1px solid #d8c7ab!important;border-radius:12px!important;background:#fff!important;color:#17130f!important;font-size:20px!important;box-shadow:inset 0 0 0 1px rgba(190,153,93,.08)}
         .benarian-luxury-field input::placeholder{color:#aaa!important}
         .benarian-luxury-form button{width:100%;height:68px;margin-top:4px;border:0!important;border-radius:11px!important;background:#1a1713!important;color:#fff!important;font-size:13px!important;font-weight:800!important;letter-spacing:.3px!important;cursor:pointer!important}
         .benarian-luxury-form button:hover{background:#b9872c!important}
         .benarian-custom-disclosure{position:relative;max-width:640px;margin:28px auto 0!important;padding:0 24px;color:#b9ad9d!important;text-align:center;font-size:11px!important;line-height:1.8!important}
         .benarian-official-link{position:relative;display:block;width:max-content;max-width:calc(100% - 40px);margin:25px auto 0;padding:0 0 7px;border-bottom:1px solid #c6923d;color:#d5a54f!important;text-align:center;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.3px}
         @media(max-width:760px){
+          .home-lux .benarian-quick-access{display:none!important}
           .benarian-custom-hotel-search{padding-bottom:52px!important}
           .benarian-domain-pill{margin-bottom:30px;padding:11px 26px;font-size:13px}
           .benarian-custom-heading{padding:0 20px}
           .benarian-custom-heading .eyebrow{font-size:9px!important;letter-spacing:3.2px!important;margin-bottom:19px!important}
           .benarian-custom-heading h2{font-size:44px!important;line-height:.95!important;margin-bottom:24px!important}
           .benarian-custom-heading p{font-size:15px!important;line-height:1.72!important;margin-bottom:34px!important}
-          .benarian-luxury-form{margin:0 34px;padding:22px 25px 25px;border-radius:23px}
-          .benarian-luxury-field{margin-bottom:17px}
-          .benarian-luxury-field input{height:88px;font-size:20px!important;text-align:center}
+          .benarian-luxury-form{width:auto!important;max-width:none!important;margin:0 34px;padding:22px 25px 25px;border-radius:23px;overflow:hidden}
+          .benarian-luxury-field{margin-bottom:17px;min-width:0;overflow:hidden}
+          .benarian-luxury-field input{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;height:88px;font-size:20px!important;text-align:center;-webkit-appearance:none!important;appearance:none!important}
           .benarian-luxury-field:first-child input{text-align:left}
           .benarian-luxury-form button{height:72px;font-size:13px!important}
           .benarian-custom-disclosure{font-size:11px!important;margin-top:27px!important}
