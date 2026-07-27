@@ -12,15 +12,14 @@
       style.id = 'benarian-hotel-image-style';
       style.textContent = `
         .benarian-hotel-card-wrap{position:relative;max-width:600px;margin:0 auto;background:#fff;border:1px solid #cfa14d;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.28)}
-        .benarian-hotel-image{height:205px;background:url('assets/benarian-hotel-golden-resort.jpg?v=20260727') center 52%/cover no-repeat;position:relative}
-        .benarian-hotel-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,9,.03),rgba(20,14,9,.22))}
+        .benarian-hotel-image{height:190px;background-image:linear-gradient(180deg,rgba(20,14,9,.03),rgba(20,14,9,.20)),url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=92&w=1800');background-position:center 56%;background-size:cover;background-repeat:no-repeat;position:relative;background-color:#2a2118}
         .benarian-hotel-card-wrap .benarian-luxury-form{max-width:none!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
         @media(max-width:760px){
           .benarian-hotel-card-wrap{margin:0 34px;border-radius:17px}
-          .benarian-hotel-image{height:150px;background-position:center 54%}
+          .benarian-hotel-image{height:142px;background-position:center 58%}
           .benarian-hotel-card-wrap .benarian-luxury-form{margin:0!important;border-radius:0!important}
         }
-        @media(max-width:390px){.benarian-hotel-card-wrap{margin-left:22px;margin-right:22px}.benarian-hotel-image{height:138px}}
+        @media(max-width:390px){.benarian-hotel-card-wrap{margin-left:22px;margin-right:22px}.benarian-hotel-image{height:132px}}
       `;
       document.head.appendChild(style);
     }
