@@ -54,6 +54,85 @@
     });
   };
 
+  const installLuxuryHomeHotelSearch = () => {
+    if (!document.body.classList.contains('home-lux')) return;
+    const section = document.querySelector('#official-booking-search') || document.querySelector('.booking-search');
+    if (!section || section.dataset.luxuryCustomSearch === 'true') return;
+    section.dataset.luxuryCustomSearch = 'true';
+    section.id = 'official-booking-search';
+    section.className = 'booking-widget-section benarian-custom-hotel-search';
+
+    if (!document.getElementById('benarian-custom-hotel-search-style')) {
+      const style = document.createElement('style');
+      style.id = 'benarian-custom-hotel-search-style';
+      style.textContent = `
+        .benarian-custom-hotel-search{position:relative!important;padding:0 0 82px!important;margin:0!important;background:radial-gradient(circle at 50% 0,#2b2117 0,#17120d 45%,#0d0a07 100%)!important;border-top:1px solid #b9822c!important;border-bottom:1px solid #b9822c!important;overflow:hidden!important;color:#fff!important}
+        .benarian-custom-hotel-search:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0,rgba(207,151,55,.06) 48%,transparent 100%);pointer-events:none}
+        .benarian-domain-pill{position:relative;width:max-content;margin:0 auto 34px;padding:13px 31px;border:1px solid rgba(205,151,67,.28);border-radius:999px;background:rgba(50,40,29,.74);color:#fff;font-size:14px;letter-spacing:.2px}
+        .benarian-custom-heading{position:relative;text-align:center;max-width:760px;margin:0 auto;padding:0 24px}
+        .benarian-custom-heading .eyebrow{display:block;color:#d3a24d!important;font-size:10px!important;font-weight:800!important;letter-spacing:4px!important;margin-bottom:22px!important}
+        .benarian-custom-heading h2{font:600 clamp(42px,6vw,70px)/.96 'Cormorant Garamond',Georgia,serif!important;color:#17110c!important;margin:0 0 26px!important;letter-spacing:-1px!important}
+        .benarian-custom-heading p{max-width:650px;margin:0 auto 42px!important;color:#eee5da!important;font-size:16px!important;line-height:1.75!important}
+        .benarian-luxury-form{position:relative;max-width:640px;margin:0 auto;padding:24px 25px 25px;background:#fff;border:1.5px solid #d3a34b;border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.38)}
+        .benarian-luxury-field{display:block;text-align:left;margin-bottom:18px}
+        .benarian-luxury-field span{display:block;margin:0 0 9px;color:#81591e;font-size:10px;font-weight:800;letter-spacing:2px}
+        .benarian-luxury-field input{width:100%;height:72px;padding:0 20px;border:1px solid #d8c7ab!important;border-radius:12px!important;background:#fff!important;color:#17130f!important;font-size:20px!important;box-shadow:inset 0 0 0 1px rgba(190,153,93,.08)}
+        .benarian-luxury-field input::placeholder{color:#aaa!important}
+        .benarian-luxury-form button{width:100%;height:68px;margin-top:4px;border:0!important;border-radius:11px!important;background:#1a1713!important;color:#fff!important;font-size:13px!important;font-weight:800!important;letter-spacing:.3px!important;cursor:pointer!important}
+        .benarian-luxury-form button:hover{background:#b9872c!important}
+        .benarian-custom-disclosure{position:relative;max-width:640px;margin:28px auto 0!important;padding:0 24px;color:#b9ad9d!important;text-align:center;font-size:11px!important;line-height:1.8!important}
+        .benarian-official-link{position:relative;display:block;width:max-content;max-width:calc(100% - 40px);margin:25px auto 0;padding:0 0 7px;border-bottom:1px solid #c6923d;color:#d5a54f!important;text-align:center;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.3px}
+        @media(max-width:760px){
+          .benarian-custom-hotel-search{padding-bottom:52px!important}
+          .benarian-domain-pill{margin-bottom:30px;padding:11px 26px;font-size:13px}
+          .benarian-custom-heading{padding:0 20px}
+          .benarian-custom-heading .eyebrow{font-size:9px!important;letter-spacing:3.2px!important;margin-bottom:19px!important}
+          .benarian-custom-heading h2{font-size:44px!important;line-height:.95!important;margin-bottom:24px!important}
+          .benarian-custom-heading p{font-size:15px!important;line-height:1.72!important;margin-bottom:34px!important}
+          .benarian-luxury-form{margin:0 34px;padding:22px 25px 25px;border-radius:23px}
+          .benarian-luxury-field{margin-bottom:17px}
+          .benarian-luxury-field input{height:88px;font-size:20px!important;text-align:center}
+          .benarian-luxury-field:first-child input{text-align:left}
+          .benarian-luxury-form button{height:72px;font-size:13px!important}
+          .benarian-custom-disclosure{font-size:11px!important;margin-top:27px!important}
+          .benarian-official-link{font-size:11px;margin-top:24px}
+        }
+        @media(max-width:390px){.benarian-luxury-form{margin-left:20px;margin-right:20px}.benarian-custom-heading h2{font-size:39px!important}.benarian-luxury-field input{height:80px}}
+      `;
+      document.head.appendChild(style);
+    }
+
+    const today = new Date();
+    const checkinDate = new Date(today); checkinDate.setDate(today.getDate() + 1);
+    const checkoutDate = new Date(today); checkoutDate.setDate(today.getDate() + 2);
+    const iso = date => date.toISOString().slice(0,10);
+
+    section.innerHTML = `
+      <div class="benarian-domain-pill">benarian.com</div>
+      <div class="benarian-custom-heading">
+        <span class="eyebrow">BOOKING.COM OFFICIAL HOTEL RESERVATIONS</span>
+        <h2>Search &amp; Book Your Stay</h2>
+        <p>Choose your destination and travel dates, then continue securely through BENARIAN’s official Booking.com affiliate connection.</p>
+      </div>
+      <form class="benarian-luxury-form" aria-label="Search hotels on Booking.com">
+        <label class="benarian-luxury-field"><span>DESTINATION</span><input id="destination" name="destination" type="text" placeholder="Bali, Phuket, Dubai…" required></label>
+        <label class="benarian-luxury-field"><span>CHECK-IN</span><input id="checkin" name="checkin" type="date" value="${iso(checkinDate)}" required></label>
+        <label class="benarian-luxury-field"><span>CHECK-OUT</span><input id="checkout" name="checkout" type="date" value="${iso(checkoutDate)}" required></label>
+        <button type="submit">SEARCH ON BOOKING.COM →</button>
+      </form>
+      <p class="benarian-custom-disclosure">You will continue securely to Booking.com to view live prices, room availability and complete your reservation. BENARIAN may earn a commission from eligible bookings at no additional cost to you.</p>
+      <a class="benarian-official-link" href="${affiliateUrl(bookingTarget('Luxury hotels'))}" target="_blank" rel="noopener sponsored">Open the official embedded Booking.com search</a>
+    `;
+
+    const form = section.querySelector('.benarian-luxury-form');
+    form?.addEventListener('submit', event => {
+      event.preventDefault();
+      const destination = form.destination.value.trim();
+      if (!destination) { form.destination.focus(); return; }
+      window.open(affiliateUrl(bookingTarget(destination, form.checkin.value, form.checkout.value)), '_blank', 'noopener');
+    });
+  };
+
   const convertExpediaContent = () => {
     document.querySelectorAll('a[href*="expedia.com"]').forEach(link => {
       const card = link.closest('.hotel-card,.lux-hotel,.market-card,.hotel-pro-card,.benarian-featured-card');
@@ -82,7 +161,7 @@
     nav.innerHTML = items.map(([href,icon,label]) => `<a href="${href}"${current===href?' class="current" aria-current="page"':''}><span aria-hidden="true">${icon}</span>${label}</a>`).join('');
   };
 
-  const apply = () => { showHotelSections(); restoreDesktopNav(); bindHomeSearch(); convertExpediaContent(); improveFeaturedLinks(); ensureMobileNav(); };
+  const apply = () => { showHotelSections(); restoreDesktopNav(); bindHomeSearch(); installLuxuryHomeHotelSearch(); convertExpediaContent(); improveFeaturedLinks(); ensureMobileNav(); };
   apply();
-  [300,700,1200,1800].forEach(delay => setTimeout(apply, delay));
+  [250,500,900,1400,2200].forEach(delay => setTimeout(apply, delay));
 })();
