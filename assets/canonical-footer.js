@@ -146,8 +146,16 @@
     }
   }
 
-  function installFooter(){document.querySelectorAll('footer').forEach(f=>f.remove());const shell=document.querySelector('.shell')||document.body;shell.insertAdjacentHTML('beforeend',FOOTER_HTML)}
+  function footerHost(){return document.querySelector('.shell')||document.body}
+  function keepFooterLast(){const host=footerHost();const footer=document.querySelector('.benarian-footer-v3');if(footer&&footer.parentElement===host&&host.lastElementChild!==footer)host.appendChild(footer)}
+  function installFooter(){document.querySelectorAll('footer').forEach(f=>f.remove());const host=footerHost();host.insertAdjacentHTML('beforeend',FOOTER_HTML);keepFooterLast()}
   function apply(){installAppMeta();installSeoMeta();installStyle();installUtilities();installHeader();installFooter()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
-  [350,1000,2200].forEach(ms=>setTimeout(()=>{installAppMeta();installSeoMeta();installStyle();installUtilities();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter()},ms));
+  [350,1000,2200,4000].forEach(ms=>setTimeout(()=>{installAppMeta();installSeoMeta();installStyle();installUtilities();if(document.querySelectorAll('.benarian-footer-v3').length!==1)installFooter();keepFooterLast()},ms));
+  const host=footerHost();
+  if(host&&host.dataset.benarianFooterObserver!=='true'){
+    host.dataset.benarianFooterObserver='true';
+    const observer=new MutationObserver(()=>requestAnimationFrame(keepFooterLast));
+    observer.observe(host,{childList:true});
+  }
 })();
