@@ -4,6 +4,7 @@
   <url><loc>https://benarian.com/brand-story.html</loc><priority>0.9</priority></url>
   <url><loc>https://benarian.com/hotels.html</loc><priority>0.9</priority></url>
   <url><loc>https://benarian.com/destinations.html</loc><priority>0.9</priority></url>
+  <url><loc>https://benarian.com/flights.html</loc><priority>0.8</priority></url>
   <url><loc>https://benarian.com/bali.html</loc><priority>0.8</priority></url>
   <url><loc>https://benarian.com/persian-experiences.html</loc><priority>0.8</priority></url>
   <url><loc>https://benarian.com/restaurants.html</loc><priority>0.7</priority></url>
@@ -13,7 +14,7 @@
   <url><loc>https://benarian.com/travel-guides.html</loc><priority>0.7</priority></url>
   <url><loc>https://benarian.com/about.html</loc><priority>0.6</priority></url>
   <url><loc>https://benarian.com/contact.html</loc><priority>0.6</priority></url>
-  <url><loc>https://benarian.com/privacy.html</loc><priority>0.3</priority></url>
+  <url><loc>https://benarian.com/privacy-policy.html</loc><priority>0.3</priority></url>
   <url><loc>https://benarian.com/affiliate-disclosure.html</loc><priority>0.3</priority></url>
-  <url><loc>https://benarian.com/terms.html</loc><priority>0.3</priority></url>
+  <url><loc>https://benarian.com/terms-and-conditions.html</loc><priority>0.3</priority></url>
 </urlset>
