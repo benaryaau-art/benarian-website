@@ -68,29 +68,55 @@
 
   function installSeoMeta(){
     const page=normalPage(location.pathname);
-    if(page!=='index')return;
-    const description='Discover curated luxury hotels, resorts, destinations, flights, wellness retreats and exceptional travel experiences with BENARIAN.';
-    document.title='BENARIAN | Luxury Travel & Hospitality';
+    const pages={
+      index:{title:'BENARIAN | Luxury Travel & Hospitality',description:'Discover curated luxury hotels, destinations, flights, wellness retreats and exceptional travel experiences with BENARIAN.',label:'Home'},
+      hotels:{title:'Luxury Hotels & Resorts | BENARIAN',description:'Explore handpicked luxury hotels and resorts with live partner rates, destination inspiration and personalised BENARIAN travel assistance.',label:'Hotels'},
+      destinations:{title:'Luxury Travel Destinations | BENARIAN',description:'Discover BENARIAN luxury destinations including Bali, Phuket, the Maldives, Dubai and selected Persian experiences.',label:'Destinations'},
+      bali:{title:'Luxury Bali Travel Guide | BENARIAN',description:'Plan a refined Bali escape with selected hotels, resorts, dining, wellness and experiences curated by BENARIAN.',label:'Bali'},
+      'persian-experiences':{title:'Persian Experiences | BENARIAN',description:'Explore selected hotels, culture, dining and private travel experiences across Iran with BENARIAN.',label:'Persian Experiences'},
+      restaurants:{title:'Luxury Restaurants & Dining | BENARIAN',description:'Discover refined restaurants, destination dining and memorable culinary experiences selected by BENARIAN.',label:'Restaurants'},
+      experiences:{title:'Tours & Luxury Experiences | BENARIAN',description:'Find private tours, cultural experiences and memorable activities curated for BENARIAN travellers.',label:'Experiences'},
+      wellness:{title:'Spa & Wellness Retreats | BENARIAN',description:'Discover luxury spas, wellness retreats and restorative travel experiences selected by BENARIAN.',label:'Spa & Wellness'},
+      'visa-guide':{title:'Visa Guide | BENARIAN',description:'Practical visa information and travel planning guidance for selected BENARIAN destinations.',label:'Visa Guide'},
+      'travel-guides':{title:'Luxury Travel Guides | BENARIAN',description:'Read curated destination guides, hotel inspiration and practical luxury travel advice from BENARIAN.',label:'Travel Guides'},
+      about:{title:'About BENARIAN | Luxury Travel & Hospitality',description:'Learn about BENARIAN, founded by hotel executive Ben Tafreshi to connect travellers with refined hotels and memorable journeys.',label:'About Us'},
+      contact:{title:'Contact BENARIAN | Luxury Travel Concierge',description:'Contact BENARIAN for personalised assistance with hotels, destinations and luxury travel planning.',label:'Contact'},
+      'brand-story':{title:'The BENARIAN Story | Luxury Travel & Hospitality',description:'Discover the story, purpose and hospitality experience behind the BENARIAN luxury travel brand.',label:'Brand Story'},
+      privacy:{title:'Privacy Policy | BENARIAN',description:'Read the BENARIAN privacy policy and information about how website data is handled.',label:'Privacy Policy'},
+      'privacy-policy':{title:'Privacy Policy | BENARIAN',description:'Read the BENARIAN privacy policy and information about how website data is handled.',label:'Privacy Policy'},
+      'affiliate-disclosure':{title:'Affiliate Disclosure | BENARIAN',description:'Read how BENARIAN may earn commissions from selected travel partner links.',label:'Affiliate Disclosure'},
+      terms:{title:'Terms & Conditions | BENARIAN',description:'Read the terms and conditions that apply to use of the BENARIAN website.',label:'Terms & Conditions'},
+      'terms-and-conditions':{title:'Terms & Conditions | BENARIAN',description:'Read the terms and conditions that apply to use of the BENARIAN website.',label:'Terms & Conditions'},
+      flights:{title:'Flights | BENARIAN',description:'Search flight options through BENARIAN travel partners and continue planning your complete journey.',label:'Flights'}
+    };
+    const data=pages[page]||{title:'BENARIAN | Luxury Travel & Hospitality',description:'Curated luxury travel, hotels and exceptional experiences by BENARIAN.',label:page.replace(/-/g,' ')};
+    const isHome=page==='index';
+    const canonicalUrl=isHome?'https://benarian.com/':`https://benarian.com/${page}.html`;
+    const imageUrl='https://benarian.com/favicon.svg';
+    document.title=data.title;
     const setMeta=(selector,attrs)=>{let node=document.head.querySelector(selector);if(!node){node=document.createElement('meta');document.head.appendChild(node)}Object.entries(attrs).forEach(([key,value])=>node.setAttribute(key,value));};
-    setMeta('meta[name="description"]',{name:'description',content:description});
-    setMeta('meta[property="og:title"]',{property:'og:title',content:'BENARIAN | Luxury Travel & Hospitality'});
-    setMeta('meta[property="og:description"]',{property:'og:description',content:description});
+    setMeta('meta[name="description"]',{name:'description',content:data.description});
+    setMeta('meta[name="robots"]',{name:'robots',content:'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'});
+    setMeta('meta[property="og:title"]',{property:'og:title',content:data.title});
+    setMeta('meta[property="og:description"]',{property:'og:description',content:data.description});
     setMeta('meta[property="og:type"]',{property:'og:type',content:'website'});
-    setMeta('meta[property="og:url"]',{property:'og:url',content:'https://benarian.com/'});
-    setMeta('meta[property="og:image"]',{property:'og:image',content:'https://benarian.com/favicon.svg'});
+    setMeta('meta[property="og:site_name"]',{property:'og:site_name',content:'BENARIAN'});
+    setMeta('meta[property="og:url"]',{property:'og:url',content:canonicalUrl});
+    setMeta('meta[property="og:image"]',{property:'og:image',content:imageUrl});
+    setMeta('meta[property="og:image:alt"]',{property:'og:image:alt',content:'BENARIAN Luxury Travel & Hospitality'});
     setMeta('meta[name="twitter:card"]',{name:'twitter:card',content:'summary'});
-    setMeta('meta[name="twitter:title"]',{name:'twitter:title',content:'BENARIAN | Luxury Travel & Hospitality'});
-    setMeta('meta[name="twitter:description"]',{name:'twitter:description',content:description});
-    let canonical=document.head.querySelector('link[rel="canonical"]');if(!canonical){canonical=document.createElement('link');canonical.rel='canonical';document.head.appendChild(canonical)}canonical.href='https://benarian.com/';
+    setMeta('meta[name="twitter:title"]',{name:'twitter:title',content:data.title});
+    setMeta('meta[name="twitter:description"]',{name:'twitter:description',content:data.description});
+    setMeta('meta[name="twitter:image"]',{name:'twitter:image',content:imageUrl});
+    let canonical=document.head.querySelector('link[rel="canonical"]');if(!canonical){canonical=document.createElement('link');canonical.rel='canonical';document.head.appendChild(canonical)}canonical.href=canonicalUrl;
     let schema=document.getElementById('benarian-structured-data');if(!schema){schema=document.createElement('script');schema.type='application/ld+json';schema.id='benarian-structured-data';document.head.appendChild(schema)}
-    schema.textContent=JSON.stringify({
-      '@context':'https://schema.org',
-      '@graph':[
-        {'@type':'Organization','@id':'https://benarian.com/#organization','name':'BENARIAN','alternateName':'Benarian Hotels','url':'https://benarian.com/','logo':{'@type':'ImageObject','url':'https://benarian.com/favicon.svg','width':512,'height':512},'sameAs':['https://www.instagram.com/benarianhotels']},
-        {'@type':'WebSite','@id':'https://benarian.com/#website','url':'https://benarian.com/','name':'BENARIAN','alternateName':'BENARIAN Luxury Travel & Hospitality','publisher':{'@id':'https://benarian.com/#organization'},'inLanguage':'en'},
-        {'@type':'WebPage','@id':'https://benarian.com/#webpage','url':'https://benarian.com/','name':'BENARIAN | Luxury Travel & Hospitality','isPartOf':{'@id':'https://benarian.com/#website'},'about':{'@id':'https://benarian.com/#organization'},'description':description,'inLanguage':'en'}
-      ]
-    });
+    const graph=[
+      {'@type':['Organization','TravelAgency'],'@id':'https://benarian.com/#organization','name':'BENARIAN','alternateName':'BENARIAN Luxury Travel & Hospitality','url':'https://benarian.com/','logo':{'@type':'ImageObject','@id':'https://benarian.com/#logo','url':imageUrl,'contentUrl':imageUrl,'width':512,'height':512,'caption':'BENARIAN'},'image':{'@id':'https://benarian.com/#logo'},'description':'Luxury travel and hospitality platform curating hotels, destinations and memorable travel experiences.','email':'info@benarian.com','founder':{'@type':'Person','name':'Ben Tafreshi','url':'https://benarian.com/about.html'},'sameAs':['https://www.instagram.com/benarianhotels'],'contactPoint':{'@type':'ContactPoint','contactType':'customer support','availableLanguage':['English','Persian'],'url':'https://benarian.com/contact.html'}},
+      {'@type':'WebSite','@id':'https://benarian.com/#website','url':'https://benarian.com/','name':'BENARIAN','alternateName':'BENARIAN Luxury Travel & Hospitality','publisher':{'@id':'https://benarian.com/#organization'},'inLanguage':['en','fa']},
+      {'@type':'WebPage','@id':`${canonicalUrl}#webpage`,'url':canonicalUrl,'name':data.title,'isPartOf':{'@id':'https://benarian.com/#website'},'about':{'@id':'https://benarian.com/#organization'},'primaryImageOfPage':{'@id':'https://benarian.com/#logo'},'description':data.description,'inLanguage':'en'}
+    ];
+    if(!isHome){graph.push({'@type':'BreadcrumbList','@id':`${canonicalUrl}#breadcrumb`,'itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':'https://benarian.com/'},{'@type':'ListItem','position':2,'name':data.label,'item':canonicalUrl}]})}
+    schema.textContent=JSON.stringify({'@context':'https://schema.org','@graph':graph});
   }
 
   function installStyle(){let style=document.getElementById('benarian-final-global-style');if(!style){style=document.createElement('style');style.id='benarian-final-global-style';document.head.appendChild(style)}style.textContent=CSS}
