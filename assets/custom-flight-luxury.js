@@ -48,9 +48,9 @@
       .benarian-flight-form button:hover{background:#b9872c!important}
       .benarian-flight-note{position:relative;max-width:620px;margin:20px auto 0!important;padding:0 24px;color:#b7aa9b!important;text-align:center;font-size:9.5px!important;line-height:1.7!important}
       .benarian-flight-link{position:relative;display:block;width:max-content;max-width:calc(100% - 40px);margin:18px auto 0;padding-bottom:5px;border-bottom:1px solid #c6923d;color:#d6a957!important;text-align:center;text-decoration:none;font-size:10.5px;font-weight:800;letter-spacing:.2px}
-      .bali-entry-shortcut{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin:0 auto 28px;padding:13px 22px;border:1px solid #d1a04a;border-radius:999px;background:linear-gradient(180deg,#c9973d,#a96f1b);color:#fff!important;text-decoration:none;font:800 11px/1 Inter,Arial,sans-serif;letter-spacing:.45px;box-shadow:0 10px 24px rgba(169,111,27,.24)}
-      .bali-entry-shortcut:hover{filter:brightness(1.04)}
-      .benarian-custom-heading .bali-entry-shortcut{margin-top:-10px}
+      .bali-entry-shortcut{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin:16px 0 0;padding:13px 22px;border:1px solid rgba(240,195,103,.9);border-radius:999px;background:rgba(15,12,8,.58);backdrop-filter:blur(8px);color:#fff!important;text-decoration:none;font:800 11px/1 Inter,Arial,sans-serif;letter-spacing:.45px;box-shadow:0 10px 24px rgba(0,0,0,.22)}
+      .bali-entry-shortcut:hover{background:rgba(185,135,44,.92)}
+      .lux-hero-copy>.bali-entry-shortcut{display:flex;width:max-content}
       @media(max-width:760px){
         .benarian-custom-flight{padding:42px 0 132px!important}
         .benarian-custom-flight:after{content:none!important;display:none!important}
@@ -66,10 +66,10 @@
         .benarian-flight-form button{height:55px;font-size:11px!important}
         .benarian-flight-note{font-size:9.5px!important;margin-top:18px!important;padding:0 28px}
         .benarian-flight-link{font-size:10px;margin-top:16px}
-        .bali-entry-shortcut{width:calc(100% - 68px);box-sizing:border-box;margin:0 34px 26px;padding:14px 14px;font-size:10.5px;text-align:center}
+        .lux-hero-copy>.bali-entry-shortcut{width:auto;max-width:100%;box-sizing:border-box;margin-top:14px;padding:13px 16px;font-size:10px;text-align:center}
         body.flight-section-active .benarian-mobile-nav{transform:translateY(120%)!important;opacity:0!important;pointer-events:none!important;transition:transform .22s ease,opacity .22s ease!important}
       }
-      @media(max-width:390px){.benarian-flight-card{margin-left:18px;margin-right:18px}.benarian-flight-heading h2{font-size:28px!important}.bali-entry-shortcut{width:calc(100% - 44px);margin-left:22px;margin-right:22px}}
+      @media(max-width:390px){.benarian-flight-card{margin-left:18px;margin-right:18px}.benarian-flight-heading h2{font-size:28px!important}.lux-hero-copy>.bali-entry-shortcut{font-size:9.5px;padding-left:13px;padding-right:13px}}
     `;
     document.head.appendChild(style);
   };
@@ -86,20 +86,25 @@
   const installBaliEntryShortcut = () => {
     if (!document.body.classList.contains('home-lux')) return false;
     installStyles();
-    const heading = document.querySelector('.benarian-custom-heading');
-    if (!heading || heading.querySelector('.bali-entry-shortcut')) return !!heading;
-    const button = document.createElement('a');
-    button.className = 'bali-entry-shortcut';
-    button.href = '#bali-entry-essentials';
-    button.innerHTML = '<span aria-hidden="true">✦</span><span>BALI ENTRY REQUIREMENTS</span><span aria-hidden="true">↓</span>';
-    button.addEventListener('click', event => {
-      const target = findBaliEntrySection();
-      if (!target) return;
-      event.preventDefault();
-      target.scrollIntoView({behavior:'smooth',block:'start'});
-      history.replaceState(null,'','#bali-entry-essentials');
-    });
-    heading.appendChild(button);
+    document.querySelectorAll('.benarian-custom-heading .bali-entry-shortcut').forEach(button => button.remove());
+    const heroCopy = document.querySelector('.lux-hero .lux-hero-copy');
+    const exploreButton = heroCopy?.querySelector('.lux-btn');
+    if (!heroCopy || !exploreButton) return false;
+    let button = heroCopy.querySelector('.bali-entry-shortcut');
+    if (!button) {
+      button = document.createElement('a');
+      button.className = 'bali-entry-shortcut';
+      button.href = '#bali-entry-essentials';
+      button.innerHTML = '<span aria-hidden="true">✦</span><span>BALI ENTRY REQUIREMENTS</span><span aria-hidden="true">↓</span>';
+      button.addEventListener('click', event => {
+        const target = findBaliEntrySection();
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({behavior:'smooth',block:'start'});
+        history.replaceState(null,'','#bali-entry-essentials');
+      });
+    }
+    exploreButton.insertAdjacentElement('afterend', button);
     return true;
   };
 
@@ -159,11 +164,11 @@
   };
 
   installBaliEntryShortcut();
-  if (render()) return;
+  render();
   const observer = new MutationObserver(() => {
     installBaliEntryShortcut();
     findBaliEntrySection();
-    if (render()) observer.disconnect();
+    render();
   });
   observer.observe(document.documentElement, { childList: true, subtree: true });
   [300,700,1200,2000,3200].forEach(delay => setTimeout(() => { installBaliEntryShortcut(); findBaliEntrySection(); render(); }, delay));
