@@ -104,7 +104,7 @@
         history.replaceState(null,'','#bali-entry-essentials');
       });
     }
-    exploreButton.insertAdjacentElement('afterend', button);
+    if (exploreButton.nextElementSibling !== button) exploreButton.insertAdjacentElement('afterend', button);
     return true;
   };
 
