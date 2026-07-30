@@ -1,4 +1,12 @@
 (() => {
+  if (!document.querySelector('script[data-benarian-google-brand]')) {
+    const seoScript = document.createElement('script');
+    seoScript.src = 'assets/google-brand-professional.js?v=20260730g';
+    seoScript.defer = true;
+    seoScript.dataset.benarianGoogleBrand = 'true';
+    document.head.appendChild(seoScript);
+  }
+
   const HOTEL_IMAGE = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=92&w=1800&v=20260727final2';
 
   const install = () => {
