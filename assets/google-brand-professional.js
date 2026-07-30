@@ -92,38 +92,16 @@
     const style = document.createElement('style');
     style.id = 'benarian-google-brand-style';
     style.textContent = `
-      .benarian-brand-services{padding:24px 6%;background:#fff;border-bottom:1px solid #eadfc9}
-      .benarian-brand-services-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.2fr repeat(5,minmax(0,1fr));gap:10px;align-items:stretch}
-      .benarian-brand-services-intro{padding:15px 16px;border:1px solid #dec99f;background:#fbf7ef}
-      .benarian-brand-services-intro strong{display:block;color:#211b15;font:700 13px/1.35 Inter,Arial,sans-serif;margin-bottom:4px}
-      .benarian-brand-services-intro span{display:block;color:#766b5f;font:400 11px/1.55 Inter,Arial,sans-serif}
-      .benarian-brand-service{display:flex;align-items:center;justify-content:center;min-height:68px;padding:12px;border:1px solid #dec99f;background:#fff;color:#211b15;text-align:center;text-decoration:none;font:700 10.5px/1.35 Inter,Arial,sans-serif;letter-spacing:.25px}
-      .benarian-brand-service:hover{background:#17130f;color:#f2cf8a;border-color:#17130f}
+      .benarian-brand-services{display:none!important}
       .benarian-bali-footer-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
       .benarian-bali-footer-links a{display:inline-flex;padding:8px 11px;border:1px solid #d7bd8b;border-radius:999px;color:#755820!important;text-decoration:none!important;font-size:10px!important;font-weight:700!important}
-      @media(max-width:980px){.benarian-brand-services-inner{grid-template-columns:1fr 1fr 1fr}.benarian-brand-services-intro{grid-column:1/-1}}
-      @media(max-width:620px){.benarian-brand-services{padding:16px 18px}.benarian-brand-services-inner{grid-template-columns:1fr 1fr;gap:8px}.benarian-brand-service{min-height:60px;font-size:9.5px}.benarian-brand-services-intro{grid-column:1/-1}.benarian-bali-footer-links{display:grid;grid-template-columns:1fr}.benarian-bali-footer-links a{justify-content:center}}
+      @media(max-width:620px){.benarian-bali-footer-links{display:grid;grid-template-columns:1fr}.benarian-bali-footer-links a{justify-content:center}}
     `;
     document.head.appendChild(style);
   };
 
-  const installHomeLinks = () => {
-    if (!IS_HOME || document.querySelector('.benarian-brand-services')) return;
-    const header = document.querySelector('.header');
-    if (!header?.parentNode) return;
-    const section = document.createElement('section');
-    section.className = 'benarian-brand-services';
-    section.setAttribute('aria-label', 'BENARIAN primary services');
-    section.innerHTML = `
-      <div class="benarian-brand-services-inner">
-        <div class="benarian-brand-services-intro"><strong>BENARIAN Travel Services</strong><span>Direct access to our most important travel pages.</span></div>
-        <a class="benarian-brand-service" href="hotels.html">LUXURY HOTELS</a>
-        <a class="benarian-brand-service" href="flights.html">FLIGHTS</a>
-        <a class="benarian-brand-service" href="bali-tourist-levy.html">BALI TOURIST LEVY</a>
-        <a class="benarian-brand-service" href="bali-arrival-card.html">BALI ARRIVAL CARD</a>
-        <a class="benarian-brand-service" href="bali-visa.html">BALI VISA &amp; e-VOA</a>
-      </div>`;
-    header.insertAdjacentElement('afterend', section);
+  const removeHomeStrip = () => {
+    document.querySelectorAll('.benarian-brand-services').forEach(section => section.remove());
   };
 
   const installFooterLinks = () => {
@@ -139,7 +117,7 @@
   const apply = () => {
     installSeo();
     installStyles();
-    installHomeLinks();
+    removeHomeStrip();
     installFooterLinks();
   };
 
