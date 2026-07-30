@@ -52,9 +52,9 @@
         .benarian-custom-flight{padding:42px 0 132px!important}
         .benarian-custom-flight:after{content:none!important;display:none!important}
         .benarian-custom-flight>.benarian-flight-pill{margin-bottom:18px;padding:8px 20px;font-size:11.5px}
-        .benarian-flight-heading{padding:0 20px}
+        .benarian-flight-heading{padding:0 10px}
         .benarian-flight-heading .eyebrow{font-size:7.5px!important;letter-spacing:2.55px!important;margin-bottom:12px!important}
-        .benarian-flight-heading h2{font-size:37px!important;line-height:.98!important;margin-bottom:14px!important}
+        .benarian-flight-heading h2{font-size:31px!important;line-height:1!important;margin-bottom:14px!important;white-space:nowrap!important;letter-spacing:-.8px!important}
         .benarian-flight-heading p{font-size:12.5px!important;line-height:1.62!important;margin-bottom:22px!important;padding:0 5px}
         .benarian-flight-card{margin:0 26px;border-radius:15px}
         .benarian-flight-image{height:138px}
@@ -65,7 +65,7 @@
         .benarian-flight-link{font-size:10px;margin-top:16px}
         body.flight-section-active .benarian-mobile-nav{transform:translateY(120%)!important;opacity:0!important;pointer-events:none!important;transition:transform .22s ease,opacity .22s ease!important}
       }
-      @media(max-width:390px){.benarian-flight-card{margin-left:18px;margin-right:18px}.benarian-flight-heading h2{font-size:34px!important}}
+      @media(max-width:390px){.benarian-flight-card{margin-left:18px;margin-right:18px}.benarian-flight-heading h2{font-size:28px!important}}
     `;
     document.head.appendChild(style);
   };
