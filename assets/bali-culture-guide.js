@@ -1,6 +1,71 @@
 (()=>{
   const page=(location.pathname.split('/').pop()||'').toLowerCase();
 
+  function mountBaliPreTravel(){
+    if(page!==''&&page!=='index.html') return;
+    if(document.querySelector('.bali-pretravel')) return;
+    const style=document.createElement('style');
+    style.id='bali-pretravel-style';
+    style.textContent=`
+      .bali-pretravel{padding:78px 7%;background:#fbf7ef;color:#17130f;border-top:1px solid #e6d6b9;border-bottom:1px solid #e6d6b9}
+      .bali-pretravel-head{max-width:860px;margin:0 auto 34px;text-align:center}
+      .bali-pretravel-kicker{display:block;margin-bottom:13px;color:#a9731f;font:800 10px/1.2 Inter,Arial,sans-serif;letter-spacing:2.8px}
+      .bali-pretravel h2{margin:0 0 15px;font:600 clamp(38px,5vw,62px)/1 'Cormorant Garamond',Georgia,serif;color:#17130f}
+      .bali-pretravel-head p{margin:0 auto;max-width:720px;color:#62584d;font-size:15px;line-height:1.8}
+      .bali-pretravel-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;max-width:1180px;margin:auto}
+      .bali-pretravel-card{position:relative;display:flex;flex-direction:column;min-height:330px;padding:28px;border:1px solid #ddc79f;border-radius:20px;background:#fff;box-shadow:0 16px 42px rgba(63,45,19,.08)}
+      .bali-pretravel-number{display:grid;place-items:center;width:48px;height:48px;border:1px solid #c8953d;border-radius:50%;color:#a46c18;font:700 14px/1 Inter,Arial,sans-serif;margin-bottom:24px}
+      .bali-pretravel-card small{display:block;margin-bottom:9px;color:#a9731f;font:800 9px/1.2 Inter,Arial,sans-serif;letter-spacing:1.7px}
+      .bali-pretravel-card h3{margin:0 0 12px;font:600 31px/1 'Cormorant Garamond',Georgia,serif;color:#17130f}
+      .bali-pretravel-card p{margin:0 0 22px;color:#655b50;font-size:13px;line-height:1.75;flex:1}
+      .bali-pretravel-card .fa-note{direction:rtl;text-align:right;color:#51473d;font-family:'Vazirmatn',Inter,sans-serif}
+      .bali-pretravel-card a{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:10px;background:#17130f;color:#fff;text-decoration:none;font:700 11px/1.2 Inter,Arial,sans-serif;letter-spacing:.7px}
+      .bali-pretravel-card a:hover{background:#a9731f}
+      .bali-pretravel-warning{max-width:1180px;margin:24px auto 0;padding:16px 20px;border:1px solid #d8ba7d;border-radius:12px;background:#fff9ed;color:#60491f;text-align:center;font-size:12px;line-height:1.7}
+      @media(max-width:900px){.bali-pretravel-grid{grid-template-columns:1fr}.bali-pretravel-card{min-height:0}}
+      @media(max-width:620px){.bali-pretravel{padding:58px 18px}.bali-pretravel h2{font-size:40px}.bali-pretravel-head p{font-size:14px}.bali-pretravel-card{padding:23px}.bali-pretravel-card h3{font-size:29px}}
+    `;
+    document.head.appendChild(style);
+    const section=document.createElement('section');
+    section.className='bali-pretravel';
+    section.setAttribute('aria-labelledby','bali-pretravel-title');
+    section.innerHTML=`
+      <div class="bali-pretravel-head">
+        <span class="bali-pretravel-kicker">BEFORE YOU FLY TO BALI</span>
+        <h2 id="bali-pretravel-title">Three essential steps before arrival</h2>
+        <p>Use the official Indonesian and Bali Government websites below to complete the key travel requirements directly and securely.</p>
+      </div>
+      <div class="bali-pretravel-grid">
+        <article class="bali-pretravel-card">
+          <span class="bali-pretravel-number">01</span>
+          <small>BALI GOVERNMENT</small>
+          <h3>Tourist Levy</h3>
+          <p>Pay Bali’s official foreign tourist levy online before departure and keep the QR-code voucher sent to your email.</p>
+          <p class="fa-note" lang="fa">عوارض گردشگری بالی را پیش از پرواز مستقیماً در وب‌سایت رسمی پرداخت کنید.</p>
+          <a href="https://lovebali.baliprov.go.id/#currency-AUD" target="_blank" rel="noopener">PAY TOURIST LEVY <span>↗</span></a>
+        </article>
+        <article class="bali-pretravel-card">
+          <span class="bali-pretravel-number">02</span>
+          <small>INDONESIA IMMIGRATION</small>
+          <h3>Arrival Card</h3>
+          <p>Complete the official All Indonesia arrival declaration, which combines immigration, customs, health and quarantine information.</p>
+          <p class="fa-note" lang="fa">کارت ورود All Indonesia را از سه روز پیش از رسیدن تا روز ورود تکمیل کنید.</p>
+          <a href="https://allindonesia.imigrasi.go.id/" target="_blank" rel="noopener">COMPLETE ARRIVAL CARD <span>↗</span></a>
+        </article>
+        <article class="bali-pretravel-card">
+          <span class="bali-pretravel-number">03</span>
+          <small>INDONESIA IMMIGRATION</small>
+          <h3>Visa &amp; e-VOA</h3>
+          <p>Check your eligibility and apply directly through Indonesia’s official eVisa portal before travelling.</p>
+          <p class="fa-note" lang="fa">برای بررسی شرایط و درخواست ویزا یا ویزای هنگام ورود الکترونیکی از سایت رسمی اقدام کنید.</p>
+          <a href="https://evisa.imigrasi.go.id/" target="_blank" rel="noopener">APPLY FOR VISA <span>↗</span></a>
+        </article>
+      </div>
+      <div class="bali-pretravel-warning"><strong>Official links only:</strong> BENARIAN does not process these government applications or collect government fees. Requirements depend on passport and travel circumstances.</div>`;
+    const anchor=document.querySelector('#official-flight-search')||document.querySelector('#official-booking-search')||document.querySelector('.booking-search')||document.querySelector('.lux-hero');
+    if(anchor) anchor.insertAdjacentElement('afterend',section);
+  }
+
   function pointBaliCardsToGuide(){
     document.querySelectorAll('.destination-card').forEach(card=>{
       const title=(card.querySelector('h3')?.textContent||'').trim().toLowerCase();
@@ -12,6 +77,7 @@
     });
   }
 
+  mountBaliPreTravel();
   if(page!=='bali-travel-guide.html'){pointBaliCardsToGuide();return;}
   if(document.querySelector('.sacred-bali-section')) return;
 
