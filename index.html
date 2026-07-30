@@ -12,14 +12,18 @@
   <link rel="stylesheet" href="assets/home-luxury.css?v=20260722e">
   <link rel="stylesheet" href="assets/benarian-fixes.css?v=20260722p">
   <style>
-    .benarian-brand-services{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}
+    body.home-lux .benarian-brand-services,
+    body.home-lux .header + section:has(a[href*="bali-tourist-levy"]),
+    body.home-lux .header + div:has(a[href*="bali-tourist-levy"]),
+    body.home-lux .shell > section:has(a[href*="bali-tourist-levy"]):not(main section),
+    body.home-lux .shell > div:has(a[href*="bali-tourist-levy"]):not(main div){display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}
     .lux-hero{background-image:url('https://images.unsplash.com/photo-1782413263988-11f7178cf385?auto=format&fit=crop&q=90&w=2200')!important;background-position:center 55%!important}
     .persian-home{padding:76px 7%;background:linear-gradient(180deg,#17130e,#2b1e13);color:#fff}.persian-home-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:28px}.persian-home h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:58px;line-height:.95;margin:0 0 12px}.persian-home p{max-width:700px;color:#e4d9ca;line-height:1.7;margin:0}.persian-home-kicker{display:block;color:#dfb45f;font-size:10px;font-weight:700;letter-spacing:2.5px;margin-bottom:12px}.persian-home-link{color:#f0c879;text-decoration:none;font-size:12px;font-weight:700;border-bottom:1px solid #c99a43;padding-bottom:4px}.persian-home-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.persian-home-card{position:relative;min-height:410px;border-radius:18px;overflow:hidden;text-decoration:none;color:#fff}.persian-home-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.persian-home-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(13,10,7,.9),rgba(13,10,7,.05) 68%)}.persian-home-copy{position:absolute;z-index:2;left:22px;right:22px;bottom:22px}.persian-home-copy span{display:block;color:#efc46e;font-size:9px;font-weight:700;letter-spacing:1.3px;margin-bottom:8px}.persian-home-copy h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:29px;line-height:1.02;margin:0 0 8px}.persian-home-copy p{font-size:12px;color:#eee5db;line-height:1.55}.persian-home-more{display:inline-block;margin-top:14px;color:#f3ca79;font-size:12px;font-weight:700}.persian-home-note{margin-top:24px;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 22px;border:1px solid rgba(223,180,95,.35);border-radius:14px;background:rgba(255,255,255,.04)}.persian-home-note strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:27px}.persian-home-note span{color:#d8ccbd;font-size:13px}.persian-home-note a{white-space:nowrap}.persian-home-note .lux-btn{background:#bd8730;color:#fff;text-decoration:none;border-radius:8px;padding:13px 18px;font-weight:700;font-size:12px}
     @media(max-width:1050px){.persian-home-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:900px){.persian-home-head{align-items:flex-start;flex-direction:column}.persian-home h2{font-size:50px}}
     @media(max-width:760px){.persian-home{padding:54px 20px}.persian-home h2{font-size:43px}.persian-home-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.persian-home-card{flex:0 0 82vw;min-height:400px;scroll-snap-align:start}.persian-home-note{align-items:flex-start;flex-direction:column}.persian-home-note strong{font-size:24px}}
   </style>
-<link rel="stylesheet" href="assets/global-polish.css?v=20260725a"></head>
+<link rel="stylesheet" href="assets/global-polish.css?v=20260730-removebar"></head>
 <body class="home-lux"><div class="shell">
   <div class="topline"><div class="left">🌐 <span>Language:</span><a href="fa.html">فارسی</a><span>|</span><b>EN</b></div><div class="right"><span class="accent">AUD⌄</span><span>♡ Wishlist</span><span>▣ My Bookings</span><a class="member-top-link" href="member-login.html">Members</a></div></div>
   <header class="header"><a class="brand brand-lockup" href="index.html" aria-label="BENARIAN home"><span class="brand-mark" aria-hidden="true">B</span><span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL &amp; HOSPITALITY</small></span></a><button class="menu-btn" aria-label="Open menu" aria-expanded="false">Menu <span>☰</span></button><nav class="nav"><a href="destinations.html">DESTINATIONS</a><a href="hotels.html">HOTELS</a><a href="persian-experiences.html">PERSIAN EXPERIENCES</a><a href="restaurants.html">RESTAURANTS</a><a href="experiences.html">EXPERIENCES</a><a href="wellness.html">SPA &amp; WELLNESS</a><a href="visa-guide.html">VISA GUIDE</a><a href="about.html">ABOUT US</a><a href="contact.html">CONTACT</a></nav></header>
@@ -31,4 +35,20 @@
     <section class="lux-concierge"><div class="concierge-icon">⌘</div><div><h2>Your Personal Concierge</h2><p>We are here to craft your perfect journey.<br>24/7 Luxury Travel Assistance</p></div><div class="lux-contact-actions"><a class="lux-outline" href="contact.html">◉ WhatsApp</a><a class="lux-outline" href="contact.html">✉ Email</a><a class="lux-outline wide" href="contact.html">Contact Concierge</a></div></section>
   </main>
   <footer class="footer lux-footer"><a href="index.html" aria-label="BENARIAN home" style="display:flex!important;align-items:center!important;text-decoration:none!important;grid-column:auto!important;min-width:250px!important;visibility:visible!important;opacity:1!important;background:none!important;"><span aria-hidden="true" style="display:block!important;font-family:'Cormorant Garamond',Georgia,serif!important;font-size:46px!important;line-height:.75!important;color:#b9872c!important;font-weight:600!important;letter-spacing:-9px!important;margin-right:18px!important;transform:scaleX(.82)!important;visibility:visible!important;opacity:1!important;">BB</span><span style="display:flex!important;flex-direction:column!important;visibility:visible!important;opacity:1!important;"><strong style="display:block!important;font-family:'Cormorant Garamond',Georgia,serif!important;font-size:27px!important;line-height:.9!important;letter-spacing:4px!important;color:#151310!important;font-weight:600!important;white-space:nowrap!important;visibility:visible!important;opacity:1!important;">BENARIAN</strong><small style="display:block!important;margin-top:6px!important;font-family:Inter,Arial,sans-serif!important;font-size:7px!important;letter-spacing:1.25px!important;color:#b9872c!important;font-weight:600!important;white-space:nowrap!important;visibility:visible!important;opacity:1!important;">LUXURY TRAVEL &amp; HOSPITALITY</small></span></a><div><strong>Company</strong><a href="about.html">About Us</a><a href="experiences.html">Our Services</a><a href="contact.html">Concierge</a></div><div><strong>Support</strong><a href="contact.html">FAQ</a><a href="privacy-policy.html">Privacy Policy</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a></div><div><strong>Follow Us</strong><p>◎ &nbsp; f &nbsp; ✉</p></div><p class="copyright">© 2026 BENARIAN. All rights reserved.</p></footer>
-</div><script src="assets/partner-config.js"></script><script src="assets/script.js"></script><script src="assets/canonical-footer.js?v=20260730-final"></script></body></html>
+</div>
+<script>
+(function(){
+  function removeTopBaliBar(){
+    document.querySelectorAll('.benarian-brand-services').forEach(function(el){el.remove()});
+    var main=document.querySelector('main');
+    document.querySelectorAll('body.home-lux a[href*="bali-tourist-levy"],body.home-lux a[href*="bali-arrival-card"],body.home-lux a[href*="bali-visa"]').forEach(function(link){
+      var box=link.closest('section,div,nav,aside');
+      if(box && !main?.contains(box) && !box.closest('footer')) box.remove();
+    });
+  }
+  removeTopBaliBar();
+  new MutationObserver(removeTopBaliBar).observe(document.documentElement,{childList:true,subtree:true});
+  [100,300,700,1500,3000].forEach(function(ms){setTimeout(removeTopBaliBar,ms)});
+})();
+</script>
+<script src="assets/partner-config.js"></script><script src="assets/script.js?v=20260730-removebar"></script><script src="assets/canonical-footer.js?v=20260730-removebar"></script></body></html>
