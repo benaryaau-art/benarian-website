@@ -88,19 +88,21 @@
   };
 
   const installStyles = () => {
-    if (document.getElementById('benarian-google-brand-style')) return;
-    const style = document.createElement('style');
-    style.id = 'benarian-google-brand-style';
+    let style = document.getElementById('benarian-google-brand-style');
+    if (!style) {
+      style = document.createElement('style');
+      style.id = 'benarian-google-brand-style';
+      document.head.appendChild(style);
+    }
     style.textContent = `
-      .benarian-brand-services{display:none!important}
+      .benarian-brand-services{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}
       .benarian-bali-footer-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
       .benarian-bali-footer-links a{display:inline-flex;padding:8px 11px;border:1px solid #d7bd8b;border-radius:999px;color:#755820!important;text-decoration:none!important;font-size:10px!important;font-weight:700!important}
       @media(max-width:620px){.benarian-bali-footer-links{display:grid;grid-template-columns:1fr}.benarian-bali-footer-links a{justify-content:center}}
     `;
-    document.head.appendChild(style);
   };
 
-  const removeHomeStrip = () => {
+  const removeHomeServiceBar = () => {
     document.querySelectorAll('.benarian-brand-services').forEach(section => section.remove());
   };
 
@@ -117,11 +119,15 @@
   const apply = () => {
     installSeo();
     installStyles();
-    removeHomeStrip();
+    removeHomeServiceBar();
     installFooterLinks();
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, { once: true });
   else apply();
-  [400, 1000, 2200].forEach(ms => setTimeout(apply, ms));
+
+  [200, 500, 1000, 1800, 3000].forEach(ms => setTimeout(apply, ms));
+
+  const observer = new MutationObserver(() => removeHomeServiceBar());
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
