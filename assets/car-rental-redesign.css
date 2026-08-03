@@ -15,6 +15,7 @@
 #official-car-rental-search .car-kicker{display:block!important;margin:0 0 16px!important;color:#d8aa55!important;font-size:11px!important;font-weight:800!important;letter-spacing:3.4px!important}
 #official-car-rental-search .car-luxury-copy h2{margin:0 0 26px!important;font:600 clamp(48px,6.5vw,76px)/.92 'Cormorant Garamond',Georgia,serif!important;color:#e9c981!important;letter-spacing:-1px!important}
 #official-car-rental-search .car-luxury-copy h2 br{display:none!important}
+#official-car-rental-search .car-luxury-copy h2 br::after{content:'\00a0'!important}
 #official-car-rental-search .car-luxury-rule{display:none!important}
 #official-car-rental-search .car-luxury-copy p{max-width:720px!important;margin:0 auto!important;color:#f1ece5!important;font-size:18px!important;line-height:1.75!important}
 #official-car-rental-search .car-luxury-copy p strong{color:#e0b45f!important}
@@ -28,11 +29,26 @@
 #official-car-rental-search .car-benefit strong{color:#f1dfbd!important}
 #official-car-rental-search .car-benefit small{color:#cfc4b5!important}
 #official-car-rental-search .car-benefit-icon{color:#d9aa52!important}
+
 @media(max-width:760px){
   #official-car-rental-search.car-widget-section{padding:54px 18px 132px!important}
   #official-car-rental-search .car-luxury-copy{margin-bottom:34px!important}
   #official-car-rental-search .car-kicker{font-size:9px!important;letter-spacing:2.5px!important}
-  #official-car-rental-search .car-luxury-copy h2{font-size:clamp(44px,13vw,59px)!important;line-height:.94!important;margin-bottom:23px!important}
+  #official-car-rental-search .car-luxury-copy h2{
+    font-size:clamp(29px,8.8vw,40px)!important;
+    line-height:1!important;
+    letter-spacing:-.8px!important;
+    white-space:nowrap!important;
+    margin-bottom:23px!important;
+  }
+  #official-car-rental-search .car-luxury-copy h2 br{display:none!important}
+  #official-car-rental-search .car-luxury-copy h2 br::after{content:'\00a0'!important}
+  #official-flight-search .flight-widget-heading h2{
+    font-size:clamp(28px,8.3vw,38px)!important;
+    line-height:1!important;
+    letter-spacing:-.7px!important;
+    white-space:nowrap!important;
+  }
   #official-car-rental-search .car-luxury-copy p{font-size:16px!important;line-height:1.65!important;max-width:330px!important}
   #official-car-rental-search .car-widget-shell{margin:0!important;padding:202px 14px 20px!important;border-radius:23px!important}
   #official-car-rental-search .car-widget-shell:before{height:178px!important;background-position:center 60%!important}
