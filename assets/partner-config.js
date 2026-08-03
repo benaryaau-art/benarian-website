@@ -208,6 +208,7 @@ window.BENARIAN_PARTNERS = {
   function start() {
     applyGlobalRules();
     removeLegacyExpediaSections();
+    loadScriptOnce('assets/hotels-curated.js?v=20260803a', 'data-benarian-curated-hotels');
     loadScriptOnce('assets/live-concierge.js?v=20260725e', 'data-benarian-live-concierge');
     loadScriptOnce('assets/install-app-prompt.js?v=20260725e', 'data-benarian-install-prompt');
     loadScriptOnce('assets/premium-v2.js?v=20260727flight', 'data-benarian-premium-v2-script');
