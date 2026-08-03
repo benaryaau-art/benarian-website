@@ -1,0 +1,52 @@
+/* BENARIAN refined homepage splash — BB identity, poster-style layout */
+body.home-lux::before,
+body.home-lux::after{
+  position:fixed!important;
+  inset:0!important;
+  z-index:2147483640!important;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  animation:benarianPosterSplash 5.8s ease both!important;
+}
+body.home-lux::before{
+  content:""!important;
+  display:block!important;
+  background:
+    linear-gradient(180deg,rgba(6,5,4,.08) 0%,rgba(6,5,4,.12) 34%,rgba(6,5,4,.58) 62%,rgba(4,3,2,.93) 100%),
+    url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=96&w=2200') center 52%/cover no-repeat!important;
+}
+body.home-lux::after{
+  content:"BB\A BENARIAN\A LUXURY TRAVEL & HOSPITALITY\A\A CURATED LUXURY TOURS\A\A Discover Bali through handpicked hotels,\A private experiences and unforgettable journeys.\A\A ─────────  ✦  ─────────\A\A LUXURY HOTELS   ·   PRIVATE EXPERIENCES\A UNFORGETTABLE JOURNEYS\A\A YOUR JOURNEY. OUR PASSION.\A\A BENARIAN.COM"!important;
+  white-space:pre-line!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  box-sizing:border-box!important;
+  padding:7vh 22px 5vh!important;
+  text-align:center!important;
+  color:#fff!important;
+  font-family:'Cormorant Garamond',Georgia,serif!important;
+  font-size:clamp(16px,2vw,28px)!important;
+  font-weight:500!important;
+  line-height:1.27!important;
+  letter-spacing:.035em!important;
+  text-shadow:0 3px 22px rgba(0,0,0,.92)!important;
+}
+@keyframes benarianPosterSplash{
+  0%{opacity:0;visibility:visible}
+  7%{opacity:1;visibility:visible}
+  80%{opacity:1;visibility:visible}
+  100%{opacity:0;visibility:hidden}
+}
+@media(max-width:760px){
+  body.home-lux::before{background-position:58% center!important}
+  body.home-lux::after{
+    padding:5.5vh 18px 4vh!important;
+    font-size:18px!important;
+    line-height:1.22!important;
+    letter-spacing:.02em!important;
+  }
+}
+@media(max-width:390px){body.home-lux::after{font-size:16.5px!important;line-height:1.2!important}}
+@media(prefers-reduced-motion:reduce){body.home-lux::before,body.home-lux::after{animation-duration:3.6s!important}}
