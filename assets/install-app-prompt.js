@@ -22,7 +22,7 @@
       link.href = uploadHref;
       link.dataset.benarianUpload = 'true';
       link.className = 'benarian-upload-quick-link';
-      link.innerHTML = '<span class="qa-icon">＋</span><span>Upload Photos</span>';
+      link.innerHTML = '<span class="qa-icon">＋</span><span class="upload-label"><strong>Upload Photos</strong><small>آپلود عکس و ثبت تجربه</small></span>';
       menu.appendChild(link);
     });
   }
@@ -83,7 +83,24 @@
     const style = document.createElement('style');
     style.id = 'benarian-community-access-style';
     style.textContent = `
-      .benarian-upload-quick-link{border-color:#e1b45e!important;background:linear-gradient(135deg,#b9872c,#7d5015)!important}
+      .benarian-quick-access .benarian-upload-quick-link{
+        display:flex!important;align-items:center!important;gap:10px!important;
+        min-width:152px!important;width:100%!important;min-height:52px!important;
+        padding:13px 15px!important;margin:0!important;
+        border:1px solid #c9953f!important;border-radius:12px!important;
+        background:rgba(18,15,11,.94)!important;color:#fff!important;
+        box-shadow:0 10px 28px rgba(0,0,0,.3)!important;
+        font:700 11px/1 Inter,Arial,sans-serif!important;
+      }
+      .benarian-quick-access .benarian-upload-quick-link .qa-icon{
+        display:grid!important;place-items:center!important;width:26px!important;height:26px!important;
+        flex:0 0 26px!important;border-radius:50%!important;
+        background:rgba(201,149,63,.18)!important;color:#f3c976!important;
+        font:700 18px/1 Inter,Arial,sans-serif!important;
+      }
+      .benarian-quick-access .benarian-upload-quick-link .upload-label{display:flex!important;flex-direction:column!important;gap:4px!important;min-width:0!important}
+      .benarian-quick-access .benarian-upload-quick-link strong{font:700 11px/1 Inter,Arial,sans-serif!important;color:#fff!important;white-space:nowrap!important}
+      .benarian-quick-access .benarian-upload-quick-link small{font:500 8px/1.25 Vazirmatn,Inter,sans-serif!important;color:#d9c9ad!important;white-space:nowrap!important}
       .benarian-mobile-nav.with-upload{grid-template-columns:repeat(6,minmax(0,1fr))!important}
       .benarian-mobile-nav .benarian-mobile-upload{background:linear-gradient(145deg,#c8953d,#8e5d1b)!important;color:#fff!important;border-radius:13px!important}
       .benarian-mobile-nav .benarian-mobile-upload b{display:block;font:700 8px/1 Inter,Arial,sans-serif!important}
