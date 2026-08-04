@@ -1,6 +1,8 @@
 (() => {
   const page = (location.pathname.split('/').filter(Boolean).pop() || 'index.html').toLowerCase();
   const isHome = page === 'index.html' || location.pathname === '/' || location.pathname === '';
+  const isStories = page === 'travel-stories.html';
+  const uploadHref = isStories ? '#share-story' : 'travel-stories.html#share-story';
 
   function addTravelStoriesNavigation() {
     document.querySelectorAll('.nav').forEach(nav => {
@@ -13,35 +15,92 @@
     });
   }
 
-  function addUploadShortcut() {
-    if (document.getElementById('benarian-upload-shortcut')) return;
-    const link = document.createElement('a');
-    link.id = 'benarian-upload-shortcut';
-    link.href = page === 'travel-stories.html' ? '#share-story' : 'travel-stories.html#share-story';
-    link.setAttribute('aria-label','Upload travel photos and share a story');
-    link.innerHTML = '<span class="upload-shortcut-icon">＋</span><span class="upload-shortcut-copy"><strong>Upload Photos</strong><small>آپلود عکس و ثبت تجربه</small></span>';
-    document.body.appendChild(link);
+  function addUploadToQuickAccess() {
+    document.querySelectorAll('.benarian-quick-access').forEach(menu => {
+      if (menu.querySelector('[data-benarian-upload]')) return;
+      const link = document.createElement('a');
+      link.href = uploadHref;
+      link.dataset.benarianUpload = 'true';
+      link.className = 'benarian-upload-quick-link';
+      link.innerHTML = '<span class="qa-icon">＋</span><span>Upload Photos</span>';
+      menu.appendChild(link);
+    });
+  }
 
-    if (!document.getElementById('benarian-upload-shortcut-style')) {
-      const style = document.createElement('style');
-      style.id = 'benarian-upload-shortcut-style';
-      style.textContent = `
-        #benarian-upload-shortcut{position:fixed;right:16px;top:calc(50% + 132px);z-index:9997;display:flex;align-items:center;gap:11px;min-width:174px;padding:13px 15px;border:1px solid #d3a24d;border-radius:12px;background:rgba(18,15,11,.96);color:#fff;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.32);backdrop-filter:blur(10px)}
-        #benarian-upload-shortcut .upload-shortcut-icon{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#b9872c;color:#fff;font:700 22px/1 Inter,Arial,sans-serif}
-        #benarian-upload-shortcut .upload-shortcut-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
-        #benarian-upload-shortcut strong{font:700 11px/1 Inter,Arial,sans-serif;white-space:nowrap}
-        #benarian-upload-shortcut small{font:500 9px/1.2 Vazirmatn,Inter,Arial,sans-serif;color:#e9d9bd;white-space:nowrap}
-        #benarian-upload-shortcut:hover{transform:translateY(-2px);background:#231b12}
-        @media(max-width:760px){
-          #benarian-upload-shortcut{left:18px;right:18px;top:auto;bottom:82px;min-width:0;justify-content:center;padding:12px 16px;border-radius:16px;background:linear-gradient(135deg,#c18a2f,#9f6d20);box-shadow:0 12px 32px rgba(53,35,10,.34)}
-          #benarian-upload-shortcut .upload-shortcut-icon{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28)}
-          #benarian-upload-shortcut strong{font-size:12px}
-          #benarian-upload-shortcut small{font-size:10px;color:#fff5e4}
-          body{padding-bottom:150px!important}
-        }
-      `;
-      document.head.appendChild(style);
+  function addUploadToMobileNav() {
+    document.querySelectorAll('.benarian-mobile-nav').forEach(nav => {
+      if (nav.querySelector('[data-benarian-mobile-upload]')) return;
+      const link = document.createElement('a');
+      link.href = uploadHref;
+      link.dataset.benarianMobileUpload = 'true';
+      link.className = isStories ? 'current benarian-mobile-upload' : 'benarian-mobile-upload';
+      link.innerHTML = '<span>＋</span><b>Upload</b><small>آپلود</small>';
+      const account = nav.querySelector('a[href*="member"],a[href*="account"]');
+      account ? nav.insertBefore(link, account) : nav.appendChild(link);
+      nav.classList.add('with-upload');
+    });
+  }
+
+  function addFallbackUploadButton() {
+    if (document.querySelector('.benarian-quick-access') || document.querySelector('.benarian-mobile-nav')) return;
+    if (document.getElementById('benarian-upload-fallback')) return;
+    const link = document.createElement('a');
+    link.id = 'benarian-upload-fallback';
+    link.href = uploadHref;
+    link.innerHTML = '<span>＋</span><strong>Upload Photos</strong><small>آپلود عکس و ثبت تجربه</small>';
+    document.body.appendChild(link);
+  }
+
+  function addCreatorPromotionFields() {
+    if (!isStories) return;
+    const form = document.getElementById('travelStoryForm');
+    if (!form || form.querySelector('[data-creator-promotion]')) return;
+    const existingSocial = form.querySelector('input[name="social"]')?.closest('label');
+    const block = document.createElement('div');
+    block.className = 'full creator-promotion-card';
+    block.dataset.creatorPromotion = 'true';
+    block.innerHTML = `
+      <div class="creator-promotion-head">
+        <span class="creator-promotion-icon">◎</span>
+        <div><strong>Promote your travel profile</strong><small>معرفی اینستاگرام و کانال یوتیوب شما</small></div>
+      </div>
+      <p>Add your public profiles so travellers can discover your content. These links are optional and will only appear when you allow them.</p>
+      <div class="creator-profile-grid">
+        <label>Instagram profile <span class="label-fa">لینک یا نام کاربری اینستاگرام</span><input type="text" name="instagram" inputmode="url" dir="auto" placeholder="@username or https://instagram.com/username"></label>
+        <label>YouTube channel <span class="label-fa">لینک کانال یوتیوب</span><input type="url" name="youtube" inputmode="url" placeholder="https://youtube.com/@channel"></label>
+        <label>TikTok or website <span class="label-fa">تیک‌تاک یا وب‌سایت — اختیاری</span><input type="text" name="creator_website" inputmode="url" dir="auto" placeholder="https://..."></label>
+        <label>Creator name or channel name <span class="label-fa">نام پیج یا کانال</span><input type="text" name="creator_name" dir="auto" placeholder="Your travel brand / نام پیج سفر"></label>
+      </div>
+      <label class="inline-choice creator-consent"><input type="checkbox" name="show_creator_profiles" value="yes"><span>Show these links publicly with my approved story.<br><span class="label-fa">لینک‌های من همراه تجربه تأییدشده نمایش داده شوند.</span></span></label>`;
+    if (existingSocial) existingSocial.replaceWith(block); else {
+      const upload = form.querySelector('#uploadZone')?.closest('.full');
+      upload ? form.insertBefore(block, upload) : form.appendChild(block);
     }
+  }
+
+  function installStyles() {
+    if (document.getElementById('benarian-community-access-style')) return;
+    const style = document.createElement('style');
+    style.id = 'benarian-community-access-style';
+    style.textContent = `
+      .benarian-upload-quick-link{border-color:#e1b45e!important;background:linear-gradient(135deg,#b9872c,#7d5015)!important}
+      .benarian-mobile-nav.with-upload{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+      .benarian-mobile-nav .benarian-mobile-upload{background:linear-gradient(145deg,#c8953d,#8e5d1b)!important;color:#fff!important;border-radius:13px!important}
+      .benarian-mobile-nav .benarian-mobile-upload b{display:block;font:700 8px/1 Inter,Arial,sans-serif!important}
+      .benarian-mobile-nav .benarian-mobile-upload small{display:block;font:500 7px/1 Vazirmatn,Inter,sans-serif!important;color:#fff!important}
+      #benarian-upload-fallback{position:fixed;right:16px;top:58%;z-index:10020;display:flex;align-items:center;gap:10px;padding:13px 16px;border:1px solid #dfb15b;border-radius:13px;background:linear-gradient(135deg,#b9872c,#75470f);color:#fff;text-decoration:none;box-shadow:0 14px 36px rgba(0,0,0,.32)}
+      #benarian-upload-fallback>span{font-size:25px}#benarian-upload-fallback strong,#benarian-upload-fallback small{display:block}#benarian-upload-fallback strong{font-size:11px}#benarian-upload-fallback small{font:500 9px Vazirmatn,Inter,sans-serif}
+      .creator-promotion-card{padding:24px;border:1px solid #d9be8b;border-radius:16px;background:linear-gradient(135deg,#fffaf0,#f7eddb)}
+      .creator-promotion-head{display:flex;align-items:center;gap:13px;margin-bottom:8px}.creator-promotion-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#1e1812;color:#e5b65e;font-size:23px}.creator-promotion-head strong{display:block;font:600 25px/1.1 'Cormorant Garamond',Georgia,serif;color:#211a13}.creator-promotion-head small{display:block;margin-top:5px;font:500 11px Vazirmatn,Inter,sans-serif;color:#806d54}.creator-promotion-card>p{margin:12px 0 20px;color:#6f6252;line-height:1.7}.creator-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.creator-consent{margin-top:16px;background:#fff}
+      @media(max-width:760px){
+        .benarian-mobile-nav.with-upload{left:6px!important;right:6px!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;padding:3px!important}
+        .benarian-mobile-nav.with-upload a{font-size:6.7px!important;padding-left:0!important;padding-right:0!important}
+        .benarian-mobile-nav.with-upload a span{font-size:16px!important}.benarian-mobile-nav .benarian-mobile-upload b{font-size:7px!important}.benarian-mobile-nav .benarian-mobile-upload small{font-size:6px!important}
+        #benarian-upload-fallback{left:14px;right:14px;top:auto;bottom:82px;justify-content:center}body{padding-bottom:150px!important}
+        .creator-promotion-card{padding:19px 15px}.creator-profile-grid{grid-template-columns:1fr}.creator-promotion-head strong{font-size:22px}
+      }
+    `;
+    document.head.appendChild(style);
   }
 
   function addTravelStoriesHomeFeature() {
@@ -51,8 +110,8 @@
     const anchor = document.querySelector('.hotels-section') || document.querySelector('.info-section') || main.lastElementChild;
     const section = document.createElement('section');
     section.id = 'benarian-travel-stories-home';
-    section.innerHTML = `<div class="travel-stories-home-media" role="img" aria-label="Traveller sharing a luxury hotel experience"></div><div class="travel-stories-home-copy"><span>BENARIAN TRAVEL COMMUNITY</span><h2>Share Your Travel Story</h2><p>Upload your favourite travel photos, review your hotel stay and inspire other travellers with your genuine experience.</p><div class="travel-stories-home-actions"><a class="travel-stories-primary" href="travel-stories.html#share-story">Share Your Story →</a><a class="travel-stories-secondary" href="travel-stories.html">Explore Stories</a></div></div>`;
-    if (anchor && anchor.parentNode) anchor.insertAdjacentElement('afterend', section); else main.appendChild(section);
+    section.innerHTML = `<div class="travel-stories-home-media" role="img" aria-label="Traveller sharing a luxury hotel experience"></div><div class="travel-stories-home-copy"><span>BENARIAN TRAVEL COMMUNITY</span><h2>Share Your Travel Story</h2><p>Upload your favourite travel photos, review your hotel stay and promote your Instagram or YouTube travel channel.</p><div class="travel-stories-home-actions"><a class="travel-stories-primary" href="travel-stories.html#share-story">Upload & Share →</a><a class="travel-stories-secondary" href="travel-stories.html">Explore Stories</a></div></div>`;
+    if (anchor?.parentNode) anchor.insertAdjacentElement('afterend', section); else main.appendChild(section);
     if (!document.getElementById('benarian-travel-stories-home-style')) {
       const style = document.createElement('style');
       style.id = 'benarian-travel-stories-home-style';
@@ -75,14 +134,17 @@
   }
 
   function run() {
-    requestAnimationFrame(() => {
-      addTravelStoriesNavigation();
-      addUploadShortcut();
-      addTravelStoriesHomeFeature();
-      removeBookingAfterFooter();
-    });
+    installStyles();
+    addTravelStoriesNavigation();
+    addUploadToQuickAccess();
+    addUploadToMobileNav();
+    addFallbackUploadButton();
+    addCreatorPromotionFields();
+    addTravelStoriesHomeFeature();
+    removeBookingAfterFooter();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true }); else run();
-  [300,800,1600,3000].forEach(ms => setTimeout(run, ms));
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, {once:true}); else run();
+  [250,600,1200,2200,4000,7000].forEach(ms => setTimeout(run, ms));
+  new MutationObserver(() => requestAnimationFrame(run)).observe(document.documentElement,{childList:true,subtree:true});
 })();
