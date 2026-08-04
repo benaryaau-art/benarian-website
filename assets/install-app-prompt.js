@@ -1,12 +1,64 @@
 (() => {
-  const isHome = /(^|\/)index\.html$/.test(location.pathname) || location.pathname === '/' || location.pathname === '';
-  if (!isHome) return;
+  const page = (location.pathname.split('/').filter(Boolean).pop() || 'index.html').toLowerCase();
+  const isHome = page === 'index.html' || location.pathname === '/' || location.pathname === '';
+
+  function addTravelStoriesNavigation() {
+    document.querySelectorAll('.nav').forEach(nav => {
+      if (nav.querySelector('a[href="travel-stories.html"]')) return;
+      const link = document.createElement('a');
+      link.href = 'travel-stories.html';
+      link.textContent = 'TRAVEL STORIES';
+      const wellness = nav.querySelector('a[href="wellness.html"]');
+      wellness ? nav.insertBefore(link, wellness) : nav.appendChild(link);
+    });
+  }
+
+  function addTravelStoriesHomeFeature() {
+    if (!isHome || document.getElementById('benarian-travel-stories-home')) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+    const anchor = document.querySelector('.hotels-section') || document.querySelector('.info-section') || main.lastElementChild;
+    const section = document.createElement('section');
+    section.id = 'benarian-travel-stories-home';
+    section.innerHTML = `
+      <div class="travel-stories-home-media" role="img" aria-label="Traveller sharing a luxury hotel experience"></div>
+      <div class="travel-stories-home-copy">
+        <span>BENARIAN TRAVEL COMMUNITY</span>
+        <h2>Share Your Travel Story</h2>
+        <p>Upload your favourite travel photos, review your hotel stay and inspire other travellers with your genuine experience.</p>
+        <div class="travel-stories-home-actions">
+          <a class="travel-stories-primary" href="travel-stories.html#share-story">Share Your Story →</a>
+          <a class="travel-stories-secondary" href="travel-stories.html">Explore Stories</a>
+        </div>
+      </div>`;
+    if (anchor && anchor.parentNode) anchor.insertAdjacentElement('afterend', section);
+    else main.appendChild(section);
+
+    if (!document.getElementById('benarian-travel-stories-home-style')) {
+      const style = document.createElement('style');
+      style.id = 'benarian-travel-stories-home-style';
+      style.textContent = `
+        #benarian-travel-stories-home{display:grid;grid-template-columns:1.05fr .95fr;min-height:560px;background:#17130e;color:#fff;overflow:hidden}
+        .travel-stories-home-media{min-height:560px;background:linear-gradient(90deg,rgba(15,12,9,.08),rgba(15,12,9,.42)),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=90&w=1600') center/cover no-repeat}
+        .travel-stories-home-copy{display:flex;flex-direction:column;justify-content:center;padding:70px clamp(32px,6vw,90px)}
+        .travel-stories-home-copy>span{color:#dfb45f;font:700 10px/1 Inter,Arial,sans-serif;letter-spacing:3px;margin-bottom:18px}
+        .travel-stories-home-copy h2{font:600 clamp(48px,5.5vw,72px)/.92 'Cormorant Garamond',Georgia,serif;margin:0 0 24px;color:#fff}
+        .travel-stories-home-copy p{max-width:560px;color:#e4d9ca;font-size:16px;line-height:1.75;margin:0}
+        .travel-stories-home-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+        .travel-stories-home-actions a{display:inline-block;padding:14px 19px;border-radius:8px;text-decoration:none;font:700 12px/1 Inter,Arial,sans-serif}
+        .travel-stories-primary{background:#bd8730;color:#fff}
+        .travel-stories-secondary{border:1px solid #d5a64b;color:#f1c978}
+        @media(max-width:820px){#benarian-travel-stories-home{grid-template-columns:1fr}.travel-stories-home-media{min-height:360px}.travel-stories-home-copy{padding:54px 22px 64px}.travel-stories-home-copy h2{font-size:48px}}
+      `;
+      document.head.appendChild(style);
+    }
+  }
 
   function removeBookingAfterFooter() {
+    if (!isHome) return;
     const footer = document.querySelector('.benarian-footer-v3, footer');
     if (!footer) return;
 
-    // The footer must be the final item inside the page shell.
     let sibling = footer.nextElementSibling;
     while (sibling) {
       const next = sibling.nextElementSibling;
@@ -18,7 +70,6 @@
       sibling = next;
     }
 
-    // Booking.com can also append an orphan widget directly to <body>.
     [...document.body.children].forEach(node => {
       if (node === footer || node.contains(footer) || footer.contains(node)) return;
       if (node.classList?.contains('benarian-quick-access')) return;
@@ -29,7 +80,14 @@
     });
   }
 
-  const run = () => requestAnimationFrame(removeBookingAfterFooter);
+  function run() {
+    requestAnimationFrame(() => {
+      addTravelStoriesNavigation();
+      addTravelStoriesHomeFeature();
+      removeBookingAfterFooter();
+    });
+  }
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });
   else run();
   [300, 800, 1600, 3000, 6000].forEach(ms => setTimeout(run, ms));
