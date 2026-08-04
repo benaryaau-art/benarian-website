@@ -146,6 +146,20 @@ window.BENARIAN_PARTNERS = {
       setHero('.page-hero', 'assets/destinations-hero-new.jpg?v=20260726b', 'linear-gradient(90deg,rgba(10,13,12,.72),rgba(10,13,12,.18))', innerWidth <= 760 ? '62% center' : 'center center');
     } else if (page === 'hotels') {
       setHero('.hotels-hero', 'assets/hotels-hero-new.jpg?v=20260726b', 'linear-gradient(90deg,rgba(10,8,6,.76),rgba(10,8,6,.20),rgba(10,8,6,.04))', innerWidth <= 760 ? '66% center' : 'center center');
+    } else if (page === 'travel-stories') {
+      setHero('.stories-hero', 'https://cdn.prod.website-files.com/66fab24d6dde4d79b3b50865/6899e5b55fa1164778ab0854_AD_4nXeaNfd5sFEUy6v6sHSww0D9neoH0wnCcXM20LcPs8d9tpx8rxP-zoOwrtqQ175-m3Cn6sXuvDjPwFuUzyWaS_QKA1fOcO0D0BKrQWUr3C3H2Bg1DxNxN8_R7a47y4Elx1HxAf7L.jpeg', 'linear-gradient(90deg,rgba(7,8,10,.90) 0%,rgba(7,8,10,.72) 42%,rgba(7,8,10,.22) 75%,rgba(7,8,10,.06) 100%)', innerWidth <= 760 ? '62% center' : 'center center');
+      const styleId='benarian-stories-readability';
+      let style=document.getElementById(styleId);
+      if(!style){style=document.createElement('style');style.id=styleId;document.head.appendChild(style)}
+      style.textContent=`
+        .stories-hero-copy{max-width:760px!important;padding:28px 30px!important;background:rgba(8,8,8,.28)!important;border-left:3px solid #d5a84f!important;border-radius:0 18px 18px 0!important;backdrop-filter:blur(3px)!important;-webkit-backdrop-filter:blur(3px)!important}
+        .stories-hero h1{display:block!important;color:#fff!important;font-size:clamp(58px,7vw,96px)!important;line-height:.9!important;text-shadow:0 4px 24px rgba(0,0,0,.9)!important;margin-bottom:26px!important}
+        .stories-hero p{color:#fff!important;font-size:19px!important;font-weight:500!important;line-height:1.8!important;text-shadow:0 2px 12px rgba(0,0,0,.95)!important}
+        .stories-hero .hero-fa{font-size:17px!important;color:#fff!important;font-weight:600!important;line-height:2.05!important}
+        .stories-hero .stories-kicker{color:#f2c66f!important;font-size:12px!important;text-shadow:0 2px 8px rgba(0,0,0,.9)!important}
+        .stories-hero .stories-btn{background:#c49237!important;border-color:#e3ba68!important;color:#fff!important;box-shadow:0 12px 30px rgba(0,0,0,.35)!important}
+        @media(max-width:760px){.stories-hero-copy{padding:22px 20px!important;background:rgba(8,8,8,.46)!important;border-radius:14px!important;border-left:2px solid #d5a84f!important}.stories-hero h1{font-size:clamp(46px,13vw,64px)!important}.stories-hero p{font-size:16px!important}.stories-hero .hero-fa{font-size:15px!important}}
+      `;
     }
   }
 
