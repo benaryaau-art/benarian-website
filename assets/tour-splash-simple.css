@@ -12,7 +12,7 @@ body.home-lux::before{
   background-size:cover!important;
   background-position:center!important;
   background-repeat:no-repeat!important;
-  animation:benarianBaliVisual 2.4s ease-in-out forwards!important;
+  animation:benarianBaliVisual 1.4s ease-in-out forwards!important;
 }
 body.home-lux::after{
   content:"BENARIAN\A BALI LUXURY TOURS\A Curated stays • experiences • private transfers\A Explore Bali with us"!important;
@@ -35,22 +35,22 @@ body.home-lux::after{
   pointer-events:none!important;
   opacity:1!important;
   visibility:visible!important;
-  animation:benarianBaliText 2.4s ease-in-out forwards!important;
+  animation:benarianBaliText 1.4s ease-in-out forwards!important;
 }
 @keyframes benarianBaliVisual{
   0%{opacity:0;visibility:visible}
-  8%,82%{opacity:1;visibility:visible}
+  8%,78%{opacity:1;visibility:visible}
   100%{opacity:0;visibility:hidden}
 }
 @keyframes benarianBaliText{
   0%{opacity:0;visibility:visible;transform:translate(-50%,-46%)}
-  12%,78%{opacity:1;visibility:visible;transform:translate(-50%,-50%)}
+  10%,74%{opacity:1;visibility:visible;transform:translate(-50%,-50%)}
   100%{opacity:0;visibility:hidden;transform:translate(-50%,-54%)}
 }
 @media(max-width:760px){
-  body.home-lux::before{animation-duration:2.2s!important;background-position:center!important}
-  body.home-lux::after{animation-duration:2.2s!important;font-size:clamp(20px,7vw,34px)!important;width:86vw!important;padding:20px 12px!important}
+  body.home-lux::before{animation-duration:1.2s!important;background-position:center!important}
+  body.home-lux::after{animation-duration:1.2s!important;font-size:clamp(20px,7vw,34px)!important;width:86vw!important;padding:20px 12px!important}
 }
 @media(prefers-reduced-motion:reduce){
-  body.home-lux::before,body.home-lux::after{animation-duration:1.6s!important}
+  body.home-lux::before,body.home-lux::after{animation-duration:.9s!important}
 }
