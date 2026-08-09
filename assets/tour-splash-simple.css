@@ -1,38 +1,11 @@
-/* BENARIAN Bali tour homepage splash — full image visibility on mobile */
-body.home-lux::before{
-  content:""!important;
-  position:fixed!important;
-  inset:0!important;
-  z-index:2147483000!important;
-  display:block!important;
-  visibility:visible!important;
-  opacity:1!important;
-  pointer-events:none!important;
-  background-color:#0b0b0b!important;
-  background-image:url('/assets/benarian-tour-splash.webp?v=20260809-full')!important;
-  background-position:center center!important;
-  background-size:cover!important;
-  background-repeat:no-repeat!important;
-  animation:benarianTourSplash 2s ease-in-out forwards!important;
-}
+/* BENARIAN splash temporarily disabled to keep homepage stable on all devices. */
+body.home-lux::before,
 body.home-lux::after{
   content:none!important;
   display:none!important;
-}
-@keyframes benarianTourSplash{
-  0%{opacity:0;visibility:visible}
-  8%,78%{opacity:1;visibility:visible}
-  100%{opacity:0;visibility:hidden}
-}
-@media(max-width:760px){
-  body.home-lux::before{
-    background-color:#0b0b0b!important;
-    background-image:url('/assets/benarian-tour-splash.webp?v=20260809-mobilefull')!important;
-    background-size:cover!important;
-    background-position:center center!important;
-    animation-duration:2s!important;
-  }
-}
-@media(prefers-reduced-motion:reduce){
-  body.home-lux::before{animation-duration:1.4s!important}
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  animation:none!important;
+  background:none!important;
 }
