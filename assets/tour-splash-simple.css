@@ -1,4 +1,3 @@
-@import url('bali-package-override.css?v=20260809a');
 /* BENARIAN Bali tour splash — 3 second intro with off-screen clean exit */
 body.home-lux::before{
   content:""!important;
