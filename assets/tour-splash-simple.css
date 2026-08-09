@@ -1,4 +1,4 @@
-/* BENARIAN Bali tour splash — 3 second intro, hard clean exit */
+/* BENARIAN Bali tour splash — 3 second intro with off-screen clean exit */
 body.home-lux::before{
   content:""!important;
   position:fixed!important;
@@ -11,6 +11,7 @@ body.home-lux::before{
   background-position:center!important;
   background-repeat:no-repeat!important;
   animation:benarianBaliVisual 3s linear forwards!important;
+  will-change:opacity,transform!important;
 }
 body.home-lux::after{
   content:"BENARIAN\A BALI LUXURY TOURS\A Curated stays • experiences • private transfers\A Explore Bali with us"!important;
@@ -32,18 +33,19 @@ body.home-lux::after{
   text-shadow:0 3px 18px rgba(0,0,0,.75)!important;
   pointer-events:none!important;
   animation:benarianBaliText 3s linear forwards!important;
+  will-change:opacity,transform!important;
 }
 @keyframes benarianBaliVisual{
-  0%{opacity:0;visibility:visible}
-  6%,82%{opacity:1;visibility:visible}
-  89%{opacity:0;visibility:visible}
-  90%,100%{opacity:0;visibility:hidden;display:none;transform:none}
+  0%{opacity:0;transform:translate3d(0,0,0)}
+  6%,84%{opacity:1;transform:translate3d(0,0,0)}
+  94%{opacity:0;transform:translate3d(0,0,0)}
+  95%,100%{opacity:0;transform:translate3d(-200vw,0,0)}
 }
 @keyframes benarianBaliText{
-  0%{opacity:0;visibility:visible;text-shadow:0 3px 18px rgba(0,0,0,.75)}
-  8%,72%{opacity:1;visibility:visible}
-  78%{opacity:0;visibility:visible;text-shadow:none}
-  79%,100%{content:""!important;opacity:0;visibility:hidden;display:none;text-shadow:none;color:transparent;font-size:0;line-height:0;letter-spacing:0;width:0;height:0;padding:0;overflow:hidden}
+  0%{opacity:0;transform:translate3d(-50%,-50%,0);text-shadow:0 3px 18px rgba(0,0,0,.75)}
+  8%,73%{opacity:1;transform:translate3d(-50%,-50%,0)}
+  78%{opacity:0;text-shadow:none;transform:translate3d(-50%,-50%,0)}
+  79%,100%{opacity:0;color:transparent;text-shadow:none;transform:translate3d(-500vw,-50%,0)}
 }
 @media(max-width:760px){
   body.home-lux::before{animation-duration:3s!important;background-position:center!important}
