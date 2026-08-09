@@ -1,3 +1,4 @@
+@import url('bali-card-images.css?v=20260809b');
 /* BENARIAN Bali tour splash — 3 second intro with off-screen clean exit */
 body.home-lux::before{
   content:""!important;
