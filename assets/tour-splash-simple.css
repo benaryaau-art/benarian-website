@@ -1,4 +1,4 @@
-/* BENARIAN Bali tour splash — short intro that fully clears */
+/* BENARIAN Bali tour splash — 3 second intro that fully clears */
 body.home-lux::before{
   content:""!important;
   position:fixed!important;
@@ -10,7 +10,7 @@ body.home-lux::before{
   background-size:cover!important;
   background-position:center!important;
   background-repeat:no-repeat!important;
-  animation:benarianBaliVisual 1.2s ease-in-out forwards!important;
+  animation:benarianBaliVisual 3s ease-in-out forwards!important;
 }
 body.home-lux::after{
   content:"BENARIAN\A BALI LUXURY TOURS\A Curated stays • experiences • private transfers\A Explore Bali with us"!important;
@@ -31,24 +31,24 @@ body.home-lux::after{
   letter-spacing:1.5px!important;
   text-shadow:0 3px 18px rgba(0,0,0,.75)!important;
   pointer-events:none!important;
-  animation:benarianBaliText 1.2s ease-in-out forwards!important;
+  animation:benarianBaliText 3s ease-in-out forwards!important;
 }
 @keyframes benarianBaliVisual{
   0%{opacity:0}
-  10%,65%{opacity:1}
+  8%,80%{opacity:1}
   99%{opacity:0;transform:scale(1)}
   100%{opacity:0;transform:scale(0);width:0;height:0;inset:auto}
 }
 @keyframes benarianBaliText{
   0%{opacity:0}
-  12%,62%{opacity:1}
+  10%,77%{opacity:1}
   99%{opacity:0}
   100%{opacity:0;font-size:0;width:0;height:0;padding:0;overflow:hidden}
 }
 @media(max-width:760px){
-  body.home-lux::before{animation-duration:1s!important;background-position:center!important}
-  body.home-lux::after{animation-duration:1s!important;font-size:clamp(20px,7vw,34px)!important;width:86vw!important;padding:20px 12px!important}
+  body.home-lux::before{animation-duration:3s!important;background-position:center!important}
+  body.home-lux::after{animation-duration:3s!important;font-size:clamp(20px,7vw,34px)!important;width:86vw!important;padding:20px 12px!important}
 }
 @media(prefers-reduced-motion:reduce){
-  body.home-lux::before,body.home-lux::after{animation-duration:.8s!important}
+  body.home-lux::before,body.home-lux::after{animation-duration:2s!important}
 }
