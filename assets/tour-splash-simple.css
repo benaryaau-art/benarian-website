@@ -1,12 +1,31 @@
-/* BENARIAN legacy tour splash disabled permanently.
-   Kept as a compatibility file so older cached homepage HTML cannot render
-   the previous full-screen overlay on top of the live homepage. */
-body.home-lux::before,
+/* BENARIAN clean 2-second homepage splash */
+body.home-lux::before{
+  content:"";
+  position:fixed!important;
+  inset:0!important;
+  z-index:2147483000!important;
+  display:block!important;
+  visibility:visible;
+  opacity:1;
+  pointer-events:none;
+  background-color:#111;
+  background-image:url('benarian-tour-splash.webp');
+  background-position:center center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  animation:benarianCleanSplash 2s ease-out forwards;
+}
 body.home-lux::after{
   content:none!important;
   display:none!important;
-  visibility:hidden!important;
-  opacity:0!important;
-  pointer-events:none!important;
-  animation:none!important;
+}
+@keyframes benarianCleanSplash{
+  0%,82%{opacity:1;visibility:visible}
+  100%{opacity:0;visibility:hidden}
+}
+@media(max-width:760px){
+  body.home-lux::before{background-position:center center}
+}
+@media(prefers-reduced-motion:reduce){
+  body.home-lux::before{animation:benarianCleanSplash 2s linear forwards}
 }
