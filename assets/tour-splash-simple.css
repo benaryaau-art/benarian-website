@@ -1,4 +1,4 @@
-/* BENARIAN clean 2-second homepage splash */
+/* BENARIAN homepage splash — safe mobile behaviour */
 body.home-lux::before{
   content:"";
   position:fixed!important;
@@ -8,24 +8,28 @@ body.home-lux::before{
   visibility:visible;
   opacity:1;
   pointer-events:none;
-  background-color:#111;
-  background-image:url('benarian-tour-splash.webp');
-  background-position:center center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  animation:benarianCleanSplash 2s ease-out forwards;
+  background:transparent url('benarian-tour-splash.webp') center center/contain no-repeat;
+  animation:benarianCleanSplash .9s ease-out forwards;
 }
 body.home-lux::after{
   content:none!important;
   display:none!important;
 }
 @keyframes benarianCleanSplash{
-  0%,82%{opacity:1;visibility:visible}
+  0%,55%{opacity:1;visibility:visible}
   100%{opacity:0;visibility:hidden}
 }
+/* iPhone/Safari: do not cover the homepage with a full-screen splash. */
 @media(max-width:760px){
-  body.home-lux::before{background-position:center center}
+  body.home-lux::before{
+    content:none!important;
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    animation:none!important;
+    background:none!important;
+  }
 }
 @media(prefers-reduced-motion:reduce){
-  body.home-lux::before{animation:benarianCleanSplash 2s linear forwards}
+  body.home-lux::before{animation-duration:.5s}
 }
