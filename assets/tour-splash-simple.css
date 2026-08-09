@@ -7,14 +7,14 @@ body.home-lux::after{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  animation:benarianTourSplashSimple 6.2s ease both;
+  animation:benarianTourSplashSimple 2s ease both;
 }
 body.home-lux::before{
   content:"";
   display:block;
   background:
     linear-gradient(180deg,rgba(5,4,3,.16),rgba(5,4,3,.55) 58%,rgba(5,4,3,.86)),
-    url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=94&w=2200') center 55%/cover no-repeat;
+    url('benarian-tour-splash.webp') center 55%/cover no-repeat;
 }
 body.home-lux::after{
   content:"BENARIAN  ·  CURATED LUXURY TOURS\A\ADiscover Bali through handpicked hotels, private experiences and unforgettable journeys.\A\ALUXURY TOURS · HOTELS · EXPERIENCES";
@@ -33,7 +33,7 @@ body.home-lux::after{
 @keyframes benarianTourSplashSimple{
   0%{opacity:0;visibility:visible}
   8%{opacity:1;visibility:visible}
-  78%{opacity:1;visibility:visible}
+  76%{opacity:1;visibility:visible}
   100%{opacity:0;visibility:hidden}
 }
 @media(max-width:760px){
@@ -46,5 +46,5 @@ body.home-lux::after{
 }
 @media(prefers-reduced-motion:reduce){
   body.home-lux::before,
-  body.home-lux::after{animation-duration:3.2s}
+  body.home-lux::after{animation-duration:2s}
 }
