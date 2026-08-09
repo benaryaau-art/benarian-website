@@ -1,37 +1,30 @@
-/* BENARIAN Bali tour homepage splash — restored with safe mobile layout */
-body.home-lux::before{
-  content:"";
-  position:fixed!important;
-  inset:0!important;
-  z-index:2147483000!important;
-  display:block!important;
-  visibility:visible;
+/* BENARIAN Bali tour homepage splash — force visible on desktop and mobile */
+html body.home-lux::before{
+  content:"" !important;
+  position:fixed !important;
+  top:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  left:0 !important;
+  z-index:2147483646 !important;
+  display:block !important;
+  visibility:visible !important;
   opacity:1;
-  pointer-events:none;
-  background-color:#f7f3ec!important;
-  background-image:url('benarian-tour-splash.webp?v=20260809-restored')!important;
-  background-position:center center!important;
-  background-size:contain!important;
-  background-repeat:no-repeat!important;
-  animation:benarianTourSplash 2s ease-in-out forwards!important;
+  pointer-events:none !important;
+  background:#f7f3ec url('/assets/benarian-tour-splash.webp?v=20260809-force') center center / contain no-repeat !important;
+  animation:benarianTourSplashForce 2.2s ease-in-out forwards !important;
 }
-body.home-lux::after{
-  content:none!important;
-  display:none!important;
-}
-@keyframes benarianTourSplash{
-  0%{opacity:0;visibility:visible}
-  8%,78%{opacity:1;visibility:visible}
+html body.home-lux::after{content:none!important;display:none!important}
+@keyframes benarianTourSplashForce{
+  0%{opacity:1;visibility:visible}
+  78%{opacity:1;visibility:visible}
   100%{opacity:0;visibility:hidden}
 }
 @media(max-width:760px){
-  body.home-lux::before{
-    background-color:#f7f3ec!important;
-    background-size:contain!important;
-    background-position:center center!important;
-    animation-duration:1.6s!important;
+  html body.home-lux::before{
+    display:block !important;
+    visibility:visible !important;
+    background:#f7f3ec url('/assets/benarian-tour-splash.webp?v=20260809-force-mobile') center center / contain no-repeat !important;
+    animation:benarianTourSplashForce 2s ease-in-out forwards !important;
   }
-}
-@media(prefers-reduced-motion:reduce){
-  body.home-lux::before{animation-duration:1s!important}
 }
