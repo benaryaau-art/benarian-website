@@ -127,27 +127,32 @@
     const style = document.createElement('style');
     style.id = 'benarian-bali-experience-promo-style';
     style.textContent = `
-      .benarian-bali-experience-promo{position:relative;min-height:520px;overflow:hidden;background:#111;color:#fff;display:grid;place-items:center;border-top:1px solid #b9872c;border-bottom:1px solid #b9872c}
-      .bbep-media{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=88') center 58%/cover no-repeat;transform:scale(1.02)}
-      .bbep-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.88) 0%,rgba(5,5,5,.62) 48%,rgba(5,5,5,.22) 100%)}
+      .benarian-bali-experience-promo{position:relative;min-height:560px;overflow:hidden;background:#080706;color:#fff;display:grid;place-items:center;border-top:1px solid #b9872c;border-bottom:1px solid #b9872c}
+      .bbep-media{position:absolute;inset:0;background:#080706 url('assets/bali-experience-package.webp') right center/contain no-repeat;transform:none}
+      .bbep-overlay{position:absolute;inset:0;background:linear-gradient(90deg,#080706 0%,rgba(8,7,6,.98) 27%,rgba(8,7,6,.78) 48%,rgba(8,7,6,.25) 72%,rgba(8,7,6,.04) 100%)}
       .bbep-content{position:relative;z-index:2;width:min(1180px,90%);padding:64px 0;text-align:left}
       .bbep-mark{font:600 56px/.8 'Cormorant Garamond',Georgia,serif;color:#dfb45f;letter-spacing:-6px;margin-bottom:20px}
       .bbep-kicker{display:block;color:#dfb45f;font:700 10px/1.2 Inter,Arial,sans-serif;letter-spacing:2.5px;margin-bottom:10px}
       .bbep-content h2{font:600 clamp(48px,7vw,82px)/.9 'Cormorant Garamond',Georgia,serif;margin:0 0 18px;letter-spacing:.5px}
-      .bbep-content p{max-width:620px;margin:0 0 26px;color:#eee6db;font:400 15px/1.75 Inter,Arial,sans-serif}
+      .bbep-content p{max-width:590px;margin:0 0 26px;color:#eee6db;font:400 15px/1.75 Inter,Arial,sans-serif}
       .bbep-actions{display:flex;gap:12px;flex-wrap:wrap}
       .bbep-actions a{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:46px;padding:13px 18px;border-radius:8px;text-decoration:none;font:700 12px/1.2 Inter,Arial,sans-serif;transition:.2s ease}
       .bbep-primary{background:#b9872c;color:#fff}.bbep-primary:hover{background:#d0a04b;transform:translateY(-1px)}
       .bbep-secondary{border:1px solid rgba(255,255,255,.55);color:#fff;background:rgba(0,0,0,.18)}.bbep-secondary:hover{border-color:#dfb45f;color:#f4ce83}
-      @media(max-width:760px){
-        .benarian-bali-experience-promo{min-height:540px}
-        .bbep-media{background-position:62% center}
-        .bbep-overlay{background:linear-gradient(180deg,rgba(4,4,4,.22),rgba(4,4,4,.82) 62%,rgba(4,4,4,.94))}
-        .bbep-content{width:calc(100% - 36px);padding:210px 0 36px;text-align:center}
-        .bbep-mark{font-size:48px;margin-bottom:13px}
+      @media(max-width:900px){
+        .benarian-bali-experience-promo{min-height:660px;align-items:end}
+        .bbep-media{background-size:100% auto;background-position:center top}
+        .bbep-overlay{background:linear-gradient(180deg,rgba(5,5,5,.08) 0%,rgba(5,5,5,.18) 35%,rgba(5,5,5,.88) 68%,#080706 100%)}
+        .bbep-content{width:calc(100% - 36px);padding:340px 0 38px;text-align:center}
+        .bbep-mark{font-size:48px;margin-bottom:12px}
         .bbep-content h2{font-size:49px}
         .bbep-content p{font-size:13px;line-height:1.65;margin-left:auto;margin-right:auto}
         .bbep-actions{justify-content:center}.bbep-actions a{width:100%}
+      }
+      @media(max-width:560px){
+        .benarian-bali-experience-promo{min-height:700px}
+        .bbep-media{background-size:112% auto;background-position:center top}
+        .bbep-content{padding-top:360px}
       }
     `;
     document.head.appendChild(style);
