@@ -1,4 +1,4 @@
-/* BENARIAN homepage splash — safe mobile behaviour */
+/* BENARIAN Bali tour homepage splash — restored with safe mobile layout */
 body.home-lux::before{
   content:"";
   position:fixed!important;
@@ -8,28 +8,30 @@ body.home-lux::before{
   visibility:visible;
   opacity:1;
   pointer-events:none;
-  background:transparent url('benarian-tour-splash.webp') center center/contain no-repeat;
-  animation:benarianCleanSplash .9s ease-out forwards;
+  background-color:#f7f3ec!important;
+  background-image:url('benarian-tour-splash.webp?v=20260809-restored')!important;
+  background-position:center center!important;
+  background-size:contain!important;
+  background-repeat:no-repeat!important;
+  animation:benarianTourSplash 2s ease-in-out forwards!important;
 }
 body.home-lux::after{
   content:none!important;
   display:none!important;
 }
-@keyframes benarianCleanSplash{
-  0%,55%{opacity:1;visibility:visible}
+@keyframes benarianTourSplash{
+  0%{opacity:0;visibility:visible}
+  8%,78%{opacity:1;visibility:visible}
   100%{opacity:0;visibility:hidden}
 }
-/* iPhone/Safari: do not cover the homepage with a full-screen splash. */
 @media(max-width:760px){
   body.home-lux::before{
-    content:none!important;
-    display:none!important;
-    visibility:hidden!important;
-    opacity:0!important;
-    animation:none!important;
-    background:none!important;
+    background-color:#f7f3ec!important;
+    background-size:contain!important;
+    background-position:center center!important;
+    animation-duration:1.6s!important;
   }
 }
 @media(prefers-reduced-motion:reduce){
-  body.home-lux::before{animation-duration:.5s}
+  body.home-lux::before{animation-duration:1s!important}
 }
