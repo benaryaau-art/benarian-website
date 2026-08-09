@@ -1,4 +1,4 @@
-/* BENARIAN Bali tour splash — 3 second intro that fully clears */
+/* BENARIAN Bali tour splash — 3 second intro with clean exit */
 body.home-lux::before{
   content:""!important;
   position:fixed!important;
@@ -34,16 +34,16 @@ body.home-lux::after{
   animation:benarianBaliText 3s ease-in-out forwards!important;
 }
 @keyframes benarianBaliVisual{
-  0%{opacity:0}
-  8%,80%{opacity:1}
-  99%{opacity:0;transform:scale(1)}
-  100%{opacity:0;transform:scale(0);width:0;height:0;inset:auto}
+  0%{opacity:0;visibility:visible}
+  8%,74%{opacity:1;visibility:visible}
+  84%{opacity:0;visibility:visible}
+  85%,100%{opacity:0;visibility:hidden;transform:scale(0);width:0;height:0;inset:auto}
 }
 @keyframes benarianBaliText{
-  0%{opacity:0}
-  10%,77%{opacity:1}
-  99%{opacity:0}
-  100%{opacity:0;font-size:0;width:0;height:0;padding:0;overflow:hidden}
+  0%{opacity:0;visibility:visible}
+  10%,70%{opacity:1;visibility:visible}
+  80%{opacity:0;visibility:visible}
+  81%,100%{opacity:0;visibility:hidden;font-size:0;width:0;height:0;padding:0;overflow:hidden;text-shadow:none}
 }
 @media(max-width:760px){
   body.home-lux::before{animation-duration:3s!important;background-position:center!important}
