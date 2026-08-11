@@ -55,3 +55,29 @@ body.home-lux::after{
 @media(prefers-reduced-motion:reduce){
   body.home-lux::before,body.home-lux::after{animation-duration:3s!important}
 }
+
+/* BENARIAN homepage promo carousel hardening
+   The homepage already contains four promo slides. This CSS fallback makes the
+   carousel rotate even if the inline carousel script is delayed or unavailable. */
+.benarian-promo-track{
+  animation:benarianPromoAutoRotate 20s infinite!important;
+  transform:translateX(0)!important;
+}
+.benarian-promo-rotator:hover .benarian-promo-track,
+.benarian-promo-rotator:focus-within .benarian-promo-track{
+  animation-play-state:paused!important;
+}
+@keyframes benarianPromoAutoRotate{
+  0%,20%{transform:translateX(0)}
+  25%,45%{transform:translateX(-100%)}
+  50%,70%{transform:translateX(-200%)}
+  75%,95%{transform:translateX(-300%)}
+  100%{transform:translateX(0)}
+}
+@media(max-width:700px){
+  .benarian-promo-track{animation-duration:18s!important}
+  .benarian-promo-slide{min-width:100%!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .benarian-promo-track{animation:none!important;transform:translateX(0)!important}
+}
