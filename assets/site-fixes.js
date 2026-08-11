@@ -2,6 +2,29 @@
   const WHATSAPP_URL='https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking.';
   const EMAIL_URL='mailto:info@benarian.com?subject=BENARIAN%20Travel%20Enquiry';
 
+  function installIntroFounderOverlay(){
+    if(!document.body.classList.contains('home-lux') || document.getElementById('benarian-intro-founder')) return;
+    const style=document.createElement('style');
+    style.id='benarian-intro-founder-style';
+    style.textContent=`
+      body.home-lux::after{content:none!important;display:none!important}
+      #benarian-intro-founder{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2147483002;width:min(94vw,820px);text-align:center;color:#fff;pointer-events:none;text-shadow:0 3px 22px rgba(0,0,0,.68);animation:benarianFounderOverlay 2.15s ease forwards}
+      #benarian-intro-founder .b-brand{font:600 clamp(29px,6.2vw,48px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:3px}
+      #benarian-intro-founder .b-tagline{margin-top:8px;font:500 clamp(18px,4vw,31px)/1.08 'Cormorant Garamond',Georgia,serif;letter-spacing:2px;white-space:nowrap}
+      #benarian-intro-founder .b-rule{width:110px;height:1px;margin:18px auto 12px;background:linear-gradient(90deg,transparent,#d4a64d,transparent)}
+      #benarian-intro-founder .b-role{color:#e5b85e;font:600 clamp(12px,2.8vw,18px)/1.2 Inter,Arial,sans-serif;letter-spacing:4px}
+      #benarian-intro-founder .b-signature{margin-top:8px;font:italic 500 clamp(30px,7vw,54px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:1px}
+      @keyframes benarianFounderOverlay{0%{opacity:0;visibility:visible}14%,66%{opacity:1;visibility:visible}88%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden}}
+      @media(max-width:430px){#benarian-intro-founder{width:96vw;top:51%}#benarian-intro-founder .b-brand{font-size:24px}#benarian-intro-founder .b-tagline{font-size:17px;letter-spacing:.8px}#benarian-intro-founder .b-rule{margin:14px auto 10px;width:86px}#benarian-intro-founder .b-role{font-size:11px;letter-spacing:2.8px}#benarian-intro-founder .b-signature{font-size:34px;margin-top:6px}}
+    `;
+    document.head.appendChild(style);
+    const el=document.createElement('div');
+    el.id='benarian-intro-founder';
+    el.innerHTML='<div class="b-brand">BENARIAN</div><div class="b-tagline">LUXURY TRAVEL &amp; HOSPITALITY</div><div class="b-rule"></div><div class="b-role">FOUNDER | CEO</div><div class="b-signature">Ben Tafreshi</div>';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),2400);
+  }
+
   function fixUtilities(){
     document.querySelectorAll('.topline .right').forEach(right=>{
       [...right.children].forEach(node=>{
@@ -74,19 +97,14 @@
         @media(max-width:760px){
           body.home-lux .benarian-promo-rotator[data-benarian-takeover="true"]{overflow:hidden!important;padding-left:0!important;padding-right:0!important}
           body.home-lux .benarian-promo-rotator[data-benarian-takeover="true"] .benarian-promo-track{overflow:visible!important}
-          body.home-lux .benarian-promo-rotator[data-benarian-takeover="true"] .benarian-promo-slide{
-            left:4%!important;right:auto!important;width:92%!important;border-radius:14px!important;transform-origin:center center!important;transition:none!important;animation:none!important;
-          }
+          body.home-lux .benarian-promo-rotator[data-benarian-takeover="true"] .benarian-promo-slide{left:4%!important;right:auto!important;width:92%!important;border-radius:14px!important;transform-origin:center center!important;transition:none!important;animation:none!important}
         }
       `;
       document.head.appendChild(style);
     }
 
-    let current=0;
-    let timer=null;
-    let busy=false;
+    let current=0,timer=null,busy=false;
     dots.innerHTML='';
-
     slides.forEach((slide,i)=>{
       slide.classList.remove('is-active','is-prev','is-next');
       slide.style.setProperty('opacity',i===0?'1':'0','important');
@@ -95,80 +113,27 @@
       slide.style.setProperty('z-index',i===0?'3':'1','important');
       slide.style.setProperty('pointer-events',i===0?'auto':'none','important');
       if(i===0) slide.classList.add('is-active');
-      const d=document.createElement('button');
-      d.className='benarian-promo-dot'+(i===0?' active':'');
-      d.setAttribute('aria-label','Go to promotion '+(i+1));
-      d.addEventListener('click',()=>transitionTo(i));
-      dots.appendChild(d);
+      const d=document.createElement('button');d.className='benarian-promo-dot'+(i===0?' active':'');d.setAttribute('aria-label','Go to promotion '+(i+1));d.addEventListener('click',()=>transitionTo(i));dots.appendChild(d);
     });
-
     function markDots(){[...dots.children].forEach((d,i)=>d.classList.toggle('active',i===current));}
-
     function transitionTo(nextIndex){
-      if(busy || nextIndex===current) return;
-      busy=true;
-      clearTimeout(timer);
-      const outgoing=slides[current];
-      const incoming=slides[nextIndex];
-
-      outgoing.style.setProperty('visibility','visible','important');
-      outgoing.style.setProperty('opacity','1','important');
-      outgoing.style.setProperty('z-index','5','important');
-      outgoing.style.setProperty('pointer-events','none','important');
-      outgoing.style.setProperty('transition','transform 560ms cubic-bezier(.18,.78,.22,1), opacity 560ms ease','important');
-      outgoing.style.setProperty('transform','scale(1.085)','important');
-
+      if(busy||nextIndex===current)return;busy=true;clearTimeout(timer);
+      const outgoing=slides[current],incoming=slides[nextIndex];
+      outgoing.style.setProperty('visibility','visible','important');outgoing.style.setProperty('opacity','1','important');outgoing.style.setProperty('z-index','5','important');outgoing.style.setProperty('pointer-events','none','important');outgoing.style.setProperty('transition','transform 560ms cubic-bezier(.18,.78,.22,1), opacity 560ms ease','important');outgoing.style.setProperty('transform','scale(1.085)','important');
+      setTimeout(()=>{outgoing.style.setProperty('transform','scale(1.16)','important');outgoing.style.setProperty('opacity','0','important');},240);
       setTimeout(()=>{
-        outgoing.style.setProperty('transform','scale(1.16)','important');
-        outgoing.style.setProperty('opacity','0','important');
-      },240);
-
-      setTimeout(()=>{
-        outgoing.classList.remove('is-active');
-        outgoing.style.setProperty('visibility','hidden','important');
-        outgoing.style.setProperty('z-index','1','important');
-        outgoing.style.setProperty('transform','scale(1)','important');
-        outgoing.style.setProperty('transition','none','important');
-
-        incoming.classList.add('is-active');
-        incoming.style.setProperty('visibility','visible','important');
-        incoming.style.setProperty('opacity','0','important');
-        incoming.style.setProperty('z-index','4','important');
-        incoming.style.setProperty('pointer-events','auto','important');
-        incoming.style.setProperty('transition','none','important');
-        incoming.style.setProperty('transform','scale(.88)','important');
-
-        requestAnimationFrame(()=>requestAnimationFrame(()=>{
-          incoming.style.setProperty('transition','transform 610ms cubic-bezier(.18,.78,.22,1), opacity 500ms ease','important');
-          incoming.style.setProperty('transform','scale(1)','important');
-          incoming.style.setProperty('opacity','1','important');
-        }));
-
-        current=nextIndex;
-        markDots();
-        setTimeout(()=>{busy=false;start();},640);
+        outgoing.classList.remove('is-active');outgoing.style.setProperty('visibility','hidden','important');outgoing.style.setProperty('z-index','1','important');outgoing.style.setProperty('transform','scale(1)','important');outgoing.style.setProperty('transition','none','important');
+        incoming.classList.add('is-active');incoming.style.setProperty('visibility','visible','important');incoming.style.setProperty('opacity','0','important');incoming.style.setProperty('z-index','4','important');incoming.style.setProperty('pointer-events','auto','important');incoming.style.setProperty('transition','none','important');incoming.style.setProperty('transform','scale(.88)','important');
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{incoming.style.setProperty('transition','transform 610ms cubic-bezier(.18,.78,.22,1), opacity 500ms ease','important');incoming.style.setProperty('transform','scale(1)','important');incoming.style.setProperty('opacity','1','important');}));
+        current=nextIndex;markDots();setTimeout(()=>{busy=false;start();},640);
       },575);
     }
-
-    function next(){transitionTo((current+1)%slides.length);}
-    function prev(){transitionTo((current-1+slides.length)%slides.length);}
-    function start(){clearTimeout(timer);timer=setTimeout(next,3400);}
-
-    const prevBtn=rotator.querySelector('.benarian-promo-prev');
-    const nextBtn=rotator.querySelector('.benarian-promo-next');
-    if(prevBtn) prevBtn.addEventListener('click',prev);
-    if(nextBtn) nextBtn.addEventListener('click',next);
-
-    let touchStart=0;
-    rotator.addEventListener('touchstart',e=>{touchStart=e.changedTouches[0].clientX;clearTimeout(timer);},{passive:true});
-    rotator.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchStart;if(Math.abs(d)>45)(d<0?next:prev)();else start();},{passive:true});
-    rotator.addEventListener('mouseenter',()=>clearTimeout(timer));
-    rotator.addEventListener('mouseleave',start);
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else start();});
-    start();
+    function next(){transitionTo((current+1)%slides.length)}function prev(){transitionTo((current-1+slides.length)%slides.length)}function start(){clearTimeout(timer);timer=setTimeout(next,3400)}
+    const prevBtn=rotator.querySelector('.benarian-promo-prev'),nextBtn=rotator.querySelector('.benarian-promo-next');if(prevBtn)prevBtn.addEventListener('click',prev);if(nextBtn)nextBtn.addEventListener('click',next);
+    let touchStart=0;rotator.addEventListener('touchstart',e=>{touchStart=e.changedTouches[0].clientX;clearTimeout(timer)},{passive:true});rotator.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchStart;if(Math.abs(d)>45)(d<0?next:prev)();else start()},{passive:true});rotator.addEventListener('mouseenter',()=>clearTimeout(timer));rotator.addEventListener('mouseleave',start);document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else start()});start();
   }
 
-  function apply(){fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();}
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',apply,{once:true}); else apply();
+  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
   window.addEventListener('load',()=>setTimeout(apply,120),{once:true});
 })();
