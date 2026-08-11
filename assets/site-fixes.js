@@ -58,8 +58,6 @@
   function installGuaranteedPromoSlider(){
     const oldRotator=document.querySelector('.benarian-promo-rotator');
     if(!oldRotator || oldRotator.dataset.benarianTakeover==='true') return;
-
-    /* Detach the original node so its old interval can keep running harmlessly off-DOM. */
     const rotator=oldRotator.cloneNode(true);
     oldRotator.replaceWith(rotator);
     rotator.dataset.benarianTakeover='true';
@@ -113,18 +111,17 @@
       const outgoing=slides[current];
       const incoming=slides[nextIndex];
 
-      /* Make the whole card visibly grow toward the viewer before it leaves. */
       outgoing.style.setProperty('visibility','visible','important');
       outgoing.style.setProperty('opacity','1','important');
       outgoing.style.setProperty('z-index','5','important');
       outgoing.style.setProperty('pointer-events','none','important');
-      outgoing.style.setProperty('transition','transform 700ms cubic-bezier(.18,.78,.22,1), opacity 700ms ease','important');
+      outgoing.style.setProperty('transition','transform 560ms cubic-bezier(.18,.78,.22,1), opacity 560ms ease','important');
       outgoing.style.setProperty('transform','scale(1.085)','important');
 
       setTimeout(()=>{
         outgoing.style.setProperty('transform','scale(1.16)','important');
         outgoing.style.setProperty('opacity','0','important');
-      },330);
+      },240);
 
       setTimeout(()=>{
         outgoing.classList.remove('is-active');
@@ -142,20 +139,20 @@
         incoming.style.setProperty('transform','scale(.88)','important');
 
         requestAnimationFrame(()=>requestAnimationFrame(()=>{
-          incoming.style.setProperty('transition','transform 760ms cubic-bezier(.18,.78,.22,1), opacity 620ms ease','important');
+          incoming.style.setProperty('transition','transform 610ms cubic-bezier(.18,.78,.22,1), opacity 500ms ease','important');
           incoming.style.setProperty('transform','scale(1)','important');
           incoming.style.setProperty('opacity','1','important');
         }));
 
         current=nextIndex;
         markDots();
-        setTimeout(()=>{busy=false;start();},800);
-      },720);
+        setTimeout(()=>{busy=false;start();},640);
+      },575);
     }
 
     function next(){transitionTo((current+1)%slides.length);}
     function prev(){transitionTo((current-1+slides.length)%slides.length);}
-    function start(){clearTimeout(timer);timer=setTimeout(next,4300);}
+    function start(){clearTimeout(timer);timer=setTimeout(next,3400);}
 
     const prevBtn=rotator.querySelector('.benarian-promo-prev');
     const nextBtn=rotator.querySelector('.benarian-promo-next');
