@@ -51,6 +51,48 @@ body.home-lux::after{
 @media(max-width:760px){
   body.home-lux::before{animation-duration:3s!important;background-position:center!important}
   body.home-lux::after{animation-duration:3s!important;font-size:clamp(20px,7vw,34px)!important;width:86vw!important;padding:20px 12px!important}
+
+  /* Mobile homepage hierarchy: hero first, compact promo second, booking third. */
+  body.home-lux main{display:flex!important;flex-direction:column!important;overflow:hidden!important}
+  body.home-lux main>section{order:4}
+  body.home-lux main>.lux-hero{order:1!important}
+  body.home-lux main>.benarian-promo-rotator{order:2!important}
+  body.home-lux main>.booking-search{order:3!important}
+
+  body.home-lux .benarian-promo-rotator{
+    height:250px!important;
+    min-height:250px!important;
+    padding:12px 0 28px!important;
+    margin:0!important;
+    perspective:900px!important;
+  }
+  body.home-lux .benarian-promo-slide{
+    left:9%!important;
+    width:82%!important;
+    height:210px!important;
+    padding:24px 18px 26px!important;
+    border-radius:14px!important;
+    background-position:center!important;
+  }
+  body.home-lux .benarian-promo-slide.is-prev{transform:translate3d(-88%,0,-100px) rotateY(24deg) scale(.72)!important}
+  body.home-lux .benarian-promo-slide.is-next{transform:translate3d(88%,0,-100px) rotateY(-24deg) scale(.72)!important}
+  body.home-lux .benarian-promo-copy{max-width:72%!important}
+  body.home-lux .benarian-promo-copy small{font-size:7px!important;letter-spacing:1.5px!important;margin-bottom:7px!important}
+  body.home-lux .benarian-promo-copy small:before{width:20px!important}
+  body.home-lux .benarian-promo-copy strong{font-size:27px!important;line-height:.96!important}
+  body.home-lux .benarian-promo-copy span{font-size:10px!important;line-height:1.35!important;margin:7px 0 10px!important}
+  body.home-lux .benarian-promo-btn{padding:8px 10px!important;font-size:7px!important;letter-spacing:1px!important;gap:7px!important}
+  body.home-lux .benarian-promo-btn:after{font-size:12px!important}
+  body.home-lux .benarian-promo-dots{bottom:10px!important;gap:6px!important}
+  body.home-lux .benarian-promo-dot{width:14px!important}
+  body.home-lux .benarian-promo-dot.active{width:25px!important}
+  body.home-lux .benarian-promo-arrow{display:none!important}
+}
+@media(max-width:420px){
+  body.home-lux .benarian-promo-rotator{height:238px!important;min-height:238px!important}
+  body.home-lux .benarian-promo-slide{height:198px!important;padding:21px 16px 23px!important}
+  body.home-lux .benarian-promo-copy strong{font-size:25px!important}
+  body.home-lux .benarian-promo-copy span{font-size:9.5px!important}
 }
 @media(prefers-reduced-motion:reduce){
   body.home-lux::before,body.home-lux::after{animation-duration:3s!important}
