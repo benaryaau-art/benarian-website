@@ -25,18 +25,27 @@
     @media(max-width:900px){.persian-home-head{align-items:flex-start;flex-direction:column}.persian-home h2{font-size:50px}}
     @media(max-width:760px){.persian-home{padding:54px 20px}.persian-home h2{font-size:43px}.persian-home-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.persian-home-card{flex:0 0 82vw;min-height:400px;scroll-snap-align:start}.persian-home-note{align-items:flex-start;flex-direction:column}.persian-home-note strong{font-size:24px}}
 
-    /* BENARIAN TEST ROTATING PROMO */
-    .benarian-promo-rotator{position:relative;overflow:hidden;background:#11100e;color:#fff;min-height:112px;border-top:1px solid rgba(185,135,44,.28);border-bottom:1px solid rgba(185,135,44,.28)}
-    .benarian-promo-track{display:flex;transition:transform .75s cubic-bezier(.22,.61,.36,1);will-change:transform}
-    .benarian-promo-slide{min-width:100%;box-sizing:border-box;padding:20px 6%;display:flex;align-items:center;justify-content:space-between;gap:24px;background:linear-gradient(100deg,#11100e,#211b12,#11100e)}
-    .benarian-promo-copy small{display:block;color:#d5aa58;font:600 9px Inter,Arial,sans-serif;letter-spacing:2.2px;text-transform:uppercase;margin-bottom:5px}
-    .benarian-promo-copy strong{display:block;font:600 27px/1 Cormorant Garamond,Georgia,serif;letter-spacing:.2px}
-    .benarian-promo-copy span{display:block;color:#cfc6ba;font:400 11px/1.4 Inter,Arial,sans-serif;margin-top:5px}
-    .benarian-promo-btn{flex:0 0 auto;border:1px solid #b9872c;color:#f2d08a;text-decoration:none;border-radius:3px;padding:11px 17px;font:600 10px Inter,Arial,sans-serif;letter-spacing:1.1px;text-transform:uppercase;transition:.25s}
-    .benarian-promo-btn:hover{background:#b9872c;color:#fff}
-    .benarian-promo-dots{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;gap:6px}
-    .benarian-promo-dot{width:5px;height:5px;border:0;border-radius:50%;padding:0;background:#665f55;cursor:pointer;transition:.25s}.benarian-promo-dot.active{background:#d1a34c;transform:scale(1.35)}
-    @media(max-width:700px){.benarian-promo-slide{padding:18px 20px 25px;gap:14px}.benarian-promo-copy strong{font-size:22px}.benarian-promo-copy span{font-size:10px}.benarian-promo-btn{padding:9px 11px;font-size:8px}.benarian-promo-rotator{min-height:104px}}
+    /* Isolated homepage campaign carousel */
+    .benarian-promo-rotator{position:relative;overflow:hidden;background:#0d0b09;color:#fff;height:clamp(310px,34vw,480px);isolation:isolate}
+    .benarian-promo-track{display:flex;height:100%;transition:transform .8s cubic-bezier(.22,.61,.36,1);will-change:transform}
+    .benarian-promo-slide{position:relative;min-width:100%;height:100%;box-sizing:border-box;display:flex;align-items:flex-end;padding:clamp(34px,6vw,76px) 7%;background-position:center;background-size:cover}
+    .benarian-promo-slide:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,7,6,.9) 0%,rgba(8,7,6,.64) 42%,rgba(8,7,6,.08) 76%),linear-gradient(0deg,rgba(8,7,6,.5),transparent 55%)}
+    .benarian-promo-slide:nth-child(1){background-image:url('assets/images/hotel-ayana.jpg')}
+    .benarian-promo-slide:nth-child(2){background-image:url('assets/images/bali.jpg')}
+    .benarian-promo-slide:nth-child(3){background-image:url('assets/benarian-visa-hero.jpg')}
+    .benarian-promo-slide:nth-child(4){background-image:url('assets/images/benarian-hero-resort.webp')}
+    .benarian-promo-copy{position:relative;z-index:2;max-width:610px;text-shadow:0 2px 22px rgba(0,0,0,.4)}
+    .benarian-promo-copy small{display:flex;align-items:center;gap:10px;color:#e3bc70;font:600 10px Inter,Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+    .benarian-promo-copy small:before{content:"";width:34px;height:1px;background:#c9963e}
+    .benarian-promo-copy strong{display:block;font:600 clamp(38px,5vw,67px)/.95 Cormorant Garamond,Georgia,serif;letter-spacing:-.7px}
+    .benarian-promo-copy span{display:block;max-width:510px;color:#eee8df;font:400 14px/1.65 Inter,Arial,sans-serif;margin:15px 0 22px}
+    .benarian-promo-btn{display:inline-flex;align-items:center;gap:14px;border:1px solid #c79846;background:rgba(15,12,9,.24);color:#fff;text-decoration:none;border-radius:2px;padding:14px 20px;font:600 10px Inter,Arial,sans-serif;letter-spacing:1.7px;text-transform:uppercase;backdrop-filter:blur(7px);transition:.25s}
+    .benarian-promo-btn:after{content:"\2192";color:#efca82;font-size:16px}.benarian-promo-btn:hover{background:#b9872c;border-color:#b9872c;transform:translateY(-1px)}
+    .benarian-promo-dots{position:absolute;z-index:4;left:7%;bottom:19px;display:flex;gap:8px}
+    .benarian-promo-dot{width:22px;height:2px;border:0;padding:0;background:rgba(255,255,255,.38);cursor:pointer;transition:.3s}.benarian-promo-dot.active{width:40px;background:#d6a951}
+    .benarian-promo-arrow{position:absolute;z-index:4;top:50%;width:42px;height:42px;transform:translateY(-50%);border:1px solid rgba(255,255,255,.42);border-radius:50%;background:rgba(10,8,6,.25);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(6px);transition:.25s}.benarian-promo-arrow:hover{background:#b9872c;border-color:#b9872c}.benarian-promo-prev{left:18px}.benarian-promo-next{right:18px}
+    @media(max-width:700px){.benarian-promo-rotator{height:390px}.benarian-promo-slide{padding:42px 24px 48px;background-position:62% center}.benarian-promo-slide:after{background:linear-gradient(90deg,rgba(8,7,6,.9),rgba(8,7,6,.38)),linear-gradient(0deg,rgba(8,7,6,.7),transparent 60%)}.benarian-promo-copy strong{font-size:39px}.benarian-promo-copy span{font-size:12px;line-height:1.55;margin:12px 0 18px}.benarian-promo-copy small{font-size:8px;letter-spacing:2.1px}.benarian-promo-btn{padding:12px 15px;font-size:9px}.benarian-promo-arrow{display:none}.benarian-promo-dots{left:24px;bottom:20px}}
+    @media(prefers-reduced-motion:reduce){.benarian-promo-track{transition:none}.benarian-promo-btn{transition:none}}
   </style>
 <link rel="stylesheet" href="assets/global-polish.css?v=20260730-removebar">
 <link rel="stylesheet" href="assets/car-rental-redesign.css?v=20260803e">
@@ -54,6 +63,8 @@
         <article class="benarian-promo-slide"><div class="benarian-promo-copy"><small>TRAVEL ESSENTIALS</small><strong>Ready for Bali?</strong><span>Check visa, arrival card and tourist levy information before you fly.</span></div><a class="benarian-promo-btn" href="visa-guide.html">Travel Guide</a></article>
         <article class="benarian-promo-slide"><div class="benarian-promo-copy"><small>BENARIAN CONCIERGE</small><strong>Let Us Craft Your Journey</strong><span>Personalised support for hotels, experiences and luxury travel.</span></div><a class="benarian-promo-btn" href="contact.html">Contact Us</a></article>
       </div>
+      <button class="benarian-promo-arrow benarian-promo-prev" type="button" aria-label="Previous promotion">&#8249;</button>
+      <button class="benarian-promo-arrow benarian-promo-next" type="button" aria-label="Next promotion">&#8250;</button>
       <div class="benarian-promo-dots" id="benarianPromoDots" aria-label="Promotion slides"></div>
     </section>
 
@@ -75,9 +86,16 @@
       (function(index){d.addEventListener('click',function(){go(index);start();});})(i); dots.appendChild(d);
     }
     function go(index){current=(index+total)%total;track.style.transform='translateX(-'+(current*100)+'%)';Array.prototype.forEach.call(dots.children,function(dot,n){dot.classList.toggle('active',n===current);});}
-    function start(){clearInterval(timer);timer=setInterval(function(){go(current+1);},4500);}
+    function start(){clearInterval(timer);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){timer=setInterval(function(){go(current+1);},5500);}}
     start();
     var rotator=track.parentElement; rotator.addEventListener('mouseenter',function(){clearInterval(timer)});rotator.addEventListener('mouseleave',start);
+    var prev=rotator.querySelector('.benarian-promo-prev'), next=rotator.querySelector('.benarian-promo-next');
+    if(prev) prev.addEventListener('click',function(){go(current-1);start();});
+    if(next) next.addEventListener('click',function(){go(current+1);start();});
+    var touchStart=0;
+    rotator.addEventListener('touchstart',function(e){touchStart=e.changedTouches[0].clientX;clearInterval(timer);},{passive:true});
+    rotator.addEventListener('touchend',function(e){var distance=e.changedTouches[0].clientX-touchStart;if(Math.abs(distance)>45)go(current+(distance<0?1:-1));start();},{passive:true});
+    document.addEventListener('visibilitychange',function(){document.hidden?clearInterval(timer):start();});
   }
 })();
 (function(){
