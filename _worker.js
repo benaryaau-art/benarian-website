@@ -7,7 +7,7 @@ export default {
     if (!type.includes('text/html')) return response;
 
     let html = await response.text();
-    const globalFixScript = '<script defer src="/assets/site-fixes.js?v=20260811a"></script>';
+    const globalFixScript = '<script defer src="/assets/site-fixes.js?v=20260811b"></script>';
     if (!html.includes('/assets/site-fixes.js')) {
       html = html.replace('</body>', `${globalFixScript}</body>`);
     }
