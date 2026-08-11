@@ -52,80 +52,48 @@ body.home-lux::after{
   body.home-lux::before{animation-duration:3s!important;background-position:center!important}
   body.home-lux::after{animation-duration:3s!important;font-size:clamp(20px,7vw,34px)!important;width:86vw!important;padding:20px 12px!important}
 
-  /* Mobile homepage hierarchy */
+  /* Restored known-good mobile homepage hierarchy and carousel sizing */
   body.home-lux main{display:flex!important;flex-direction:column!important;overflow:hidden!important}
   body.home-lux main>section{order:4}
   body.home-lux main>.lux-hero{order:1!important}
   body.home-lux main>.benarian-promo-rotator{order:2!important}
   body.home-lux main>.booking-search{order:3!important}
 
-  /* Deterministic mobile slideshow: one full card every 5.5 seconds.
-     The JS classes are intentionally ignored on mobile so there can be no empty/black frame. */
   body.home-lux .benarian-promo-rotator{
-    height:246px!important;
-    min-height:246px!important;
+    height:250px!important;
+    min-height:250px!important;
     padding:12px 0 28px!important;
     margin:0!important;
-    perspective:none!important;
-    background:linear-gradient(180deg,#17120d 0%,#20170f 100%)!important;
-    overflow:hidden!important;
+    perspective:900px!important;
   }
-  body.home-lux .benarian-promo-track{height:100%!important;transform-style:flat!important}
-  body.home-lux .benarian-promo-slide,
-  body.home-lux .benarian-promo-slide.is-active,
-  body.home-lux .benarian-promo-slide.is-prev,
-  body.home-lux .benarian-promo-slide.is-next{
-    position:absolute!important;
-    top:0!important;
-    left:7%!important;
-    width:86%!important;
-    height:206px!important;
-    display:flex!important;
-    align-items:flex-end!important;
-    padding:23px 18px 25px!important;
-    border-radius:16px!important;
-    background-size:cover!important;
+  body.home-lux .benarian-promo-slide{
+    left:9%!important;
+    width:82%!important;
+    height:210px!important;
+    padding:24px 18px 26px!important;
+    border-radius:14px!important;
     background-position:center!important;
-    filter:none!important;
-    box-shadow:0 14px 34px rgba(0,0,0,.32)!important;
-    pointer-events:auto!important;
-    z-index:2!important;
-    opacity:0;
-    transform:translate3d(6%,0,0) scale(.985);
-    animation:benarianMobilePromo 22s infinite both;
   }
-  body.home-lux .benarian-promo-slide:nth-child(1){background-image:url('images/hotel-ayana.jpg')!important;animation-delay:0s!important}
-  body.home-lux .benarian-promo-slide:nth-child(2){background-image:url('images/bali.jpg')!important;animation-delay:5.5s!important}
-  body.home-lux .benarian-promo-slide:nth-child(3){background-image:url('images/hero-hotel-clean.jpg')!important;animation-delay:11s!important}
-  body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('images/benarian-hero-resort.webp')!important;animation-delay:16.5s!important}
-  body.home-lux .benarian-promo-slide:after{
-    background:linear-gradient(90deg,rgba(8,7,6,.72) 0%,rgba(8,7,6,.42) 50%,rgba(8,7,6,.08) 84%),linear-gradient(0deg,rgba(8,7,6,.34),transparent 58%)!important;
-  }
-  body.home-lux .benarian-promo-copy{max-width:76%!important;opacity:1!important;transform:none!important}
+  body.home-lux .benarian-promo-slide.is-prev{transform:translate3d(-88%,0,-100px) rotateY(24deg) scale(.72)!important}
+  body.home-lux .benarian-promo-slide.is-next{transform:translate3d(88%,0,-100px) rotateY(-24deg) scale(.72)!important}
+  body.home-lux .benarian-promo-copy{max-width:72%!important}
   body.home-lux .benarian-promo-copy small{font-size:7px!important;letter-spacing:1.5px!important;margin-bottom:7px!important}
   body.home-lux .benarian-promo-copy small:before{width:20px!important}
-  body.home-lux .benarian-promo-copy strong{font-size:27px!important;line-height:.98!important}
+  body.home-lux .benarian-promo-copy strong{font-size:27px!important;line-height:.96!important}
   body.home-lux .benarian-promo-copy span{font-size:10px!important;line-height:1.35!important;margin:7px 0 10px!important}
   body.home-lux .benarian-promo-btn{padding:8px 10px!important;font-size:7px!important;letter-spacing:1px!important;gap:7px!important}
   body.home-lux .benarian-promo-btn:after{font-size:12px!important}
-  body.home-lux .benarian-promo-dots{bottom:10px!important;gap:7px!important}
-  body.home-lux .benarian-promo-dot{width:16px!important;height:2px!important;background:#6a6259!important}
-  body.home-lux .benarian-promo-dot.active{width:30px!important;background:#d4a74d!important}
+  body.home-lux .benarian-promo-dots{bottom:10px!important;gap:6px!important}
+  body.home-lux .benarian-promo-dot{width:14px!important}
+  body.home-lux .benarian-promo-dot.active{width:25px!important}
   body.home-lux .benarian-promo-arrow{display:none!important}
 }
-@keyframes benarianMobilePromo{
-  0%{opacity:0;transform:translate3d(6%,0,0) scale(.985)}
-  2%,22%{opacity:1;transform:translate3d(0,0,0) scale(1)}
-  24%,100%{opacity:0;transform:translate3d(-6%,0,0) scale(.985)}
-}
 @media(max-width:420px){
-  body.home-lux .benarian-promo-rotator{height:234px!important;min-height:234px!important}
-  body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-active,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{height:194px!important;padding:20px 16px 22px!important}
+  body.home-lux .benarian-promo-rotator{height:238px!important;min-height:238px!important}
+  body.home-lux .benarian-promo-slide{height:198px!important;padding:21px 16px 23px!important}
   body.home-lux .benarian-promo-copy strong{font-size:25px!important}
   body.home-lux .benarian-promo-copy span{font-size:9.5px!important}
 }
 @media(prefers-reduced-motion:reduce){
   body.home-lux::before,body.home-lux::after{animation-duration:3s!important}
-  body.home-lux .benarian-promo-slide{animation:none!important;opacity:0!important}
-  body.home-lux .benarian-promo-slide:first-child{opacity:1!important;transform:none!important}
 }
