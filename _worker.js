@@ -7,13 +7,16 @@ export default {
     if (!type.includes('text/html')) return response;
 
     let html = await response.text();
-    html = html.replace(/assets\/tour-splash-simple\.css\?v=[^\"']+/g, 'assets/tour-splash-simple.css?v=20260811zoom3');
+    html = html.replace(/assets\/tour-splash-simple\.css\?v=[^\"']+/g, 'assets/tour-splash-simple.css?v=20260811zoom4');
     const globalFixScript = '<script defer src="/assets/site-fixes.js?v=20260811b"></script>';
     if (!html.includes('/assets/site-fixes.js')) {
       html = html.replace('</body>', `${globalFixScript}</body>`);
     }
 
     if (url.pathname === '/' || url.pathname === '/index.html') {
+      const promoMotion = '<link rel="stylesheet" href="/assets/promo-motion.css?v=20260811a">';
+      if (!html.includes('/assets/promo-motion.css')) html = html.replace('</head>', `${promoMotion}</head>`);
+
       const socialImage = 'https://benarian.com/assets/hotels-hero-new.jpg?v=20260728-social';
       const title = 'BENARIAN | Luxury Travel & Hospitality';
       const description = 'Curated luxury hotels, destinations, flights and exceptional travel experiences with BENARIAN.';
