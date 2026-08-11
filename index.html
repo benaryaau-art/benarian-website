@@ -26,25 +26,28 @@
     @media(max-width:760px){.persian-home{padding:54px 20px}.persian-home h2{font-size:43px}.persian-home-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.persian-home-card{flex:0 0 82vw;min-height:400px;scroll-snap-align:start}.persian-home-note{align-items:flex-start;flex-direction:column}.persian-home-note strong{font-size:24px}}
 
     /* Isolated homepage campaign carousel */
-    .benarian-promo-rotator{position:relative;overflow:hidden;background:#0d0b09;color:#fff;height:clamp(310px,34vw,480px);isolation:isolate}
-    .benarian-promo-track{display:flex;height:100%;transition:transform .8s cubic-bezier(.22,.61,.36,1);will-change:transform}
-    .benarian-promo-slide{position:relative;min-width:100%;height:100%;box-sizing:border-box;display:flex;align-items:flex-end;padding:clamp(34px,6vw,76px) 7%;background-position:center;background-size:cover}
-    .benarian-promo-slide:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,7,6,.9) 0%,rgba(8,7,6,.64) 42%,rgba(8,7,6,.08) 76%),linear-gradient(0deg,rgba(8,7,6,.5),transparent 55%)}
+    .benarian-promo-rotator{position:relative;overflow:hidden;background:linear-gradient(180deg,#f8f4ed,#fff);color:#fff;height:clamp(350px,38vw,530px);padding:24px 0 38px;box-sizing:border-box;perspective:1400px;isolation:isolate}
+    .benarian-promo-track{position:relative;height:100%;transform-style:preserve-3d}
+    .benarian-promo-slide{position:absolute;top:0;left:11%;width:78%;height:100%;box-sizing:border-box;display:flex;align-items:flex-end;padding:clamp(34px,6vw,70px);border-radius:20px;overflow:hidden;background-position:center;background-size:cover;box-shadow:0 24px 55px rgba(34,24,12,.24);opacity:0;pointer-events:none;transform:translate3d(0,0,-240px) scale(.68);transition:transform .85s cubic-bezier(.22,.61,.36,1),opacity .55s ease,filter .55s ease;filter:saturate(.72) brightness(.78);z-index:0}
+    .benarian-promo-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,7,6,.9) 0%,rgba(8,7,6,.61) 43%,rgba(8,7,6,.06) 78%),linear-gradient(0deg,rgba(8,7,6,.58),transparent 60%);z-index:0}
+    .benarian-promo-slide.is-active{opacity:1;pointer-events:auto;transform:translate3d(0,0,70px) scale(1);filter:none;z-index:3}
+    .benarian-promo-slide.is-prev{opacity:.62;transform:translate3d(-73%,0,-125px) rotateY(24deg) scale(.78);z-index:1}
+    .benarian-promo-slide.is-next{opacity:.62;transform:translate3d(73%,0,-125px) rotateY(-24deg) scale(.78);z-index:1}
     .benarian-promo-slide:nth-child(1){background-image:url('assets/images/hotel-ayana.jpg')}
     .benarian-promo-slide:nth-child(2){background-image:url('assets/images/bali.jpg')}
     .benarian-promo-slide:nth-child(3){background-image:url('assets/benarian-visa-hero.jpg')}
     .benarian-promo-slide:nth-child(4){background-image:url('assets/images/benarian-hero-resort.webp')}
-    .benarian-promo-copy{position:relative;z-index:2;max-width:610px;text-shadow:0 2px 22px rgba(0,0,0,.4)}
+    .benarian-promo-copy{position:relative;z-index:2;max-width:610px;text-shadow:0 2px 22px rgba(0,0,0,.4);transition:transform .75s ease,opacity .55s ease;transform:translateY(14px);opacity:0}.benarian-promo-slide.is-active .benarian-promo-copy{transform:none;opacity:1}
     .benarian-promo-copy small{display:flex;align-items:center;gap:10px;color:#e3bc70;font:600 10px Inter,Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
     .benarian-promo-copy small:before{content:"";width:34px;height:1px;background:#c9963e}
     .benarian-promo-copy strong{display:block;font:600 clamp(38px,5vw,67px)/.95 Cormorant Garamond,Georgia,serif;letter-spacing:-.7px}
     .benarian-promo-copy span{display:block;max-width:510px;color:#eee8df;font:400 14px/1.65 Inter,Arial,sans-serif;margin:15px 0 22px}
     .benarian-promo-btn{display:inline-flex;align-items:center;gap:14px;border:1px solid #c79846;background:rgba(15,12,9,.24);color:#fff;text-decoration:none;border-radius:2px;padding:14px 20px;font:600 10px Inter,Arial,sans-serif;letter-spacing:1.7px;text-transform:uppercase;backdrop-filter:blur(7px);transition:.25s}
     .benarian-promo-btn:after{content:"\2192";color:#efca82;font-size:16px}.benarian-promo-btn:hover{background:#b9872c;border-color:#b9872c;transform:translateY(-1px)}
-    .benarian-promo-dots{position:absolute;z-index:4;left:7%;bottom:19px;display:flex;gap:8px}
+    .benarian-promo-dots{position:absolute;z-index:4;left:50%;bottom:17px;transform:translateX(-50%);display:flex;gap:8px}
     .benarian-promo-dot{width:22px;height:2px;border:0;padding:0;background:rgba(255,255,255,.38);cursor:pointer;transition:.3s}.benarian-promo-dot.active{width:40px;background:#d6a951}
-    .benarian-promo-arrow{position:absolute;z-index:4;top:50%;width:42px;height:42px;transform:translateY(-50%);border:1px solid rgba(255,255,255,.42);border-radius:50%;background:rgba(10,8,6,.25);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(6px);transition:.25s}.benarian-promo-arrow:hover{background:#b9872c;border-color:#b9872c}.benarian-promo-prev{left:18px}.benarian-promo-next{right:18px}
-    @media(max-width:700px){.benarian-promo-rotator{height:390px}.benarian-promo-slide{padding:42px 24px 48px;background-position:62% center}.benarian-promo-slide:after{background:linear-gradient(90deg,rgba(8,7,6,.9),rgba(8,7,6,.38)),linear-gradient(0deg,rgba(8,7,6,.7),transparent 60%)}.benarian-promo-copy strong{font-size:39px}.benarian-promo-copy span{font-size:12px;line-height:1.55;margin:12px 0 18px}.benarian-promo-copy small{font-size:8px;letter-spacing:2.1px}.benarian-promo-btn{padding:12px 15px;font-size:9px}.benarian-promo-arrow{display:none}.benarian-promo-dots{left:24px;bottom:20px}}
+    .benarian-promo-arrow{position:absolute;z-index:5;top:50%;width:46px;height:46px;transform:translateY(-50%);border:1px solid rgba(255,255,255,.62);border-radius:50%;background:rgba(10,8,6,.38);color:#fff;font-size:22px;cursor:pointer;backdrop-filter:blur(8px);transition:.25s}.benarian-promo-arrow:hover{background:#b9872c;border-color:#b9872c}.benarian-promo-prev{left:6.5%}.benarian-promo-next{right:6.5%}
+    @media(max-width:700px){.benarian-promo-rotator{height:350px;padding:14px 0 34px}.benarian-promo-slide{left:7%;width:86%;padding:34px 22px 38px;border-radius:16px;background-position:62% center}.benarian-promo-slide.is-prev{transform:translate3d(-82%,0,-120px) rotateY(28deg) scale(.77)}.benarian-promo-slide.is-next{transform:translate3d(82%,0,-120px) rotateY(-28deg) scale(.77)}.benarian-promo-slide:after{background:linear-gradient(90deg,rgba(8,7,6,.91),rgba(8,7,6,.34)),linear-gradient(0deg,rgba(8,7,6,.72),transparent 62%)}.benarian-promo-copy strong{font-size:36px}.benarian-promo-copy span{font-size:12px;line-height:1.5;margin:10px 0 16px}.benarian-promo-copy small{font-size:8px;letter-spacing:2px;margin-bottom:10px}.benarian-promo-btn{padding:11px 14px;font-size:8px}.benarian-promo-arrow{display:none}.benarian-promo-dots{bottom:16px}}
     @media(prefers-reduced-motion:reduce){.benarian-promo-track{transition:none}.benarian-promo-btn{transition:none}}
   </style>
 <link rel="stylesheet" href="assets/global-polish.css?v=20260730-removebar">
@@ -54,11 +57,9 @@
   <div class="topline"><div class="left">🌐 <span>Language:</span><a href="fa.html">فارسی</a><span>|</span><b>EN</b></div><div class="right"><span class="accent">AUD⌄</span><span>♡ Wishlist</span><span>▣ My Bookings</span><a class="member-top-link" href="member-login.html">Members</a></div></div>
   <header class="header"><a class="brand brand-lockup" href="index.html" aria-label="BENARIAN home"><span class="brand-mark" aria-hidden="true">B</span><span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL &amp; HOSPITALITY</small></span></a><button class="menu-btn" aria-label="Open menu" aria-expanded="false">Menu <span>☰</span></button><nav class="nav"><a href="destinations.html">DESTINATIONS</a><a href="hotels.html">HOTELS</a><a href="persian-experiences.html">PERSIAN EXPERIENCES</a><a href="restaurants.html">RESTAURANTS</a><a href="experiences.html">EXPERIENCES</a><a href="wellness.html">SPA &amp; WELLNESS</a><a href="visa-guide.html">VISA GUIDE</a><a href="about.html">ABOUT US</a><a href="contact.html">CONTACT</a></nav></header>
   <main>
-    <section class="lux-hero"><div class="lux-hero-copy"><h1>Curated<br>Luxury Journeys</h1><div class="hero-ornament">✦</div><p>Bespoke travel experiences across the world’s most extraordinary destinations.</p><a class="lux-btn" href="destinations.html">Explore Journeys <span>→</span></a></div></section>
-
     <section class="benarian-promo-rotator" aria-label="BENARIAN promotions">
       <div class="benarian-promo-track" id="benarianPromoTrack">
-        <article class="benarian-promo-slide"><div class="benarian-promo-copy"><small>BENARIAN FEATURED</small><strong>Luxury Hotels in Bali</strong><span>Discover hand-picked stays and the best available rates.</span></div><a class="benarian-promo-btn" href="hotels.html">Explore Hotels</a></article>
+        <article class="benarian-promo-slide is-active"><div class="benarian-promo-copy"><small>BENARIAN FEATURED</small><strong>Luxury Hotels in Bali</strong><span>Discover hand-picked stays and the best available rates.</span></div><a class="benarian-promo-btn" href="hotels.html">Explore Hotels</a></article>
         <article class="benarian-promo-slide"><div class="benarian-promo-copy"><small>CURATED JOURNEYS</small><strong>Your Bali Escape Starts Here</strong><span>Hotels, experiences and personalised travel assistance.</span></div><a class="benarian-promo-btn" href="destinations.html">Explore Bali</a></article>
         <article class="benarian-promo-slide"><div class="benarian-promo-copy"><small>TRAVEL ESSENTIALS</small><strong>Ready for Bali?</strong><span>Check visa, arrival card and tourist levy information before you fly.</span></div><a class="benarian-promo-btn" href="visa-guide.html">Travel Guide</a></article>
         <article class="benarian-promo-slide"><div class="benarian-promo-copy"><small>BENARIAN CONCIERGE</small><strong>Let Us Craft Your Journey</strong><span>Personalised support for hotels, experiences and luxury travel.</span></div><a class="benarian-promo-btn" href="contact.html">Contact Us</a></article>
@@ -67,6 +68,8 @@
       <button class="benarian-promo-arrow benarian-promo-next" type="button" aria-label="Next promotion">&#8250;</button>
       <div class="benarian-promo-dots" id="benarianPromoDots" aria-label="Promotion slides"></div>
     </section>
+
+    <section class="lux-hero"><div class="lux-hero-copy"><h1>Curated<br>Luxury Journeys</h1><div class="hero-ornament">✦</div><p>Bespoke travel experiences across the world’s most extraordinary destinations.</p><a class="lux-btn" href="destinations.html">Explore Journeys <span>→</span></a></div></section>
 
     <section class="booking-search" aria-label="Search hotels"><form class="booking-form"><label><span>DESTINATION</span><input id="destination" type="text" value="Bali" aria-label="Destination"></label><label><span>CHECK-IN</span><input id="checkin" type="date" aria-label="Check-in date"></label><label><span>CHECK-OUT</span><input id="checkout" type="date" aria-label="Check-out date"></label><label><span>GUESTS &amp; ROOMS</span><select id="guests" aria-label="Guests and rooms"><option value="2-1">2 Adults, 1 Room</option><option value="1-1">1 Adult, 1 Room</option><option value="3-1">3 Adults, 1 Room</option><option value="4-2">4 Adults, 2 Rooms</option></select></label><button type="submit">Search Hotels →</button></form><p>Search results open through our Booking.com affiliate connection.</p></section>
     <section class="lux-section hotels-section"><div class="lux-section-head centered-head"><div class="title-wrap"><div class="section-icon">✤</div><h2 class="lux-title">Featured Hotels</h2></div><a class="lux-view" href="hotels.html">View all →</a></div><div class="lux-hotel-grid"></div></section>
@@ -85,9 +88,9 @@
       var d=document.createElement('button'); d.className='benarian-promo-dot'+(i===0?' active':''); d.setAttribute('aria-label','Go to promotion '+(i+1));
       (function(index){d.addEventListener('click',function(){go(index);start();});})(i); dots.appendChild(d);
     }
-    function go(index){current=(index+total)%total;track.style.transform='translateX(-'+(current*100)+'%)';Array.prototype.forEach.call(dots.children,function(dot,n){dot.classList.toggle('active',n===current);});}
+    function go(index){current=(index+total)%total;Array.prototype.forEach.call(slides,function(slide,n){slide.classList.remove('is-active','is-prev','is-next');if(n===current)slide.classList.add('is-active');else if(n===(current-1+total)%total)slide.classList.add('is-prev');else if(n===(current+1)%total)slide.classList.add('is-next');});Array.prototype.forEach.call(dots.children,function(dot,n){dot.classList.toggle('active',n===current);});}
     function start(){clearInterval(timer);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){timer=setInterval(function(){go(current+1);},5500);}}
-    start();
+    go(0);start();
     var rotator=track.parentElement; rotator.addEventListener('mouseenter',function(){clearInterval(timer)});rotator.addEventListener('mouseleave',start);
     var prev=rotator.querySelector('.benarian-promo-prev'), next=rotator.querySelector('.benarian-promo-next');
     if(prev) prev.addEventListener('click',function(){go(current-1);start();});
