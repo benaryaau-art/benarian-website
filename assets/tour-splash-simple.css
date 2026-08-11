@@ -19,15 +19,15 @@ body.home-lux::after{
 @keyframes benarianIntroVisual{0%{opacity:0;visibility:visible}10%,72%{opacity:1;visibility:visible}92%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden;z-index:-1}}
 @keyframes benarianIntroText{0%{opacity:0;visibility:visible}14%,64%{opacity:1;visibility:visible}86%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden;z-index:-1}}
 
-/* REAL luxury Bali imagery for all four promo slides, desktop and mobile.
-   1: Pecatu resort sunset, 2: Uluwatu resort pool, 3: Bali luxury resort aerial,
-   4: Uluwatu luxury villa/pool. */
 body.home-lux .benarian-promo-slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1782413263988-11f7178cf385?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 56%!important}
 body.home-lux .benarian-promo-slide:nth-child(2){background-image:url('https://images.unsplash.com/photo-1664876080601-acf03b40c5e3?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 55%!important}
 body.home-lux .benarian-promo-slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1728051104450-f7bc748a6fdd?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 52%!important}
 body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://images.unsplash.com/photo-1666261012545-face98271e94?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 56%!important}
 
 @media(max-width:760px){
+  /* Intro typography: BENARIAN on first line, tagline smaller on ONE line. */
+  body.home-lux::after{content:"BENARIAN\A LUXURY TRAVEL & HOSPITALITY"!important;width:96vw!important;white-space:pre!important;font-size:clamp(19px,5.2vw,30px)!important;line-height:1.45!important;letter-spacing:1.25px!important}
+
   body.home-lux main{display:flex!important;flex-direction:column!important;overflow:hidden!important}
   body.home-lux main>section{order:4}
   body.home-lux main>.lux-hero{order:1!important}
@@ -52,6 +52,7 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
   body.home-lux .benarian-promo-arrow{display:none!important}
 }
 @media(max-width:420px){
+  body.home-lux::after{width:98vw!important;font-size:18px!important;letter-spacing:.9px!important}
   body.home-lux .benarian-promo-rotator{height:232px!important;min-height:232px!important}
   body.home-lux .benarian-promo-track,body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{height:204px!important}
   body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{padding:22px 20px 23px!important}
