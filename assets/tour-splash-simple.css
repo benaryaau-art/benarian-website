@@ -24,6 +24,15 @@ body.home-lux .benarian-promo-slide:nth-child(2){background-image:url('https://i
 body.home-lux .benarian-promo-slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1728051104450-f7bc748a6fdd?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 52%!important}
 body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://images.unsplash.com/photo-1666261012545-face98271e94?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 56%!important}
 
+@keyframes benarianPromoActiveZoom{
+  0%{transform:translate3d(0,0,-65px) scale(.90);opacity:.15}
+  8%{transform:translate3d(0,0,0) scale(1);opacity:1}
+  72%{transform:translate3d(0,0,0) scale(1);opacity:1}
+  84%{transform:translate3d(0,0,95px) scale(1.10);opacity:1}
+  94%{transform:translate3d(0,0,155px) scale(1.18);opacity:.95}
+  100%{transform:translate3d(0,0,210px) scale(1.25);opacity:0}
+}
+
 @media(max-width:760px){
   body.home-lux::after{content:"BENARIAN\A LUXURY TRAVEL & HOSPITALITY"!important;width:96vw!important;white-space:pre!important;font-size:clamp(19px,5.2vw,30px)!important;line-height:1.45!important;letter-spacing:1.25px!important}
   body.home-lux main{display:flex!important;flex-direction:column!important;overflow:hidden!important}
@@ -32,18 +41,20 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
   body.home-lux main>.benarian-promo-rotator{order:2!important}
   body.home-lux main>.booking-search{order:3!important}
 
-  /* Cinematic zoom-forward carousel: active image gently comes toward the viewer, then gives way to the next. */
-  body.home-lux .benarian-promo-rotator{height:244px!important;min-height:244px!important;margin:0!important;padding:0 0 28px!important;perspective:900px!important;overflow:hidden!important;background:#0e0d0b!important;border-bottom:1px solid rgba(196,145,55,.45)!important}
+  body.home-lux .benarian-promo-rotator{height:244px!important;min-height:244px!important;margin:0!important;padding:0 0 28px!important;perspective:760px!important;overflow:hidden!important;background:#0e0d0b!important;border-bottom:1px solid rgba(196,145,55,.45)!important}
   body.home-lux .benarian-promo-track{position:relative!important;height:216px!important;transform:none!important;transform-style:preserve-3d!important;overflow:hidden!important}
   body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{
     position:absolute!important;inset:0!important;width:100%!important;height:216px!important;padding:25px 24px 26px!important;border:0!important;border-radius:0!important;background-size:cover!important;
     opacity:0!important;visibility:visible!important;pointer-events:none!important;filter:none!important;box-shadow:none!important;z-index:1!important;
     transform-origin:center center!important;will-change:opacity,transform!important;
-    transition:opacity .8s cubic-bezier(.2,.72,.25,1)!important,transform .95s cubic-bezier(.16,.8,.25,1)!important;
+    transition:none!important;
   }
-  body.home-lux .benarian-promo-slide.is-next{transform:translate3d(0,0,-90px) scale(.91)!important;opacity:0!important}
-  body.home-lux .benarian-promo-slide.is-prev{transform:translate3d(0,0,105px) scale(1.13)!important;opacity:0!important;z-index:3!important}
-  body.home-lux .benarian-promo-slide.is-active{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translate3d(0,0,0) scale(1)!important;z-index:2!important}
+  body.home-lux .benarian-promo-slide.is-next{transform:translate3d(0,0,-80px) scale(.90)!important;opacity:0!important}
+  body.home-lux .benarian-promo-slide.is-prev{transform:translate3d(0,0,180px) scale(1.22)!important;opacity:0!important;z-index:1!important}
+  body.home-lux .benarian-promo-slide.is-active{
+    visibility:visible!important;pointer-events:auto!important;z-index:3!important;
+    animation:benarianPromoActiveZoom 5.5s cubic-bezier(.2,.65,.25,1) both!important;
+  }
   body.home-lux .benarian-promo-slide:after{background:linear-gradient(90deg,rgba(7,7,6,.58) 0%,rgba(7,7,6,.26) 48%,rgba(7,7,6,.02) 84%),linear-gradient(0deg,rgba(0,0,0,.16),transparent 60%)!important}
   body.home-lux .benarian-promo-copy{max-width:68%!important;opacity:1!important;transform:none!important}
   body.home-lux .benarian-promo-copy small{font-size:8px!important;letter-spacing:2px!important;margin-bottom:8px!important}
@@ -65,4 +76,4 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
   body.home-lux .benarian-promo-copy strong{font-size:27px!important}
   body.home-lux .benarian-promo-btn{right:18px!important;bottom:23px!important}
 }
-@media(prefers-reduced-motion:reduce){body.home-lux::before,body.home-lux::after{animation-duration:1.4s!important}.benarian-promo-slide{transition:none!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){body.home-lux::before,body.home-lux::after{animation-duration:1.4s!important}.benarian-promo-slide.is-active{animation:none!important;opacity:1!important;transform:none!important}}
