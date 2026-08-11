@@ -80,7 +80,37 @@
     });
   }
 
-  function apply(){fixUtilities();fixConciergeLinks();optimiseImages();hardenLinks();installPerformanceHints();fixLegacyHeavyBrand();}
+  function installPromoZoomEffect(){
+    const track=document.getElementById('benarianPromoTrack');
+    if(!track || track.dataset.zoomEffectBound==='true' || !('animate' in Element.prototype)) return;
+    track.dataset.zoomEffectBound='true';
+    let previous=track.querySelector('.benarian-promo-slide.is-active');
+    const slides=[...track.querySelectorAll('.benarian-promo-slide')];
+    const observer=new MutationObserver(()=>{
+      const active=track.querySelector('.benarian-promo-slide.is-active');
+      if(!active || active===previous) return;
+      const outgoing=previous;
+      previous=active;
+      slides.forEach(slide=>slide.getAnimations().forEach(a=>{if(a.id==='benarianPromoZoomOut'||a.id==='benarianPromoZoomIn')a.cancel()}));
+      if(outgoing){
+        const out=outgoing.animate([
+          {transform:'translate3d(0,0,0) scale(1)',opacity:1,filter:'brightness(1)'},
+          {transform:'translate3d(0,0,120px) scale(1.16)',opacity:.98,filter:'brightness(1.08)',offset:.58},
+          {transform:'translate3d(0,0,165px) scale(1.22)',opacity:0,filter:'brightness(1.1)'}
+        ],{duration:900,easing:'cubic-bezier(.18,.78,.22,1)',fill:'none'});
+        out.id='benarianPromoZoomOut';
+      }
+      const incoming=active.animate([
+        {transform:'translate3d(0,0,-130px) scale(.88)',opacity:0},
+        {transform:'translate3d(0,0,-45px) scale(.95)',opacity:.55,offset:.42},
+        {transform:'translate3d(0,0,0) scale(1)',opacity:1}
+      ],{duration:900,easing:'cubic-bezier(.18,.78,.22,1)',fill:'none'});
+      incoming.id='benarianPromoZoomIn';
+    });
+    observer.observe(track,{subtree:true,attributes:true,attributeFilter:['class']});
+  }
+
+  function apply(){fixUtilities();fixConciergeLinks();optimiseImages();hardenLinks();installPerformanceHints();fixLegacyHeavyBrand();installPromoZoomEffect();}
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',apply,{once:true}); else apply();
   window.addEventListener('load',()=>setTimeout(apply,150),{once:true});
 })();
