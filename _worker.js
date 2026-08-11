@@ -7,13 +7,12 @@ export default {
     if (!type.includes('text/html')) return response;
 
     let html = await response.text();
-    html = html.replace(/assets\/tour-splash-simple\.css\?v=[^\"']+/g, 'assets/tour-splash-simple.css?v=20260811zoom6');
+    html = html.replace(/assets\/tour-splash-simple\.css\?v=[^\"']+/g, 'assets/tour-splash-simple.css?v=20260812founder1');
 
-    /* Keep exactly one global runtime. The previous forced promo script conflicted
-       with the page slider and prevented a reliable visible transition on iOS. */
+    /* Keep exactly one global runtime. */
     html = html.replace(/<script[^>]+src=["']\/assets\/site-fixes\.js[^>]*><\/script>/gi,'');
     html = html.replace(/<style id="benarian-forced-promo-zoom">[\s\S]*?<\/style>\s*<script>[\s\S]*?initForcedPromo[\s\S]*?<\/script>/gi,'');
-    const globalFixScript = '<script defer src="/assets/site-fixes.js?v=20260811d"></script>';
+    const globalFixScript = '<script defer src="/assets/site-fixes.js?v=20260812founder1"></script>';
     html = html.replace('</body>', `${globalFixScript}</body>`);
 
     if (url.pathname === '/' || url.pathname === '/index.html') {
