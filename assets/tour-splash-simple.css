@@ -10,10 +10,10 @@ body.home-lux::before{
   animation:benarianIntroVisual 2.15s ease forwards!important;
 }
 body.home-lux::after{
-  content:"BENARIAN\A LUXURY TRAVEL & HOSPITALITY"!important;
+  content:"BENARIAN\A LUXURY TRAVEL & HOSPITALITY\A \A FOUNDER | CEO\A 𝓑𝓮𝓷 𝓣𝓪𝓯𝓻𝓮𝓼𝓱𝓲"!important;
   white-space:pre-line!important;position:fixed!important;left:50%!important;top:50%!important;z-index:2147483001!important;
-  transform:translate(-50%,-50%)!important;width:86vw!important;text-align:center!important;color:#fff!important;pointer-events:none!important;
-  font-family:'Cormorant Garamond',Georgia,serif!important;font-size:clamp(28px,7vw,48px)!important;line-height:1.15!important;letter-spacing:2px!important;
+  transform:translate(-50%,-50%)!important;width:92vw!important;text-align:center!important;color:#fff!important;pointer-events:none!important;
+  font-family:'Cormorant Garamond',Georgia,serif!important;font-size:clamp(25px,6.2vw,45px)!important;line-height:1.18!important;letter-spacing:1.8px!important;
   text-shadow:0 3px 22px rgba(0,0,0,.65)!important;animation:benarianIntroText 2.15s ease forwards!important;
 }
 @keyframes benarianIntroVisual{0%{opacity:0;visibility:visible}10%,72%{opacity:1;visibility:visible}92%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden;z-index:-1}}
@@ -34,7 +34,7 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
 }
 
 @media(max-width:760px){
-  body.home-lux::after{content:"BENARIAN\A LUXURY TRAVEL & HOSPITALITY"!important;width:96vw!important;white-space:pre!important;font-size:clamp(19px,5.2vw,30px)!important;line-height:1.45!important;letter-spacing:1.25px!important}
+  body.home-lux::after{content:"BENARIAN\A LUXURY TRAVEL & HOSPITALITY\A \A FOUNDER | CEO\A 𝓑𝓮𝓷 𝓣𝓪𝓯𝓻𝓮𝓼𝓱𝓲"!important;width:96vw!important;font-size:clamp(18px,4.8vw,27px)!important;line-height:1.28!important;letter-spacing:1px!important}
   body.home-lux main{display:flex!important;flex-direction:column!important;overflow:hidden!important}
   body.home-lux main>section{order:4}
   body.home-lux main>.lux-hero{order:1!important}
@@ -69,7 +69,7 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
   body.home-lux .benarian-promo-arrow{display:none!important}
 }
 @media(max-width:420px){
-  body.home-lux::after{width:98vw!important;font-size:18px!important;letter-spacing:.9px!important}
+  body.home-lux::after{width:98vw!important;font-size:17px!important;letter-spacing:.7px!important;line-height:1.3!important}
   body.home-lux .benarian-promo-rotator{height:232px!important;min-height:232px!important}
   body.home-lux .benarian-promo-track,body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{height:204px!important}
   body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{padding:22px 20px 23px!important}
