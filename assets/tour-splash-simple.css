@@ -1,12 +1,12 @@
 @import url('bali-card-images.css?v=20260809b');
 
-/* Short branded intro: visible on entry, then fully hidden so it cannot sit over the page. */
+/* Short branded intro: real Bali resort photography, then fully hidden. */
 body.home-lux::before{
   content:""!important;
   position:fixed!important;inset:0!important;z-index:2147483000!important;display:block!important;pointer-events:none!important;
   background:
-    linear-gradient(180deg,rgba(7,7,6,.20),rgba(7,7,6,.52)),
-    url('images/hero-hotel-clean.jpg') center/cover no-repeat!important;
+    linear-gradient(180deg,rgba(7,7,6,.16),rgba(7,7,6,.44)),
+    url('https://images.unsplash.com/photo-1782413263988-11f7178cf385?auto=format&fit=crop&w=1800&q=88') center/cover no-repeat!important;
   animation:benarianIntroVisual 2.15s ease forwards!important;
 }
 body.home-lux::after{
@@ -19,6 +19,14 @@ body.home-lux::after{
 @keyframes benarianIntroVisual{0%{opacity:0;visibility:visible}10%,72%{opacity:1;visibility:visible}92%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden;z-index:-1}}
 @keyframes benarianIntroText{0%{opacity:0;visibility:visible}14%,64%{opacity:1;visibility:visible}86%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden;z-index:-1}}
 
+/* REAL luxury Bali imagery for all four promo slides, desktop and mobile.
+   1: Pecatu resort sunset, 2: Uluwatu resort pool, 3: Bali luxury resort aerial,
+   4: Uluwatu luxury villa/pool. */
+body.home-lux .benarian-promo-slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1782413263988-11f7178cf385?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 56%!important}
+body.home-lux .benarian-promo-slide:nth-child(2){background-image:url('https://images.unsplash.com/photo-1664876080601-acf03b40c5e3?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 55%!important}
+body.home-lux .benarian-promo-slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1728051104450-f7bc748a6fdd?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 52%!important}
+body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://images.unsplash.com/photo-1666261012545-face98271e94?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 56%!important}
+
 @media(max-width:760px){
   body.home-lux main{display:flex!important;flex-direction:column!important;overflow:hidden!important}
   body.home-lux main>section{order:4}
@@ -26,23 +34,17 @@ body.home-lux::after{
   body.home-lux main>.benarian-promo-rotator{order:2!important}
   body.home-lux main>.booking-search{order:3!important}
 
-  /* Upgraded natural resort photography. Slide 2 (Alila) is intentionally kept. */
-  body.home-lux .benarian-promo-slide:nth-child(1){background-image:url('images/hero-hotel.jpg')!important;background-position:center 52%!important}
-  body.home-lux .benarian-promo-slide:nth-child(2){background-image:url('images/hotel-alila.jpg')!important;background-position:center 55%!important}
-  body.home-lux .benarian-promo-slide:nth-child(3){background-image:url('images/hotel-apurva.jpg')!important;background-position:center 56%!important}
-  body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('images/hero.jpg')!important;background-position:center 48%!important}
-
   body.home-lux .benarian-promo-rotator{height:244px!important;min-height:244px!important;margin:0!important;padding:0 0 28px!important;perspective:none!important;overflow:hidden!important;background:#0e0d0b!important;border-bottom:1px solid rgba(196,145,55,.45)!important}
   body.home-lux .benarian-promo-track{position:relative!important;height:216px!important;transform:none!important;transform-style:flat!important;overflow:hidden!important}
   body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:216px!important;padding:25px 24px 26px!important;border:0!important;border-radius:0!important;background-size:cover!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;filter:none!important;transform:none!important;box-shadow:none!important;z-index:1!important;transition:opacity .45s ease!important,visibility 0s linear .45s!important}
   body.home-lux .benarian-promo-slide.is-active{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;z-index:2!important;transition:opacity .45s ease!important,visibility 0s!important}
-  body.home-lux .benarian-promo-slide:after{background:linear-gradient(90deg,rgba(7,7,6,.68) 0%,rgba(7,7,6,.34) 46%,rgba(7,7,6,.04) 82%),linear-gradient(0deg,rgba(0,0,0,.20),transparent 58%)!important}
+  body.home-lux .benarian-promo-slide:after{background:linear-gradient(90deg,rgba(7,7,6,.58) 0%,rgba(7,7,6,.26) 48%,rgba(7,7,6,.02) 84%),linear-gradient(0deg,rgba(0,0,0,.16),transparent 60%)!important}
   body.home-lux .benarian-promo-copy{max-width:68%!important;opacity:1!important;transform:none!important}
   body.home-lux .benarian-promo-copy small{font-size:8px!important;letter-spacing:2px!important;margin-bottom:8px!important}
   body.home-lux .benarian-promo-copy small:before{width:24px!important}
   body.home-lux .benarian-promo-copy strong{font-size:29px!important;line-height:1!important;text-shadow:0 2px 12px rgba(0,0,0,.35)!important}
   body.home-lux .benarian-promo-copy span{font-size:10.5px!important;line-height:1.4!important;margin:8px 0 11px!important}
-  body.home-lux .benarian-promo-btn{position:absolute!important;right:22px!important;bottom:26px!important;padding:10px 13px!important;font-size:7.5px!important;letter-spacing:1.2px!important;gap:8px!important;background:rgba(8,8,7,.48)!important;backdrop-filter:blur(5px)!important}
+  body.home-lux .benarian-promo-btn{position:absolute!important;right:22px!important;bottom:26px!important;padding:10px 13px!important;font-size:7.5px!important;letter-spacing:1.2px!important;gap:8px!important;background:rgba(8,8,7,.42)!important;backdrop-filter:blur(5px)!important}
   body.home-lux .benarian-promo-btn:after{font-size:12px!important}
   body.home-lux .benarian-promo-dots{bottom:10px!important;gap:7px!important;z-index:5!important}
   body.home-lux .benarian-promo-dot{width:18px!important;height:2px!important;border-radius:2px!important;background:#5f5a52!important}
