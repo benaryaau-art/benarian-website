@@ -34,10 +34,23 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
   body.home-lux main>.benarian-promo-rotator{order:2!important}
   body.home-lux main>.booking-search{order:3!important}
 
-  body.home-lux .benarian-promo-rotator{height:244px!important;min-height:244px!important;margin:0!important;padding:0 0 28px!important;perspective:none!important;overflow:hidden!important;background:#0e0d0b!important;border-bottom:1px solid rgba(196,145,55,.45)!important}
-  body.home-lux .benarian-promo-track{position:relative!important;height:216px!important;transform:none!important;transform-style:flat!important;overflow:hidden!important}
-  body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:216px!important;padding:25px 24px 26px!important;border:0!important;border-radius:0!important;background-size:cover!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;filter:none!important;transform:none!important;box-shadow:none!important;z-index:1!important;transition:opacity .45s ease!important,visibility 0s linear .45s!important}
-  body.home-lux .benarian-promo-slide.is-active{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;z-index:2!important;transition:opacity .45s ease!important,visibility 0s!important}
+  /* Smooth luxury carousel rotation: one full card, with subtle depth during transition. */
+  body.home-lux .benarian-promo-rotator{height:244px!important;min-height:244px!important;margin:0!important;padding:0 0 28px!important;perspective:1100px!important;overflow:hidden!important;background:#0e0d0b!important;border-bottom:1px solid rgba(196,145,55,.45)!important}
+  body.home-lux .benarian-promo-track{position:relative!important;height:216px!important;transform:none!important;transform-style:preserve-3d!important;overflow:hidden!important}
+  body.home-lux .benarian-promo-slide,
+  body.home-lux .benarian-promo-slide.is-prev,
+  body.home-lux .benarian-promo-slide.is-next{
+    position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:216px!important;
+    padding:25px 24px 26px!important;border:0!important;border-radius:0!important;background-size:cover!important;
+    opacity:0!important;visibility:visible!important;pointer-events:none!important;filter:none!important;box-shadow:none!important;z-index:1!important;
+    will-change:opacity,transform!important;
+    transition:opacity .72s cubic-bezier(.22,.61,.36,1)!important,transform .78s cubic-bezier(.22,.61,.36,1)!important;
+  }
+  body.home-lux .benarian-promo-slide.is-prev{transform:translate3d(-5%,0,-30px) rotateY(4deg) scale(.985)!important}
+  body.home-lux .benarian-promo-slide.is-next{transform:translate3d(5%,0,-30px) rotateY(-4deg) scale(.985)!important}
+  body.home-lux .benarian-promo-slide.is-active{
+    opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translate3d(0,0,0) rotateY(0) scale(1)!important;z-index:2!important;
+  }
   body.home-lux .benarian-promo-slide:after{background:linear-gradient(90deg,rgba(7,7,6,.58) 0%,rgba(7,7,6,.26) 48%,rgba(7,7,6,.02) 84%),linear-gradient(0deg,rgba(0,0,0,.16),transparent 60%)!important}
   body.home-lux .benarian-promo-copy{max-width:68%!important;opacity:1!important;transform:none!important}
   body.home-lux .benarian-promo-copy small{font-size:8px!important;letter-spacing:2px!important;margin-bottom:8px!important}
@@ -47,7 +60,7 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
   body.home-lux .benarian-promo-btn{position:absolute!important;right:22px!important;bottom:26px!important;padding:10px 13px!important;font-size:7.5px!important;letter-spacing:1.2px!important;gap:8px!important;background:rgba(8,8,7,.42)!important;backdrop-filter:blur(5px)!important}
   body.home-lux .benarian-promo-btn:after{font-size:12px!important}
   body.home-lux .benarian-promo-dots{bottom:10px!important;gap:7px!important;z-index:5!important}
-  body.home-lux .benarian-promo-dot{width:18px!important;height:2px!important;border-radius:2px!important;background:#5f5a52!important}
+  body.home-lux .benarian-promo-dot{width:18px!important;height:2px!important;border-radius:2px!important;background:#5f5a52!important;transition:width .35s ease,background .35s ease!important}
   body.home-lux .benarian-promo-dot.active{width:32px!important;background:#d5a64a!important}
   body.home-lux .benarian-promo-arrow{display:none!important}
 }
@@ -59,4 +72,4 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
   body.home-lux .benarian-promo-copy strong{font-size:27px!important}
   body.home-lux .benarian-promo-btn{right:18px!important;bottom:23px!important}
 }
-@media(prefers-reduced-motion:reduce){body.home-lux::before,body.home-lux::after{animation-duration:1.4s!important}.benarian-promo-slide{transition:none!important}}
+@media(prefers-reduced-motion:reduce){body.home-lux::before,body.home-lux::after{animation-duration:1.4s!important}.benarian-promo-slide{transition:none!important;transform:none!important}}
