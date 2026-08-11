@@ -2,8 +2,6 @@
   const WHATSAPP_URL='https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking.';
   const EMAIL_URL='mailto:info@benarian.com?subject=BENARIAN%20Travel%20Enquiry';
 
-  function normalPage(v){return(v||'index.html').split('/').pop()||'index.html'}
-
   function fixUtilities(){
     document.querySelectorAll('.topline .right').forEach(right=>{
       [...right.children].forEach(node=>{
@@ -30,87 +28,150 @@
   function fixConciergeLinks(){
     document.querySelectorAll('.lux-contact-actions').forEach(group=>{
       const links=[...group.querySelectorAll('a')];
-      if(links[0]){links[0].href=WHATSAPP_URL;links[0].target='_blank';links[0].rel='noopener';links[0].setAttribute('aria-label','Chat with BENARIAN on WhatsApp');}
-      if(links[1]){links[1].href=EMAIL_URL;links[1].removeAttribute('target');links[1].setAttribute('aria-label','Email BENARIAN');}
-      if(links[2]){links[2].href='contact.html';links[2].setAttribute('aria-label','Open BENARIAN Concierge contact page');}
+      if(links[0]){links[0].href=WHATSAPP_URL;links[0].target='_blank';links[0].rel='noopener';}
+      if(links[1]){links[1].href=EMAIL_URL;links[1].removeAttribute('target');}
+      if(links[2]) links[2].href='contact.html';
     });
   }
 
   function optimiseImages(){
     const imgs=[...document.images];
     const firstVisible=imgs.find(img=>img.getBoundingClientRect().top < window.innerHeight*1.2);
-    imgs.forEach(img=>{
-      img.decoding='async';
-      if(img===firstVisible){img.loading='eager';img.fetchPriority='high';}
-      else {img.loading='lazy';img.fetchPriority='low';}
-      if(!img.alt && !img.closest('a[aria-label]')) img.alt='';
-    });
-  }
-
-  function hardenLinks(){
-    document.querySelectorAll('a[target="_blank"]').forEach(a=>{
-      const rel=new Set((a.rel||'').split(/\s+/).filter(Boolean));rel.add('noopener');rel.add('noreferrer');a.rel=[...rel].join(' ');
-    });
-    document.querySelectorAll('a[href="#"],a[href=""]').forEach(a=>{
-      if(a.dataset.keepEmpty==='true') return;
-      a.setAttribute('aria-disabled','true');
-      a.addEventListener('click',e=>e.preventDefault());
-    });
+    imgs.forEach(img=>{img.decoding='async';if(img===firstVisible){img.loading='eager';img.fetchPriority='high';}else{img.loading='lazy';img.fetchPriority='low';}});
   }
 
   function installPerformanceHints(){
-    const origins=['https://images.unsplash.com','https://www.booking.com','https://fonts.gstatic.com'];
-    origins.forEach(href=>{if(document.head.querySelector(`link[rel="preconnect"][href="${href}"]`))return;const l=document.createElement('link');l.rel='preconnect';l.href=href;l.crossOrigin='anonymous';document.head.appendChild(l);});
+    ['https://images.unsplash.com','https://www.booking.com','https://fonts.gstatic.com'].forEach(href=>{
+      if(document.head.querySelector(`link[rel="preconnect"][href="${href}"]`))return;
+      const l=document.createElement('link');l.rel='preconnect';l.href=href;l.crossOrigin='anonymous';document.head.appendChild(l);
+    });
     if(!document.getElementById('benarian-global-stability')){
       const s=document.createElement('style');s.id='benarian-global-stability';s.textContent=`
         .topline .right .benarian-utility{display:inline-flex;align-items:center;gap:5px;border:0;background:transparent;color:inherit;text-decoration:none;font:inherit;cursor:pointer;padding:0}
         .topline .right .benarian-utility:hover{color:#b9872c}
         img{max-width:100%;height:auto}
         @media(max-width:760px){button,a{touch-action:manipulation}}
-        @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
       `;document.head.appendChild(s);
     }
   }
 
-  function fixLegacyHeavyBrand(){
-    document.querySelectorAll('.header .brand img[src*="benarian-logo-approved.png"]').forEach(img=>{
-      const brand=img.closest('.brand');if(!brand)return;
-      brand.classList.add('brand-lockup');brand.setAttribute('aria-label','BENARIAN home');
-      brand.innerHTML='<span class="brand-mark" aria-hidden="true">BB</span><span class="brand-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL & HOSPITALITY</small></span>';
-    });
-  }
+  function installGuaranteedPromoSlider(){
+    const oldRotator=document.querySelector('.benarian-promo-rotator');
+    if(!oldRotator || oldRotator.dataset.benarianTakeover==='true') return;
 
-  function installPromoZoomEffect(){
-    const track=document.getElementById('benarianPromoTrack');
-    if(!track || track.dataset.zoomEffectBound==='true' || !('animate' in Element.prototype)) return;
-    track.dataset.zoomEffectBound='true';
-    let previous=track.querySelector('.benarian-promo-slide.is-active');
+    /* Detach the original node so its old interval can keep running harmlessly off-DOM. */
+    const rotator=oldRotator.cloneNode(true);
+    oldRotator.replaceWith(rotator);
+    rotator.dataset.benarianTakeover='true';
+
+    const track=rotator.querySelector('.benarian-promo-track');
+    const dots=rotator.querySelector('.benarian-promo-dots');
     const slides=[...track.querySelectorAll('.benarian-promo-slide')];
-    const observer=new MutationObserver(()=>{
-      const active=track.querySelector('.benarian-promo-slide.is-active');
-      if(!active || active===previous) return;
-      const outgoing=previous;
-      previous=active;
-      slides.forEach(slide=>slide.getAnimations().forEach(a=>{if(a.id==='benarianPromoZoomOut'||a.id==='benarianPromoZoomIn')a.cancel()}));
-      if(outgoing){
-        const out=outgoing.animate([
-          {transform:'translate3d(0,0,0) scale(1)',opacity:1,filter:'brightness(1)'},
-          {transform:'translate3d(0,0,120px) scale(1.16)',opacity:.98,filter:'brightness(1.08)',offset:.58},
-          {transform:'translate3d(0,0,165px) scale(1.22)',opacity:0,filter:'brightness(1.1)'}
-        ],{duration:900,easing:'cubic-bezier(.18,.78,.22,1)',fill:'none'});
-        out.id='benarianPromoZoomOut';
-      }
-      const incoming=active.animate([
-        {transform:'translate3d(0,0,-130px) scale(.88)',opacity:0},
-        {transform:'translate3d(0,0,-45px) scale(.95)',opacity:.55,offset:.42},
-        {transform:'translate3d(0,0,0) scale(1)',opacity:1}
-      ],{duration:900,easing:'cubic-bezier(.18,.78,.22,1)',fill:'none'});
-      incoming.id='benarianPromoZoomIn';
+    if(!slides.length) return;
+
+    if(!document.getElementById('benarian-takeover-motion')){
+      const style=document.createElement('style');
+      style.id='benarian-takeover-motion';
+      style.textContent=`
+        @media(max-width:760px){
+          body.home-lux .benarian-promo-rotator[data-benarian-takeover="true"]{overflow:hidden!important;padding-left:0!important;padding-right:0!important}
+          body.home-lux .benarian-promo-rotator[data-benarian-takeover="true"] .benarian-promo-track{overflow:visible!important}
+          body.home-lux .benarian-promo-rotator[data-benarian-takeover="true"] .benarian-promo-slide{
+            left:4%!important;right:auto!important;width:92%!important;border-radius:14px!important;transform-origin:center center!important;transition:none!important;animation:none!important;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    let current=0;
+    let timer=null;
+    let busy=false;
+    dots.innerHTML='';
+
+    slides.forEach((slide,i)=>{
+      slide.classList.remove('is-active','is-prev','is-next');
+      slide.style.setProperty('opacity',i===0?'1':'0','important');
+      slide.style.setProperty('visibility',i===0?'visible':'hidden','important');
+      slide.style.setProperty('transform','scale(1)','important');
+      slide.style.setProperty('z-index',i===0?'3':'1','important');
+      slide.style.setProperty('pointer-events',i===0?'auto':'none','important');
+      if(i===0) slide.classList.add('is-active');
+      const d=document.createElement('button');
+      d.className='benarian-promo-dot'+(i===0?' active':'');
+      d.setAttribute('aria-label','Go to promotion '+(i+1));
+      d.addEventListener('click',()=>transitionTo(i));
+      dots.appendChild(d);
     });
-    observer.observe(track,{subtree:true,attributes:true,attributeFilter:['class']});
+
+    function markDots(){[...dots.children].forEach((d,i)=>d.classList.toggle('active',i===current));}
+
+    function transitionTo(nextIndex){
+      if(busy || nextIndex===current) return;
+      busy=true;
+      clearTimeout(timer);
+      const outgoing=slides[current];
+      const incoming=slides[nextIndex];
+
+      /* Make the whole card visibly grow toward the viewer before it leaves. */
+      outgoing.style.setProperty('visibility','visible','important');
+      outgoing.style.setProperty('opacity','1','important');
+      outgoing.style.setProperty('z-index','5','important');
+      outgoing.style.setProperty('pointer-events','none','important');
+      outgoing.style.setProperty('transition','transform 700ms cubic-bezier(.18,.78,.22,1), opacity 700ms ease','important');
+      outgoing.style.setProperty('transform','scale(1.085)','important');
+
+      setTimeout(()=>{
+        outgoing.style.setProperty('transform','scale(1.16)','important');
+        outgoing.style.setProperty('opacity','0','important');
+      },330);
+
+      setTimeout(()=>{
+        outgoing.classList.remove('is-active');
+        outgoing.style.setProperty('visibility','hidden','important');
+        outgoing.style.setProperty('z-index','1','important');
+        outgoing.style.setProperty('transform','scale(1)','important');
+        outgoing.style.setProperty('transition','none','important');
+
+        incoming.classList.add('is-active');
+        incoming.style.setProperty('visibility','visible','important');
+        incoming.style.setProperty('opacity','0','important');
+        incoming.style.setProperty('z-index','4','important');
+        incoming.style.setProperty('pointer-events','auto','important');
+        incoming.style.setProperty('transition','none','important');
+        incoming.style.setProperty('transform','scale(.88)','important');
+
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          incoming.style.setProperty('transition','transform 760ms cubic-bezier(.18,.78,.22,1), opacity 620ms ease','important');
+          incoming.style.setProperty('transform','scale(1)','important');
+          incoming.style.setProperty('opacity','1','important');
+        }));
+
+        current=nextIndex;
+        markDots();
+        setTimeout(()=>{busy=false;start();},800);
+      },720);
+    }
+
+    function next(){transitionTo((current+1)%slides.length);}
+    function prev(){transitionTo((current-1+slides.length)%slides.length);}
+    function start(){clearTimeout(timer);timer=setTimeout(next,4300);}
+
+    const prevBtn=rotator.querySelector('.benarian-promo-prev');
+    const nextBtn=rotator.querySelector('.benarian-promo-next');
+    if(prevBtn) prevBtn.addEventListener('click',prev);
+    if(nextBtn) nextBtn.addEventListener('click',next);
+
+    let touchStart=0;
+    rotator.addEventListener('touchstart',e=>{touchStart=e.changedTouches[0].clientX;clearTimeout(timer);},{passive:true});
+    rotator.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchStart;if(Math.abs(d)>45)(d<0?next:prev)();else start();},{passive:true});
+    rotator.addEventListener('mouseenter',()=>clearTimeout(timer));
+    rotator.addEventListener('mouseleave',start);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else start();});
+    start();
   }
 
-  function apply(){fixUtilities();fixConciergeLinks();optimiseImages();hardenLinks();installPerformanceHints();fixLegacyHeavyBrand();installPromoZoomEffect();}
+  function apply(){fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();}
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',apply,{once:true}); else apply();
-  window.addEventListener('load',()=>setTimeout(apply,150),{once:true});
+  window.addEventListener('load',()=>setTimeout(apply,120),{once:true});
 })();
