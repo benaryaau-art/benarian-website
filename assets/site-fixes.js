@@ -9,23 +9,24 @@
     const style=document.createElement('style');
     style.id='benarian-intro-founder-style';
     style.textContent=`
-      #benarian-intro-founder{position:fixed;left:50%;top:49%;transform:translate(-50%,-50%);z-index:2147483646;width:min(92vw,820px);text-align:center;color:#fff;pointer-events:none;animation:benarianFounderIntro 5.8s ease both}
-      #benarian-intro-founder .b-brand{font:500 clamp(30px,6.2vw,49px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:5px}
-      #benarian-intro-founder .b-tagline{margin-top:12px;font:400 clamp(17px,3.7vw,29px)/1.12 'Cormorant Garamond',Georgia,serif;letter-spacing:2.5px;white-space:nowrap}
-      #benarian-intro-founder .b-rule{width:110px;height:1px;margin:22px auto 15px;background:linear-gradient(90deg,transparent,#d4a64d,transparent)}
-      #benarian-intro-founder .b-role{color:#e5b85e;font:500 clamp(11px,2.5vw,17px)/1.2 Inter,Arial,sans-serif;letter-spacing:4px}
-      #benarian-intro-founder .b-signature{margin-top:10px;font:italic 400 clamp(31px,6.8vw,53px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:1px}
-      @keyframes benarianFounderIntro{0%{opacity:0;visibility:visible}9%,76%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
-      @media(max-width:430px){#benarian-intro-founder{width:94vw;top:49%}#benarian-intro-founder .b-brand{font-size:25px;letter-spacing:3px}#benarian-intro-founder .b-tagline{font-size:16px;letter-spacing:.9px}#benarian-intro-founder .b-rule{margin:17px auto 12px;width:86px}#benarian-intro-founder .b-role{font-size:11px;letter-spacing:2.7px}#benarian-intro-founder .b-signature{font-size:35px;margin-top:7px}}
+      #benarian-intro-screen{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;overflow:hidden;pointer-events:none;color:#fff;text-align:center;background:#050505 url('/assets/benarian-tour-splash.webp?v=20260812intro4') center/contain no-repeat;animation:benarianIntroScreen 5.8s ease both}
+      #benarian-intro-screen .b-copy{width:min(92vw,820px)}
+      #benarian-intro-screen .b-brand{font:500 clamp(30px,6.2vw,49px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:5px}
+      #benarian-intro-screen .b-tagline{margin-top:12px;font:400 clamp(17px,3.7vw,29px)/1.12 'Cormorant Garamond',Georgia,serif;letter-spacing:2.5px;white-space:nowrap}
+      #benarian-intro-screen .b-rule{width:110px;height:1px;margin:22px auto 15px;background:linear-gradient(90deg,transparent,#d4a64d,transparent)}
+      #benarian-intro-screen .b-role{color:#e5b85e;font:500 clamp(11px,2.5vw,17px)/1.2 Inter,Arial,sans-serif;letter-spacing:4px}
+      #benarian-intro-screen .b-signature{margin-top:10px;font:italic 400 clamp(31px,6.8vw,53px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:1px}
+      @keyframes benarianIntroScreen{0%{opacity:0;visibility:visible}7%,82%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+      @media(max-width:760px){#benarian-intro-screen{background-size:cover;background-position:center}#benarian-intro-screen .b-copy{width:94vw}#benarian-intro-screen .b-brand{font-size:25px;letter-spacing:3px}#benarian-intro-screen .b-tagline{font-size:16px;letter-spacing:.9px}#benarian-intro-screen .b-rule{margin:17px auto 12px;width:86px}#benarian-intro-screen .b-role{font-size:11px;letter-spacing:2.7px}#benarian-intro-screen .b-signature{font-size:35px;margin-top:7px}}
     `;
     document.head.appendChild(style);
 
-    const el=document.createElement('div');
-    el.id='benarian-intro-founder';
-    el.innerHTML='<div class="b-brand">BENARIAN</div><div class="b-tagline">LUXURY TRAVEL &amp; HOSPITALITY</div><div class="b-rule"></div><div class="b-role">FOUNDER | CEO</div><div class="b-signature">Ben Tafreshi</div>';
-    document.body.appendChild(el);
-    const cleanup=()=>{el.remove();style.remove();};
-    el.addEventListener('animationend',cleanup,{once:true});
+    const screen=document.createElement('div');
+    screen.id='benarian-intro-screen';
+    screen.innerHTML='<div class="b-copy"><div class="b-brand">BENARIAN</div><div class="b-tagline">LUXURY TRAVEL &amp; HOSPITALITY</div><div class="b-rule"></div><div class="b-role">FOUNDER | CEO</div><div class="b-signature">Ben Tafreshi</div></div>';
+    document.body.appendChild(screen);
+    const cleanup=()=>{screen.remove();style.remove();};
+    screen.addEventListener('animationend',cleanup,{once:true});
     setTimeout(cleanup,6200);
   }
 
