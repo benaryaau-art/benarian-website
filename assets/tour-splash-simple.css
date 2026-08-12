@@ -1,24 +1,6 @@
 @import url('bali-card-images.css?v=20260809b');
 
-/* Short branded intro: real Bali resort photography, then fully hidden. */
-body.home-lux::before{
-  content:""!important;
-  position:fixed!important;inset:0!important;z-index:2147483000!important;display:block!important;pointer-events:none!important;
-  background:
-    linear-gradient(180deg,rgba(7,7,6,.16),rgba(7,7,6,.44)),
-    url('https://images.unsplash.com/photo-1782413263988-11f7178cf385?auto=format&fit=crop&w=1800&q=88') center/cover no-repeat!important;
-  animation:benarianIntroVisual 2.15s ease forwards!important;
-}
-body.home-lux::after{
-  content:"BENARIAN\A LUXURY TRAVEL & HOSPITALITY\A \A FOUNDER | CEO\A 𝓑𝓮𝓷 𝓣𝓪𝓯𝓻𝓮𝓼𝓱𝓲"!important;
-  white-space:pre-line!important;position:fixed!important;left:50%!important;top:50%!important;z-index:2147483001!important;
-  transform:translate(-50%,-50%)!important;width:92vw!important;text-align:center!important;color:#fff!important;pointer-events:none!important;
-  font-family:'Cormorant Garamond',Georgia,serif!important;font-size:clamp(25px,6.2vw,45px)!important;line-height:1.18!important;letter-spacing:1.8px!important;
-  text-shadow:0 3px 22px rgba(0,0,0,.65)!important;animation:benarianIntroText 2.15s ease forwards!important;
-}
-@keyframes benarianIntroVisual{0%{opacity:0;visibility:visible}10%,72%{opacity:1;visibility:visible}92%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden;z-index:-1}}
-@keyframes benarianIntroText{0%{opacity:0;visibility:visible}14%,64%{opacity:1;visibility:visible}86%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden;z-index:-1}}
-
+/* Homepage carousel only. The obsolete branded text intro was permanently removed. */
 body.home-lux .benarian-promo-slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1782413263988-11f7178cf385?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 56%!important}
 body.home-lux .benarian-promo-slide:nth-child(2){background-image:url('https://images.unsplash.com/photo-1664876080601-acf03b40c5e3?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 55%!important}
 body.home-lux .benarian-promo-slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1728051104450-f7bc748a6fdd?auto=format&fit=crop&w=1800&q=88')!important;background-position:center 52%!important}
@@ -34,7 +16,6 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
 }
 
 @media(max-width:760px){
-  body.home-lux::after{content:"BENARIAN\A LUXURY TRAVEL & HOSPITALITY\A \A FOUNDER | CEO\A 𝓑𝓮𝓷 𝓣𝓪𝓯𝓻𝓮𝓼𝓱𝓲"!important;width:96vw!important;font-size:clamp(18px,4.8vw,27px)!important;line-height:1.28!important;letter-spacing:1px!important}
   body.home-lux main{display:flex!important;flex-direction:column!important;overflow:hidden!important}
   body.home-lux main>section{order:4}
   body.home-lux main>.lux-hero{order:1!important}
@@ -69,18 +50,12 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
   body.home-lux .benarian-promo-arrow{display:none!important}
 }
 @media(max-width:420px){
-  body.home-lux::after{width:98vw!important;font-size:17px!important;letter-spacing:.7px!important;line-height:1.3!important}
   body.home-lux .benarian-promo-rotator{height:232px!important;min-height:232px!important}
   body.home-lux .benarian-promo-track,body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{height:204px!important}
   body.home-lux .benarian-promo-slide,body.home-lux .benarian-promo-slide.is-prev,body.home-lux .benarian-promo-slide.is-next{padding:22px 20px 23px!important}
   body.home-lux .benarian-promo-copy strong{font-size:27px!important}
   body.home-lux .benarian-promo-btn{right:18px!important;bottom:23px!important}
 }
-@media(prefers-reduced-motion:reduce){body.home-lux::before,body.home-lux::after{animation-duration:1.4s!important}}
 
 
-/* Remove legacy founder-name overlay: the visual intro may fade, but no text should sit over homepage slides. */
-body.home-lux::after{content:none!important;display:none!important;visibility:hidden!important;opacity:0!important;animation:none!important}
 
-/* Safari/PWA hard stop for the obsolete founder text overlay. */
-html body.home-lux::after,html body.home-lux:after,html body.home-lux.no-founder-overlay::after{content:""!important;display:none!important;visibility:hidden!important;opacity:0!important;z-index:-2147483647!important;width:0!important;height:0!important;overflow:hidden!important;animation:none!important;transition:none!important;pointer-events:none!important}
