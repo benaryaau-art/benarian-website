@@ -1,4 +1,4 @@
-const CACHE_NAME = 'benarian-pwa-v5-20260812-no-founder-overlay';
+const CACHE_NAME = 'benarian-pwa-v6-20260812-founder-source-deleted';
 const CORE_ASSETS = [
   '/',
   '/index.html',
