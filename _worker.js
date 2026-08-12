@@ -7,6 +7,7 @@ export default {
     if (!type.includes('text/html')) return response;
 
     let html = await response.text();
+    if (url.pathname === '/persian-experiences.html') html = html.replace('</head>', '<meta name="benarian-version" content="iran-mobile-20260812a"></head>');
     html = html.replace(/assets\/tour-splash-simple\.css\?v=[^\"']+/g, 'assets/tour-splash-simple.css?v=20260812founder1');
 
     /* Keep exactly one global runtime. */
