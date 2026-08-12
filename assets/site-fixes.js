@@ -15,7 +15,7 @@
       #benarian-intro-screen .b-tagline{margin-top:12px;font:400 clamp(17px,3.7vw,29px)/1.12 'Cormorant Garamond',Georgia,serif;letter-spacing:2.5px;white-space:nowrap}
       #benarian-intro-screen .b-rule{width:110px;height:1px;margin:22px auto 15px;background:linear-gradient(90deg,transparent,#d4a64d,transparent)}
       #benarian-intro-screen .b-role{color:#e5b85e;font:500 clamp(11px,2.5vw,17px)/1.2 Inter,Arial,sans-serif;letter-spacing:4px}
-      #benarian-intro-screen .b-signature{margin-top:10px;font:italic 400 clamp(31px,6.8vw,53px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:1px}
+      #benarian-intro-screen .b-signature{margin-top:10px;font:400 clamp(38px,8vw,66px)/1.05 'Italianno','Allura','Segoe Script',cursive;letter-spacing:.3px;transform:rotate(-2deg)}
       @keyframes benarianIntroScreen{0%{opacity:0;visibility:visible}7%,82%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
       @media(max-width:760px){#benarian-intro-screen{background-size:cover;background-position:center}#benarian-intro-screen .b-copy{width:94vw}#benarian-intro-screen .b-brand{font-size:25px;letter-spacing:3px}#benarian-intro-screen .b-tagline{font-size:16px;letter-spacing:.9px}#benarian-intro-screen .b-rule{margin:17px auto 12px;width:86px}#benarian-intro-screen .b-role{font-size:11px;letter-spacing:2.7px}#benarian-intro-screen .b-signature{font-size:35px;margin-top:7px}}
     `;
