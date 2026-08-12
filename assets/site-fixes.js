@@ -11,7 +11,6 @@
     style.textContent=`
       #benarian-intro-screen{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;overflow:hidden;pointer-events:none;color:#fff;text-align:center;background:#071014;animation:benarianIntroScreen 5.8s ease both;isolation:isolate}
       #benarian-intro-screen::before{content:"";position:absolute;inset:-3%;z-index:-2;background:linear-gradient(rgba(4,7,8,.32),rgba(4,7,8,.46)),url('/assets/images/thailand-hero.jpg?v=20260812intro-motion') center/cover no-repeat;animation:benarianCinematicDrift 5.8s ease-out both;will-change:transform}
-      #benarian-intro-screen::after{content:"";position:absolute;left:-15%;right:-15%;bottom:-4%;height:42%;z-index:-1;opacity:.34;background:repeating-radial-gradient(ellipse at 50% 110%,rgba(180,235,232,.34) 0 1px,transparent 2px 16px);mix-blend-mode:soft-light;filter:blur(1px);transform-origin:center bottom;animation:benarianWaterFlow 2.4s ease-in-out infinite alternate;will-change:transform,background-position}
       #benarian-intro-screen .b-copy{position:relative;z-index:2;width:min(92vw,820px)}
       #benarian-intro-screen .b-brand{font:500 clamp(30px,6.2vw,49px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:5px}
       #benarian-intro-screen .b-tagline{margin-top:12px;font:400 clamp(17px,3.7vw,29px)/1.12 'Cormorant Garamond',Georgia,serif;letter-spacing:2.5px;white-space:nowrap}
@@ -19,9 +18,8 @@
       #benarian-intro-screen .b-role{color:#e5b85e;font:500 clamp(11px,2.5vw,17px)/1.2 Inter,Arial,sans-serif;letter-spacing:4px}
       #benarian-intro-screen .b-signature-img{display:block;width:min(72vw,440px);height:auto;margin:9px auto 0;filter:invert(1) drop-shadow(0 2px 8px rgba(0,0,0,.3))}
       @keyframes benarianIntroScreen{0%,96%{opacity:1;visibility:visible}100%{opacity:1;visibility:hidden}}
-      @keyframes benarianCinematicDrift{0%{transform:scale(1.035) translate3d(0,0,0)}100%{transform:scale(1.095) translate3d(-.7%,-.5%,0)}}
-      @keyframes benarianWaterFlow{0%{transform:translate3d(-1.5%,0,0) scaleX(1.02);background-position:0 0}100%{transform:translate3d(1.5%,-1.2%,0) scaleX(.98);background-position:38px 13px}}
-      @media(prefers-reduced-motion:reduce){#benarian-intro-screen::before,#benarian-intro-screen::after{animation:none!important}}
+      @keyframes benarianCinematicDrift{0%{transform:scale(1.025) translate3d(0,0,0)}100%{transform:scale(1.055) translate3d(-.25%,-.18%,0)}}
+      @media(prefers-reduced-motion:reduce){#benarian-intro-screen::before{animation:none!important}}
       @media(max-width:760px){#benarian-intro-screen .b-copy{width:94vw}#benarian-intro-screen .b-brand{font-size:25px;letter-spacing:3px}#benarian-intro-screen .b-tagline{font-size:16px;letter-spacing:.9px}#benarian-intro-screen .b-rule{margin:17px auto 12px;width:86px}#benarian-intro-screen .b-role{font-size:11px;letter-spacing:2.7px}#benarian-intro-screen .b-signature-img{width:min(78vw,330px);margin-top:7px}}
     `;
     document.head.appendChild(style);
