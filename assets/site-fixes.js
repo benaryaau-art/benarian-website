@@ -23,7 +23,7 @@
 
     const screen=document.createElement('div');
     screen.id='benarian-intro-screen';
-    screen.innerHTML='<div class="b-copy"><div class="b-brand">BENARIAN</div><div class="b-tagline">LUXURY TRAVEL &amp; HOSPITALITY</div><div class="b-rule"></div><div class="b-role">FOUNDER | CEO</div><img class="b-signature-img" src="/assets/ben-tafreshi-signature.png?v=20260812final3" alt="Ben Tafreshi signature"></div>';
+    screen.innerHTML='<div class="b-copy"><div class="b-brand">BENARIAN</div><div class="b-tagline">LUXURY TRAVEL &amp; HOSPITALITY</div><div class="b-rule"></div><div class="b-role">FOUNDER | CEO</div><img class="b-signature-img" src="/assets/ben-tafreshi-signature.png?v=20260812final4" alt="Ben Tafreshi signature"></div>';
     document.body.appendChild(screen);
     const cleanup=()=>{screen.remove();style.remove();};
     screen.addEventListener('animationend',cleanup,{once:true});
