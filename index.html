@@ -52,6 +52,29 @@
   </style>
 <link rel="stylesheet" href="assets/global-polish.css?v=20260730-removebar">
 <link rel="stylesheet" href="assets/car-rental-redesign.css?v=20260803e">
+
+<style id="benarian-desktop-repair-20260812">
+/* Desktop repair: restore one active promotional slide and keep the main navigation inside the viewport. */
+body.home-lux .benarian-promo-rotator{height:clamp(350px,38vw,530px)!important;min-height:350px!important;padding:24px 0 38px!important;background:linear-gradient(180deg,#f8f4ed,#fff)!important}
+body.home-lux .benarian-promo-track{display:block!important;position:relative!important;width:100%!important;height:100%!important}
+body.home-lux .benarian-promo-slide{display:flex!important;position:absolute!important;top:0!important;left:11%!important;width:78%!important;min-width:0!important;height:100%!important;min-height:0!important;opacity:0!important;visibility:visible!important;pointer-events:none!important;z-index:0!important;transform:translate3d(0,0,-240px) scale(.68)!important}
+body.home-lux .benarian-promo-slide.is-active{opacity:1!important;pointer-events:auto!important;z-index:3!important;transform:translate3d(0,0,70px) scale(1)!important}
+body.home-lux .benarian-promo-slide.is-prev{opacity:.62!important;z-index:1!important;transform:translate3d(-73%,0,-125px) rotateY(24deg) scale(.78)!important}
+body.home-lux .benarian-promo-slide.is-next{opacity:.62!important;z-index:1!important;transform:translate3d(73%,0,-125px) rotateY(-24deg) scale(.78)!important}
+@media (min-width:901px){
+  body.home-lux .header{gap:16px!important;padding-left:2.2%!important;padding-right:2.2%!important}
+  body.home-lux .header .brand-lockup{min-width:218px!important}
+  body.home-lux .header .nav{gap:10px!important;overflow:visible!important}
+  body.home-lux .header .nav a{font-size:8px!important;letter-spacing:.25px!important;padding:0 2px!important}
+  body.home-lux .header .nav a[href="terms-and-conditions.html"]{display:none!important}
+}
+@media (max-width:700px){
+  body.home-lux .benarian-promo-rotator{height:350px!important;min-height:350px!important;padding:14px 0 34px!important}
+  body.home-lux .benarian-promo-slide{left:7%!important;width:86%!important;padding:34px 22px 38px!important}
+  body.home-lux .benarian-promo-slide.is-prev{transform:translate3d(-82%,0,-120px) rotateY(28deg) scale(.77)!important}
+  body.home-lux .benarian-promo-slide.is-next{transform:translate3d(82%,0,-120px) rotateY(-28deg) scale(.77)!important}
+}
+</style>
 </head>
 <body class="home-lux"><div class="shell">
   <div class="topline"><div class="left">🌐 <span>Language:</span><a href="fa.html">فارسی</a><span>|</span><b>EN</b></div><div class="right"><span class="accent">AUD⌄</span><span>♡ Wishlist</span><span>▣ My Bookings</span><a class="member-top-link" href="member-login.html">Members</a></div></div>
