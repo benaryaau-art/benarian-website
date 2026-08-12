@@ -1,4 +1,4 @@
-const CACHE_NAME = 'benarian-pwa-v6-20260812-founder-source-deleted';
+const CACHE_NAME = 'benarian-pwa-v7-20260812-signature-final';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -34,7 +34,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   if (url.origin !== location.origin) return;
 
-  const isDynamicAsset = /\.(?:js|css)$/i.test(url.pathname);
+  const isDynamicAsset = /\.(?:js|css|png|jpe?g|webp|svg)$/i.test(url.pathname);
 
   if (event.request.mode === 'navigate' || isDynamicAsset) {
     event.respondWith(
