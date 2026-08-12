@@ -15,15 +15,15 @@
       #benarian-intro-screen .b-tagline{margin-top:12px;font:400 clamp(17px,3.7vw,29px)/1.12 'Cormorant Garamond',Georgia,serif;letter-spacing:2.5px;white-space:nowrap}
       #benarian-intro-screen .b-rule{width:110px;height:1px;margin:22px auto 15px;background:linear-gradient(90deg,transparent,#d4a64d,transparent)}
       #benarian-intro-screen .b-role{color:#e5b85e;font:500 clamp(11px,2.5vw,17px)/1.2 Inter,Arial,sans-serif;letter-spacing:4px}
-      #benarian-intro-screen .b-signature{margin-top:10px;font:400 clamp(38px,8vw,66px)/1.05 'Italianno','Allura','Segoe Script',cursive;letter-spacing:.3px;transform:rotate(-2deg)}
+      #benarian-intro-screen .b-signature-img{display:block;width:min(72vw,440px);height:auto;margin:9px auto 0;filter:invert(1) drop-shadow(0 2px 8px rgba(0,0,0,.3))}
       @keyframes benarianIntroScreen{0%{opacity:0;visibility:visible}7%,82%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
-      @media(max-width:760px){#benarian-intro-screen{background-size:cover;background-position:center}#benarian-intro-screen .b-copy{width:94vw}#benarian-intro-screen .b-brand{font-size:25px;letter-spacing:3px}#benarian-intro-screen .b-tagline{font-size:16px;letter-spacing:.9px}#benarian-intro-screen .b-rule{margin:17px auto 12px;width:86px}#benarian-intro-screen .b-role{font-size:11px;letter-spacing:2.7px}#benarian-intro-screen .b-signature{font-size:35px;margin-top:7px}}
+      @media(max-width:760px){#benarian-intro-screen{background-size:cover;background-position:center}#benarian-intro-screen .b-copy{width:94vw}#benarian-intro-screen .b-brand{font-size:25px;letter-spacing:3px}#benarian-intro-screen .b-tagline{font-size:16px;letter-spacing:.9px}#benarian-intro-screen .b-rule{margin:17px auto 12px;width:86px}#benarian-intro-screen .b-role{font-size:11px;letter-spacing:2.7px}#benarian-intro-screen .b-signature-img{width:min(78vw,330px);margin-top:7px}}
     `;
     document.head.appendChild(style);
 
     const screen=document.createElement('div');
     screen.id='benarian-intro-screen';
-    screen.innerHTML='<div class="b-copy"><div class="b-brand">BENARIAN</div><div class="b-tagline">LUXURY TRAVEL &amp; HOSPITALITY</div><div class="b-rule"></div><div class="b-role">FOUNDER | CEO</div><div class="b-signature">Ben Tafreshi</div></div>';
+    screen.innerHTML='<div class="b-copy"><div class="b-brand">BENARIAN</div><div class="b-tagline">LUXURY TRAVEL &amp; HOSPITALITY</div><div class="b-rule"></div><div class="b-role">FOUNDER | CEO</div><img class="b-signature-img" src="/assets/ben-tafreshi-signature.png?v=20260812exact" alt="Ben Tafreshi signature"></div>';
     document.body.appendChild(screen);
     const cleanup=()=>{screen.remove();style.remove();};
     screen.addEventListener('animationend',cleanup,{once:true});
