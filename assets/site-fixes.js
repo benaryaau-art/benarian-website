@@ -18,7 +18,7 @@
       #benarian-intro-screen .b-role{color:#e5b85e;font:500 clamp(11px,2.5vw,17px)/1.2 Inter,Arial,sans-serif;letter-spacing:4px}
       #benarian-intro-screen .b-signature-img{display:block;width:min(72vw,440px);height:auto;margin:9px auto 0;filter:invert(1) drop-shadow(0 2px 8px rgba(0,0,0,.3))}
       @keyframes benarianIntroScreen{0%,96%{opacity:1;visibility:visible}100%{opacity:1;visibility:hidden}}
-      @keyframes benarianCinematicDrift{0%{transform:scale(1.025) translate3d(0,0,0)}100%{transform:scale(1.055) translate3d(-.25%,-.18%,0)}}
+      @keyframes benarianCinematicDrift{0%{transform:scale(1.02) translate3d(0,0,0)}45%{transform:scale(1.065) translate3d(-.45%,-.28%,0)}100%{transform:scale(1.105) translate3d(-.9%,-.55%,0)}}
       @media(prefers-reduced-motion:reduce){#benarian-intro-screen::before{animation:none!important}}
       @media(max-width:760px){#benarian-intro-screen .b-copy{width:94vw}#benarian-intro-screen .b-brand{font-size:25px;letter-spacing:3px}#benarian-intro-screen .b-tagline{font-size:16px;letter-spacing:.9px}#benarian-intro-screen .b-rule{margin:17px auto 12px;width:86px}#benarian-intro-screen .b-role{font-size:11px;letter-spacing:2.7px}#benarian-intro-screen .b-signature-img{width:min(78vw,330px);margin-top:7px}}
     `;
