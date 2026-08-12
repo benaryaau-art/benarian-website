@@ -2,29 +2,6 @@
   const WHATSAPP_URL='https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking.';
   const EMAIL_URL='mailto:info@benarian.com?subject=BENARIAN%20Travel%20Enquiry';
 
-  function installIntroFounderOverlay(){
-    if(!document.body.classList.contains('home-lux') || document.getElementById('benarian-intro-founder')) return;
-    const style=document.createElement('style');
-    style.id='benarian-intro-founder-style';
-    style.textContent=`
-      body.home-lux::after{content:none!important;display:none!important}
-      #benarian-intro-founder{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2147483002;width:min(94vw,820px);text-align:center;color:#fff;pointer-events:none;text-shadow:0 3px 22px rgba(0,0,0,.68);animation:benarianFounderOverlay 2.15s ease forwards}
-      #benarian-intro-founder .b-brand{font:600 clamp(29px,6.2vw,48px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:3px}
-      #benarian-intro-founder .b-tagline{margin-top:8px;font:500 clamp(18px,4vw,31px)/1.08 'Cormorant Garamond',Georgia,serif;letter-spacing:2px;white-space:nowrap}
-      #benarian-intro-founder .b-rule{width:110px;height:1px;margin:18px auto 12px;background:linear-gradient(90deg,transparent,#d4a64d,transparent)}
-      #benarian-intro-founder .b-role{color:#e5b85e;font:600 clamp(12px,2.8vw,18px)/1.2 Inter,Arial,sans-serif;letter-spacing:4px}
-      #benarian-intro-founder .b-signature{margin-top:8px;font:italic 500 clamp(30px,7vw,54px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:1px}
-      @keyframes benarianFounderOverlay{0%{opacity:0;visibility:visible}14%,66%{opacity:1;visibility:visible}88%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden}}
-      @media(max-width:430px){#benarian-intro-founder{width:96vw;top:51%}#benarian-intro-founder .b-brand{font-size:24px}#benarian-intro-founder .b-tagline{font-size:17px;letter-spacing:.8px}#benarian-intro-founder .b-rule{margin:14px auto 10px;width:86px}#benarian-intro-founder .b-role{font-size:11px;letter-spacing:2.8px}#benarian-intro-founder .b-signature{font-size:34px;margin-top:6px}}
-    `;
-    document.head.appendChild(style);
-    const el=document.createElement('div');
-    el.id='benarian-intro-founder';
-    el.innerHTML='<div class="b-brand">BENARIAN</div><div class="b-tagline">LUXURY TRAVEL &amp; HOSPITALITY</div><div class="b-rule"></div><div class="b-role">FOUNDER | CEO</div><div class="b-signature">Ben Tafreshi</div>';
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),2400);
-  }
-
   function fixUtilities(){
     document.querySelectorAll('.topline .right').forEach(right=>{
       [...right.children].forEach(node=>{
@@ -133,7 +110,7 @@
     let touchStart=0;rotator.addEventListener('touchstart',e=>{touchStart=e.changedTouches[0].clientX;clearTimeout(timer)},{passive:true});rotator.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchStart;if(Math.abs(d)>45)(d<0?next:prev)();else start()},{passive:true});rotator.addEventListener('mouseenter',()=>clearTimeout(timer));rotator.addEventListener('mouseleave',start);document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else start()});start();
   }
 
-  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();}
+  function apply(){fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
   window.addEventListener('load',()=>setTimeout(apply,120),{once:true});
 })();
