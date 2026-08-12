@@ -30,3 +30,7 @@
 
 /site.webmanifest
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/create-lab-7b26.html
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+  Cache-Control: no-store
