@@ -9,7 +9,7 @@
     const style=document.createElement('style');
     style.id='benarian-intro-founder-style';
     style.textContent=`
-      #benarian-intro-screen{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;overflow:hidden;pointer-events:none;color:#fff;text-align:center;background:#050505 url('/assets/benarian-tour-splash.webp?v=20260812intro4') center/contain no-repeat;animation:benarianIntroScreen 5.8s ease both}
+      #benarian-intro-screen{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;overflow:hidden;pointer-events:none;color:#fff;text-align:center;background:linear-gradient(rgba(4,7,8,.34),rgba(4,7,8,.48)),url('/assets/images/thailand-hero.jpg?v=20260812intro-photo') center/cover no-repeat;animation:benarianIntroScreen 5.8s ease both}
       #benarian-intro-screen .b-copy{width:min(92vw,820px)}
       #benarian-intro-screen .b-brand{font:500 clamp(30px,6.2vw,49px)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:5px}
       #benarian-intro-screen .b-tagline{margin-top:12px;font:400 clamp(17px,3.7vw,29px)/1.12 'Cormorant Garamond',Georgia,serif;letter-spacing:2.5px;white-space:nowrap}
