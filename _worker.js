@@ -12,7 +12,7 @@ export default {
     /* Keep exactly one global runtime. */
     html = html.replace(/<script[^>]+src=["']\/assets\/site-fixes\.js[^>]*><\/script>/gi,'');
     html = html.replace(/<style id="benarian-forced-promo-zoom">[\s\S]*?<\/style>\s*<script>[\s\S]*?initForcedPromo[\s\S]*?<\/script>/gi,'');
-    const globalFixScript = '<script defer src="/assets/site-fixes.js?v=20260812signature-final9"></script>';
+    const globalFixScript = '<script defer src="/assets/site-fixes.js?v=20260812chrome10"></script>';
     html = html.replace('</body>', `${globalFixScript}</body>`);
 
     if (url.pathname === '/' || url.pathname === '/index.html') {
