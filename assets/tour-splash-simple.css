@@ -81,3 +81,6 @@ body.home-lux .benarian-promo-slide:nth-child(4){background-image:url('https://i
 
 /* Remove legacy founder-name overlay: the visual intro may fade, but no text should sit over homepage slides. */
 body.home-lux::after{content:none!important;display:none!important;visibility:hidden!important;opacity:0!important;animation:none!important}
+
+/* Safari/PWA hard stop for the obsolete founder text overlay. */
+html body.home-lux::after,html body.home-lux:after,html body.home-lux.no-founder-overlay::after{content:""!important;display:none!important;visibility:hidden!important;opacity:0!important;z-index:-2147483647!important;width:0!important;height:0!important;overflow:hidden!important;animation:none!important;transition:none!important;pointer-events:none!important}
