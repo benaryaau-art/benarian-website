@@ -94,7 +94,7 @@
     return article;
   }
 
-  fetch('/api/shopify-products', { cache: 'no-store' })
+  fetch(`${SHOPIFY_BASE}/products.json?limit=250`, { mode: 'cors', cache: 'no-store' })
     .then(r => {
       if (!r.ok) throw new Error(`Shopify sync failed: ${r.status}`);
       return r.json();
