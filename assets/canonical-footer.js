@@ -8,6 +8,7 @@
     ['wellness.html','SPA & WELLNESS'],
     ['visa-guide.html','VISA GUIDE'],
     ['travel-guides.html','TRAVEL GUIDE'],
+    ['shop.html','BENARIAN SHOP'],
     ['about.html','ABOUT US'],
     ['contact.html','CONTACT'],
     ['terms-and-conditions.html','TERMS & CONDITIONS']
