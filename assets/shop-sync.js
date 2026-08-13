@@ -62,6 +62,18 @@
     }
 
     const image = productImage(product);
+    const cardTitle = normalise(card.querySelector('h3')?.textContent || '');
+    if (image && cardTitle.includes('sneaker')) {
+      const currentImg = card.querySelector('.shop-card-media img');
+      if (currentImg) {
+        currentImg.src = image;
+        currentImg.alt = product.title;
+        currentImg.loading = 'eager';
+        currentImg.style.objectFit = 'contain';
+        currentImg.style.background = '#fff';
+      }
+    }
+
     const placeholder = card.querySelector('.shop-placeholder');
     if (image && placeholder) {
       placeholder.classList.remove('shop-placeholder');
@@ -71,6 +83,8 @@
       img.src = image;
       img.alt = product.title;
       img.loading = 'lazy';
+      img.style.objectFit = 'contain';
+      img.style.background = '#fff';
       placeholder.appendChild(img);
     }
   }
