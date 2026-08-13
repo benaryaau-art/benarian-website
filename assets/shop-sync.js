@@ -1,0 +1,126 @@
+(() => {
+  const SHOPIFY_BASE = 'https://benarian-2.myshopify.com';
+  const grid = document.querySelector('.shop-grid');
+  if (!grid) return;
+
+  const normalise = (value = '') => value.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, ' ').trim();
+  const money = (value) => {
+    const amount = Number.parseFloat(value);
+    if (!Number.isFinite(amount)) return '';
+    return `AU$${amount.toLocaleString('en-AU', { minimumFractionDigits: Number.isInteger(amount) ? 0 : 2, maximumFractionDigits: 2 })}`;
+  };
+  const stripHtml = (html = '') => {
+    const el = document.createElement('div');
+    el.innerHTML = html;
+    return (el.textContent || '').replace(/\s+/g, ' ').trim();
+  };
+  const productPrice = (product) => {
+    const prices = (product.variants || []).map(v => Number.parseFloat(v.price)).filter(Number.isFinite);
+    return prices.length ? Math.min(...prices) : null;
+  };
+  const productImage = (product) => product.images?.[0]?.src || product.image?.src || '';
+  const productUrl = (product) => `${SHOPIFY_BASE}/products/${product.handle}`;
+
+  const cards = [...grid.querySelectorAll('.shop-card')];
+  const usedHandles = new Set();
+
+  const aliases = [
+    ['crossbody', ['crossbody']],
+    ['backpack', ['backpack']],
+    ['gym travel', ['gym', 'travel', 'bag']],
+    ['hoodie', ['hoodie']],
+    ['cap', ['cap']],
+    ['sneaker', ['sneaker']],
+    ['neck pillow', ['neck', 'pillow']],
+    ['wash bag', ['wash', 'bag']]
+  ];
+
+  function scoreCard(card, product) {
+    const cardText = normalise(card.querySelector('h3')?.textContent || '');
+    const productText = normalise(product.title || '');
+    let score = 0;
+    for (const [, terms] of aliases) {
+      const inCard = terms.every(t => cardText.includes(t));
+      const inProduct = terms.every(t => productText.includes(t));
+      if (inCard && inProduct) score += 20;
+    }
+    const words = cardText.split(' ').filter(w => w.length > 3);
+    for (const word of words) if (productText.includes(word)) score += 1;
+    return score;
+  }
+
+  function updateExistingCard(card, product) {
+    usedHandles.add(product.handle);
+    const priceEl = card.querySelector('.shop-price');
+    const minPrice = productPrice(product);
+    if (priceEl && minPrice !== null) priceEl.textContent = money(minPrice);
+
+    const primary = card.querySelector('.shop-card-actions .shop-button');
+    if (primary) {
+      primary.href = productUrl(product);
+      primary.textContent = 'Shop on Shopify';
+    }
+
+    const image = productImage(product);
+    const placeholder = card.querySelector('.shop-placeholder');
+    if (image && placeholder) {
+      placeholder.classList.remove('shop-placeholder');
+      const old = placeholder.querySelector('div');
+      if (old) old.remove();
+      const img = document.createElement('img');
+      img.src = image;
+      img.alt = product.title;
+      img.loading = 'lazy';
+      placeholder.appendChild(img);
+    }
+  }
+
+  function createCard(product, index) {
+    const article = document.createElement('article');
+    article.className = 'shop-card shop-card-live';
+    const image = productImage(product);
+    const price = productPrice(product);
+    const description = stripHtml(product.body_html || '').slice(0, 210);
+    article.innerHTML = `
+      <div class="shop-card-media">
+        <span class="shop-card-number">No. ${String(index).padStart(2, '0')}</span>
+        ${image ? `<img src="${image}" alt="${product.title.replace(/"/g, '&quot;')}" loading="lazy">` : '<div class="shop-live-placeholder">BENARIAN</div>'}
+      </div>
+      <div class="shop-card-body">
+        <div class="shop-card-top"><h3>${product.title}</h3><span class="shop-price">${price !== null ? money(price) : 'View price'}</span></div>
+        <p>${description || 'A BENARIAN signature piece, available through our secure Shopify store.'}</p>
+        <div class="shop-card-actions"><a class="shop-button" href="${productUrl(product)}">Shop on Shopify</a><a class="shop-button ghost" href="contact.html">Ask Concierge</a></div>
+      </div>`;
+    return article;
+  }
+
+  fetch('/api/shopify-products', { cache: 'no-store' })
+    .then(r => {
+      if (!r.ok) throw new Error(`Shopify sync failed: ${r.status}`);
+      return r.json();
+    })
+    .then(data => {
+      const products = (data.products || []).filter(p => p && p.handle && p.title);
+      if (!products.length) return;
+
+      cards.forEach(card => {
+        let best = null;
+        let bestScore = 0;
+        for (const product of products) {
+          const score = scoreCard(card, product);
+          if (score > bestScore) { best = product; bestScore = score; }
+        }
+        if (best && bestScore >= 3) updateExistingCard(card, best);
+      });
+
+      let nextIndex = grid.querySelectorAll('.shop-card').length + 1;
+      products.filter(p => !usedHandles.has(p.handle)).forEach(product => {
+        grid.appendChild(createCard(product, nextIndex++));
+        usedHandles.add(product.handle);
+      });
+
+      const note = document.querySelector('.shop-note');
+      if (note) note.dataset.shopifySynced = 'true';
+    })
+    .catch(err => console.warn('[BENARIAN Shop]', err.message));
+})();
