@@ -3,6 +3,28 @@
   const grid = document.querySelector('.shop-grid');
   if (!grid) return;
 
+  const SNEAKER_ALT = 'BENARIAN Signature High-Top Sneakers in black and gold';
+  const SNEAKER_SOURCE = 'assets/shop/benarian-sneakers-pro-v2.b64?v=20260814g';
+
+  const applyProfessionalSneaker = () => {
+    fetch(SNEAKER_SOURCE, { cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) throw new Error(`Sneaker image source failed: ${r.status}`);
+        return r.text();
+      })
+      .then(base64 => {
+        const img = grid.querySelector(`img[alt="${SNEAKER_ALT}"]`) || [...grid.querySelectorAll('.shop-card')].find(card => (card.querySelector('h3')?.textContent || '').toLowerCase().includes('sneaker'))?.querySelector('.shop-card-media img');
+        if (!img) return;
+        img.src = `data:image/jpeg;base64,${base64.trim()}`;
+        img.alt = SNEAKER_ALT;
+        img.loading = 'eager';
+        img.style.objectFit = 'contain';
+        img.style.objectPosition = 'center';
+        img.style.background = '#f5f1eb';
+      })
+      .catch(err => console.warn('[BENARIAN Sneaker]', err.message));
+  };
+
   const normalise = (value = '') => value.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, ' ').trim();
   const money = (value) => {
     const amount = Number.parseFloat(value);
@@ -63,15 +85,11 @@
 
     const image = productImage(product);
     const cardTitle = normalise(card.querySelector('h3')?.textContent || '');
+
+    /* No. 06 uses BENARIAN's professionally prepared product image.
+       Do not replace it with the Shopify source image. */
     if (image && cardTitle.includes('sneaker')) {
-      const currentImg = card.querySelector('.shop-card-media img');
-      if (currentImg) {
-        currentImg.src = image;
-        currentImg.alt = product.title;
-        currentImg.loading = 'eager';
-        currentImg.style.objectFit = 'contain';
-        currentImg.style.background = '#fff';
-      }
+      applyProfessionalSneaker();
     }
 
     const placeholder = card.querySelector('.shop-placeholder');
@@ -108,6 +126,9 @@
     return article;
   }
 
+  /* Apply the professional sneaker immediately so the user never sees the old asset. */
+  applyProfessionalSneaker();
+
   fetch(`${SHOPIFY_BASE}/products.json?limit=250`, { mode: 'cors', cache: 'no-store' })
     .then(r => {
       if (!r.ok) throw new Error(`Shopify sync failed: ${r.status}`);
@@ -115,7 +136,10 @@
     })
     .then(data => {
       const products = (data.products || []).filter(p => p && p.handle && p.title);
-      if (!products.length) return;
+      if (!products.length) {
+        applyProfessionalSneaker();
+        return;
+      }
 
       cards.forEach(card => {
         let best = null;
@@ -135,6 +159,12 @@
 
       const note = document.querySelector('.shop-note');
       if (note) note.dataset.shopifySynced = 'true';
+
+      /* Shopify updates prices/links, then restore the curated sneaker image. */
+      applyProfessionalSneaker();
     })
-    .catch(err => console.warn('[BENARIAN Shop]', err.message));
+    .catch(err => {
+      console.warn('[BENARIAN Shop]', err.message);
+      applyProfessionalSneaker();
+    });
 })();
