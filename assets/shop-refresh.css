@@ -33,7 +33,8 @@ body.shop-page{background:#fff;color:#171512}
 .shop-note strong{color:#171512!important}
 .benarian-lifestyle-photo{width:100%!important;margin:0!important;padding:88px 0 72px!important;background:#fff!important;overflow:hidden!important}
 .benarian-lifestyle-photo img{display:block!important;width:min(96vw,1500px)!important;max-width:1500px!important;height:auto!important;margin:0 auto!important;border:0!important;border-radius:0!important;box-shadow:none!important;object-fit:contain!important;background:transparent!important}
-.shop-manifesto{background:#111!important;color:#fff!important}
+.shop-manifesto{background:#111!important;color:#fff!important;padding-top:72px!important}
+.shop-manifesto::before{display:none!important;content:none!important}
 .shop-manifesto span,.shop-manifesto a{color:#d8b871!important}
 .shop-footer{background:#f7f4ee!important;color:#171512!important}
 .shop-footer .shop-logo{color:#171512!important}
