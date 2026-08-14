@@ -1,6 +1,45 @@
 (() => {
   const SHOPIFY_BASE = 'https://benarian-2.myshopify.com';
   const grid = document.querySelector('.shop-grid');
+
+  const HERO_SOURCE = 'assets/shop/benarian-group-hero-mobile-fix.b64?v=20260814h';
+  const HERO_FALLBACK = "url('assets/shop/benarian-collection-hero-v3.webp')";
+
+  const applyProfessionalHero = () => {
+    const hero = document.querySelector('.shop-hero-visual');
+    if (!hero) return;
+
+    hero.style.setProperty('background-color', '#f3eee6', 'important');
+
+    fetch(HERO_SOURCE, { cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) throw new Error(`Hero source failed: ${r.status}`);
+        return r.text();
+      })
+      .then(base64 => {
+        const clean = base64.replace(/\s+/g, '');
+        if (!clean.startsWith('/9j/') || clean.length < 50000) throw new Error('Hero source incomplete');
+        const dataUrl = `data:image/jpeg;base64,${clean}`;
+        const probe = new Image();
+        probe.onload = () => {
+          hero.style.setProperty('background-image', `url("${dataUrl}")`, 'important');
+          hero.style.setProperty('background-size', 'cover', 'important');
+          hero.style.setProperty('background-repeat', 'no-repeat', 'important');
+          hero.style.setProperty('background-position', window.innerWidth <= 560 ? '72% center' : window.innerWidth <= 900 ? '70% center' : '68% center', 'important');
+        };
+        probe.onerror = () => {
+          hero.style.setProperty('background-image', HERO_FALLBACK, 'important');
+        };
+        probe.src = dataUrl;
+      })
+      .catch(err => {
+        console.warn('[BENARIAN Hero]', err.message);
+        hero.style.setProperty('background-image', HERO_FALLBACK, 'important');
+      });
+  };
+
+  applyProfessionalHero();
+
   if (!grid) return;
 
   const SNEAKER_ALT = 'BENARIAN Signature High-Top Sneakers in black and gold';
@@ -85,12 +124,7 @@
 
     const image = productImage(product);
     const cardTitle = normalise(card.querySelector('h3')?.textContent || '');
-
-    /* No. 06 uses BENARIAN's professionally prepared product image.
-       Do not replace it with the Shopify source image. */
-    if (image && cardTitle.includes('sneaker')) {
-      applyProfessionalSneaker();
-    }
+    if (image && cardTitle.includes('sneaker')) applyProfessionalSneaker();
 
     const placeholder = card.querySelector('.shop-placeholder');
     if (image && placeholder) {
@@ -126,7 +160,6 @@
     return article;
   }
 
-  /* Apply the professional sneaker immediately so the user never sees the old asset. */
   applyProfessionalSneaker();
 
   fetch(`${SHOPIFY_BASE}/products.json?limit=250`, { mode: 'cors', cache: 'no-store' })
@@ -159,12 +192,12 @@
 
       const note = document.querySelector('.shop-note');
       if (note) note.dataset.shopifySynced = 'true';
-
-      /* Shopify updates prices/links, then restore the curated sneaker image. */
       applyProfessionalSneaker();
+      applyProfessionalHero();
     })
     .catch(err => {
       console.warn('[BENARIAN Shop]', err.message);
       applyProfessionalSneaker();
+      applyProfessionalHero();
     });
 })();
