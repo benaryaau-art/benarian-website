@@ -90,6 +90,8 @@
     ['backpack', ['backpack']],
     ['gym travel', ['gym', 'travel', 'bag']],
     ['hoodie', ['hoodie']],
+    ['quarter zip', ['quarter', 'zip']],
+    ['pullover', ['pullover']],
     ['cap', ['cap']],
     ['sneaker', ['sneaker']],
     ['neck pillow', ['neck', 'pillow']],
@@ -135,8 +137,9 @@
       const img = document.createElement('img');
       img.src = image;
       img.alt = product.title;
-      img.loading = 'lazy';
+      img.loading = 'eager';
       img.style.objectFit = 'contain';
+      img.style.objectPosition = 'center';
       img.style.background = '#fff';
       placeholder.appendChild(img);
     }
