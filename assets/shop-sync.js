@@ -93,7 +93,8 @@
     ['cap', ['cap']],
     ['sneaker', ['sneaker']],
     ['neck pillow', ['neck', 'pillow']],
-    ['wash bag', ['wash', 'bag']]
+    ['wash bag', ['wash', 'bag']],
+    ['socks', ['socks']]
   ];
 
   function scoreCard(card, product) {
