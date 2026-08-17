@@ -10,6 +10,15 @@
 /assets/*.js
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
+/assets/shop-sync.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/shop-refresh.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/shop-hero3.css
+  Cache-Control: public, max-age=0, must-revalidate
+
 /assets/images/*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
