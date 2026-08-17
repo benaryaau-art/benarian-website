@@ -1,5 +1,6 @@
 (() => {
   const SHOPIFY_BASE = 'https://benarian-2.myshopify.com';
+  const COLLECTION_URL = `${SHOPIFY_BASE}/collections/all`;
   const grid = document.querySelector('.shop-grid');
 
   const HERO_SOURCE = 'assets/shop/benarian-group-hero-mobile-fix.b64?v=20260814h';
@@ -27,9 +28,7 @@
           hero.style.setProperty('background-repeat', 'no-repeat', 'important');
           hero.style.setProperty('background-position', window.innerWidth <= 560 ? '72% center' : window.innerWidth <= 900 ? '70% center' : '68% center', 'important');
         };
-        probe.onerror = () => {
-          hero.style.setProperty('background-image', HERO_FALLBACK, 'important');
-        };
+        probe.onerror = () => hero.style.setProperty('background-image', HERO_FALLBACK, 'important');
         probe.src = dataUrl;
       })
       .catch(err => {
@@ -39,9 +38,9 @@
   };
 
   applyProfessionalHero();
-
   if (!grid) return;
 
+  const cards = [...grid.querySelectorAll('.shop-card')];
   const SNEAKER_ALT = 'BENARIAN Signature High-Top Sneakers in black and gold';
   const SNEAKER_SOURCE = 'assets/shop/benarian-sneakers-pro-v2.b64?v=20260814g';
 
@@ -52,11 +51,12 @@
         return r.text();
       })
       .then(base64 => {
-        const img = grid.querySelector(`img[alt="${SNEAKER_ALT}"]`) || [...grid.querySelectorAll('.shop-card')].find(card => (card.querySelector('h3')?.textContent || '').toLowerCase().includes('sneaker'))?.querySelector('.shop-card-media img');
+        const img = grid.querySelector(`img[alt="${SNEAKER_ALT}"]`) || cards.find(card => (card.querySelector('h3')?.textContent || '').toLowerCase().includes('sneaker'))?.querySelector('.shop-card-media img');
         if (!img) return;
         img.src = `data:image/jpeg;base64,${base64.trim()}`;
         img.alt = SNEAKER_ALT;
         img.loading = 'eager';
+        img.decoding = 'async';
         img.style.objectFit = 'contain';
         img.style.objectPosition = 'center';
         img.style.background = '#f5f1eb';
@@ -68,12 +68,10 @@
   const money = (value) => {
     const amount = Number.parseFloat(value);
     if (!Number.isFinite(amount)) return '';
-    return `AU$${amount.toLocaleString('en-AU', { minimumFractionDigits: Number.isInteger(amount) ? 0 : 2, maximumFractionDigits: 2 })}`;
-  };
-  const stripHtml = (html = '') => {
-    const el = document.createElement('div');
-    el.innerHTML = html;
-    return (el.textContent || '').replace(/\s+/g, ' ').trim();
+    return `AU$${amount.toLocaleString('en-AU', {
+      minimumFractionDigits: Number.isInteger(amount) ? 0 : 2,
+      maximumFractionDigits: 2
+    })}`;
   };
   const productPrice = (product) => {
     const prices = (product.variants || []).map(v => Number.parseFloat(v.price)).filter(Number.isFinite);
@@ -82,47 +80,81 @@
   const productImage = (product) => product.images?.[0]?.src || product.image?.src || '';
   const productUrl = (product) => `${SHOPIFY_BASE}/products/${product.handle}`;
 
-  const cards = [...grid.querySelectorAll('.shop-card')];
-  const usedHandles = new Set();
+  /*
+   * Never leave stale product URLs or stale prices visible. If Shopify is
+   * temporarily unavailable, customers are sent to the live collection instead
+   * of an old/404 product handle and are not shown an outdated price.
+   */
+  cards.forEach(card => {
+    const primary = card.querySelector('.shop-card-actions .shop-button');
+    if (primary) {
+      primary.href = COLLECTION_URL;
+      primary.textContent = 'View Piece';
+      primary.setAttribute('aria-label', `View ${(card.querySelector('h3')?.textContent || 'BENARIAN piece').replace(/\s+/g, ' ').trim()}`);
+    }
+    const price = card.querySelector('.shop-price');
+    if (price) {
+      price.textContent = 'Live price';
+      price.dataset.livePrice = 'pending';
+    }
+  });
 
-  const aliases = [
-    ['crossbody', ['crossbody']],
-    ['backpack', ['backpack']],
-    ['gym travel', ['gym', 'travel', 'bag']],
-    ['hoodie', ['hoodie']],
-    ['quarter zip', ['quarter', 'zip']],
-    ['pullover', ['pullover']],
-    ['cap', ['cap']],
-    ['sneaker', ['sneaker']],
-    ['neck pillow', ['neck', 'pillow']],
-    ['wash bag', ['wash', 'bag']],
-    ['socks', ['socks']]
+  /* Fixed card-to-product matching keeps similarly named Shopify products from
+     being attached to the wrong BENARIAN card. Alternate terms cover current
+     naming variations used by Shopify/Contrado. */
+  const cardMatchers = [
+    [['crossbody']],
+    [['backpack'], ['rucksack']],
+    [['gym', 'travel', 'bag'], ['duffel'], ['holdall']],
+    [['hoodie']],
+    [['cap'], ['hat']],
+    [['sneaker'], ['high', 'top'], ['high-top']],
+    [['neck', 'pillow'], ['travel', 'pillow']],
+    [['wash', 'bag'], ['toiletry'], ['mens', 'bag']],
+    [['sock']],
+    [['quarter', 'zip'], ['quarterzip'], ['pullover']],
+    [['sleep', 'mask'], ['eye', 'mask']]
   ];
 
-  function scoreCard(card, product) {
-    const cardText = normalise(card.querySelector('h3')?.textContent || '');
-    const productText = normalise(product.title || '');
-    let score = 0;
-    for (const [, terms] of aliases) {
-      const inCard = terms.every(t => cardText.includes(t));
-      const inProduct = terms.every(t => productText.includes(t));
-      if (inCard && inProduct) score += 20;
+  const matchesTerms = (text, termGroups) => termGroups.some(group => group.every(term => text.includes(normalise(term))));
+
+  function findProductForCard(cardIndex, products, usedHandles) {
+    const cardText = normalise(cards[cardIndex]?.querySelector('h3')?.textContent || '');
+    const groups = cardMatchers[cardIndex] || [];
+
+    let best = null;
+    let bestScore = -1;
+    for (const product of products) {
+      if (usedHandles.has(product.handle)) continue;
+      const productText = normalise(`${product.title || ''} ${product.handle || ''}`);
+      if (!matchesTerms(productText, groups)) continue;
+
+      let score = 100;
+      for (const word of cardText.split(' ').filter(w => w.length > 3)) {
+        if (productText.includes(word)) score += 2;
+      }
+      if (productText.includes('benarian')) score += 4;
+      if (score > bestScore) {
+        best = product;
+        bestScore = score;
+      }
     }
-    const words = cardText.split(' ').filter(w => w.length > 3);
-    for (const word of words) if (productText.includes(word)) score += 1;
-    return score;
+    return best;
   }
 
   function updateExistingCard(card, product) {
-    usedHandles.add(product.handle);
     const priceEl = card.querySelector('.shop-price');
     const minPrice = productPrice(product);
-    if (priceEl && minPrice !== null) priceEl.textContent = money(minPrice);
+    if (priceEl) {
+      priceEl.textContent = minPrice !== null ? money(minPrice) : 'View live price';
+      priceEl.dataset.livePrice = minPrice !== null ? 'synced' : 'unavailable';
+    }
 
     const primary = card.querySelector('.shop-card-actions .shop-button');
     if (primary) {
       primary.href = productUrl(product);
-      primary.textContent = 'Shop on Shopify';
+      primary.textContent = 'Shop Piece';
+      primary.setAttribute('aria-label', `Shop ${product.title}`);
     }
 
     const image = productImage(product);
@@ -134,73 +166,70 @@
       placeholder.classList.remove('shop-placeholder');
       const old = placeholder.querySelector('div');
       if (old) old.remove();
-      const img = document.createElement('img');
+      let img = placeholder.querySelector('img');
+      if (!img) {
+        img = document.createElement('img');
+        placeholder.appendChild(img);
+      }
       img.src = image;
       img.alt = product.title;
-      img.loading = 'eager';
+      img.loading = 'lazy';
+      img.decoding = 'async';
       img.style.objectFit = 'contain';
       img.style.objectPosition = 'center';
       img.style.background = '#fff';
-      placeholder.appendChild(img);
     }
-  }
-
-  function createCard(product, index) {
-    const article = document.createElement('article');
-    article.className = 'shop-card shop-card-live';
-    const image = productImage(product);
-    const price = productPrice(product);
-    const description = stripHtml(product.body_html || '').slice(0, 210);
-    article.innerHTML = `
-      <div class="shop-card-media">
-        <span class="shop-card-number">No. ${String(index).padStart(2, '0')}</span>
-        ${image ? `<img src="${image}" alt="${product.title.replace(/"/g, '&quot;')}" loading="lazy">` : '<div class="shop-live-placeholder">BENARIAN</div>'}
-      </div>
-      <div class="shop-card-body">
-        <div class="shop-card-top"><h3>${product.title}</h3><span class="shop-price">${price !== null ? money(price) : 'View price'}</span></div>
-        <p>${description || 'A BENARIAN signature piece, available through our secure Shopify store.'}</p>
-        <div class="shop-card-actions"><a class="shop-button" href="${productUrl(product)}">Shop on Shopify</a><a class="shop-button ghost" href="contact.html">Ask Concierge</a></div>
-      </div>`;
-    return article;
   }
 
   applyProfessionalSneaker();
 
-  fetch(`${SHOPIFY_BASE}/products.json?limit=250`, { mode: 'cors', cache: 'no-store' })
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 9000);
+
+  fetch(`${SHOPIFY_BASE}/products.json?limit=250`, {
+    mode: 'cors',
+    cache: 'no-store',
+    signal: controller.signal
+  })
     .then(r => {
       if (!r.ok) throw new Error(`Shopify sync failed: ${r.status}`);
       return r.json();
     })
     .then(data => {
+      clearTimeout(timeout);
       const products = (data.products || []).filter(p => p && p.handle && p.title);
-      if (!products.length) {
-        applyProfessionalSneaker();
-        return;
-      }
+      if (!products.length) throw new Error('No Shopify products returned');
 
-      cards.forEach(card => {
-        let best = null;
-        let bestScore = 0;
-        for (const product of products) {
-          const score = scoreCard(card, product);
-          if (score > bestScore) { best = product; bestScore = score; }
-        }
-        if (best && bestScore >= 3) updateExistingCard(card, best);
-      });
+      const usedHandles = new Set();
+      let synced = 0;
 
-      let nextIndex = grid.querySelectorAll('.shop-card').length + 1;
-      products.filter(p => !usedHandles.has(p.handle)).forEach(product => {
-        grid.appendChild(createCard(product, nextIndex++));
+      cards.forEach((card, index) => {
+        const product = findProductForCard(index, products, usedHandles);
+        if (!product) return;
         usedHandles.add(product.handle);
+        updateExistingCard(card, product);
+        synced += 1;
       });
 
       const note = document.querySelector('.shop-note');
-      if (note) note.dataset.shopifySynced = 'true';
+      if (note) {
+        note.dataset.shopifySynced = synced === cards.length ? 'complete' : 'partial';
+        const first = note.querySelector('span');
+        if (first) first.innerHTML = `<strong>Secure checkout</strong> · ${synced} of ${cards.length} collection pieces matched to live Shopify products. Prices shown are live when available.`;
+      }
+
       applyProfessionalSneaker();
       applyProfessionalHero();
     })
     .catch(err => {
-      console.warn('[BENARIAN Shop]', err.message);
+      clearTimeout(timeout);
+      console.warn('[BENARIAN Shop]', err.name === 'AbortError' ? 'Shopify sync timed out' : err.message);
+      const note = document.querySelector('.shop-note');
+      if (note) {
+        note.dataset.shopifySynced = 'offline';
+        const first = note.querySelector('span');
+        if (first) first.innerHTML = '<strong>Secure checkout</strong> · Live pricing is available in the BENARIAN Shopify collection.';
+      }
       applyProfessionalSneaker();
       applyProfessionalHero();
     });
