@@ -140,6 +140,29 @@
     let touchStart=0;rotator.addEventListener('touchstart',e=>{touchStart=e.changedTouches[0].clientX;clearTimeout(timer)},{passive:true});rotator.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchStart;if(Math.abs(d)>45)(d<0?next:prev)();else start()},{passive:true});rotator.addEventListener('mouseenter',()=>clearTimeout(timer));rotator.addEventListener('mouseleave',start);document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else start()});start();
   }
 
+  function installHotelDealsQuickAd(){
+    if(!document.body.classList.contains('home-lux')||document.querySelector('.home-deals-quick-ad'))return;
+    const style=document.createElement('style');
+    style.id='home-deals-quick-ad-style';
+    style.textContent=`
+      .home-deals-quick-ad{position:fixed;right:22px;bottom:24px;z-index:9998;display:flex;align-items:center;justify-content:space-between;gap:22px;min-width:290px;padding:16px 19px;border:1px solid rgba(255,255,255,.24);border-radius:3px;background:linear-gradient(135deg,#d7a447,#b98224);box-shadow:0 14px 34px rgba(0,0,0,.34),0 0 0 1px rgba(215,164,71,.18);color:#100c07;text-decoration:none;font:800 10px/1 Inter,Arial,sans-serif;letter-spacing:1.8px;transform:translateY(120px);opacity:0;transition:transform .65s cubic-bezier(.2,.75,.25,1),opacity .45s ease,filter .25s ease}
+      .home-deals-quick-ad.is-visible{transform:translateY(0);opacity:1}
+      .home-deals-quick-ad:hover{filter:brightness(1.08)}
+      .home-deals-quick-ad small{display:block;margin-bottom:5px;font-size:7px;letter-spacing:1.4px;opacity:.74}
+      .home-deals-quick-ad .quick-arrow{font-size:22px;font-weight:400;transition:transform .25s ease}
+      .home-deals-quick-ad:hover .quick-arrow{transform:translateX(4px)}
+      @media(max-width:760px){.home-deals-quick-ad{left:16px;right:16px;bottom:98px;min-width:0;padding:15px 18px;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.42)}}
+    `;
+    document.head.appendChild(style);
+    const ad=document.createElement('a');
+    ad.className='home-deals-quick-ad';
+    ad.href='hotel-deals.html';
+    ad.setAttribute('aria-label','Discover BENARIAN Hotel Deals');
+    ad.innerHTML='<span><small>COMING SOON · PRICE TRACKING</small>DISCOVER HOTEL DEALS</span><span class="quick-arrow">→</span>';
+    document.body.appendChild(ad);
+    setTimeout(()=>ad.classList.add('is-visible'),1800);
+  }
+
   function installHotelDealsPhoto(){
     const photo=document.querySelector('.home-deals-image');
     if(!photo)return;
@@ -162,7 +185,7 @@
     setTimeout(()=>observer.disconnect(),10000);
   }
 
-  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();installHotelDealsPhoto();installHotelDealsPlacement();}
+  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();installHotelDealsPhoto();installHotelDealsPlacement();installHotelDealsQuickAd();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
   window.addEventListener('load',()=>setTimeout(apply,120),{once:true});
 })();
