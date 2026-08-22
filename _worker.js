@@ -8,7 +8,7 @@ export default {
 
     const isHome = url.pathname === '/' || url.pathname === '/index.html';
     if (isHome && !html.includes('assets/site-fixes.js')) {
-      html = html.replace('</body>', '<script src="/assets/site-fixes.js?v=20260822-coast-iphone"></script></body>');
+      html = html.replace('</body>', '<script src="/assets/site-fixes.js?v=20260822-coast-safari-fixed"></script></body>');
     }
 
     const headers = new Headers(response.headers);
