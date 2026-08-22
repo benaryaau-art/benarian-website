@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "benarian-price-tracker",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-22",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "HOTELBEDS_BASE_URL": "https://api.test.hotelbeds.com",
+    "ALLOWED_ORIGIN": "https://benarian.com"
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "benarian-hotel-prices",
+    "database_id": "REPLACE_AFTER_D1_CREATE",
+    "migrations_dir": "migrations"
+  }],
+  "triggers": {"crons": ["17 */3 * * *"]},
+  "observability": {"enabled": true, "head_sampling_rate": 1}
+}
