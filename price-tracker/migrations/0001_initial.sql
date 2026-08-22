@@ -1,0 +1,10 @@
+PRAGMA foreign_keys=ON;
+CREATE TABLE hotels(id TEXT PRIMARY KEY,provider TEXT NOT NULL,provider_hotel_id TEXT NOT NULL,name TEXT NOT NULL,destination TEXT NOT NULL,image_url TEXT,booking_url TEXT,active INTEGER NOT NULL DEFAULT 1,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,UNIQUE(provider,provider_hotel_id));
+CREATE TABLE searches(id TEXT PRIMARY KEY,destination_label TEXT NOT NULL,provider_destination_code TEXT NOT NULL,checkin TEXT NOT NULL,checkout TEXT NOT NULL,adults INTEGER NOT NULL DEFAULT 2,rooms INTEGER NOT NULL DEFAULT 1,currency TEXT NOT NULL DEFAULT 'AUD',active INTEGER NOT NULL DEFAULT 1,last_checked_at TEXT,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE price_snapshots(id INTEGER PRIMARY KEY AUTOINCREMENT,hotel_id TEXT NOT NULL REFERENCES hotels(id),search_id TEXT NOT NULL REFERENCES searches(id),currency TEXT NOT NULL,total_price REAL NOT NULL,room_name TEXT,board_name TEXT,rate_key TEXT,captured_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE INDEX idx_price_latest ON price_snapshots(search_id,hotel_id,captured_at DESC);
+CREATE TABLE price_watches(id TEXT PRIMARY KEY,search_id TEXT NOT NULL REFERENCES searches(id),hotel_id TEXT REFERENCES hotels(id),email TEXT NOT NULL,target_price REAL,active INTEGER NOT NULL DEFAULT 1,last_notified_at TEXT,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE INDEX idx_watch_active ON price_watches(active,search_id);
+CREATE TABLE tracker_runs(id TEXT PRIMARY KEY,status TEXT NOT NULL,checked_searches INTEGER NOT NULL DEFAULT 0,checked_hotels INTEGER NOT NULL DEFAULT 0,error_message TEXT,started_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,finished_at TEXT);
+CREATE TABLE notification_outbox(id TEXT PRIMARY KEY,watch_id TEXT NOT NULL REFERENCES price_watches(id),hotel_id TEXT NOT NULL REFERENCES hotels(id),currency TEXT NOT NULL,current_price REAL NOT NULL,previous_price REAL NOT NULL,drop_percent REAL NOT NULL,status TEXT NOT NULL DEFAULT 'pending',created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,sent_at TEXT);
+CREATE INDEX idx_notification_pending ON notification_outbox(status,created_at);
