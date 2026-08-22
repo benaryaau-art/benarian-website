@@ -6,3 +6,5 @@ CREATE INDEX idx_price_latest ON price_snapshots(search_id,hotel_id,captured_at 
 CREATE TABLE price_watches(id TEXT PRIMARY KEY,search_id TEXT NOT NULL REFERENCES searches(id),hotel_id TEXT REFERENCES hotels(id),email TEXT NOT NULL,target_price REAL,active INTEGER NOT NULL DEFAULT 1,last_notified_at TEXT,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
 CREATE INDEX idx_watch_active ON price_watches(active,search_id);
 CREATE TABLE tracker_runs(id TEXT PRIMARY KEY,status TEXT NOT NULL,checked_searches INTEGER NOT NULL DEFAULT 0,checked_hotels INTEGER NOT NULL DEFAULT 0,error_message TEXT,started_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,finished_at TEXT);
+CREATE TABLE notification_outbox(id TEXT PRIMARY KEY,watch_id TEXT NOT NULL REFERENCES price_watches(id),hotel_id TEXT NOT NULL REFERENCES hotels(id),currency TEXT NOT NULL,current_price REAL NOT NULL,previous_price REAL NOT NULL,drop_percent REAL NOT NULL,status TEXT NOT NULL DEFAULT 'pending',created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,sent_at TEXT);
+CREATE INDEX idx_notification_pending ON notification_outbox(status,created_at);
