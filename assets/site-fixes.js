@@ -140,7 +140,21 @@
     let touchStart=0;rotator.addEventListener('touchstart',e=>{touchStart=e.changedTouches[0].clientX;clearTimeout(timer)},{passive:true});rotator.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchStart;if(Math.abs(d)>45)(d<0?next:prev)();else start()},{passive:true});rotator.addEventListener('mouseenter',()=>clearTimeout(timer));rotator.addEventListener('mouseleave',start);document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else start()});start();
   }
 
-  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();}
+  function installHotelDealsPlacement(){
+    const move=()=>{
+      const bali=document.querySelector('.benarian-bali-experience-promo');
+      const deals=document.querySelector('.home-hotel-deals');
+      if(!bali||!deals)return false;
+      if(bali.nextElementSibling!==deals)bali.insertAdjacentElement('afterend',deals);
+      return true;
+    };
+    if(move())return;
+    const observer=new MutationObserver(()=>{if(move())observer.disconnect();});
+    observer.observe(document.body,{childList:true,subtree:true});
+    setTimeout(()=>observer.disconnect(),10000);
+  }
+
+  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();installHotelDealsPlacement();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
   window.addEventListener('load',()=>setTimeout(apply,120),{once:true});
 })();
