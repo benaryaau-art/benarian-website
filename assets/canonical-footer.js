@@ -2,6 +2,7 @@
   const NAV_ITEMS = [
     ['destinations.html','DESTINATIONS'],
     ['hotels.html','HOTELS'],
+    ['hotel-deals.html','HOTEL DEALS'],
     ['flights.html','FLIGHTS'],
     ['persian-experiences.html','PERSIAN EXPERIENCES'],
     ['experiences.html','EXPERIENCES'],
