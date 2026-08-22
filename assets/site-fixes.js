@@ -140,6 +140,14 @@
     let touchStart=0;rotator.addEventListener('touchstart',e=>{touchStart=e.changedTouches[0].clientX;clearTimeout(timer)},{passive:true});rotator.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchStart;if(Math.abs(d)>45)(d<0?next:prev)();else start()},{passive:true});rotator.addEventListener('mouseenter',()=>clearTimeout(timer));rotator.addEventListener('mouseleave',start);document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else start()});start();
   }
 
+  function installHotelDealsPhoto(){
+    const photo=document.querySelector('.home-deals-image');
+    if(!photo)return;
+    photo.style.setProperty('background-image',"linear-gradient(90deg,transparent,rgba(11,10,9,.14)),url('/assets/images/hotel-deals-coast-original.svg?v=20260822b')",'important');
+    photo.style.setProperty('background-position','center 58%','important');
+    photo.style.setProperty('background-size','cover','important');
+  }
+
   function installHotelDealsPlacement(){
     const move=()=>{
       const bali=document.querySelector('.benarian-bali-experience-promo');
@@ -154,7 +162,7 @@
     setTimeout(()=>observer.disconnect(),10000);
   }
 
-  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();installHotelDealsPlacement();}
+  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();installHotelDealsPhoto();installHotelDealsPlacement();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
   window.addEventListener('load',()=>setTimeout(apply,120),{once:true});
 })();
