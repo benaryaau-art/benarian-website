@@ -7,7 +7,9 @@ const json = (body, status = 200, headers = {}) =>
 
 async function hotelbedsSignature(apiKey, secret) {
   const timestamp = Math.floor(Date.now() / 1000);
-  const input = new TextEncoder().encode(apiKey + secret + timestamp);
+  const cleanKey = String(apiKey || "").trim();
+  const cleanSecret = String(secret || "").trim();
+  const input = new TextEncoder().encode(cleanKey + cleanSecret + timestamp);
   const digest = await crypto.subtle.digest("SHA-256", input);
   return [...new Uint8Array(digest)]
     .map(byte => byte.toString(16).padStart(2, "0"))
@@ -23,8 +25,8 @@ async function hotelbedsStatus(env) {
     const response = await fetch("https://api.test.hotelbeds.com/hotel-api/1.0/status", {
       headers: {
         accept: "application/json",
-        "api-key": env.HOTELBEDS_API_KEY,
-        "x-signature": await hotelbedsSignature(env.HOTELBEDS_API_KEY, env.HOTELBEDS_SECRET)
+        "Api-key": String(env.HOTELBEDS_API_KEY).trim(),
+        "X-Signature": await hotelbedsSignature(env.HOTELBEDS_API_KEY, env.HOTELBEDS_SECRET)
       }
     });
 
