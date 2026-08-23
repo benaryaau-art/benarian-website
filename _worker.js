@@ -15,36 +15,49 @@ async function hotelbedsSignature(apiKey, secret) {
 
 async function hotelbedsStatus(env) {
   if (!env.HOTELBEDS_API_KEY || !env.HOTELBEDS_SECRET) {
-    return json({ ok: false, supplier: "hotelbeds", error: "credentials_missing" }, 503);
+    return json({ ok: false, supplier: "hotelbeds", error: "credentials_missing" });
   }
 
-  const response = await fetch("https://api.test.hotelbeds.com/hotel-api/1.0/status", {
-    headers: {
-      accept: "application/json",
-      "api-key": env.HOTELBEDS_API_KEY,
-      "x-signature": await hotelbedsSignature(env.HOTELBEDS_API_KEY, env.HOTELBEDS_SECRET)
-    }
-  });
+  try {
+    const response = await fetch("https://api.test.hotelbeds.com/hotel-api/1.0/status", {
+      headers: {
+        accept: "application/json",
+        "api-key": env.HOTELBEDS_API_KEY,
+        "x-signature": await hotelbedsSignature(env.HOTELBEDS_API_KEY, env.HOTELBEDS_SECRET)
+      }
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      console.error(JSON.stringify({
+        event: "hotelbeds_status_failed",
+        status: response.status
+      }));
+      return json({
+        ok: false,
+        supplier: "hotelbeds",
+        environment: "test",
+        supplierStatus: response.status
+      });
+    }
+
+    return json({
+      ok: true,
+      supplier: "hotelbeds",
+      environment: "test",
+      checkedAt: new Date().toISOString()
+    });
+  } catch (error) {
     console.error(JSON.stringify({
-      event: "hotelbeds_status_failed",
-      status: response.status
+      event: "hotelbeds_status_error",
+      error: String(error && error.message || error)
     }));
     return json({
       ok: false,
       supplier: "hotelbeds",
       environment: "test",
-      status: response.status
-    }, 502);
+      error: "supplier_unreachable"
+    });
   }
-
-  return json({
-    ok: true,
-    supplier: "hotelbeds",
-    environment: "test",
-    checkedAt: new Date().toISOString()
-  });
 }
 
 export default {
