@@ -1,4 +1,5 @@
-// Redeploy after Hotelbeds credential refresh: 2026-08-23\nconst json = (body, status = 200, headers = {}) =>
+// Hotelbeds test integration
+const json = (body, status = 200, headers = {}) =>
   new Response(JSON.stringify(body), {
     status,
     headers: { "content-type": "application/json; charset=utf-8", ...headers }
