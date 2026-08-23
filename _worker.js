@@ -28,15 +28,25 @@ async function hotelbedsStatus(env) {
     });
 
     if (!response.ok) {
+      let supplierError = {};
+      try {
+        const raw = await response.json();
+        supplierError = {
+          code: String(raw.code || raw.error?.code || "").slice(0, 80),
+          message: String(raw.message || raw.error?.message || raw.error || "").slice(0, 180)
+        };
+      } catch {}
       console.error(JSON.stringify({
         event: "hotelbeds_status_failed",
-        status: response.status
+        status: response.status,
+        supplierError
       }));
       return json({
         ok: false,
         supplier: "hotelbeds",
         environment: "test",
-        supplierStatus: response.status
+        supplierStatus: response.status,
+        supplierError
       });
     }
 
