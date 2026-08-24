@@ -11,7 +11,7 @@
   "d1_databases": [{
     "binding": "DB",
     "database_name": "benarian-hotel-prices",
-    "database_id": "REPLACE_AFTER_D1_CREATE",
+    "database_id": "fe8aea1d-38dd-4914-987d-4a8eb64ecd96",
     "migrations_dir": "migrations"
   }],
   "triggers": {"crons": ["17 */3 * * *"]},
