@@ -36,20 +36,6 @@
     const legacyLinks=[...document.querySelectorAll('a[href*="bali-tourist-levy"],a[href*="bali-arrival-card"],a[href*="bali-visa"]')];
     if(legacyLinks.length){const legacyBar=legacyLinks[0].closest('.benarian-brand-services,nav,section,aside')||legacyLinks[0].parentElement;if(legacyBar&&!legacyBar.classList.contains('ben-deals-shortcuts'))legacyBar.remove()}
     if(!document.querySelector('.ben-deals-shortcuts')){const header=document.querySelector('header.header,.ben-header,header');if(header){const nav=document.createElement('nav');nav.className='ben-deals-shortcuts';nav.setAttribute('aria-label','Hotel booking shortcuts');nav.innerHTML='<a href="#benBookingDemo">Search Hotels</a><button type="button" data-deals-action="wishlist">Saved Hotels</button><button type="button" data-deals-action="account">My Bookings</button><a href="payment-refund-policy.html">Payment &amp; Refund</a>';header.insertAdjacentElement('afterend',nav);nav.querySelector('[data-deals-action="wishlist"]').addEventListener('click',()=>open('wishlist'));nav.querySelector('[data-deals-action="account"]').addEventListener('click',()=>open('account'))}}
-    const replacements=[
-      {old:['tourist levy'],label:'Search Hotels',href:'#benBookingDemo'},
-      {old:['arrival card'],label:'Saved Hotels',action:()=>open('wishlist')},
-      {old:['bali visa'],label:'My Bookings',action:()=>open('account')},
-      {old:['hotels'],label:'Payment & Refund',href:'payment-refund-policy.html'}
-    ];
-    const candidates=[...document.querySelectorAll('a,button')];
-    replacements.forEach(item=>{
-      const element=candidates.find(node=>{const text=(node.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();return item.old.some(label=>text===label||text.includes(label))});
-      if(!element)return;
-      element.textContent=item.label;
-      if(item.href)element.setAttribute('href',item.href);
-      if(item.action){element.removeAttribute('href');element.setAttribute('role','button');element.style.cursor='pointer';element.addEventListener('click',event=>{event.preventDefault();item.action()})}
-    });
   }
   document.querySelector('.ben-list').addEventListener('click',e=>{const b=e.target.closest('[data-choose]');if(b)choose(b.dataset.choose)});document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>open(b.dataset.open)));document.querySelectorAll('.ben-close').forEach(b=>b.addEventListener('click',close));document.querySelectorAll('.ben-drawer').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)close()}));document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-lang]').forEach(x=>x.classList.toggle('active',x===b));document.querySelector('.ben-en').style.display=b.dataset.lang==='en'?'grid':'none';document.querySelector('.ben-fa').style.display=b.dataset.lang==='fa'?'grid':'none'}));replaceLegacyQuickLinks();
   const quickLinkObserver=new MutationObserver(replaceLegacyQuickLinks);quickLinkObserver.observe(document.body,{childList:true,subtree:true});setTimeout(()=>quickLinkObserver.disconnect(),10000);
