@@ -18,7 +18,7 @@
 <div class="trust"><span><b>✓</b> Verified live rates</span><span><b>✓</b> Price-drop tracking</span><span><b>✓</b> Trusted booking partners</span></div></section>
 <main><div class="head"><h2>Hotel price drops</h2><div class="status" id="status">Enter your destination and dates</div></div><div class="grid" id="deals"><div class="empty"><h3>Find your next hotel deal</h3><p>BENARIAN automatic hotel price tracking is being connected. Soon you will be able to compare verified rates, watch price drops and book at the right moment.</p></div></div><div class="error" id="error" role="alert"></div><p class="fine">Rates and availability can change until confirmed by the booking provider. Price guidance is based on recorded rate history and is not a guarantee of future prices.</p></main>
 <script>
-const API='https://api.benarian.com/v1';
+const API='https://benarian-price-tracker.benarya-au.workers.dev/v1';
 const form=document.querySelector('#dealSearch'),box=document.querySelector('#deals'),statusEl=document.querySelector('#status'),errorEl=document.querySelector('#error');
 const esc=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const safeUrl=s=>{try{const u=new URL(s,location.origin);return ['http:','https:'].includes(u.protocol)?u.href:'#'}catch{return '#'}};
