@@ -159,5 +159,5 @@ body.home-lux .benarian-brand-services,body.home-lux .benarian-quick-access{disp
     const API='https://benarian-price-tracker.benarya-au.workers.dev/v1';
     fetch(API+'/health').then(r=>r.ok?r.json():Promise.reject()).then(data=>{if(!data.ok)return;if(data.supplier){document.querySelector('#heroStatus').textContent='Systems online · Verified supplier connected';document.querySelector('#connectionText').textContent='Verified supplier access is connected. BENARIAN is preparing the first monitored searches before opening public access.';document.querySelector('#statusBadge').textContent='SUPPLIER CONNECTED';}}).catch(()=>{document.querySelector('#systemLabel').textContent='CONNECTING';});
   </script>
-</div><script src="assets/partner-config.js"></script><script src="assets/script.js?v=20260824b"></script><script src="assets/canonical-footer.js?v=20260808b"></script><script src="assets/hotel-booking-demo.js?v=20260824c"></script></body>
+</div><script src="assets/partner-config.js"></script><script src="assets/script.js?v=20260824b"></script><script src="assets/canonical-footer.js?v=20260808b"></script><script src="assets/hotel-booking-demo.js?v=20260824d"></script></body>
 </html>
