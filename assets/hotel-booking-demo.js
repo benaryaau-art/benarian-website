@@ -1,5 +1,5 @@
 (function(){
-  if(!/hotel-deals\.html$/.test(location.pathname)) return;
+  if(!/\/hotel-deals(?:\.html)?\/?$/.test(location.pathname)) return;
   const gold='#c99a43', gold2='#edca84';
   const style=document.createElement('style');
   style.textContent=`
