@@ -62,3 +62,11 @@ function improveExternalLinks(){document.querySelectorAll('a[href^="http"]').for
 bindMenu();markCurrentNavigation();ensureNavigation();normaliseBrand();optimisePageLayers();ensureLegalLinks();improveExternalLinks();removeLegacyHotelSearch();renderFeaturedHotels();mountBookingWidget();mountQuickAccess();pinBookingBelowHero();
 onIdle(()=>{mountFlightWidget();mountCarRentalWidget();optimisePageLayers()});
 setTimeout(()=>{pinBookingBelowHero();removeLegacyHotelSearch()},800);
+
+/* BENARIAN hotel booking, wishlist, checkout and bilingual policy experience */
+if (/\/hotel-deals\.html$/.test(window.location.pathname)) {
+  const bookingExperience = document.createElement('script');
+  bookingExperience.src = 'assets/hotel-booking-demo.js?v=20260824a';
+  bookingExperience.defer = true;
+  document.body.appendChild(bookingExperience);
+}
