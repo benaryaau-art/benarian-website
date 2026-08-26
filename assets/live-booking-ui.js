@@ -51,7 +51,7 @@
   }
 
   async function checkHealth(){
-    try{const response=await fetch(API+'/health',{headers:{accept:'application/json'}});const data=await response.json();supplierConnected=Boolean(response.ok&&data.ok&&data.supplier);$('#systemLabel').textContent=supplierConnected?'SUPPLIER CONNECTED':'API SETUP REQUIRED';if(supplierConnected){$('#heroStatus').textContent='Systems online · Verified supplier connected';$('#connectionText').textContent='Hotelbeds is connected. Select a destination and dates to request verified rates.';$('#statusBadge').textContent='SUPPLIER CONNECTED'}}catch(_){$('#systemLabel').textContent='CONNECTING'}
+    try{const response=await fetch(API+'/health',{headers:{accept:'application/json'}});const data=await response.json();supplierConnected=Boolean(response.ok&&data.ok&&data.supplier);$('#systemLabel').textContent=supplierConnected?'AUTHORIZATION PENDING':'API SETUP REQUIRED';if(supplierConnected){$('#heroStatus').textContent='Systems online · Hotelbeds authorization pending';$('#connectionText').textContent='Credentials are configured securely. Live prices will appear after Hotelbeds authorizes the API credentials.';$('#statusBadge').textContent='AUTHORIZATION PENDING'}}catch(_){$('#systemLabel').textContent='CONNECTING'}
   }
 
   form.addEventListener('submit',async event=>{
@@ -66,7 +66,7 @@
       const data=await response.json();
       if(!response.ok)throw new Error(data.error||'search_failed');
       results=Array.isArray(data.deals)?data.deals:[];renderResults();
-    }catch(error){setState(error.message==='supplier_credentials_missing'?'Hotelbeds credentials are not active yet.':'Verified rates could not be retrieved. Please try again after the supplier connection is deployed.');}
+    }catch(error){setState(error.message==='supplier_credentials_missing'?'Hotelbeds credentials are not active yet.':'Hotelbeds authorization is pending. Verified live prices will appear as soon as the supplier accepts the API credentials.');}
     finally{button.disabled=false;button.textContent='SEARCH LIVE RATES'}
   });
 
