@@ -27,6 +27,19 @@
     @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:45px}.hero-copy{padding-top:20px}.insight{max-width:640px}.search{grid-template-columns:1fr 1fr}.cards,.hotel-grid{grid-template-columns:1fr 1fr}.promise-box{grid-template-columns:1fr}.policy-intro{grid-template-columns:1fr;gap:25px}}
     @media(max-width:620px){.wrap{width:min(100% - 28px,1180px)}.hero .wrap{padding:58px 0}.hero-copy>p{font-size:13px}h1{font-size:57px}.search-title,.section-head,.status-panel{display:block}.search-title .system{margin-top:9px}.search,.cards,.hotel-grid,.policy-grid{grid-template-columns:1fr}.section{padding:65px 0}.section-head p{margin-top:15px}.status-badge{display:inline-block;margin-top:22px}.promise-copy,.promise-list{padding:28px}.booking-toolbar{bottom:8px}.tool-link,.tool-button{padding:0 10px;font-size:8px}.booking-toolbar .account-label{display:none}}
     @media(max-width:700px){.header{padding-left:16px!important;padding-right:16px!important;gap:10px!important}.header-actions{gap:7px}.shop-header-btn{min-height:44px;padding:0 11px;border-radius:12px;font-size:8px;letter-spacing:.65px}.header-actions .menu-btn{min-height:44px;padding:0 12px!important}}
+
+    /* Hotel Deals contrast fixes: protect dark panels from global page styles */
+    .hero h1,.insight .metric-value,.search-shell .search-title h2,
+    .card h3,.promise-copy h2,.promise-item strong,.status-panel .status-copy h2,
+    .hotel-card .hotel-content h3,.drawer .drawer-head h2,.checkout-summary h3{
+      color:#fff!important;
+    }
+    .insight .metric-label,.card p,.promise-copy p,.promise-item span,
+    .status-panel .status-copy p{opacity:1!important}
+    .search-shell .field select{color:#17130f!important}
+    .search-shell .field{background:#f8f5ef!important;color:#17130f!important;border-radius:7px!important;padding:10px 14px!important}
+    .search-shell .field input{height:34px!important;padding:0!important;border:0!important;background:transparent!important;color:#17130f!important}
+    .search-shell .field span{color:#786f64!important}
   </style>
 </head>
 <body><div class="shell">
@@ -74,7 +87,7 @@
     document.querySelectorAll('[data-language]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-language]').forEach(b=>b.classList.toggle('active',b===button));document.querySelector('.policy-en').classList.toggle('active',button.dataset.language==='en');document.querySelector('.policy-fa').classList.toggle('active',button.dataset.language==='fa')}));
     renderSaved();renderCheckout();
   </script>
-  <script src="assets/live-booking-ui.js?v=20260826a"></script>
+  <script src="assets/live-booking-ui.js?v=20260827b"></script>
   <script src="assets/script.js?v=20260803-flightline"></script>
   <script src="assets/canonical-footer.js?v=20260822-hotel-deals"></script>
 </body>
