@@ -43,3 +43,15 @@
 /create-lab-7b26.html
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
   Cache-Control: no-store
+
+/bali-travel-guide
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+
+/bali-travel-guide.html
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+
+/travel-guides
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+
+/travel-guides.html
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'benarian-pwa-v7-20260812-signature-final';
+const CACHE_NAME = 'benarian-pwa-v8-20260830-guide-cache-reset';
 const CORE_ASSETS = [
   '/',
   '/index.html',
