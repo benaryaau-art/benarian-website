@@ -90,7 +90,7 @@ export default {
     if (isHome && !html.includes("assets/site-fixes.js")) {
       html = html.replace(
         "</body>",
-        '<script src="/assets/site-fixes.js?v=20260822-deals-quick-ad"></script></body>'
+        '<script src="/assets/site-fixes.js?v=20260913-private-contact"></script></body>'
       );
     }
 
