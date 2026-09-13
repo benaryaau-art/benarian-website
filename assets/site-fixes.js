@@ -1,5 +1,4 @@
 (() => {
-  const WHATSAPP_URL='https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking.';
   const EMAIL_URL='mailto:info@benarian.com?subject=BENARIAN%20Travel%20Enquiry';
 
   function installIntroFounderOverlay(){
@@ -58,7 +57,7 @@
   function fixConciergeLinks(){
     document.querySelectorAll('.lux-contact-actions').forEach(group=>{
       const links=[...group.querySelectorAll('a')];
-      if(links[0]){links[0].href=WHATSAPP_URL;links[0].target='_blank';links[0].rel='noopener';}
+      if(links[0]){links[0].href='contact.html';links[0].removeAttribute('target');links[0].textContent='Contact Us';}
       if(links[1]){links[1].href=EMAIL_URL;links[1].removeAttribute('target');}
       if(links[2]) links[2].href='contact.html';
     });
