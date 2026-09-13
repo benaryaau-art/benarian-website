@@ -40,7 +40,7 @@
         <div class="bbx-cta">
           <div><strong>7 / 10 DAYS ITINERARY</strong><span>Fully customizable</span></div>
           <a class="bbx-gold" href="bali-experiences.html">EXPLORE ALL EXPERIENCES →</a>
-          <a class="bbx-dark" href="https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%27m%20interested%20in%20the%20Bali%20Experience%20package.">◉ ENQUIRE ON WHATSAPP</a>
+          <a class="bbx-dark" href="contact.html">◉ CONTACT US</a>
           <div><strong>GROUPS, COUPLES & FAMILIES</strong><span>All welcome</span></div>
         </div>
         <div class="bbx-extras"><span>🚘 PRIVATE TRANSFERS</span><span>🍽 GOURMET MEALS</span><span>📷 PROFESSIONAL PHOTOS</span><span>🥂 COMPLIMENTARY DRINKS</span><span>🎁 SPECIAL EXTRAS</span></div>
