@@ -22,8 +22,8 @@
           <span class="bf3-mark" aria-hidden="true">BB</span>
           <span class="bf3-copy"><strong>BENARIAN</strong><small>LUXURY TRAVEL & HOSPITALITY</small></span>
         </a>
-        <a class="bf3-whatsapp" href="https://wa.me/61420788006?text=Hello%20BENARIAN%2C%20I%20need%20assistance%20with%20my%20travel%20booking." target="_blank" rel="noopener">
-          <span class="bf3-dot" aria-hidden="true"></span><span>LIVE CONCIERGE · WHATSAPP</span>
+        <a class="bf3-whatsapp" href="contact.html">
+          <span class="bf3-dot" aria-hidden="true"></span><span>CONTACT CONCIERGE</span>
         </a>
         <p class="bf3-talk">Talk to our team or Ben Tafreshi</p>
       </div>
