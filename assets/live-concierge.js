@@ -145,11 +145,10 @@
     });
 
     if (!document.getElementById('benarian-footer-live')) {
-      const whatsappUrl = `https://wa.me/61420788006?text=${encodeURIComponent('Hello BENARIAN, I need assistance with my travel booking.')}`;
       const block = document.createElement('div');
       block.id = 'benarian-footer-live';
       block.className = 'benarian-footer-concierge';
-      block.innerHTML = `<a class="benarian-footer-live" href="${whatsappUrl}" target="_blank" rel="noopener"><span class="live-dot" aria-hidden="true"></span>LIVE CONCIERGE · WHATSAPP</a><p>Talk to our team or Ben Tafreshi</p>`;
+      block.innerHTML = `<a class="benarian-footer-live" href="contact.html"><span class="live-dot" aria-hidden="true"></span>CONTACT CONCIERGE</a><p>Talk to our team or Ben Tafreshi</p>`;
       const brand = footer.querySelector('a[aria-label="BENARIAN home"], a[href="index.html"], .brand');
       if (brand) {
         let column = brand.parentElement?.classList.contains('benarian-footer-brand-column') ? brand.parentElement : null;
