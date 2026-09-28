@@ -107,6 +107,38 @@ body.home-lux .benarian-youtube-portrait:after{content:"";position:absolute;inse
 @media(max-width:760px){body.home-lux .benarian-youtube-feature{position:relative;display:block;height:min(720px,85svh);min-height:560px}body.home-lux .benarian-youtube-portrait{position:absolute;inset:0}body.home-lux .benarian-youtube-portrait img{object-position:center 29%}body.home-lux .benarian-youtube-portrait:after{background:linear-gradient(0deg,rgba(5,5,5,.95) 0%,rgba(5,5,5,.72) 27%,rgba(5,5,5,.05) 65%)}body.home-lux .benarian-youtube-copy{position:absolute;inset:0;justify-content:flex-end;padding:32px 25px 40px;background:none}body.home-lux .benarian-youtube-title{font-size:clamp(42px,10vw,57px);margin:10px 0 4px}body.home-lux .benarian-youtube-subtitle{font-size:14px;line-height:1.6}body.home-lux .benarian-youtube-persian{font-size:19px;margin:8px 0 18px}body.home-lux .benarian-youtube-watch{min-height:49px;padding:10px 16px}body.home-lux .benarian-youtube-handle{margin-top:13px}}
 @media(prefers-reduced-motion:reduce){body.home-lux .benarian-youtube-watch{transition:none}}
 </style>
+<style id="benarian-traveller-voices-css">
+.benarian-voices{width:calc(100% - 48px);max-width:1260px;margin:78px auto;padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5.6vw,76px);align-items:center;position:relative;overflow:hidden;border:1px solid rgba(185,135,44,.42);border-radius:24px;background:radial-gradient(ellipse at 8% 8%,rgba(185,135,44,.15),transparent 42%),linear-gradient(135deg,#1b1813,#0c0d0e 74%);color:#f7f3eb;box-shadow:0 24px 65px rgba(21,16,8,.14)}
+.benarian-voices-copy{position:relative;z-index:1}
+.benarian-voices-kicker{display:inline-block;margin:0 0 18px;color:#d1a653;font:600 11px/1.4 Inter,Arial,sans-serif;letter-spacing:2.4px;text-transform:uppercase}
+.benarian-voices h2{max-width:500px;margin:0 0 18px;font:400 clamp(38px,5vw,61px)/.98 'Cormorant Garamond',Georgia,serif;letter-spacing:-.5px;color:#fff}
+.benarian-voices-copy>p{max-width:490px;margin:0;color:#d3cec4;font:400 16px/1.75 Inter,Arial,sans-serif}
+.benarian-voices-note{display:flex;gap:12px;align-items:flex-start;margin-top:27px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);color:#c5bdaf;font:400 13px/1.6 Inter,Arial,sans-serif}
+.benarian-voices-note span:first-child{color:#d1a653;font-size:18px;line-height:1}
+.benarian-voices-form{position:relative;z-index:1;padding:clamp(22px,3vw,34px);border:1px solid rgba(255,255,255,.13);border-radius:18px;background:rgba(8,9,10,.56);box-shadow:0 14px 36px rgba(0,0,0,.18)}
+.benarian-voices-form h3{margin:0 0 20px;color:#fff;font:400 30px/1.1 'Cormorant Garamond',Georgia,serif}
+.benarian-voices-form label,.benarian-voices-form legend{color:#e8e1d5;font:500 13px/1.5 Inter,Arial,sans-serif}
+.benarian-voices-form select,.benarian-voices-form textarea,.benarian-voices-form input[type=text]{display:block;width:100%;margin-top:8px;border:1px solid rgba(255,255,255,.2);border-radius:9px;background:#141413;color:#fff;padding:13px 14px;font:400 15px/1.5 Inter,Arial,sans-serif}
+.benarian-voices-form select{min-height:48px}
+.benarian-voices-form textarea{min-height:116px;resize:vertical}
+.benarian-voices-form select:focus,.benarian-voices-form textarea:focus,.benarian-voices-form input[type=text]:focus{outline:2px solid #c99a43;outline-offset:2px}
+.benarian-voices-field{margin:0 0 17px}
+.benarian-voices-form fieldset{margin:0 0 17px;padding:0;border:0}
+.benarian-voices-form legend{margin-bottom:8px}
+.benarian-voices-stars{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:7px}
+.benarian-voices-stars label{cursor:pointer}
+.benarian-voices-stars input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}
+.benarian-voices-stars span{display:inline-flex;align-items:center;justify-content:center;width:39px;height:39px;border:1px solid rgba(255,255,255,.2);border-radius:9px;color:#a29b8f;font-size:22px;transition:color .18s ease,border-color .18s ease,background .18s ease}
+.benarian-voices-stars label:hover span,.benarian-voices-stars label:hover~label span,.benarian-voices-stars input:checked~span{color:#f0c76d;border-color:#bd8730;background:rgba(189,135,48,.12)}
+.benarian-voices-stars input:focus-visible+span{outline:2px solid #f0c76d;outline-offset:3px}
+.benarian-voices-permission{display:flex!important;gap:10px;align-items:flex-start;margin:0 0 18px;color:#c9c2b7!important;font-size:12px!important;font-weight:400!important;line-height:1.55!important}
+.benarian-voices-permission input{flex:0 0 auto;margin:3px 0 0;accent-color:#bd8730}
+.benarian-voices-submit{width:100%;min-height:50px;border:0;border-radius:9px;background:linear-gradient(110deg,#c69743,#e0bc70);color:#17130d;font:700 12px/1.2 Inter,Arial,sans-serif;letter-spacing:1.1px;text-transform:uppercase;cursor:pointer;transition:filter .2s ease,transform .2s ease}
+.benarian-voices-submit:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.benarian-voices-privacy{margin:12px 0 0;color:#a9a397;font:400 12px/1.55 Inter,Arial,sans-serif}
+@media(max-width:800px){.benarian-voices{grid-template-columns:1fr;gap:28px;margin:54px auto;padding:30px 24px}.benarian-voices h2{font-size:48px}}
+@media(max-width:520px){.benarian-voices{width:calc(100% - 28px);padding:25px 18px;border-radius:18px}.benarian-voices h2{font-size:43px}.benarian-voices-form{padding:20px 16px}.benarian-voices-stars span{width:36px;height:36px}}
+</style>
 </head>
 <body class="home-lux no-founder-overlay"><div class="shell">
   <div class="topline"><div class="left">🌐 <span>Language:</span><a href="fa.html">فارسی</a><span>|</span><b>EN</b></div><div class="right"><span class="accent">AUD⌄</span><span>♡ Wishlist</span><span>▣ My Bookings</span><a class="member-top-link" href="member-login.html">Members</a></div></div>
@@ -183,6 +215,30 @@ body.home-lux .benarian-youtube-portrait:after{content:"";position:absolute;inse
     <section class="booking-search" aria-label="Search hotels"><form class="booking-form"><label><span>DESTINATION</span><input id="destination" type="text" value="Bali" aria-label="Destination"></label><label><span>CHECK-IN</span><input id="checkin" type="date" aria-label="Check-in date"></label><label><span>CHECK-OUT</span><input id="checkout" type="date" aria-label="Check-out date"></label><label><span>GUESTS &amp; ROOMS</span><select id="guests" aria-label="Guests and rooms"><option value="2-1">2 Adults, 1 Room</option><option value="1-1">1 Adult, 1 Room</option><option value="3-1">3 Adults, 1 Room</option><option value="4-2">4 Adults, 2 Rooms</option></select></label><button type="submit">Search Hotels →</button></form><p>Search results open through our Booking.com affiliate connection.</p></section>
     <section class="lux-section hotels-section"><div class="lux-section-head centered-head"><div class="title-wrap"><div class="section-icon">✤</div><h2 class="lux-title">Featured Hotels</h2></div><a class="lux-view" href="hotels.html">View all →</a></div><div class="lux-hotel-grid"></div></section>
     <section class="lux-section info-section"><div class="lux-visa"><div class="lux-visa-icon">▣</div><div><h3>Visa Guide for Iranian Travelers</h3><p>Complete guide to visa requirements and travel documents.</p><p class="fa">راهنمای کامل ویزا و مدارک سفر برای مسافران ایرانی</p></div><a class="lux-btn" href="visa-guide.html">View Visa Guide →</a></div></section>
+<section class="benarian-voices" aria-labelledby="benarian-voices-title">
+  <div class="benarian-voices-copy">
+    <span class="benarian-voices-kicker">TRAVELLER FEEDBACK</span>
+    <h2 id="benarian-voices-title">Your journey.<br>Your words.</h2>
+    <p>Tell us what you thought of a tour, hotel, wellness stay or private experience. Your feedback helps us make every BENARIAN recommendation more thoughtful.</p>
+    <div class="benarian-voices-note"><span aria-hidden="true">✦</span><span>We only share guest feedback publicly when you give us permission.</span></div>
+  </div>
+  <form class="benarian-voices-form" id="benarian-voices-form">
+    <h3>How was your experience?</h3>
+    <div class="benarian-voices-field"><label for="benarian-voices-topic">What would you like to review?</label><select id="benarian-voices-topic" name="experience" required><option value="" disabled selected>Select an experience</option><option>Bali tour or activity</option><option>Hotel or resort stay</option><option>Spa &amp; wellness</option><option>Private transport or concierge</option><option>Other travel experience</option></select></div>
+    <fieldset><legend>Your rating</legend><div class="benarian-voices-stars" aria-label="Choose a rating from one to five stars">
+      <label><input type="radio" name="rating" value="1" required><span aria-hidden="true">★</span><span class="sr-only">1 star</span></label>
+      <label><input type="radio" name="rating" value="2"><span aria-hidden="true">★</span><span class="sr-only">2 stars</span></label>
+      <label><input type="radio" name="rating" value="3"><span aria-hidden="true">★</span><span class="sr-only">3 stars</span></label>
+      <label><input type="radio" name="rating" value="4"><span aria-hidden="true">★</span><span class="sr-only">4 stars</span></label>
+      <label><input type="radio" name="rating" value="5"><span aria-hidden="true">★</span><span class="sr-only">5 stars</span></label>
+    </div></fieldset>
+    <div class="benarian-voices-field"><label for="benarian-voices-name">First name <span style="color:#aaa397;font-weight:400">(optional)</span></label><input id="benarian-voices-name" type="text" name="firstName" autocomplete="given-name" maxlength="80" placeholder="Your first name"></div>
+    <div class="benarian-voices-field"><label for="benarian-voices-message">Your feedback</label><textarea id="benarian-voices-message" name="feedback" maxlength="1500" required placeholder="What did you enjoy, and what could we improve?"></textarea></div>
+    <label class="benarian-voices-permission"><input type="checkbox" name="publishPermission" value="yes"><span>You may contact me about sharing this feedback publicly with my first name.</span></label>
+    <button class="benarian-voices-submit" type="submit">Send your feedback</button>
+    <p class="benarian-voices-privacy">This opens an email for you to review and send. Your feedback is not posted automatically.</p>
+  </form>
+</section>
     <section class="lux-concierge"><div class="concierge-icon">⌘</div><div><h2>Your Personal Concierge</h2><p>We are here to craft your perfect journey.<br>24/7 Luxury Travel Assistance</p></div><div class="lux-contact-actions"><a class="lux-outline" href="contact.html">Contact Us</a><a class="lux-outline" href="mailto:info@benarian.com?subject=BENARIAN%20Travel%20Enquiry">✉ Email</a><a class="lux-outline wide" href="contact.html">Contact Concierge</a></div></section>
   </main>
   <footer class="footer lux-footer"><a href="index.html" aria-label="BENARIAN home" style="display:flex!important;align-items:center!important;text-decoration:none!important;grid-column:auto!important;min-width:250px!important;visibility:visible!important;opacity:1!important;background:none!important;"><span aria-hidden="true" style="display:block!important;font-family:'Cormorant Garamond',Georgia,serif!important;font-size:46px!important;line-height:.75!important;color:#b9872c!important;font-weight:600!important;letter-spacing:-9px!important;margin-right:18px!important;transform:scaleX(.82)!important;visibility:visible!important;opacity:1!important;">BB</span><span style="display:flex!important;flex-direction:column!important;visibility:visible!important;opacity:1!important;"><strong style="display:block!important;font-family:'Cormorant Garamond',Georgia,serif!important;font-size:27px!important;line-height:.9!important;letter-spacing:4px!important;color:#151310!important;font-weight:600!important;white-space:nowrap!important;visibility:visible!important;opacity:1!important;">BENARIAN</strong><small style="display:block!important;margin-top:6px!important;font-family:Inter,Arial,sans-serif!important;font-size:7px!important;letter-spacing:1.25px!important;color:#b9872c!important;font-weight:600!important;white-space:nowrap!important;visibility:visible!important;opacity:1!important;">LUXURY TRAVEL &amp; HOSPITALITY</small></span></a><div><strong>Company</strong><a href="about.html">About Us</a><a href="experiences.html">Our Services</a><a href="contact.html">Concierge</a></div><div><strong>Support</strong><a href="contact.html">FAQ</a><a href="privacy-policy.html">Privacy Policy</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a></div><div><strong>Follow Us</strong><p>◎ &nbsp; f &nbsp; ✉</p></div><p class="copyright">© 2026 BENARIAN. All rights reserved.</p></footer>
@@ -232,4 +288,22 @@ body.home-lux .benarian-youtube-portrait:after{content:"";position:absolute;inse
   body.home-lux #official-car-rental-search .car-luxury-copy h2 br{display:none!important}
 }
 </style>
+<script>
+(function(){
+  var form=document.getElementById('benarian-voices-form');
+  if(!form)return;
+  form.addEventListener('submit',function(event){
+    event.preventDefault();
+    var data=new FormData(form);
+    var topic=data.get('experience')||'Travel experience';
+    var rating=data.get('rating')||'Not selected';
+    var name=data.get('firstName')||'Not provided';
+    var feedback=data.get('feedback')||'';
+    var permission=data.get('publishPermission')==='yes'?'Yes, you may contact me about sharing this feedback with my first name.':'No permission to share publicly was given.';
+    var subject=encodeURIComponent('BENARIAN traveller feedback — '+topic);
+    var body=encodeURIComponent('First name: '+name+'\nExperience: '+topic+'\nRating: '+rating+' / 5\n\nFeedback:\n'+feedback+'\n\n'+permission);
+    window.location.href='mailto:info@benarian.com?subject='+subject+'&body='+body;
+  });
+})();
+</script>
 </body></html>
