@@ -125,11 +125,11 @@ body.home-lux .benarian-youtube-portrait:after{content:"";position:absolute;inse
 .benarian-voices-field{margin:0 0 17px}
 .benarian-voices-form fieldset{margin:0 0 17px;padding:0;border:0}
 .benarian-voices-form legend{margin-bottom:8px}
-.benarian-voices-stars{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:7px}
+.benarian-voices-stars{display:flex;flex-direction:row;justify-content:flex-start;gap:8px}
 .benarian-voices-stars label{cursor:pointer}
 .benarian-voices-stars input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}
 .benarian-voices-stars span{display:inline-flex;align-items:center;justify-content:center;width:39px;height:39px;border:1px solid rgba(255,255,255,.2);border-radius:9px;color:#a29b8f;font-size:22px;transition:color .18s ease,border-color .18s ease,background .18s ease}
-.benarian-voices-stars label:hover span,.benarian-voices-stars label:hover~label span,.benarian-voices-stars input:checked~span{color:#f0c76d;border-color:#bd8730;background:rgba(189,135,48,.12)}
+.benarian-voices-stars label:hover span,.benarian-voices-stars input:checked+span{color:#f0c76d;border-color:#bd8730;background:rgba(189,135,48,.12)}
 .benarian-voices-stars input:focus-visible+span{outline:2px solid #f0c76d;outline-offset:3px}
 .benarian-voices-permission{display:flex!important;gap:10px;align-items:flex-start;margin:0 0 18px;color:#c9c2b7!important;font-size:12px!important;font-weight:400!important;line-height:1.55!important}
 .benarian-voices-permission input{flex:0 0 auto;margin:3px 0 0;accent-color:#bd8730}
@@ -137,7 +137,7 @@ body.home-lux .benarian-youtube-portrait:after{content:"";position:absolute;inse
 .benarian-voices-submit:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .benarian-voices-privacy{margin:12px 0 0;color:#a9a397;font:400 12px/1.55 Inter,Arial,sans-serif}
 @media(max-width:800px){.benarian-voices{grid-template-columns:1fr;gap:28px;margin:54px auto;padding:30px 24px}.benarian-voices h2{font-size:48px}}
-@media(max-width:520px){.benarian-voices{width:calc(100% - 28px);padding:25px 18px;border-radius:18px}.benarian-voices h2{font-size:43px}.benarian-voices-form{padding:20px 16px}.benarian-voices-stars span{width:36px;height:36px}}
+@media(max-width:900px){body.benarian-feedback-visible .home-deals-quick-ad,body.benarian-feedback-active .home-deals-quick-ad,body.benarian-feedback-visible .benarian-mobile-nav,body.benarian-feedback-active .benarian-mobile-nav{display:none!important}}\n@media(max-width:520px){.benarian-voices{width:calc(100% - 28px);padding:25px 18px;border-radius:18px}.benarian-voices h2{font-size:43px}.benarian-voices-form{padding:20px 16px}.benarian-voices-stars span{width:36px;height:36px}}
 </style>
 </head>
 <body class="home-lux no-founder-overlay"><div class="shell">
@@ -226,11 +226,11 @@ body.home-lux .benarian-youtube-portrait:after{content:"";position:absolute;inse
     <h3>How was your experience?</h3>
     <div class="benarian-voices-field"><label for="benarian-voices-topic">What would you like to review?</label><select id="benarian-voices-topic" name="experience" required><option value="" disabled selected>Select an experience</option><option>Bali tour or activity</option><option>Hotel or resort stay</option><option>Spa &amp; wellness</option><option>Private transport or concierge</option><option>Other travel experience</option></select></div>
     <fieldset><legend>Your rating</legend><div class="benarian-voices-stars" aria-label="Choose a rating from one to five stars">
-      <label><input type="radio" name="rating" value="1" required><span aria-hidden="true">★</span><span class="sr-only">1 star</span></label>
-      <label><input type="radio" name="rating" value="2"><span aria-hidden="true">★</span><span class="sr-only">2 stars</span></label>
-      <label><input type="radio" name="rating" value="3"><span aria-hidden="true">★</span><span class="sr-only">3 stars</span></label>
-      <label><input type="radio" name="rating" value="4"><span aria-hidden="true">★</span><span class="sr-only">4 stars</span></label>
-      <label><input type="radio" name="rating" value="5"><span aria-hidden="true">★</span><span class="sr-only">5 stars</span></label>
+      <label aria-label="1 star"><input type="radio" name="rating" value="1" required><span aria-hidden="true">★</span></label>
+      <label aria-label="2 stars"><input type="radio" name="rating" value="2"><span aria-hidden="true">★</span></label>
+      <label aria-label="3 stars"><input type="radio" name="rating" value="3"><span aria-hidden="true">★</span></label>
+      <label aria-label="4 stars"><input type="radio" name="rating" value="4"><span aria-hidden="true">★</span></label>
+      <label aria-label="5 stars"><input type="radio" name="rating" value="5"><span aria-hidden="true">★</span></label>
     </div></fieldset>
     <div class="benarian-voices-field"><label for="benarian-voices-name">First name <span style="color:#aaa397;font-weight:400">(optional)</span></label><input id="benarian-voices-name" type="text" name="firstName" autocomplete="given-name" maxlength="80" placeholder="Your first name"></div>
     <div class="benarian-voices-field"><label for="benarian-voices-message">Your feedback</label><textarea id="benarian-voices-message" name="feedback" maxlength="1500" required placeholder="What did you enjoy, and what could we improve?"></textarea></div>
@@ -291,7 +291,21 @@ body.home-lux .benarian-youtube-portrait:after{content:"";position:absolute;inse
 <script>
 (function(){
   var form=document.getElementById('benarian-voices-form');
+  var section=document.querySelector('.benarian-voices');
+  if(section && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        document.body.classList.toggle('benarian-feedback-visible',entry.isIntersecting);
+      });
+    },{threshold:0.12}).observe(section);
+  }
   if(!form)return;
+  form.addEventListener('focusin',function(){document.body.classList.add('benarian-feedback-active')});
+  form.addEventListener('focusout',function(){
+    setTimeout(function(){
+      if(!form.contains(document.activeElement))document.body.classList.remove('benarian-feedback-active');
+    },0);
+  });
   form.addEventListener('submit',function(event){
     event.preventDefault();
     var data=new FormData(form);
