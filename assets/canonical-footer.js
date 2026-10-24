@@ -2,11 +2,9 @@
   const NAV_ITEMS = [
     ['destinations.html','DESTINATIONS'],
     ['hotels.html','HOTELS'],
-    ['hotel-deals.html','HOTEL DEALS'],
+    ['hotel-performance','HOTEL ANALYSIS'],
     ['flights.html','FLIGHTS'],
     ['persian-experiences.html','PERSIAN EXPERIENCES'],
-    ['experiences.html','EXPERIENCES'],
-    ['wellness.html','SPA & WELLNESS'],
     ['visa-guide.html','VISA GUIDE'],
     ['travel-guides.html','TRAVEL GUIDE'],
     ['shop.html','BENARIAN SHOP'],
