@@ -86,6 +86,7 @@ export default {
     if (!type.includes("text/html")) return response;
 
     let html = await response.text();
+    html = html.replaceAll("assets/canonical-footer.js?v=20260725a", "assets/canonical-footer.js?v=20261025-hotel-menu");
     const isHome = url.pathname === "/" || url.pathname === "/index.html";
     if (isHome && !html.includes("assets/site-fixes.js")) {
       html = html.replace(
