@@ -155,9 +155,9 @@
     document.head.appendChild(style);
     const ad=document.createElement('a');
     ad.className='home-deals-quick-ad';
-    ad.href='hotel-deals.html';
-    ad.setAttribute('aria-label','Discover BENARIAN Hotel Deals');
-    ad.innerHTML='<span><small>COMING SOON · PRICE TRACKING</small>DISCOVER HOTEL DEALS</span><span class="quick-arrow">→</span>';
+    ad.href='hotel-performance';
+    ad.setAttribute('aria-label','Analyse your hotel performance');
+    ad.innerHTML='<span><small>BENARIAN · HOTEL PERFORMANCE</small>ANALYSE YOUR HOTEL PERFORMANCE</span><span class="quick-arrow">→</span>';
     document.body.appendChild(ad);
     setTimeout(()=>ad.classList.add('is-visible'),1800);
   }
