@@ -40,6 +40,14 @@
     .header .brand-lockup .brand-copy small{margin-top:7px!important;color:#b9872c!important;font:700 7px/1.2 Inter,Arial,sans-serif!important;letter-spacing:1.25px!important;white-space:nowrap!important}
     .header .nav{min-height:42px!important}
     .header .nav a{flex:0 0 auto!important}
+    .header .nav .nav-dropdown{position:relative;flex:0 0 auto}
+    .header .nav .nav-dropdown-toggle{display:inline-flex;align-items:center;gap:5px;padding:inherit;border:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;white-space:nowrap;cursor:pointer}
+    .header .nav .nav-dropdown-toggle:hover,.header .nav .nav-dropdown-toggle.current{color:#b9872c!important}
+    .header .nav .nav-dropdown-menu{display:none;position:absolute;z-index:10050;top:calc(100% + 8px);left:0;min-width:235px;max-height:70vh;overflow:auto;padding:7px;background:#171410;border:1px solid rgba(185,135,44,.45);border-radius:8px;box-shadow:0 14px 32px rgba(0,0,0,.28)}
+    .header .nav .nav-dropdown:hover .nav-dropdown-menu,.header .nav .nav-dropdown:focus-within .nav-dropdown-menu,.header .nav .nav-dropdown.is-open .nav-dropdown-menu{display:grid}
+    .header .nav .nav-dropdown-menu a{display:block;flex:none;padding:10px 12px;color:#eee7dc!important;font:600 10px/1.3 Inter,Arial,sans-serif!important;letter-spacing:.06em;text-decoration:none}
+    .header .nav .nav-dropdown-menu a:hover,.header .nav .nav-dropdown-menu a:focus{background:rgba(185,135,44,.14);color:#e6c477!important}
+    @media(max-width:760px){.header .nav .nav-dropdown{display:block;width:100%}.header .nav .nav-dropdown-toggle{width:100%;justify-content:space-between;text-align:left;padding:11px 16px}.header .nav .nav-dropdown-menu{position:static;min-width:0;max-height:none;margin:2px 0 8px 12px;border:0;border-left:1px solid rgba(185,135,44,.5);border-radius:0;box-shadow:none;background:transparent;padding:2px 0}.header .nav .nav-dropdown-menu a{padding:10px 14px}}
     .topline .right .benarian-utility{display:inline-flex!important;align-items:center!important;gap:5px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;color:inherit!important;text-decoration:none!important;font:inherit!important;line-height:inherit!important;white-space:nowrap!important;cursor:pointer!important}
     .topline .right .benarian-utility:hover{color:#b9872c!important}
     .benarian-footer-v3{position:relative!important;inset:auto!important;float:none!important;clear:both!important;display:grid!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;grid-template-columns:minmax(280px,1.3fr) repeat(3,minmax(120px,.55fr))!important;gap:32px!important;align-items:start!important;margin:0!important;padding:48px 6% 36px!important;background:#fbf7ef!important;border:0!important;border-top:1px solid #e3d3b7!important;border-radius:0!important;box-shadow:none!important;color:#6d6254!important;font-family:Inter,Arial,sans-serif!important;font-size:16px!important;line-height:1.5!important;box-sizing:border-box!important;overflow:visible!important;transform:none!important;z-index:1!important}
@@ -56,8 +64,9 @@
   `;
 
   function normalPage(v){return(v||'index').replace(/^.*\//,'').replace(/\.html$/,'')||'index'}
-  function desiredNavHtml(){return NAV_ITEMS.map(([href,label])=>`<a href="${href}">${label}</a>`).join('')}
-  function navSignature(nav){return [...nav.querySelectorAll('a')].map(a=>`${normalPage(a.getAttribute('href'))}:${(a.textContent||'').trim()}`).join('|')}
+  const ANALYSIS_ITEMS=[['hotel-performance','OVERVIEW'],['hotel-performance#revRooms','ROOMS & REVENUE'],['hotel-performance#revFB','FOOD & BEVERAGE'],['hotel-performance#revSpa','SPA & WELLNESS'],['hotel-performance#revOther','EVENTS & OTHER REVENUE'],['hotel-performance#payroll','PAYROLL & PEOPLE'],['hotel-performance#engineering','ENGINEERING & MAINTENANCE'],['hotel-performance#utilities','UTILITIES & SUSTAINABILITY'],['hotel-performance#sales','SALES & DISTRIBUTION'],['hotel-performance#admin','ADMIN & FINANCE'],['hotel-performance#results','RESULTS & AI ADVISOR']];
+  function desiredNavHtml(){return NAV_ITEMS.map(([href,label])=>normalPage(href)==='hotel-performance'?'<div class="nav-dropdown"><button type="button" class="nav-dropdown-toggle" data-nav-label="HOTEL ANALYSIS" aria-expanded="false" aria-haspopup="true">HOTEL ANALYSIS <span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu" role="group" aria-label="Hotel Analysis sections">'+ANALYSIS_ITEMS.map(([target,name])=>'<a href="'+target+'">'+name+'</a>').join('')+'</div></div>':`<a href="${href}">${label}</a>`).join('')}
+  function navSignature(nav){return [...nav.children].map(node=>{const el=node.matches('.nav-dropdown')?node.querySelector('.nav-dropdown-toggle'):node;const href=el?.getAttribute('href')||'hotel-performance';const label=el?.dataset.navLabel||(el?.textContent||'').trim().replace(/\\s*⌄\\s*$/,'');return `${normalPage(href)}:${label}`}).join('|')}
   const DESIRED_SIGNATURE=NAV_ITEMS.map(([href,label])=>`${normalPage(href)}:${label}`).join('|');
 
   function installAppMeta(){
@@ -157,6 +166,8 @@
         if(navSignature(nav)!==DESIRED_SIGNATURE) nav.innerHTML=desiredNavHtml();
         const current=normalPage(location.pathname);
         nav.querySelectorAll('a').forEach(a=>{a.classList.toggle('current',normalPage(a.getAttribute('href'))===current);a.addEventListener('click',()=>nav.classList.remove('open'),{once:true})});
+        const analysisToggle=nav.querySelector('.nav-dropdown-toggle');
+        if(analysisToggle){analysisToggle.classList.toggle('current',current==='hotel-performance');if(analysisToggle.dataset.bound!=='true'){analysisToggle.dataset.bound='true';analysisToggle.addEventListener('click',event=>{event.preventDefault();const item=analysisToggle.closest('.nav-dropdown');const open=item.classList.toggle('is-open');analysisToggle.setAttribute('aria-expanded',String(open))})}}
         nav.dataset.benarianNavReady='true';
       }
       const existing=header.querySelector('.menu-btn');
