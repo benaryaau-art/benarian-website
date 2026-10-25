@@ -65,8 +65,8 @@
   `;
 
   function normalPage(v){return(v||'index').replace(/^.*\//,'').replace(/\.html$/,'')||'index'}
-  const ANALYSIS_ITEMS=[['hotel-performance','PERFORMANCE ANALYZER'],['hotel-operations-book.html','HOTEL OPERATIONS BOOK']];
-  function desiredNavHtml(){return NAV_ITEMS.map(([href,label])=>normalPage(href)==='hotel-performance'?'<div class="nav-dropdown"><a class="nav-dropdown-link" data-nav-label="HOTEL ANALYSIS" href="hotel-performance">HOTEL ANALYSIS</a><button type="button" class="nav-dropdown-toggle" aria-label="Open Hotel Analysis menu" aria-expanded="false" aria-haspopup="true"><span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu" role="group" aria-label="Hotel Analysis"><a href="hotel-performance">PERFORMANCE ANALYZER</a><a href="hotel-operations-book.html">HOTEL OPERATIONS BOOK</a></div></div>':`<a href="${href}">${label}</a>`).join('')}
+  const ANALYSIS_ITEMS=[['hotel-performance','PERFORMANCE ANALYZER'],['hotel-operations-book.html','HOTEL OPERATIONS BOOK'],['hotel-management-course.html','HOTEL MANAGEMENT COURSE']];
+  function desiredNavHtml(){return NAV_ITEMS.map(([href,label])=>normalPage(href)==='hotel-performance'?'<div class="nav-dropdown"><a class="nav-dropdown-link" data-nav-label="HOTEL ANALYSIS" href="hotel-performance">HOTEL ANALYSIS</a><button type="button" class="nav-dropdown-toggle" aria-label="Open Hotel Analysis menu" aria-expanded="false" aria-haspopup="true"><span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu" role="group" aria-label="Hotel Analysis"><a href="hotel-performance">PERFORMANCE ANALYZER</a><a href="hotel-operations-book.html">HOTEL OPERATIONS BOOK</a><a href="hotel-management-course.html">HOTEL MANAGEMENT COURSE</a></div></div>':`<a href="${href}">${label}</a>`).join('')}
   function navSignature(nav){return [...nav.children].map(node=>{const dropdown=node.matches('.nav-dropdown');const el=dropdown?node.querySelector('.nav-dropdown-link'):node;const href=el?.getAttribute('href')||'hotel-performance';const label=el?.dataset.navLabel||(el?.textContent||'').trim();return `${normalPage(href)}:${label}${dropdown?':dropdown':''}`}).join('|')}
   const DESIRED_SIGNATURE=NAV_ITEMS.map(([href,label])=>`${normalPage(href)}:${label}${normalPage(href)==='hotel-performance'?':dropdown':''}`).join('|');
 
@@ -168,7 +168,7 @@
         const current=normalPage(location.pathname);
         nav.querySelectorAll('a').forEach(a=>{a.classList.toggle('current',normalPage(a.getAttribute('href'))===current);a.addEventListener('click',()=>nav.classList.remove('open'),{once:true})});
         const analysisToggle=nav.querySelector('.nav-dropdown-toggle');
-        if(analysisToggle){analysisToggle.classList.toggle('current',current==='hotel-performance'||current==='hotel-operations-book');if(analysisToggle.dataset.bound!=='true'){analysisToggle.dataset.bound='true';analysisToggle.addEventListener('click',event=>{event.preventDefault();const item=analysisToggle.closest('.nav-dropdown');const open=item.classList.toggle('is-open');analysisToggle.setAttribute('aria-expanded',String(open))})}}
+        if(analysisToggle){analysisToggle.classList.toggle('current',current==='hotel-performance'||current==='hotel-operations-book'||current==='hotel-management-course');if(analysisToggle.dataset.bound!=='true'){analysisToggle.dataset.bound='true';analysisToggle.addEventListener('click',event=>{event.preventDefault();const item=analysisToggle.closest('.nav-dropdown');const open=item.classList.toggle('is-open');analysisToggle.setAttribute('aria-expanded',String(open))})}}
 
         nav.dataset.benarianNavReady='true';
       }
