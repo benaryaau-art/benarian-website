@@ -65,8 +65,8 @@
   `;
 
   function normalPage(v){return(v||'index').replace(/^.*\//,'').replace(/\.html$/,'')||'index'}
-  const ANALYSIS_ITEMS=[['hotel-performance','PERFORMANCE ANALYZER'],['hotel-performance#operations-book','HOTEL OPERATIONS BOOK']];
-  function desiredNavHtml(){return NAV_ITEMS.map(([href,label])=>normalPage(href)==='hotel-performance'?'<div class="nav-dropdown"><button type="button" class="nav-dropdown-toggle" data-nav-label="HOTEL ANALYSIS" aria-expanded="false" aria-haspopup="true">HOTEL ANALYSIS <span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu" role="group" aria-label="Hotel Analysis"><a href="hotel-performance">PERFORMANCE ANALYZER</a><a href="hotel-performance#operations-book">HOTEL OPERATIONS BOOK</a></div></div>':`<a href="${href}">${label}</a>`).join('')}
+  const ANALYSIS_ITEMS=[['hotel-performance','PERFORMANCE ANALYZER'],['hotel-operations-book.html','HOTEL OPERATIONS BOOK']];
+  function desiredNavHtml(){return NAV_ITEMS.map(([href,label])=>normalPage(href)==='hotel-performance'?'<div class="nav-dropdown"><button type="button" class="nav-dropdown-toggle" data-nav-label="HOTEL ANALYSIS" aria-expanded="false" aria-haspopup="true">HOTEL ANALYSIS <span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu" role="group" aria-label="Hotel Analysis"><a href="hotel-performance">PERFORMANCE ANALYZER</a><a href="hotel-operations-book.html">HOTEL OPERATIONS BOOK</a></div></div>':`<a href="${href}">${label}</a>`).join('')}
   function navSignature(nav){return [...nav.children].map(node=>{const dropdown=node.matches('.nav-dropdown');const el=dropdown?node.querySelector('.nav-dropdown-toggle'):node;const href=el?.getAttribute('href')||'hotel-performance';const label=el?.dataset.navLabel||(el?.textContent||'').trim();return `${normalPage(href)}:${label}${dropdown?':dropdown':''}`}).join('|')}
   const DESIRED_SIGNATURE=NAV_ITEMS.map(([href,label])=>`${normalPage(href)}:${label}${normalPage(href)==='hotel-performance'?':dropdown':''}`).join('|');
 
@@ -80,7 +80,7 @@
     const page=normalPage(location.pathname);
     const pages={
       index:{title:'BENARIAN | Luxury Travel & Hospitality',description:'Discover curated luxury hotels, destinations, flights, wellness retreats and exceptional travel experiences with BENARIAN.',label:'Home'},
-      hotels:{title:'Luxury Hotels & Resorts | BENARIAN',description:'Explore handpicked luxury hotels and resorts with live partner rates, destination inspiration and personalised BENARIAN travel assistance.',label:'Hotels'},
+      'hotel-performance':{title:'Hotel Performance Analyzer | BENARIAN',description:'Review hotel revenue, costs and operating performance with the BENARIAN Hotel Performance Analyzer.',label:'Hotel Analysis'},'hotel-operations-book':{title:'Hotel Operations Book | BENARIAN',description:'Hotel operations knowledge and practical management guidance from BENARIAN.',label:'Hotel Operations Book'},hotels:{title:'Luxury Hotels & Resorts | BENARIAN',description:'Explore handpicked luxury hotels and resorts with live partner rates, destination inspiration and personalised BENARIAN travel assistance.',label:'Hotels'},
       destinations:{title:'Luxury Travel Destinations | BENARIAN',description:'Discover BENARIAN luxury destinations including Bali, Phuket, the Maldives, Dubai and selected Persian experiences.',label:'Destinations'},
       bali:{title:'Luxury Bali Travel Guide | BENARIAN',description:'Plan a refined Bali escape with selected hotels, resorts, dining, wellness and experiences curated by BENARIAN.',label:'Bali'},
       'persian-experiences':{title:'Persian Experiences | BENARIAN',description:'Explore selected hotels, culture, dining and private travel experiences across Iran with BENARIAN.',label:'Persian Experiences'},
@@ -168,7 +168,7 @@
         const current=normalPage(location.pathname);
         nav.querySelectorAll('a').forEach(a=>{a.classList.toggle('current',normalPage(a.getAttribute('href'))===current);a.addEventListener('click',()=>nav.classList.remove('open'),{once:true})});
         const analysisToggle=nav.querySelector('.nav-dropdown-toggle');
-        if(analysisToggle){analysisToggle.classList.toggle('current',current==='hotel-performance');if(analysisToggle.dataset.bound!=='true'){analysisToggle.dataset.bound='true';analysisToggle.addEventListener('click',event=>{event.preventDefault();const item=analysisToggle.closest('.nav-dropdown');const open=item.classList.toggle('is-open');analysisToggle.setAttribute('aria-expanded',String(open))})}}
+        if(analysisToggle){analysisToggle.classList.toggle('current',current==='hotel-performance'||current==='hotel-operations-book');if(analysisToggle.dataset.bound!=='true'){analysisToggle.dataset.bound='true';analysisToggle.addEventListener('click',event=>{event.preventDefault();const item=analysisToggle.closest('.nav-dropdown');const open=item.classList.toggle('is-open');analysisToggle.setAttribute('aria-expanded',String(open))})}}
 
         nav.dataset.benarianNavReady='true';
       }
