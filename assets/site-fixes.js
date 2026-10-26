@@ -162,6 +162,33 @@
     setTimeout(()=>ad.classList.add('is-visible'),1800);
   }
 
+  function installHotelCourseQuickAd(){
+    if(!document.body.classList.contains('home-lux')||document.querySelector('.home-course-quick-ad'))return;
+    const style=document.createElement('style');
+    style.id='home-course-quick-ad-style';
+    style.textContent=`
+      .home-course-quick-ad{position:fixed;right:22px;bottom:112px;z-index:9997;display:flex;align-items:center;justify-content:space-between;gap:22px;min-width:290px;padding:16px 19px;border:1px solid rgba(221,190,127,.8);border-radius:3px;background:linear-gradient(135deg,#173754,#102a43 58%,#0b2136);box-shadow:0 14px 34px rgba(0,0,0,.34),0 0 0 1px rgba(221,190,127,.12);color:#fff;text-decoration:none;font:800 10px/1.25 Inter,Arial,sans-serif;letter-spacing:1.8px;transform:translateY(120px);opacity:0;transition:transform .65s cubic-bezier(.2,.75,.25,1),opacity .45s ease,filter .25s ease;overflow:hidden;isolation:isolate}
+      .home-course-quick-ad:before{content:"";position:absolute;z-index:-1;inset:-35% auto -35% -35%;width:26%;transform:skewX(-22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);animation:homeCourseShine 5s ease-in-out infinite}
+      .home-course-quick-ad.is-visible{transform:translateY(0);opacity:1}
+      .home-course-quick-ad:hover{filter:brightness(1.12)}
+      .home-course-quick-ad small{display:block;margin-bottom:5px;color:#e4c27c;font-size:7px;letter-spacing:1.4px}
+      .home-course-quick-ad .quick-arrow{color:#e4c27c;font-size:22px;font-weight:400;transition:transform .25s ease;animation:homeCourseArrow 1.8s ease-in-out infinite}
+      .home-course-quick-ad:hover .quick-arrow{transform:translateX(5px)}
+      @keyframes homeCourseArrow{0%,100%{translate:0 0}50%{translate:6px 0}}
+      @keyframes homeCourseShine{0%,18%{left:-35%}70%,100%{left:125%}}
+      @media(max-width:760px){.home-course-quick-ad{left:16px;right:16px;bottom:174px;min-width:0;padding:15px 18px;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.42)}}
+      @media(prefers-reduced-motion:reduce){.home-course-quick-ad,.home-course-quick-ad:before,.home-course-quick-ad .quick-arrow{animation:none;transition:none}}
+    `;
+    document.head.appendChild(style);
+    const ad=document.createElement('a');
+    ad.className='home-course-quick-ad';
+    ad.href='hotel-management-course.html';
+    ad.setAttribute('aria-label','Explore the Hotel Management Course');
+    ad.innerHTML='<span><small>BENARIAN · HOTEL MANAGEMENT COURSE</small>EXPLORE THE HOTEL MANAGEMENT COURSE</span><span class="quick-arrow" aria-hidden="true">→</span>';
+    document.body.appendChild(ad);
+    setTimeout(()=>ad.classList.add('is-visible'),2100);
+  }
+
   function installHotelDealsPhoto(){
     const photo=document.querySelector('.home-deals-image');
     if(!photo)return;
@@ -184,7 +211,7 @@
     setTimeout(()=>observer.disconnect(),10000);
   }
 
-  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();installHotelDealsPhoto();installHotelDealsPlacement();installHotelDealsQuickAd();}
+  function apply(){installIntroFounderOverlay();fixUtilities();fixConciergeLinks();optimiseImages();installPerformanceHints();installGuaranteedPromoSlider();installHotelDealsPhoto();installHotelDealsPlacement();installHotelDealsQuickAd();installHotelCourseQuickAd();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
   window.addEventListener('load',()=>setTimeout(apply,120),{once:true});
 })();
