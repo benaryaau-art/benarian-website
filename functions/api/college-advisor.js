@@ -19,3 +19,5 @@ export async function onRequestPost({request,env}){
   }
 }
 export async function onRequestGet(){return json(405,{error:'Use POST'})}
+
+// Redeploy after Workers AI binding AI was configured in Cloudflare Pages.
