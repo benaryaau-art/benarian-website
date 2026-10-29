@@ -18,6 +18,6 @@ export async function onRequestPost({request,env}){
     return json(503,{error:'Free AI capacity is unavailable or today’s quota is exhausted. Please try tomorrow.'});
   }
 }
-export async function onRequestGet(){return json(405,{error:'Use POST'})}
+export async function onRequestGet({env}){return json(200,{service:'Sophia Cloudflare Workers AI',aiBindingConfigured:!!env.AI,mode:'free-workers-ai'})}
 
 // Redeploy after Workers AI binding AI was configured in Cloudflare Pages.
