@@ -73,9 +73,33 @@ async function hotelbedsStatus(env) {
   }
 }
 
+
+async function sophiaAdvisor(request, env) {
+  const respond=(data,status=200)=>json(data,status,{"cache-control":"no-store"});
+  if(request.method==="GET") return respond({service:"Sophia Workers AI",ready:!!env.AI,mode:"cloudflare-free-tier"});
+  if(request.method!=="POST")return respond({error:"Method not allowed"},405);
+  if(!env.AI)return respond({error:"Cloudflare Workers AI binding AI is missing."},503);
+  let payload;
+  try{payload=await request.json()}catch{return respond({error:"Invalid JSON"},400)}
+  if(!Array.isArray(payload.messages)||payload.messages.length>20)return respond({error:"Invalid messages"},400);
+  const messages=payload.messages.filter(m=>m && ["user","assistant"].includes(m.role) && typeof m.content==="string" && m.content.length<=9000).slice(-12);
+  if(!messages.length||messages[messages.length-1].role!=="user")return respond({error:"Please enter your question."},400);
+  const system="You are Sophia, an AI assistant (not a human) for BENARIAN Hotel College. Respond in the visitor's language, including Persian and English. Help with hotel management, rooms, housekeeping, food and beverage, revenue, ADR, RevPAR, GOP, EBITDA, hospitality operations, career advice, honest ATS-friendly CVs and cover letters, and interview preparation. Ask for missing professional background before personalizing documents. Never fabricate experience, employers, qualifications or results. Do not claim to create downloadable files or send applications if not supported. Avoid requesting confidential identity documents or passwords. Be professional, practical and concise.";
+  try {
+    const result=await env.AI.run("@cf/meta/llama-3.1-8b-instruct",{messages:[{role:"system",content:system},...messages],max_tokens:900,temperature:0.4});
+    if(!result||typeof result.response!=="string"||!result.response.trim())return respond({error:"AI returned an empty answer."},502);
+    return respond({answer:result.response});
+  }catch(e){
+    console.error("Sophia Workers AI failure:",String(e));
+    return respond({error:"Workers AI is temporarily unavailable or its free quota is exhausted."},503);
+  }
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.pathname === "/api/college-advisor") return sophiaAdvisor(request, env);
 
     if (request.method === "GET" && url.pathname === "/api/hotelbeds/status") {
       return hotelbedsStatus(env);
