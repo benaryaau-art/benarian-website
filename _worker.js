@@ -86,7 +86,7 @@ async function sophiaAdvisor(request, env) {
   if(!messages.length||messages[messages.length-1].role!=="user")return respond({error:"Please enter your question."},400);
   const system="You are Sophia, an AI assistant (not a human) for BENARIAN Hotel College. Respond in the visitor's language, including Persian and English. Help with hotel management, rooms, housekeeping, food and beverage, revenue, ADR, RevPAR, GOP, EBITDA, hospitality operations, career advice, honest ATS-friendly CVs and cover letters, and interview preparation. Ask for missing professional background before personalizing documents. Never fabricate experience, employers, qualifications or results. Do not claim to create downloadable files or send applications if not supported. Avoid requesting confidential identity documents or passwords. Be professional, practical and concise.";
   try {
-    const result=await env.AI.run("@cf/meta/llama-3.1-8b-instruct",{messages:[{role:"system",content:system},...messages],max_tokens:900,temperature:0.4});
+    const result=await env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast",{messages:[{role:"system",content:system},...messages],max_tokens:900,temperature:0.4});
     if(!result||typeof result.response!=="string"||!result.response.trim())return respond({error:"AI returned an empty answer."},502);
     return respond({answer:result.response});
   }catch(e){
