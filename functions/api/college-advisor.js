@@ -12,7 +12,7 @@ export async function onRequestPost({request,env}){
   try{
     const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),25000);
     let response;try{response=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+env.OPENAI_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({model:env.OPENAI_MODEL||'gpt-4o-mini',temperature:0.4,max_tokens:1200,messages:[{role:'system',content:system},...messages]}),signal:controller.signal})}finally{clearTimeout(timer)}
-    if(!response.ok){console.error('OpenAI returned',response.status);return json(502,{error:'AI provider unavailable. Check API billing and permissions.'})}
+    if(!response.ok){console.error('OpenAI returned',response.status);const message=response.status===401?'OpenAI API key is invalid or revoked. Replace the secret in Cloudflare and redeploy.':response.status===429?'OpenAI quota or billing limit reached. Check API billing and usage.':response.status===403?'OpenAI project does not permit this request. Check API key permissions.': 'OpenAI API error ('+response.status+'). Please check API billing and service status.';return json(502,{error:message})}
     const result=await response.json();return json(200,{answer:result.choices?.[0]?.message?.content||'No response received.'});
   }catch(error){console.error('Sophia AI error',String(error));return json(502,{error:'AI request failed'})}
 }
