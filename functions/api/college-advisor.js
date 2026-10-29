@@ -9,7 +9,7 @@ export async function onRequestPost({request,env}){
   const history=input.messages.filter(m=>m&&['user','assistant'].includes(m.role)&&typeof m.content==='string'&&m.content.length<=9000).slice(-12);
   if(!history.length||history[history.length-1].role!=='user')return json(400,{error:'Message required'});
   try{
-    const result=await env.AI.run('@cf/meta/llama-3.1-8b-instruct',{messages:[{role:'system',content:system},...history],max_tokens:900,temperature:0.4});
+    const result=await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fast',{messages:[{role:'system',content:system},...history],max_tokens:900,temperature:0.4});
     const answer=result?.response;
     if(typeof answer!=='string'||!answer.trim())return json(502,{error:'No response from AI model'});
     return json(200,{answer});
